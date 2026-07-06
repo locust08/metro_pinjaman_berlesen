@@ -128,9 +128,6 @@ html(lang="en")
                                                             option(value="15:00", x-bind:disabled="isBooked('15:00')", x-text="timeLabel('15:00', '3:00 PM')") 3:00 PM
                                                             option(value="16:00", x-bind:disabled="isBooked('16:00')", x-text="timeLabel('16:00', '4:00 PM')") 4:00 PM
                                                             option(value="17:00", x-bind:disabled="isBooked('17:00')", x-text="timeLabel('17:00', '5:00 PM')") 5:00 PM
-                                                    p(x-show="bookedTimes.length", class="mt-2 pl-4 text-sm text-gray-500", style="display: none;")
-                                                        span Booked times for this date: 
-                                                        span(class="font-medium", x-text="bookedTimeLabels()")
                                             label(for="", class="block pl-4 mb-1 text-sm font-medium") Message / Enquiry
                                             textarea(rows="4", x-model="form.message", class="w-full px-4 py-3 mb-8 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-2xl resize-none")
                                             button(type="submit", :disabled="loading", class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200 disabled:opacity-60")
@@ -372,20 +369,6 @@ html(lang="en")
                     },
                     timeLabel(time, label) {
                         return this.isBooked(time) ? `${label} - Booked` : label;
-                    },
-                    bookedTimeLabels() {
-                        const labels = {
-                            '09:00': '9:00 AM',
-                            '10:00': '10:00 AM',
-                            '11:00': '11:00 AM',
-                            '12:00': '12:00 PM',
-                            '14:00': '2:00 PM',
-                            '15:00': '3:00 PM',
-                            '16:00': '4:00 PM',
-                            '17:00': '5:00 PM'
-                        };
-
-                        return this.bookedTimes.map((time) => labels[time] || time).join(', ');
                     },
                     async loadBookedTimes() {
                         if (!this.form.date) return;

@@ -132,7 +132,6 @@
                               <option value="17:00" x-bind:disabled="isBooked('17:00')" x-text="timeLabel('17:00', '5:00 PM')">5:00 PM</option>
                             </select>
                           </div>
-                          <p class="mt-2 pl-4 text-sm text-gray-500" x-show="bookedTimes.length" style="display: none;"><span>Booked times for this date: </span><span class="font-medium" x-text="bookedTimeLabels()"></span></p>
                         </div>
                       </div>
                       <label class="block pl-4 mb-1 text-sm font-medium" for="">Message / Enquiry</label>
@@ -427,20 +426,6 @@
               },
               timeLabel(time, label) {
                   return this.isBooked(time) ? `${label} - Booked` : label;
-              },
-              bookedTimeLabels() {
-                  const labels = {
-                      '09:00': '9:00 AM',
-                      '10:00': '10:00 AM',
-                      '11:00': '11:00 AM',
-                      '12:00': '12:00 PM',
-                      '14:00': '2:00 PM',
-                      '15:00': '3:00 PM',
-                      '16:00': '4:00 PM',
-                      '17:00': '5:00 PM'
-                  };
-      
-                  return this.bookedTimes.map((time) => labels[time] || time).join(', ');
               },
               async loadBookedTimes() {
                   if (!this.form.date) return;
