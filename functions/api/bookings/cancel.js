@@ -4,6 +4,7 @@ import {
   formatAppointmentDate,
   getConfig,
   htmlResponse,
+  sendCancelledEmails,
 } from '../../_lib/booking.js';
 
 export async function onRequestGet({ request, env }) {
@@ -20,6 +21,12 @@ export async function onRequestGet({ request, env }) {
 
   if (!booking) {
     return htmlResponse('<h1>Booking not found</h1><p>This cancellation link is invalid or expired.</p>', 404);
+  }
+
+  if (booking.wasConfirmed) {
+    const emailResults = await sendCancelledEmails(config, booking);
+    if (!emailResults.client.ok) console.error('[booking] Cancelled client email failed:', emailResults.client.error);
+    if (!emailResults.admin.ok) console.error('[booking] Cancelled admin email failed:', emailResults.admin.error);
   }
 
   return htmlResponse(`<!doctype html>

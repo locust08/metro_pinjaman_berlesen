@@ -197,7 +197,7 @@ function formatIcsDate(date) {
   return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
 }
 
-function buildCalendarInvite(booking) {
+function buildCalendarInvite(booking, { method = 'REQUEST', status = 'CONFIRMED', sequence = 1 } = {}) {
   const start = slotStart(booking.date, booking.time);
   const end = addMinutes(start, 30);
   const escapeIcs = (value) => String(value || '')
@@ -210,19 +210,26 @@ function buildCalendarInvite(booking) {
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Metro Pinjaman Berlesen//Appointment//EN',
-    'METHOD:PUBLISH',
+    `METHOD:${method}`,
     'BEGIN:VEVENT',
     `UID:${booking.id}@metropinjamanberlesan.com`,
     `DTSTAMP:${formatIcsDate(new Date())}`,
     `DTSTART:${formatIcsDate(start)}`,
     `DTEND:${formatIcsDate(end)}`,
-    'STATUS:TENTATIVE',
+    `STATUS:${status}`,
+    `SEQUENCE:${sequence}`,
     `SUMMARY:${escapeIcs(`Loan Appointment - ${booking.loanType}`)}`,
     `DESCRIPTION:${escapeIcs(`Metro Pinjaman Berlesen appointment. Contact: +60 11-7007 3191. Cancel: ${booking.cancelUrl || ''}`)}`,
     'LOCATION:Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur',
+    `ORGANIZER;CN=Metro Pinjaman Berlesen:mailto:${OFFICE_EMAIL}`,
+    `ATTENDEE;CN=${escapeIcs(booking.name)};ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION:mailto:${booking.email}`,
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
+}
+
+function buildCalendarCancel(booking) {
+  return buildCalendarInvite(booking, { method: 'CANCEL', status: 'CANCELLED', sequence: 2 });
 }
 
 function bookingReference(booking) {
@@ -286,16 +293,18 @@ function rowsHtml(rows) {
     </tr>`).join('');
 }
 
-function bookingRows(booking, { includeInternal = false } = {}) {
+function bookingRows(booking, { includeInternal = false, includeSlot = true } = {}) {
   const rows = [
     ['Customer Name', booking.name],
     ['Email', booking.email],
     ['Contact Number', booking.phone],
     ['Loan Type', booking.loanType],
-    ['Preferred Slot', formatAppointmentDate(booking)],
     ['Message / Enquiry', booking.message || '-'],
     ['Status', booking.status || 'Pending Confirmation'],
   ];
+  if (includeSlot) {
+    rows.splice(4, 0, ['Preferred Slot', formatAppointmentDate(booking)]);
+  }
   if (includeInternal) {
     rows.push(['Slot Key', booking.slotKey || '-']);
     rows.push(['Source', booking.source || 'Website']);
@@ -343,20 +352,16 @@ function buildAdminEmail(booking) {
 
 function buildClientEmail(booking) {
   const reference = bookingReference(booking);
-  const preferredSlot = formatAppointmentDate(booking);
   const text = [
     `Hi ${booking.name},`,
     '',
     'Thank you. We have received your appointment request.',
-    '',
-    `Preferred Slot: ${preferredSlot}`,
     `Loan Type: ${booking.loanType}`,
     '',
     'You will receive this confirmation by email and WhatsApp. Please confirm or cancel from either one; you only need to do it once.',
     `Confirm appointment: ${booking.confirmUrl}`,
     `Cancel appointment: ${booking.cancelUrl}`,
     `WhatsApp: ${WHATSAPP_URL}`,
-    `Location: ${GOOGLE_MAPS_URL}`,
     '',
     'Metro Pinjaman Berlesen',
   ].join('\n');
@@ -365,21 +370,20 @@ function buildClientEmail(booking) {
     <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
     <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. You will receive this confirmation by email and WhatsApp. Please confirm or cancel from either one; you only need to do it once.</p>
     <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:700;">Pending Confirmation</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
-    <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">After you confirm, we will send the calendar invite for this appointment. If you need to change your appointment, please cancel this request first and submit a new preferred slot.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking, { includeSlot: false }))}</table>
+    <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">We will send the calendar invite only after you confirm. If you need to change your request, please cancel it first and submit a new preferred slot.</p>
     <div style="margin-top:22px;">
       ${buttonHtml(booking.confirmUrl, 'Confirm Appointment')}
       ${buttonHtml(booking.cancelUrl, 'Cancel Appointment', 'secondary')}
       ${buttonHtml(WHATSAPP_URL, 'WhatsApp Us', 'secondary')}
-      ${buttonHtml(GOOGLE_MAPS_URL, 'View Location', 'secondary')}
     </div>`;
 
   return {
-    subject: 'We received your Metro Pinjaman Berlesen appointment request',
+    subject: 'Please confirm your Metro Pinjaman Berlesen request',
     text,
     html: buildEmailShell({
-      title: 'Appointment request received',
-      preheader: `We received your appointment request for ${preferredSlot}.`,
+      title: 'Please confirm your request',
+      preheader: 'Confirm or cancel your request. The calendar invite is sent only after confirmation.',
       reference,
       body,
     }),
@@ -556,6 +560,58 @@ async function sendConfirmedEmails(booking) {
 
   if (!client.ok) console.error('[booking] Confirmed client email failed:', client.error);
   if (!admin.ok) console.error('[booking] Confirmed admin email failed:', admin.error);
+
+  return { client, admin };
+}
+
+async function sendCancelledEmails(booking) {
+  const preferredSlot = formatAppointmentDate(booking);
+  const reference = bookingReference(booking);
+  const calendarCancel = buildCalendarCancel(booking);
+  const text = [
+    `Hi ${booking.name},`,
+    '',
+    'Your appointment has been cancelled.',
+    `Previous Slot: ${preferredSlot}`,
+    `Loan Type: ${booking.loanType}`,
+    '',
+    'A calendar cancellation file is attached so supported calendar apps can remove the event.',
+    'Metro Pinjaman Berlesen',
+  ].join('\n');
+  const html = buildEmailShell({
+    title: 'Appointment cancelled',
+    preheader: `Your appointment for ${preferredSlot} has been cancelled.`,
+    reference,
+    body: `
+      <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Your appointment has been cancelled. We attached a calendar cancellation file so supported calendar apps can remove the event.</p>
+      <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#fef2f2;color:#b91c1c;font-size:12px;font-weight:700;">Cancelled</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
+      <div style="margin-top:22px;">
+        ${buttonHtml(`${BOOKING_BASE_URL}/contact.html`, 'Book Another Appointment')}
+        ${buttonHtml(WHATSAPP_URL, 'WhatsApp Us', 'secondary')}
+      </div>`,
+  });
+
+  const [client, admin] = await Promise.all([
+    sendResendEmail({
+      to: booking.email,
+      subject: 'Your Metro Pinjaman Berlesen appointment was cancelled',
+      text,
+      html,
+      attachments: [{ filename: 'metro-pinjaman-appointment-cancelled.ics', content: Buffer.from(calendarCancel).toString('base64') }],
+    }),
+    sendResendEmail({
+      to: RESEND_ADMIN_EMAILS,
+      replyTo: booking.email,
+      subject: `Appointment cancelled: ${booking.name} - ${booking.date} ${booking.time}`,
+      text,
+      html,
+    }),
+  ]);
+
+  if (!client.ok) console.error('[booking] Cancelled client email failed:', client.error);
+  if (!admin.ok) console.error('[booking] Cancelled admin email failed:', admin.error);
 
   return { client, admin };
 }
@@ -784,12 +840,13 @@ async function handleCancelBooking(res, url) {
   const id = url.searchParams.get('id');
   const token = url.searchParams.get('token');
   const bookings = readBookings();
-  const booking = bookings.find((item) => item.id === id && item.cancelToken === token);
+  const booking = bookings.find((item) => (item.id === id || item.notionPageId === id) && item.cancelToken === token);
 
   if (!booking) {
     return sendHtml(res, 404, '<h1>Booking not found</h1><p>This cancellation link is invalid or expired.</p>');
   }
 
+  const wasConfirmed = booking.status === 'Confirmed - Booked';
   booking.status = 'Cancelled';
   booking.cancelledAt = new Date().toISOString();
 
@@ -798,6 +855,10 @@ async function handleCancelBooking(res, url) {
   }
 
   writeBookings(bookings);
+
+  if (wasConfirmed) {
+    await sendCancelledEmails(booking);
+  }
 
   sendHtml(res, 200, `<!doctype html>
 <html>
