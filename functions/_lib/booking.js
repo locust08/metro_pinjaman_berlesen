@@ -151,18 +151,12 @@ export async function findActiveBookingBySlot(config, key) {
 }
 
 export async function findActiveBookingsForDate(config, date) {
-  const nextDay = new Date(`${date}T00:00:00+08:00`);
-  nextDay.setDate(nextDay.getDate() + 1);
-  const pad = (value) => String(value).padStart(2, '0');
-  const nextDate = `${nextDay.getFullYear()}-${pad(nextDay.getMonth() + 1)}-${pad(nextDay.getDate())}`;
-
   const result = await notionRequest(config, `/databases/${config.notionDatabaseId}/query`, {
     method: 'POST',
     body: JSON.stringify({
       filter: {
         and: [
-          { property: 'Preferred Slot', date: { on_or_after: date } },
-          { property: 'Preferred Slot', date: { before: nextDate } },
+          { property: 'Slot Key', rich_text: { contains: `${date}|` } },
           {
             or: ACTIVE_STATUSES.map((status) => ({ property: 'Status', select: { equals: status } })),
           },

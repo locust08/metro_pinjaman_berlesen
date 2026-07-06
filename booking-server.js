@@ -426,17 +426,12 @@ async function findActiveNotionBooking(key) {
 async function findActiveNotionBookingsForDate(date) {
   if (!NOTION_TOKEN) return [];
 
-  const nextDay = new Date(`${date}T00:00:00+08:00`);
-  nextDay.setDate(nextDay.getDate() + 1);
-  const nextDate = `${nextDay.getFullYear()}-${String(nextDay.getMonth() + 1).padStart(2, '0')}-${String(nextDay.getDate()).padStart(2, '0')}`;
-
   const result = await notionRequest(`/databases/${NOTION_DATABASE_ID}/query`, {
     method: 'POST',
     body: JSON.stringify({
       filter: {
         and: [
-          { property: 'Preferred Slot', date: { on_or_after: date } },
-          { property: 'Preferred Slot', date: { before: nextDate } },
+          { property: 'Slot Key', rich_text: { contains: `${date}|` } },
           {
             or: [
               { property: 'Status', select: { equals: 'Pending Confirmation' } },
