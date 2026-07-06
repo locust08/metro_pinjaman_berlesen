@@ -313,19 +313,84 @@ export function buildCalendarInvite(booking) {
   ].join('\r\n');
 }
 
-function emailShell(title, body) {
-  return `<!doctype html><html><body style="margin:0;background:#f8fafc;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:32px 16px;"><tr><td align="center"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;"><tr><td style="padding:24px 28px;border-bottom:1px solid #e2e8f0;"><div style="font-size:20px;font-weight:700;color:#0f172a;">Metro Pinjaman Berlesen</div><div style="font-size:13px;color:#64748b;margin-top:4px;">${escapeHtml(title)}</div></td></tr><tr><td style="padding:24px 28px;">${body}</td></tr></table></td></tr></table></body></html>`;
+const OFFICE_ADDRESS = 'Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur';
+const OFFICE_PHONE = '+60 10-215 0037';
+const OFFICE_EMAIL = 'metropinjamanberlesan@gmail.com';
+const WHATSAPP_URL = 'https://wa.me/60102150037';
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b';
+
+function bookingReference(booking) {
+  return booking.id || booking.slotKey || `${booking.date}-${booking.time}`;
 }
 
-function rowsHtml(booking) {
-  return [
-    ['Name', booking.name],
+function buttonHtml(href, label, variant = 'primary') {
+  if (!href) return '';
+  const style = variant === 'primary'
+    ? 'background:#020617;color:#ffffff;border:1px solid #020617;'
+    : 'background:#ffffff;color:#0f766e;border:1px solid #0f766e;';
+  return `<a href="${escapeHtml(href)}" style="display:inline-block;margin:0 8px 10px 0;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;padding:12px 16px;${style}">${escapeHtml(label)}</a>`;
+}
+
+function emailShell({ title, preheader, reference, body }) {
+  const safeTitle = escapeHtml(title);
+  const safePreheader = escapeHtml(preheader || title);
+  return `<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>${safeTitle}</title>
+  </head>
+  <body style="margin:0;background:#f6f8f5;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${safePreheader}</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f8f5;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:680px;background:#ffffff;border:1px solid #dfe7df;border-radius:12px;overflow:hidden;">
+            <tr>
+              <td style="padding:26px 30px;border-bottom:1px solid #e5ebe5;background:#ffffff;">
+                <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e;">Metro Pinjaman Berlesen</div>
+                <div style="font-size:24px;line-height:1.25;font-weight:800;color:#0f172a;margin-top:8px;">${safeTitle}</div>
+                <div style="font-size:13px;color:#64748b;margin-top:8px;">Ref: ${escapeHtml(reference || '-')}</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:28px 30px;">${body}</td>
+            </tr>
+            <tr>
+              <td style="padding:20px 30px;background:#f8fafc;border-top:1px solid #e2e8f0;font-size:13px;line-height:1.7;color:#475569;">
+                <strong style="color:#0f172a;">Metro Pinjaman Berlesen</strong><br>
+                ${escapeHtml(OFFICE_ADDRESS)}<br>
+                ${escapeHtml(OFFICE_PHONE)} | ${escapeHtml(OFFICE_EMAIL)}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function rowsHtml(rows) {
+  return rows.map(([label, value]) => `<tr><th align="left" style="width:38%;padding:12px 14px;border-bottom:1px solid #e2e8f0;background:#f8fafc;font-size:14px;color:#0f172a;">${escapeHtml(label)}</th><td style="padding:12px 14px;border-bottom:1px solid #e2e8f0;font-size:14px;line-height:1.5;color:#334155;">${escapeHtml(value || '-')}</td></tr>`).join('');
+}
+
+function bookingRows(booking, { includeInternal = false } = {}) {
+  const rows = [
+    ['Customer Name', booking.name],
     ['Email', booking.email],
     ['Contact Number', booking.phone],
     ['Loan Type', booking.loanType],
     ['Preferred Slot', formatAppointmentDate(booking)],
     ['Message / Enquiry', booking.message || '-'],
-  ].map(([label, value]) => `<tr><th align="left" style="width:38%;padding:11px 12px;border-bottom:1px solid #e2e8f0;background:#f8fafc;font-size:14px;color:#0f172a;">${escapeHtml(label)}</th><td style="padding:11px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#334155;">${escapeHtml(value)}</td></tr>`).join('');
+    ['Status', booking.status || 'Pending Confirmation'],
+  ];
+  if (includeInternal) {
+    rows.push(['Slot Key', booking.slotKey || '-']);
+    rows.push(['Source', booking.source || 'Website']);
+  }
+  return rows;
 }
 
 export async function sendResendEmail(config, { to, replyTo, subject, text, html, attachments }) {
@@ -356,10 +421,64 @@ export async function sendResendEmail(config, { to, replyTo, subject, text, html
 }
 
 export async function sendBookingEmails(config, booking) {
-  const detailRows = rowsHtml(booking);
-  const adminHtml = emailShell('Internal appointment notification', `<h1 style="margin:0 0 16px;font-size:20px;">New Appointment Booking</h1><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${detailRows}</table><p style="margin:18px 0 0;"><a href="${escapeHtml(booking.notionUrl)}" style="color:#0f766e;font-weight:700;">Open in Notion</a></p>`);
-  const clientHtml = emailShell('Appointment request received', `<p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p><p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request and our team will contact you to confirm it.</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${detailRows}</table><p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">A calendar file is attached to this email.</p><p style="margin:18px 0 0;"><a href="${escapeHtml(booking.cancelUrl)}" style="display:inline-block;border:1px solid #0f766e;border-radius:8px;color:#0f766e;text-decoration:none;font-size:14px;font-weight:700;padding:12px 18px;">Cancel Appointment</a></p>`);
-  const text = `Appointment booking\nName: ${booking.name}\nEmail: ${booking.email}\nContact Number: ${booking.phone}\nLoan Type: ${booking.loanType}\nPreferred Slot: ${formatAppointmentDate(booking)}\nMessage: ${booking.message || '-'}\nCancel: ${booking.cancelUrl}`;
+  const reference = bookingReference(booking);
+  const preferredSlot = formatAppointmentDate(booking);
+  const adminText = [
+    'New Metro Pinjaman Berlesen appointment request',
+    '',
+    `Reference: ${reference}`,
+    `Name: ${booking.name}`,
+    `Email: ${booking.email}`,
+    `Contact Number: ${booking.phone}`,
+    `Loan Type: ${booking.loanType}`,
+    `Preferred Slot: ${preferredSlot}`,
+    `Message / Enquiry: ${booking.message || '-'}`,
+    `Status: ${booking.status || 'Pending Confirmation'}`,
+    `Notion: ${booking.notionUrl || '-'}`,
+  ].join('\n');
+  const clientText = [
+    `Hi ${booking.name},`,
+    '',
+    'Thank you. We have received your appointment request.',
+    `Preferred Slot: ${preferredSlot}`,
+    `Loan Type: ${booking.loanType}`,
+    '',
+    'Our team will contact you to confirm the appointment. A calendar file is attached for your convenience.',
+    `Cancel appointment: ${booking.cancelUrl}`,
+    `WhatsApp: ${WHATSAPP_URL}`,
+    `Location: ${GOOGLE_MAPS_URL}`,
+    '',
+    'Metro Pinjaman Berlesen',
+  ].join('\n');
+  const adminHtml = emailShell({
+    title: 'New appointment booking',
+    preheader: `${booking.name} requested ${preferredSlot}.`,
+    reference,
+    body: `
+      <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#334155;">A new appointment request was submitted from the website. Reply directly to the customer from this email if needed.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking, { includeInternal: true }))}</table>
+      <div style="margin-top:22px;">
+        ${buttonHtml(booking.notionUrl, 'Open in Notion')}
+        ${buttonHtml(`mailto:${booking.email}`, 'Reply to Client', 'secondary')}
+        ${buttonHtml(WHATSAPP_URL, 'Open WhatsApp', 'secondary')}
+      </div>`,
+  });
+  const clientHtml = emailShell({
+    title: 'Appointment request received',
+    preheader: `We received your appointment request for ${preferredSlot}.`,
+    reference,
+    body: `
+      <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. Our team will contact you to confirm this appointment.</p>
+      <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:700;">Pending Confirmation</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
+      <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">A calendar file is attached to this email. If you need to change your appointment, please cancel this request first and submit a new preferred slot.</p>
+      <div style="margin-top:22px;">
+        ${buttonHtml(booking.cancelUrl, 'Cancel Appointment')}
+        ${buttonHtml(WHATSAPP_URL, 'WhatsApp Us', 'secondary')}
+        ${buttonHtml(GOOGLE_MAPS_URL, 'View Location', 'secondary')}
+      </div>`,
+  });
   const calendarInvite = buildCalendarInvite(booking);
 
   const [admin, client] = await Promise.all([
@@ -367,13 +486,13 @@ export async function sendBookingEmails(config, booking) {
       to: config.resendAdminEmails,
       replyTo: booking.email,
       subject: `New appointment: ${booking.name} - ${booking.date} ${booking.time}`,
-      text,
+      text: adminText,
       html: adminHtml,
     }),
     sendResendEmail(config, {
       to: booking.email,
       subject: 'We received your Metro Pinjaman Berlesen appointment request',
-      text,
+      text: clientText,
       html: clientHtml,
       attachments: [{ filename: 'metro-pinjaman-appointment.ics', content: btoa(calendarInvite) }],
     }),
