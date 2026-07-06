@@ -97,10 +97,7 @@ html(lang="en")
                                             input(type="text", x-model="form.name", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
                                             label(for="", class="block pl-4 mb-1 text-sm font-medium") Email
                                             input(type="email", x-model="form.email", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
-                                            label(for="", class="block pl-4 mb-1 text-sm font-medium")
-                                                span Contact Number
-                                                |                         
-                                                span(class="text-gray-700") (optional)
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium") Contact Number
                                             input(type="text", x-model="form.phone", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
                                             label(for="", class="block pl-4 mb-1 text-sm font-medium") Loan Type
                                             div(class="relative w-full mb-8 bg-white rounded-full")
@@ -406,7 +403,8 @@ html(lang="en")
                     },
                     validate() {
                         if (!this.form.name.trim()) return 'Please enter your full name.';
-                        if (!this.form.email.trim() && !this.form.phone.trim()) return 'Please enter either email or contact number.';
+                        if (!this.form.email.trim()) return 'Please enter your email address.';
+                        if (!this.form.phone.trim()) return 'Please enter your contact number.';
                         if (!this.form.loanType) return 'Please select a loan type.';
                         if (!this.form.date || !this.form.time) return 'Please select your preferred date and time.';
                         if (this.isBooked(this.form.time)) return 'This time slot has already been booked. Please choose another time.';
@@ -432,12 +430,12 @@ html(lang="en")
                                 return;
                             }
 
-                            this.successMessage = 'Thank you. Your preferred slot has been submitted and blocked for testing.';
+                            this.successMessage = 'Thank you. Your preferred slot has been submitted.';
                             this.errorMessage = '';
                             this.form.time = '';
                             await this.loadBookedTimes();
                         } catch (error) {
-                            this.errorMessage = 'Booking service is not running. Please use the booking test server.';
+                            this.errorMessage = 'Booking service is currently unavailable. Please try again later.';
                         } finally {
                             this.loading = false;
                         }

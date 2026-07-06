@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const PORT = Number(process.env.PORT || 3001);
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -10,6 +11,12 @@ const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
 const NOTION_TOKEN = process.env.NOTION_TOKEN || '';
 const NOTION_DATABASE_ID = process.env.APPOINTMENT_NOTION_DATABASE_ID || process.env.NOTION_DATABASE_ID || 'fa9a71965f8d40ff92276ba56aa2d69f';
 const NOTION_VERSION = '2022-06-28';
+const RESEND_ENDPOINT = 'https://api.resend.com/emails';
+const DEFAULT_APPOINTMENT_DURATION_MINUTES = 30;
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL_DEV || process.env.RESEND_FROM_EMAIL || 'Metro Pinjaman Berlesen <no-reply@locus-t.com.my>';
+const RESEND_ADMIN_EMAILS = process.env.RESEND_CONFIRMATION_TO_EMAIL_DEV || process.env.RESEND_TO_EMAIL_DEV || process.env.RESEND_TO_EMAILS || process.env.RESEND_TO_EMAIL || '';
+const BOOKING_BASE_URL = process.env.BOOKING_BASE_URL || `http://localhost:${PORT}`;
 
 const activeStatuses = new Set(['Pending Confirmation', 'Confirmed - Booked']);
 const contentTypes = {
@@ -45,6 +52,11 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+function sendHtml(res, statusCode, html) {
+  res.writeHead(statusCode, { 'Content-Type': 'text/html; charset=utf-8' });
+  res.end(html);
+}
+
 function readJsonBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
@@ -74,32 +86,296 @@ function addMinutes(date, minutes) {
   return new Date(date.getTime() + minutes * 60 * 1000);
 }
 
+function cleanValue(value) {
+  return String(value || '').trim();
+}
+
+function escapeHtml(value) {
+  return cleanValue(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanValue(email));
+}
+
+function parseRecipientEmails(value) {
+  return cleanValue(value)
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean);
+}
+
 function slotStart(date, time) {
   return new Date(`${date}T${time}:00+08:00`);
 }
 
 function notionDateTime(date, time) {
-  return `${date}T${time}:00`;
+  const parsed = addMinutesToWallClock(date, time, 0);
+  return `${parsed.date}T${parsed.time}:00`;
 }
 
 function notionEndDateTime(date, time) {
-  const end = addMinutes(slotStart(date, time), 30);
-  const year = end.getFullYear();
-  const month = String(end.getMonth() + 1).padStart(2, '0');
-  const day = String(end.getDate()).padStart(2, '0');
-  const hours = String(end.getHours()).padStart(2, '0');
-  const minutes = String(end.getMinutes()).padStart(2, '0');
-  return `${year}-${month}-${day}T${hours}:${minutes}:00`;
+  const end = addMinutesToWallClock(date, time, DEFAULT_APPOINTMENT_DURATION_MINUTES);
+  return `${end.date}T${end.time}:00`;
+}
+
+function addMinutesToWallClock(date, time, minutesToAdd) {
+  const dateMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(cleanValue(date));
+  const timeMatch = /^(\d{1,2}):(\d{2})(?:\s*([AP]M))?$/i.exec(cleanValue(time));
+
+  if (!dateMatch || !timeMatch) {
+    throw new Error('Invalid appointment date or time.');
+  }
+
+  let hours = Number(timeMatch[1]);
+  const minutes = Number(timeMatch[2]);
+  const meridiem = timeMatch[3]?.toUpperCase();
+
+  if (meridiem === 'PM' && hours < 12) hours += 12;
+  if (meridiem === 'AM' && hours === 12) hours = 0;
+  if (hours > 23 || minutes > 59) throw new Error('Invalid appointment time.');
+
+  const wallClock = new Date(Date.UTC(
+    Number(dateMatch[1]),
+    Number(dateMatch[2]) - 1,
+    Number(dateMatch[3]),
+    hours,
+    minutes + minutesToAdd,
+    0,
+  ));
+  const pad = (value) => String(value).padStart(2, '0');
+
+  return {
+    date: `${wallClock.getUTCFullYear()}-${pad(wallClock.getUTCMonth() + 1)}-${pad(wallClock.getUTCDate())}`,
+    time: `${pad(wallClock.getUTCHours())}:${pad(wallClock.getUTCMinutes())}`,
+  };
 }
 
 function validateBooking(payload) {
   if (!payload.name || !String(payload.name).trim()) return 'Please enter your full name.';
-  if (!payload.email && !payload.phone) return 'Please enter either email or contact number.';
+  if (!payload.email || !isValidEmail(payload.email)) return 'Please enter a valid email address.';
+  if (!payload.phone || !String(payload.phone).trim()) return 'Please enter your contact number.';
   if (!payload.loanType) return 'Please select a loan type.';
   if (!payload.date || !payload.time) return 'Please select your preferred date and time.';
   if (!/^\d{4}-\d{2}-\d{2}$/.test(payload.date)) return 'Please select a valid date.';
   if (!/^\d{2}:\d{2}$/.test(payload.time)) return 'Please select a valid time.';
   return '';
+}
+
+function formatAppointmentDate(booking) {
+  const start = slotStart(booking.date, booking.time);
+  return new Intl.DateTimeFormat('en-MY', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Kuala_Lumpur',
+  }).format(start);
+}
+
+function formatIcsDate(date) {
+  const pad = (value) => String(value).padStart(2, '0');
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+}
+
+function buildCalendarInvite(booking) {
+  const start = slotStart(booking.date, booking.time);
+  const end = addMinutes(start, 30);
+  const escapeIcs = (value) => String(value || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/,/g, '\\,')
+    .replace(/;/g, '\\;')
+    .replace(/\n/g, '\\n');
+
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Metro Pinjaman Berlesen//Appointment//EN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${booking.id}@metropinjamanberlesan.com`,
+    `DTSTAMP:${formatIcsDate(new Date())}`,
+    `DTSTART:${formatIcsDate(start)}`,
+    `DTEND:${formatIcsDate(end)}`,
+    'STATUS:TENTATIVE',
+    `SUMMARY:${escapeIcs(`Loan Appointment - ${booking.loanType}`)}`,
+    `DESCRIPTION:${escapeIcs(`Metro Pinjaman Berlesen appointment. Contact: +60 10-215 0037. Cancel: ${booking.cancelUrl || ''}`)}`,
+    'LOCATION:Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+}
+
+function buildEmailShell({ title, body }) {
+  return `<!doctype html>
+<html>
+  <body style="margin:0;background:#f8fafc;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;">
+            <tr>
+              <td style="padding:24px 28px;border-bottom:1px solid #e2e8f0;">
+                <div style="font-size:20px;font-weight:700;color:#0f172a;">Metro Pinjaman Berlesen</div>
+                <div style="font-size:13px;color:#64748b;margin-top:4px;">${escapeHtml(title)}</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:24px 28px;">${body}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function bookingRowsHtml(booking) {
+  const rows = [
+    ['Name', booking.name],
+    ['Email', booking.email],
+    ['Contact Number', booking.phone],
+    ['Loan Type', booking.loanType],
+    ['Preferred Slot', formatAppointmentDate(booking)],
+    ['Message / Enquiry', booking.message || '-'],
+  ];
+
+  return rows.map(([label, value]) => `
+    <tr>
+      <th align="left" style="width:38%;padding:11px 12px;border-bottom:1px solid #e2e8f0;background:#f8fafc;font-size:14px;color:#0f172a;">${escapeHtml(label)}</th>
+      <td style="padding:11px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#334155;">${escapeHtml(value)}</td>
+    </tr>`).join('');
+}
+
+function buildAdminEmail(booking) {
+  const text = [
+    'New Metro Pinjaman Berlesen Appointment',
+    '',
+    `Name: ${booking.name}`,
+    `Email: ${booking.email}`,
+    `Contact Number: ${booking.phone}`,
+    `Loan Type: ${booking.loanType}`,
+    `Preferred Slot: ${formatAppointmentDate(booking)}`,
+    `Message / Enquiry: ${booking.message || '-'}`,
+    `Status: ${booking.status}`,
+    `Notion: ${booking.notionUrl || '-'}`,
+  ].join('\n');
+
+  const body = `
+    <h1 style="margin:0 0 16px;font-size:20px;color:#0f172a;">New Appointment Booking</h1>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${bookingRowsHtml(booking)}</table>
+    ${booking.notionUrl ? `<p style="margin:18px 0 0;"><a href="${escapeHtml(booking.notionUrl)}" style="color:#0f766e;font-weight:700;">Open in Notion</a></p>` : ''}`;
+
+  return {
+    subject: `New appointment: ${booking.name} - ${booking.date} ${booking.time}`,
+    text,
+    html: buildEmailShell({ title: 'Internal appointment notification', body }),
+  };
+}
+
+function buildClientEmail(booking) {
+  const text = [
+    `Hi ${booking.name},`,
+    '',
+    'Thank you. We have received your appointment request.',
+    '',
+    `Preferred Slot: ${formatAppointmentDate(booking)}`,
+    `Loan Type: ${booking.loanType}`,
+    '',
+    'Our team will contact you to confirm the appointment.',
+    `Cancel appointment: ${booking.cancelUrl}`,
+    '',
+    'Metro Pinjaman Berlesen',
+  ].join('\n');
+
+  const body = `
+    <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
+    <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request and our team will contact you to confirm it.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${bookingRowsHtml(booking)}</table>
+    <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">A calendar file is attached to this email for your convenience.</p>
+    <p style="margin:18px 0 0;"><a href="${escapeHtml(booking.cancelUrl)}" style="display:inline-block;border:1px solid #0f766e;border-radius:8px;color:#0f766e;text-decoration:none;font-size:14px;font-weight:700;padding:12px 18px;">Cancel Appointment</a></p>`;
+
+  return {
+    subject: 'We received your Metro Pinjaman Berlesen appointment request',
+    text,
+    html: buildEmailShell({ title: 'Appointment request received', body }),
+  };
+}
+
+async function sendResendEmail({ to, replyTo, subject, text, html, attachments }) {
+  const recipients = Array.isArray(to) ? to : parseRecipientEmails(to);
+  if (!RESEND_API_KEY || !recipients.length) {
+    return { ok: false, error: 'Missing RESEND_API_KEY or recipient email.' };
+  }
+
+  const payload = {
+    from: RESEND_FROM_EMAIL,
+    to: recipients,
+    subject,
+    text,
+    html,
+  };
+
+  if (replyTo) payload.reply_to = replyTo;
+  if (attachments && attachments.length) payload.attachments = attachments;
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const body = await response.text();
+      return { ok: false, error: `Resend returned ${response.status}: ${body.slice(0, 500)}` };
+    }
+
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error: error.message || 'Resend request failed.' };
+  }
+}
+
+async function sendBookingEmails(booking) {
+  const adminEmail = buildAdminEmail(booking);
+  const clientEmail = buildClientEmail(booking);
+  const calendarInvite = buildCalendarInvite(booking);
+
+  const [adminResult, clientResult] = await Promise.all([
+    sendResendEmail({
+      to: RESEND_ADMIN_EMAILS,
+      replyTo: booking.email,
+      ...adminEmail,
+    }),
+    sendResendEmail({
+      to: booking.email,
+      ...clientEmail,
+      attachments: [
+        {
+          filename: 'metro-pinjaman-appointment.ics',
+          content: Buffer.from(calendarInvite).toString('base64'),
+        },
+      ],
+    }),
+  ]);
+
+  if (!adminResult.ok) console.error('[booking] Admin email failed:', adminResult.error);
+  if (!clientResult.ok) console.error('[booking] Client email failed:', clientResult.error);
+
+  return { admin: adminResult, client: clientResult };
 }
 
 async function notionRequest(pathname, options = {}) {
@@ -265,6 +541,7 @@ async function handleCreateBooking(req, res) {
   const booking = {
     id: `local-${Date.now()}`,
     slotKey: key,
+    cancelToken: crypto.randomBytes(24).toString('hex'),
     status: 'Pending Confirmation',
     source: 'Website',
     submittedAt: new Date().toISOString(),
@@ -277,6 +554,7 @@ async function handleCreateBooking(req, res) {
     message: String(payload.message || '').trim(),
     notionSynced: false,
   };
+  booking.cancelUrl = `${BOOKING_BASE_URL}/api/bookings/cancel?id=${encodeURIComponent(booking.id)}&token=${encodeURIComponent(booking.cancelToken)}`;
 
   const notionPage = await createNotionBooking(payload, key);
   if (notionPage) {
@@ -287,7 +565,47 @@ async function handleCreateBooking(req, res) {
 
   bookings.push(booking);
   writeBookings(bookings);
+
+  const emailResults = await sendBookingEmails(booking);
+  booking.emailSent = Boolean(emailResults.admin.ok || emailResults.client.ok);
+  writeBookings(bookings);
+
   sendJson(res, 201, { message: 'Booking submitted.', booking });
+}
+
+async function handleCancelBooking(res, url) {
+  const id = url.searchParams.get('id');
+  const token = url.searchParams.get('token');
+  const bookings = readBookings();
+  const booking = bookings.find((item) => item.id === id && item.cancelToken === token);
+
+  if (!booking) {
+    return sendHtml(res, 404, '<h1>Booking not found</h1><p>This cancellation link is invalid or expired.</p>');
+  }
+
+  booking.status = 'Cancelled';
+  booking.cancelledAt = new Date().toISOString();
+
+  if (booking.notionPageId) {
+    await updateNotionBookingStatus(booking.notionPageId, 'Cancelled').catch(() => null);
+  }
+
+  writeBookings(bookings);
+
+  sendHtml(res, 200, `<!doctype html>
+<html>
+  <head>
+    <title>Appointment Cancelled</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body style="margin:0;background:#f8fafc;color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+    <main style="max-width:640px;margin:64px auto;padding:32px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;">
+      <h1 style="margin:0 0 12px;font-size:28px;">Appointment Cancelled</h1>
+      <p style="font-size:16px;line-height:1.6;">Your appointment for ${escapeHtml(formatAppointmentDate(booking))} has been cancelled. This time slot is now available again.</p>
+      <p><a href="/contact.html" style="color:#0f766e;font-weight:700;">Book another appointment</a></p>
+    </main>
+  </body>
+</html>`);
 }
 
 async function handleResetBookings(res) {
@@ -335,6 +653,11 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === 'GET' && url.pathname === '/api/bookings/cancel') {
+      await handleCancelBooking(res, url);
+      return;
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/bookings') {
       await handleCreateBooking(req, res);
       return;
@@ -347,7 +670,10 @@ const server = http.createServer(async (req, res) => {
 
     serveStatic(req, res, url);
   } catch (error) {
-    sendJson(res, 500, { message: error.message || 'Server error.' });
+    console.error('[booking] Request failed:', error);
+    sendJson(res, 500, {
+      message: 'Sorry, we could not submit your appointment right now. Please try again or contact us on WhatsApp.',
+    });
   }
 });
 
@@ -355,5 +681,8 @@ server.listen(PORT, () => {
   console.log(`Booking test server running at http://localhost:${PORT}`);
   if (!NOTION_TOKEN) {
     console.log('NOTION_TOKEN is not set. Bookings will be blocked locally for testing only.');
+  }
+  if (!RESEND_API_KEY) {
+    console.log('RESEND_API_KEY is not set. Booking emails will not be sent.');
   }
 });
