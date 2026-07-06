@@ -352,7 +352,7 @@ function buildClientEmail(booking) {
     `Preferred Slot: ${preferredSlot}`,
     `Loan Type: ${booking.loanType}`,
     '',
-    'Please confirm or cancel your appointment request using the links below.',
+    'You will receive this confirmation by email and WhatsApp. Please confirm or cancel from either one; you only need to do it once.',
     `Confirm appointment: ${booking.confirmUrl}`,
     `Cancel appointment: ${booking.cancelUrl}`,
     `WhatsApp: ${WHATSAPP_URL}`,
@@ -363,7 +363,7 @@ function buildClientEmail(booking) {
 
   const body = `
     <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
-    <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. Please confirm or cancel your appointment using the buttons below.</p>
+    <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. You will receive this confirmation by email and WhatsApp. Please confirm or cancel from either one; you only need to do it once.</p>
     <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:700;">Pending Confirmation</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
     <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">After you confirm, we will send the calendar invite for this appointment. If you need to change your appointment, please cancel this request first and submit a new preferred slot.</p>
@@ -499,7 +499,7 @@ async function sendBookingWhatsApp(booking) {
       `Preferred slot: ${formatAppointmentDate(booking)}`,
       `Loan type: ${booking.loanType}`,
       '',
-      'Please confirm or cancel using these links:',
+      'You will also receive this by email. Please confirm or cancel from either email or WhatsApp; you only need to do it once.',
       `Confirm: ${booking.confirmUrl}`,
       `Cancel: ${booking.cancelUrl}`,
     ].join('\n'),
