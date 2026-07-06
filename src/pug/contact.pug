@@ -1,0 +1,459 @@
+html(lang="en")
+    head
+        title Contact Us | Metro Pinjaman Berlesen
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        link(rel="preconnect", href="https://fonts.gstatic.com")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900|Plus+Jakarta+Sans:400,500,600,700,800,900&subset=latin")
+        link(href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap", rel="stylesheet")
+        link(rel="stylesheet", href="css/tailwind/tailwind.min.css")
+        link(rel="stylesheet", href="css/main.css")
+        link(rel="icon", type="image/png", sizes="32x32", href="shuffle-for-tailwind.png")
+        script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js", defer="defer")
+    body(class="antialiased bg-body text-body font-body")
+        div(class="")
+            section(x-data="{ mobileNavOpen: false }", class="overflow-hidden")
+                nav(class="mx-4 py-6")
+                    div(class="container mx-auto px-4")
+                        div(class="relative flex items-center justify-between")
+                            a(href="index.html", class="inline-block")
+                                img(class="h-8", src="flow-assets/logos/flow-logo.svg", alt="")
+                            ul(class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex")
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="about_us.html") About us
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="loan.html") Loan
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="how_to_apply.html") How to apply
+                                li
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="contact.html") Contact us
+                            div(class="flex items-center justify-end")
+                                div(class="hidden md:block")
+                                    a(href="loan.html", class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200")
+                                        span(class="mr-2") Apply now
+                                        |                     
+                                        span(class="transform group-hover:translate-x-0.5 transition-transform duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                                path(d="M4.75 10H15.25", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                                path(d="M10 4.75L15.25 10L10 15.25", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                button(x-on:click="mobileNavOpen = !mobileNavOpen", class="md:hidden text-teal-900 hover:text-teal-800")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M5.19995 23.2H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.19995 16H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.19995 8.79999H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                div(:class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}", class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50")
+                    div(x-on:click="mobileNavOpen = !mobileNavOpen", class="fixed inset-0 bg-violet-900 opacity-20")
+                    nav(class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto")
+                        div(class="flex items-center justify-between")
+                            a(href="index.html", class="inline-block")
+                                img(class="h-8", src="flow-assets/logos/sign-logo-flow.svg", alt="")
+                            div(class="flex items-center")
+                                a(href="#", class="inline-flex py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200") Login
+                                button(x-on:click="mobileNavOpen = !mobileNavOpen", class="ml-6")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M23.2 8.79999L8.80005 23.2M8.80005 8.79999L23.2 23.2", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        div(class="pt-20 pb-12 mb-auto")
+                            ul(class="flex-col")
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="about_us.html") About us
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="loan.html") Loan
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="how_to_apply.html") How to apply
+                                li
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="contact.html") Contact us
+                        div(class="flex items-center justify-between")
+                            a(href="#", class="inline-flex items-center text-lg font-medium text-teal-900")
+                                span
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M6.4 6.39999H25.6C26.92 6.39999 28 7.47999 28 8.79999V23.2C28 24.52 26.92 25.6 25.6 25.6H6.4C5.08 25.6 4 24.52 4 23.2V8.79999C4 7.47999 5.08 6.39999 6.4 6.39999Z", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M28 8.8L16 17.2L4 8.8", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                |                 
+                                span(class="ml-2") Newsletter
+                            div(class="flex items-center")
+                                a(href="#", class="inline-block mr-4")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                        g(clip-path="url(#clip0_282_7847)")
+                                            path(d="M11.548 19.9999V10.8776H14.6087L15.0679 7.32146H11.548V5.05136C11.548 4.02209 11.8326 3.32066 13.3103 3.32066L15.1918 3.31988V0.139123C14.8664 0.0968385 13.7495 -0.000106812 12.4495 -0.000106812C9.73488 -0.000106812 7.87642 1.65686 7.87642 4.69916V7.32146H4.8064V10.8776H7.87642V19.9999H11.548Z", fill="#022C22")
+                                |                 
+                                a(href="#", class="inline-block mr-4")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z", fill="currentColor")
+                                |                 
+                                a(href="#", class="inline-block")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z", fill="currentColor")
+            section(class="py-12 lg:py-24")
+                div(class="container mx-auto px-4")
+                    div(class="border-t pt-16")
+                        div(class="max-w-lg mx-auto lg:max-w-none")
+                            div(class="flex flex-wrap -mx-4")
+                                div(class="w-full lg:w-1/2 px-4 mb-12 lg:mb-0")
+                                    div(class="max-w-lg py-7")
+                                        h1(class="font-heading text-4xl sm:text-6xl tracking-sm mb-6") Contact us
+                                        p(class="text-lg text-gray-700 mb-16") Contact Metro Pinjaman Berlesen for personal and business loan enquiries. Our team is ready to assist you 24/7.
+                                        form(action="", x-data="contactBookingForm()", x-init="init()", x-on:submit.prevent="submitBooking()")
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium") Full Name
+                                            input(type="text", x-model="form.name", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium") Email
+                                            input(type="email", x-model="form.email", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium")
+                                                span Contact Number
+                                                |                         
+                                                span(class="text-gray-700") (optional)
+                                            input(type="text", x-model="form.phone", class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium") Loan Type
+                                            div(class="relative w-full mb-8 bg-white rounded-full")
+                                                span(class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                                        path(d="M6.3999 8.2L9.9999 11.8L13.5999 8.2", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                                select(x-model="form.loanType", class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative")
+                                                    option(value="") Select loan type
+                                                    option(value="Personal Loan") Personal Loan
+                                                    option(value="Business Loan") Business Loan
+                                            div(class="flex flex-wrap -mx-2")
+                                                div(class="w-full sm:w-1/2 px-2")
+                                                    label(for="", class="block pl-4 mb-1 text-sm font-medium") Preferred Date
+                                                    input(type="date", x-model="form.date", x-on:change="loadBookedTimes()", :min="today", class="w-full px-4 py-3 mb-6 text-gray-600 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full")
+                                                div(class="w-full sm:w-1/2 px-2")
+                                                    label(for="", class="block pl-4 mb-1 text-sm font-medium") Preferred Time
+                                                    div(class="relative w-full mb-8 bg-white rounded-full")
+                                                        span(class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2")
+                                                            svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                                                path(d="M6.3999 8.2L9.9999 11.8L13.5999 8.2", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                                        select(x-model="form.time", x-on:focus="loadBookedTimes()", x-on:click="loadBookedTimes()", class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative")
+                                                            option(value="") Select preferred time
+                                                            option(value="09:00", x-bind:disabled="isBooked('09:00')", x-text="timeLabel('09:00', '9:00 AM')") 9:00 AM
+                                                            option(value="10:00", x-bind:disabled="isBooked('10:00')", x-text="timeLabel('10:00', '10:00 AM')") 10:00 AM
+                                                            option(value="11:00", x-bind:disabled="isBooked('11:00')", x-text="timeLabel('11:00', '11:00 AM')") 11:00 AM
+                                                            option(value="12:00", x-bind:disabled="isBooked('12:00')", x-text="timeLabel('12:00', '12:00 PM')") 12:00 PM
+                                                            option(value="14:00", x-bind:disabled="isBooked('14:00')", x-text="timeLabel('14:00', '2:00 PM')") 2:00 PM
+                                                            option(value="15:00", x-bind:disabled="isBooked('15:00')", x-text="timeLabel('15:00', '3:00 PM')") 3:00 PM
+                                                            option(value="16:00", x-bind:disabled="isBooked('16:00')", x-text="timeLabel('16:00', '4:00 PM')") 4:00 PM
+                                                            option(value="17:00", x-bind:disabled="isBooked('17:00')", x-text="timeLabel('17:00', '5:00 PM')") 5:00 PM
+                                                    p(x-show="bookedTimes.length", class="mt-2 pl-4 text-sm text-gray-500", style="display: none;")
+                                                        span Booked times for this date: 
+                                                        span(class="font-medium", x-text="bookedTimeLabels()")
+                                            label(for="", class="block pl-4 mb-1 text-sm font-medium") Message / Enquiry
+                                            textarea(rows="4", x-model="form.message", class="w-full px-4 py-3 mb-8 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-2xl resize-none")
+                                            button(type="submit", :disabled="loading", class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200 disabled:opacity-60")
+                                                span(class="mr-2", x-text="loading ? 'Submitting...' : 'Submit'") Submit
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    path(d="M5.25 10H15.75", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                                    path(d="M10.5 4.75L15.75 10L10.5 15.25", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                            p(x-show="successMessage", x-text="successMessage", class="mt-4 text-sm text-teal-900 text-center font-medium", style="display: none;")
+                                            p(x-show="errorMessage", x-text="errorMessage", class="mt-4 text-sm text-red-600 text-center font-medium", style="display: none;")
+                                            button(type="button", x-show="isLocal", x-on:click="resetTestBookings()", class="mt-3 mx-auto text-sm text-gray-600 underline", style="display: none;") Reset test bookings
+                                div(class="w-full lg:w-1/2 px-4")
+                                    div(class="lg:max-w-md lg:ml-auto h-full")
+                                        img(class="block w-full h-full", src="flow-assets/contact/photo-1.png", alt="")
+            section(class="py-12 lg:py-24")
+                div(class="container mx-auto px-4")
+                    div(class="max-w-lg mx-auto md:max-w-none")
+                        div(class="flex flex-wrap -mx-4")
+                            div(class="w-full sm:w-1/2 md:w-1/3 px-4 mb-10 md:mb-0")
+                                a(href="mailto:metropinjamanberlesan@gmail.com", class="flex flex-col h-full", style="color: inherit; text-decoration: none;")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="48", height="48", viewbox="0 0 48 48", fill="none")
+                                        path(d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z", fill="#BEF264")
+                                        path(d="M11.5389 13.4152L24 23.6106L36.461 13.4152C36.3173 13.3623 36.162 13.3333 36 13.3333H12C11.8379 13.3333 11.6826 13.3623 11.5389 13.4152Z", fill="#022C22")
+                                        path(d="M10.6666 16.147V33.3333C10.6666 34.0697 11.2636 34.6667 12 34.6667H36C36.7363 34.6667 37.3333 34.0697 37.3333 33.3333V16.147L24.8443 26.3653C24.3531 26.7671 23.6468 26.7671 23.1556 26.3653L10.6666 16.147Z", fill="#022C22")
+                                    span(class="block mt-8 mb-1 text-2xl font-medium") Email
+                                    p(class="text-gray-700 mb-auto") Email us for loan enquiries and application support.
+                                    p(class="mt-8 text-lg font-medium") metropinjamanberlesan@gmail.com
+                            div(class="w-full sm:w-1/2 md:w-1/3 px-4 mb-10 md:mb-0")
+                                div(x-data="{ copied: false }", x-on:click="window.open('https://wa.me/60102150037', '_blank', 'noopener')", x-on:keydown.enter="window.open('https://wa.me/60102150037', '_blank', 'noopener')", role="link", tabindex="0", class="flex flex-col h-full cursor-pointer")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="48", height="48", viewbox="0 0 48 48", fill="none")
+                                        path(d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z", fill="#BEF264")
+                                        path(d="M13.3333 12C12.597 12 12 12.597 12 13.3333C12 25.8518 22.1482 36 34.6667 36C35.403 36 36 35.403 36 34.6667V28.2667C36 27.6779 35.6138 27.1588 35.0498 26.9896L29.7165 25.3896C29.2466 25.2486 28.7374 25.377 28.3905 25.7239L26.8288 27.2856C24.2738 25.847 22.153 23.7262 20.7144 21.1712L22.2761 19.6095C22.623 19.2626 22.7514 18.7534 22.6104 18.2835L21.0104 12.9502C20.8412 12.3862 20.3221 12 19.7333 12H13.3333Z", fill="#022C22")
+                                    span(class="block mt-8 mb-1 text-2xl font-medium") Phone
+                                    p(class="text-gray-700") We are open 24 hours
+                                    p(class="text-gray-700 mb-auto") and 7 days a week
+                                    div(class="mt-8 flex items-center")
+                                        p(class="text-lg font-medium") +60 10-215 0037
+                                        button(type="button", aria-label="Copy phone number", x-on:click.stop="navigator.clipboard.writeText('+60 10-215 0037'); copied = true; setTimeout(() => copied = false, 2000)", class="ml-3 inline-flex items-center justify-center text-teal-900 hover:text-teal-700 transition duration-200")
+                                            svg(x-show="!copied", xmlns="http://www.w3.org/2000/svg", width="18", height="18", viewbox="0 0 24 24", fill="none")
+                                                rect(x="9", y="9", width="10", height="10", rx="2", stroke="currentColor", stroke-width="1.8", stroke-linecap="round", stroke-linejoin="round")
+                                                path(d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5", stroke="currentColor", stroke-width="1.8", stroke-linecap="round", stroke-linejoin="round")
+                                            svg(x-show="copied", xmlns="http://www.w3.org/2000/svg", width="18", height="18", viewbox="0 0 24 24", fill="none", style="display: none;")
+                                                path(d="M20 6L9 17L4 12", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                            div(class="w-full sm:w-1/2 md:w-1/3 px-4")
+                                div(class="flex flex-col h-full")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="48", height="48", viewbox="0 0 48 48", fill="none")
+                                        path(d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z", fill="#BEF264")
+                                        path(fill-rule="evenodd", clip-rule="evenodd", d="M24.7886 37.0751L24.7902 37.074L24.7926 37.0722L24.8 37.0667L24.8247 37.0483C24.8456 37.0328 24.875 37.0106 24.9126 36.9821C24.9876 36.9249 25.0948 36.8422 25.2297 36.7351C25.4994 36.5212 25.8803 36.2099 26.3353 35.8126C27.2435 35.0196 28.4568 33.876 29.6738 32.4735C32.0637 29.7193 34.6667 25.7403 34.6667 21.3333C34.6667 15.4423 29.8911 10.6667 24 10.6667C18.109 10.6667 13.3334 15.4423 13.3334 21.3333C13.3334 25.7403 15.9364 29.7193 18.3263 32.4735C19.5433 33.876 20.7566 35.0196 21.6648 35.8126C22.1198 36.2099 22.5007 36.5212 22.7704 36.7351C22.9053 36.8422 23.0125 36.9249 23.0875 36.9821C23.125 37.0106 23.1545 37.0328 23.1754 37.0483L23.2001 37.0667L23.2075 37.0722L23.2108 37.0746C23.6802 37.4189 24.3192 37.4194 24.7886 37.0751ZM23.9971 24.6667C25.8381 24.6667 27.3304 23.1743 27.3304 21.3333C27.3304 19.4924 25.8381 18 23.9971 18C22.1562 18 20.6638 19.4924 20.6638 21.3333C20.6638 23.1743 22.1562 24.6667 23.9971 24.6667Z", fill="#022C22")
+                                    span(class="block mt-8 mb-1 text-2xl font-medium") HQ Office
+                                    p(class="text-gray-700 mb-auto") Visit us at our office
+                                    p(class="mt-8 text-lg font-medium") Metro Pinjaman Berlesen
+                                    p(class="text-lg font-medium") Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur
+                                    div(class="flex flex-wrap mt-6")
+                                        a(href="https://www.waze.com/live-map/directions/my/wilayah-persekutuan-kuala-lumpur/kuala-lumpur/jalan-metro-1?to=place.ElpKYWxhbiBNZXRybyAxLCBNZXRybyBQcmltYSwgNTIxMDAgS3VhbGEgTHVtcHVyLCBXaWxheWFoIFBlcnNla3V0dWFuIEt1YWxhIEx1bXB1ciwgTWFsYXlzaWEiLiosChQKEglr0ecfQEbMMRELOdpZeIzxyxIUChIJ35pfkUBGzDERuup-yz1DT3Y", target="_blank", rel="noopener", class="inline-flex py-2.5 px-4 mr-3 mb-3 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200")
+                                            img(src="icons/waze-icon.svg", alt="Waze", style="width: 16px; height: 16px;")
+                                        a(href="https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b?sa=X&ved=1t:242&ictx=111", target="_blank", rel="noopener", class="inline-flex py-2.5 px-4 mb-3 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200")
+                                            img(src="icons/google-map-icon.svg", alt="Google Map", style="width: 16px; height: 16px;")
+            section(class="py-12 lg:py-24")
+                div(class="container mx-auto px-4")
+                    div(class="text-center mb-20")
+                        h1(class="font-heading text-6xl mb-6") FAQ
+                        p(class="text-gray-700") Here you will find the answers to the frequently asked questions.
+                    div(class="max-w-4xl mx-auto")
+                        button(x-data="{ accordion: false }", x-on:click.prevent="accordion = !accordion", class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl")
+                            div
+                                div(class="pr-5")
+                                    h5(class="text-lg font-medium") What loan services do you offer?
+                                div(x-ref="container", :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''", class="overflow-hidden h-0 pr-5 duration-500")
+                                    p(class="text-gray-700 mt-4") Metro Pinjaman Berlesen offers personal loans and business loans with flexible repayment options.
+                            span(class="flex-shrink-0")
+                                div(:class="{'hidden': accordion}")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M12 5.69995V18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                div(:class="{'hidden': !accordion}", class="hidden")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        button(x-data="{ accordion: false }", x-on:click.prevent="accordion = !accordion", class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl")
+                            div
+                                div(class="pr-5")
+                                    h5(class="text-lg font-medium") How fast can I receive the money?
+                                div(x-ref="container", :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''", class="overflow-hidden h-0 pr-5 duration-500")
+                                    p(class="text-gray-700 mt-4") Once your application is approved, you can receive your cash by bank transfer within 10 minutes.
+                            span(class="flex-shrink-0")
+                                div(:class="{'hidden': accordion}")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M12 5.69995V18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                div(:class="{'hidden': !accordion}", class="hidden")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        button(x-data="{ accordion: false }", x-on:click.prevent="accordion = !accordion", class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl")
+                            div
+                                div(class="pr-5")
+                                    h5(class="text-lg font-medium") Who can apply?
+                                div(x-ref="container", :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''", class="overflow-hidden h-0 pr-5 duration-500")
+                                    p(class="text-gray-700 mt-4") The service is open to Malaysians. Personal loan applicants should have a source of income and a minimum monthly salary of RM3000.
+                            span(class="flex-shrink-0")
+                                div(:class="{'hidden': accordion}")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M12 5.69995V18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                div(:class="{'hidden': !accordion}", class="hidden")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        button(x-data="{ accordion: false }", x-on:click.prevent="accordion = !accordion", class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl")
+                            div
+                                div(class="pr-5")
+                                    h5(class="text-lg font-medium") Do I need an ATM card or guarantor?
+                                div(x-ref="container", :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''", class="overflow-hidden h-0 pr-5 duration-500")
+                                    p(class="text-gray-700 mt-4") No. Metro Pinjaman Berlesen does not require your ATM card or a guarantor for your loan application.
+                            span(class="flex-shrink-0")
+                                div(:class="{'hidden': accordion}")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M12 5.69995V18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                div(:class="{'hidden': !accordion}", class="hidden")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        button(x-data="{ accordion: false }", x-on:click.prevent="accordion = !accordion", class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl")
+                            div
+                                div(class="pr-5")
+                                    h5(class="text-lg font-medium") What documents are required?
+                                div(x-ref="container", :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''", class="overflow-hidden h-0 pr-5 duration-500")
+                                    p(class="text-gray-700 mt-4") Required documents may include NRIC, contact number, latest 3 months pay slip, latest 3 months bank statement, latest utility bills, EPF statement, S&P, or tenancy agreement.
+                            span(class="flex-shrink-0")
+                                div(:class="{'hidden': accordion}")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M12 5.69995V18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                div(:class="{'hidden': !accordion}", class="hidden")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M5.69995 12H18.3", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        div(class="sm:flex py-10 px-5 sm:px-10 bg-orange-50 rounded-2xl")
+                            div(class="mb-4 sm:mb-0 sm:mr-6")
+                                svg(xmlns="http://www.w3.org/2000/svg", width="48", height="48", viewbox="0 0 48 48", fill="none")
+                                    path(d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z", fill="#BEF264")
+                                    path(d="M13.676 15.5617C11.7951 17.8602 10.6666 20.7983 10.6666 24C10.6666 27.2017 11.7951 30.1398 13.6761 32.4383L18.9201 27.1943C18.3372 26.2694 18 25.174 18 24C18 22.8259 18.3372 21.7306 18.92 20.8057L13.676 15.5617Z", fill="#022C22")
+                                    path(d="M15.5616 13.6761L20.8056 18.9201C21.7306 18.3372 22.8259 18 24 18C25.174 18 26.2694 18.3372 27.1943 18.9201L32.4383 13.6761C30.1398 11.7951 27.2017 10.6666 24 10.6666C20.7982 10.6666 17.8601 11.7951 15.5616 13.6761Z", fill="#022C22")
+                                    path(d="M34.3239 15.5617L29.0799 20.8057C29.6628 21.7307 30 22.8259 30 24C30 25.174 29.6627 26.2693 29.0799 27.1943L34.3238 32.4383C36.2048 30.1398 37.3333 27.2017 37.3333 24C37.3333 20.7983 36.2048 17.8602 34.3239 15.5617Z", fill="#022C22")
+                                    path(d="M32.4382 34.3239L27.1942 29.0799C26.2693 29.6628 25.174 30 24 30C22.8259 30 21.7307 29.6628 20.8057 29.0799L15.5617 34.3239C17.8602 36.2048 20.7983 37.3333 24 37.3333C27.2016 37.3333 30.1397 36.2048 32.4382 34.3239Z", fill="#022C22")
+                            div
+                                h5(class="text-xl font-medium mb-4") Still have questions?
+                                p(class="text-gray-700")
+                                    span For assistance, please visit our
+                                    |                   
+                                    a(href="#", class="inline-block text-black font-medium underline") Contact Us
+                                    |                   
+                                    span page or contact us on WhatsApp at
+                                    |                   
+                                    span(class="text-black font-medium") +60 10-215 0037
+                                    |                   
+                                    span . Our team is ready to help with your loan enquiry and application.
+            section(class="relative py-12 lg:py-24 overflow-hidden")
+                img(class="absolute bottom-0 left-0", src="flow-assets/footer/waves-lines-left-bottom.png", alt="")
+                div(class="container px-4 mx-auto relative")
+                    div(class="flex flex-wrap mb-12 md:mb-24 xl:mb-40 -mx-4")
+                        div(class="w-full lg:w-2/12 xl:w-3/12 px-4 mb-16 lg:mb-0")
+                            a(class="inline-block mb-4", href="#")
+                                img(class="h-8", src="flow-assets/logos/flow-logo.svg", alt="")
+                        div(class="w-full md:w-7/12 lg:w-7/12 xl:w-6/12 px-4 mb-16 lg:mb-0")
+                            div(class="flex flex-wrap -mx-4")
+                                div(class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0")
+                                    h3(class="mb-6 font-bold") Platform
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Solutions
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") How it works
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Pricing
+                                div(class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0")
+                                    h3(class="mb-6 font-bold") Resources
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Blog
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Help Center
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Support
+                                div(class="w-full xs:w-1/3 px-4")
+                                    h3(class="mb-6 font-bold") Company
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") About
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Our Mission
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Careers
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Contact
+                        div(class="w-full md:w-5/12 lg:w-3/12 xl:w-3/12 px-4")
+                            div(class="flex flex-col w-full md:items-end")
+                                div
+                                    a(href="#", class="group flex mb-4 items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                g(clip-path="url(#clip0_229_2133)")
+                                                    path(d="M13.8577 23.9999V13.0532H17.5306L18.0816 8.78575H13.8577V6.06164C13.8577 4.82652 14.1993 3.98479 15.9725 3.98479L18.2303 3.98387V0.166954C17.8398 0.116212 16.4995 -0.00012207 14.9395 -0.00012207C11.682 -0.00012207 9.45185 1.98824 9.45185 5.639V8.78575H5.76782V13.0532H9.45185V23.9999H13.8577Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on Facebook
+                                    |                   
+                                    a(href="#", class="group flex mb-4 items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                path(d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on Instagram
+                                    |                   
+                                    a(href="#", class="group flex items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                path(d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on LinkedIn
+                    div(class="md:text-right")
+                        p(class="text-sm text-gray-500") Copyright © 2025 Metro Pinjaman Berlesen. All rights reserved.
+        script.
+            function contactBookingForm() {
+                const today = new Date().toISOString().slice(0, 10);
+
+                return {
+                    today,
+                    isLocal: ['localhost', '127.0.0.1'].includes(window.location.hostname),
+                    loading: false,
+                    successMessage: '',
+                    errorMessage: '',
+                    bookedTimes: [],
+                    form: {
+                        name: '',
+                        email: '',
+                        phone: '',
+                        loanType: '',
+                        date: today,
+                        time: '',
+                        message: ''
+                    },
+                    init() {
+                        this.loadBookedTimes();
+                    },
+                    isBooked(time) {
+                        return this.bookedTimes.includes(time);
+                    },
+                    timeLabel(time, label) {
+                        return this.isBooked(time) ? `${label} - Booked` : label;
+                    },
+                    bookedTimeLabels() {
+                        const labels = {
+                            '09:00': '9:00 AM',
+                            '10:00': '10:00 AM',
+                            '11:00': '11:00 AM',
+                            '12:00': '12:00 PM',
+                            '14:00': '2:00 PM',
+                            '15:00': '3:00 PM',
+                            '16:00': '4:00 PM',
+                            '17:00': '5:00 PM'
+                        };
+
+                        return this.bookedTimes.map((time) => labels[time] || time).join(', ');
+                    },
+                    async loadBookedTimes() {
+                        if (!this.form.date) return;
+                        try {
+                            const response = await fetch(`/api/bookings/booked-slots?date=${encodeURIComponent(this.form.date)}`);
+                            if (!response.ok) return;
+                            const data = await response.json();
+                            this.bookedTimes = data.bookedTimes || [];
+                            if (this.isBooked(this.form.time)) {
+                                this.form.time = '';
+                            }
+                        } catch (error) {
+                            this.bookedTimes = [];
+                        }
+                    },
+                    validate() {
+                        if (!this.form.name.trim()) return 'Please enter your full name.';
+                        if (!this.form.email.trim() && !this.form.phone.trim()) return 'Please enter either email or contact number.';
+                        if (!this.form.loanType) return 'Please select a loan type.';
+                        if (!this.form.date || !this.form.time) return 'Please select your preferred date and time.';
+                        if (this.isBooked(this.form.time)) return 'This time slot has already been booked. Please choose another time.';
+                        return '';
+                    },
+                    async submitBooking() {
+                        this.successMessage = '';
+                        this.errorMessage = this.validate();
+                        if (this.errorMessage) return;
+
+                        this.loading = true;
+                        try {
+                            const response = await fetch('/api/bookings', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(this.form)
+                            });
+                            const data = await response.json().catch(() => ({}));
+
+                            if (!response.ok) {
+                                this.errorMessage = data.message || 'This time slot is unavailable. Please choose another time.';
+                                await this.loadBookedTimes();
+                                return;
+                            }
+
+                            this.successMessage = 'Thank you. Your preferred slot has been submitted and blocked for testing.';
+                            this.errorMessage = '';
+                            this.form.time = '';
+                            await this.loadBookedTimes();
+                        } catch (error) {
+                            this.errorMessage = 'Booking service is not running. Please use the booking test server.';
+                        } finally {
+                            this.loading = false;
+                        }
+                    },
+                    async resetTestBookings() {
+                        this.successMessage = '';
+                        this.errorMessage = '';
+                        try {
+                            const response = await fetch('/api/test/reset-bookings', { method: 'POST' });
+                            if (!response.ok) throw new Error('Reset failed');
+                            this.successMessage = 'Test bookings have been reset.';
+                            await this.loadBookedTimes();
+                        } catch (error) {
+                            this.errorMessage = 'Could not reset test bookings.';
+                        }
+                    }
+                };
+            }
+        script(type="text/javascript", src="js/global-88881.js?v=1782722021")

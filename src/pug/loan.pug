@@ -1,0 +1,571 @@
+html(lang="en")
+    head
+        title Page title
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        link(rel="preconnect", href="https://fonts.gstatic.com")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900|Plus+Jakarta+Sans:400,500,600,700,800,900&subset=latin")
+        link(href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap", rel="stylesheet")
+        link(rel="stylesheet", href="css/tailwind/tailwind.min.css")
+        link(rel="stylesheet", href="css/main.css")
+        link(rel="icon", type="image/png", sizes="32x32", href="shuffle-for-tailwind.png")
+        script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js", defer="defer")
+    body(class="antialiased bg-body text-body font-body")
+        div(class="")
+            section(x-data="{ mobileNavOpen: false }")
+                nav(class="py-6 border-b")
+                    div(class="container mx-auto px-4")
+                        div(class="relative flex items-center justify-between")
+                            a(href="index.html", class="inline-block")
+                                img(class="h-8", src="flow-assets/logos/flow-logo.svg", alt="")
+                            ul(class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex")
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="about_us.html") About us
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="loan.html") Loan
+                                li(class="mr-8")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="how_to_apply.html") How to apply
+                                li
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="contact.html") Contact us
+                            div(class="flex items-center justify-end")
+                                div(class="hidden md:block")
+                                    a(href="loan.html", class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200")
+                                        span(class="mr-2") Apply now
+                                        |                     
+                                        span(class="transform group-hover:translate-x-0.5 transition-transform duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                                path(d="M4.75 10H15.25", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                                path(d="M10 4.75L15.25 10L10 15.25", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                button(x-on:click="mobileNavOpen = !mobileNavOpen", class="md:hidden text-teal-900 hover:text-teal-800")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M5.19995 23.2H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.19995 16H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M5.19995 8.79999H26.7999", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                div(class="relative")
+                    div(class="container mx-auto px-4")
+                        div(class="max-w-lg xl:max-w-xl mx-auto lg:mx-0 pt-12 pb-28 lg:py-24")
+                            div(class="flex mb-6 items-center")
+                                svg(xmlns="http://www.w3.org/2000/svg", width="12", height="12", viewbox="0 0 12 12", fill="none")
+                                    rect(width="12", height="12", rx="2", fill="#022C22")
+                                    circle(cx="6", cy="6", r="4", fill="#BEF264")
+                                span(class="ml-2 text-sm font-medium") Powering Tomorrow
+                            h1(class="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8") The Future of Green Energy
+                            p(class="max-w-md xl:max-w-none text-lg text-gray-700 mb-10") Our commitment to green energy is paving the way for a cleaner, healthier planet. Join us on a journey towards a future where clean, renewable energy sources transform the way we power our lives.
+                            div(class="flex flex-col sm:flex-row")
+                                a(href="#", class="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200") See our solutions
+                                |                 
+                                a(href="#", class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200") Get in touch
+                    div(class="hidden lg:flex items-center justify-center absolute top-0 right-0 h-full max-w-lg xl:max-w-none xl:w-2/5 p-3 ml-auto bg-lime-500")
+                        img(class="absolute bottom-0 left-0 -ml-16 max-w-md lg:h-52", src="../..//flow-assets/headers/card-small.png", alt="")
+                        img(class="block xl:h-full mx-auto rounded-full", src="flow-assets/headers/image-hero-1.png", alt="")
+                    div(class="relative flex lg:hidden p-3 bg-lime-500 items-center justify-center")
+                        img(class="absolute top-0 right-0 -mt-16", src="../..//flow-assets/headers/card-small.png", alt="")
+                        img(class="block w-full max-w-2xl h-auto rounded-full", src="flow-assets/headers/image-hero-1.png", alt="")
+                div(:class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}", class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50")
+                    div(x-on:click="mobileNavOpen = !mobileNavOpen", class="fixed inset-0 bg-violet-900 opacity-20")
+                    nav(class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto")
+                        div(class="flex items-center justify-between")
+                            a(href="index.html", class="inline-block")
+                                img(class="h-8", src="flow-assets/logos/sign-logo-flow.svg", alt="")
+                            div(class="flex items-center")
+                                a(href="#", class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200") Login
+                                button(x-on:click="mobileNavOpen = !mobileNavOpen")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M23.2 8.79999L8.80005 23.2M8.80005 8.79999L23.2 23.2", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                        div(class="pt-20 pb-12 mb-auto")
+                            ul(class="flex-col")
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="about_us.html") About us
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="loan.html") Loan
+                                li(class="mb-6")
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="how_to_apply.html") How to apply
+                                li
+                                    a(class="inline-block text-teal-900 hover:text-teal-700 font-medium", href="contact.html") Contact us
+                        div(class="flex items-center justify-between")
+                            a(href="#", class="inline-flex items-center text-lg font-medium text-teal-900")
+                                span
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="32", height="32", viewbox="0 0 32 32", fill="none")
+                                        path(d="M6.4 6.39999H25.6C26.92 6.39999 28 7.47999 28 8.79999V23.2C28 24.52 26.92 25.6 25.6 25.6H6.4C5.08 25.6 4 24.52 4 23.2V8.79999C4 7.47999 5.08 6.39999 6.4 6.39999Z", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                        path(d="M28 8.8L16 17.2L4 8.8", stroke="#646A69", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                |                 
+                                span(class="ml-2") Newsletter
+                            div(class="flex items-center")
+                                a(href="#", class="inline-block mr-4")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="20", height="20", viewbox="0 0 20 20", fill="none")
+                                        g(clip-path="url(#clip0_282_7847)")
+                                            path(d="M11.548 19.9999V10.8776H14.6087L15.0679 7.32146H11.548V5.05136C11.548 4.02209 11.8326 3.32066 13.3103 3.32066L15.1918 3.31988V0.139123C14.8664 0.0968385 13.7495 -0.000106812 12.4495 -0.000106812C9.73488 -0.000106812 7.87642 1.65686 7.87642 4.69916V7.32146H4.8064V10.8776H7.87642V19.9999H11.548Z", fill="#022C22")
+                                |                 
+                                a(href="#", class="inline-block mr-4")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z", fill="currentColor")
+                                |                 
+                                a(href="#", class="inline-block")
+                                    svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                        path(d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z", fill="currentColor")
+            section(x-data="{ showContent: false }", class="py-12 lg:py-24")
+                div(class="container mx-auto px-4")
+                    div(class="flex flex-wrap mb-20 -mx-4")
+                        div(class="w-full lg:w-1/2 px-4 mb-10 lg:mb-0")
+                            div(class="flex flex-col h-full items-start max-w-md")
+                                h1(class="font-heading text-4xl xs:text-6xl mb-6") Personal Loan
+                                p(class="text-lg text-gray-700 mb-20") Our team boasts top green energy experts, driving innovation in sustainability.
+                                a(x-on:click.prevent="showContent = true", :class="{'hidden': showContent}", href="#", class="inline-flex mt-auto py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300") See all
+                        div(class="w-full lg:w-1/2 px-4")
+                            div(class="max-w-xl")
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-1.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-1.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Wade Warren
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-2.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") From Trash to Treasure: The Promising World of Biomass Energy
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-2.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Jenny Wilson
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-3.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Hydrogen: Fueling the Green Energy Revolution
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-3.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Leslie Alexander
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 5 min read
+                            div(:class="{'hidden': !showContent}", class="hidden mt-8 max-w-xl")
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-1.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-1.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Wade Warren
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-2.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") From Trash to Treasure: The Promising World of Biomass Energy
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-2.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Jenny Wilson
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-3.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Hydrogen: Fueling the Green Energy Revolution
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-3.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Leslie Alexander
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 5 min read
+            section(x-data="{ showContent: false }", class="py-12 lg:py-24")
+                div(class="container mx-auto px-4")
+                    div(class="flex flex-wrap mb-20 -mx-4")
+                        div(class="w-full lg:w-1/2 px-4 mb-10 lg:mb-0")
+                            div(class="flex flex-col h-full items-start max-w-md")
+                                h1(class="font-heading text-4xl xs:text-6xl mb-6") Business Loan
+                                p(class="text-lg text-gray-700 mb-20") Our team boasts top green energy experts, driving innovation in sustainability.
+                                a(x-on:click.prevent="showContent = true", :class="{'hidden': showContent}", href="#", class="inline-flex mt-auto py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300") See all
+                        div(class="w-full lg:w-1/2 px-4")
+                            div(class="max-w-xl")
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-1.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-1.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Wade Warren
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-2.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") From Trash to Treasure: The Promising World of Biomass Energy
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-2.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Jenny Wilson
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-3.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Hydrogen: Fueling the Green Energy Revolution
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-3.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Leslie Alexander
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 5 min read
+                            div(:class="{'hidden': !showContent}", class="hidden mt-8 max-w-xl")
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-1.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-1.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Wade Warren
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group mb-8 items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-2.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") From Trash to Treasure: The Promising World of Biomass Energy
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-2.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Jenny Wilson
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 7 min read
+                                |                 
+                                a(href="#", class="flex flex-wrap sm:flex-nowrap group items-center")
+                                    img(class="block w-44 h-44 rounded-2xl", src="flow-assets/blog/image-sm-3.png", alt="")
+                                    div(class="mt-6 sm:mt-0 sm:ml-8")
+                                        h3(class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6") Hydrogen: Fueling the Green Energy Revolution
+                                        div(class="flex items-center")
+                                            img(class="w-8 h-8 rounded-full", src="flow-assets/blog/circle-avatar-3.png", alt="")
+                                            div(class="flex items-center ml-4")
+                                                span(class="text-sm font-medium") Leslie Alexander
+                                                |                         
+                                                span(class="mx-2 sm:mx-4")
+                                                    svg(xmlns="http://www.w3.org/2000/svg", width="4", height="4", viewbox="0 0 4 4", fill="none")
+                                                        circle(cx="2", cy="2", r="2", fill="#929C9A")
+                                                |                         
+                                                span(class="text-sm font-medium") 5 min read
+            section(class="relative py-12 lg:py-24 overflow-hidden")
+                img(class="absolute top-0 right-0", src="flow-assets/pricing/waves-right-top.png", alt="")
+                div(class="container mx-auto px-4 relative")
+                    div(class="max-w-2xl mx-auto text-center mb-20")
+                        h1(class="font-heading text-5xl sm:text-6xl tracking-xs mb-6") Pricing
+                        p(class="text-lg text-gray-700") Our pricing plans are simple and designed to cater to households and companies of various sizes. Choose a plan that suits your needs and budget.
+                    div(class="flex flex-wrap -mx-4 mb-24")
+                        div(class="w-full lg:w-1/3 px-4 mb-8 lg:mb-0")               
+                        |             
+                        div(class="w-full lg:w-1/3 px-4 mb-8 lg:mb-0")               
+                        |             
+                        div(class="w-full lg:w-1/3 px-4")               
+                        |             
+                    div(class="pb-4 overflow-x-scroll")
+                        h4(class="font-heading text-3xl font-medium text-center mb-8") Compare benefits
+                        table(class="min-w-max")
+                            thead
+                                tr
+                                    th(class="w-72 pr-4")
+                                    th(class="w-72 px-4")
+                                        div(class="py-4 px-2 shadow-md rounded-2xl")
+                                            span(class="block font-medium") Basic
+                                            div(class="flex items-center justify-center")
+                                                span(class="font-medium") $59
+                                                |                         
+                                                span(class="ml-1 font-medium text-gray-700") /month
+                                    th(class="w-72 px-4")
+                                        div(class="py-4 px-2 shadow-md rounded-2xl")
+                                            span(class="block font-medium") Premium
+                                            div(class="flex items-center justify-center")
+                                                span(class="font-medium") $129
+                                                |                         
+                                                span(class="ml-1 font-medium text-gray-700") /month
+                                    th(class="w-72 pl-4")
+                                        div(class="py-4 px-2 shadow-md rounded-2xl")
+                                            span(class="block font-medium") Enterprise
+                                            |                       
+                                            span(class="font-medium") Custom
+                            tbody
+                                tr
+                                    td
+                                        div(class="py-8")
+                                            span(class="text-xl font-medium") Support
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Installation Fee
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") $119
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") No Installation Fee
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") No Installation Fee
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Satisfaction Guarantee
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") 24/7 Customer Support
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#EDF2F1")
+                                                    path(d="M14.2664 6.40002L7.06641 13.6M7.06641 6.40002L14.2664 13.6", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Smart Energy Monitoring
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#EDF2F1")
+                                                    path(d="M14.2664 6.40002L7.06641 13.6M7.06641 6.40002L14.2664 13.6", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="inline-block")
+                                                svg(xmlns="http://www.w3.org/2000/svg", width="21", height="20", viewbox="0 0 21 20", fill="none")
+                                                    rect(x="0.666504", width="20", height="20", rx="10", fill="#BEF264")
+                                                    path(d="M15.4667 6.40002L8.8667 13L5.8667 10", stroke="#1D1F1E", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
+                                tr
+                                    td(class="pt-12")
+                                        div(class="py-8")
+                                            span(class="text-xl font-medium") Energy Supply
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Renewable Energy Sources
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 50%
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 75%
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 90%
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Carbon Offsetting
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 1.5 metric tons CO2e
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 5 metric tons CO2e
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") Custom
+                                tr
+                                    td(class="border-b")
+                                        div(class="py-8")
+                                            span(class="text-sm") Energy Consumption Limit
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 500 kWh
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") 1,000 kWh
+                                    td(class="border-b")
+                                        div(class="py-8 text-center")
+                                            span(class="text-sm") Custom
+            section(class="bg-white")
+                div(class="max-w-6xl mx-auto px-6 py-16")
+                    h2(class="text-3xl font-bold text-blue-900 mb-4 text-center") Interest Rates & Repayment
+                    p(class="text-center text-gray-600 max-w-2xl mx-auto mb-12") Transparent pricing with flexible repayment options designed to fit your budget.
+                    div(class="grid md:grid-cols-3 gap-8")
+                        div(class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center")
+                            div(class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold") %
+                            h3(class="text-xl font-semibold text-gray-900 mb-2") Competitive Rates
+                            p(class="text-gray-600")
+                                |                     Personal loans from
+                                |                     
+                                span(class="font-semibold text-blue-700") 6.5% p.a.
+                                |                     and business loans from
+                                |                     
+                                span(class="font-semibold text-blue-700") 8.0% p.a.
+                        div(class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center")
+                            div(class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold") $
+                            h3(class="text-xl font-semibold text-gray-900 mb-2") Flexible Repayment
+                            p(class="text-gray-600") Choose monthly installments that suit your cash flow, with no hidden fees or surprises.
+                        div(class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center")
+                            div(class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold") ↻
+                            h3(class="text-xl font-semibold text-gray-900 mb-2") Early Settlement
+                            p(class="text-gray-600") Pay off your loan early and save on interest with low or zero prepayment penalties.
+                    | 
+                    div(class="mt-12 bg-blue-50 rounded-2xl p-8 max-w-3xl mx-auto loan-estimator")
+                        h3(class="text-xl font-semibold text-blue-900 mb-6 text-center") Estimate Your Monthly Repayment
+                        div(class="grid sm:grid-cols-3 gap-5")
+                            div
+                                label(class="block text-sm font-medium text-gray-700 mb-1") Amount ($)
+                                input(type="number", value="10000", min="1000", class="est-amount w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none")
+                            div
+                                label(class="block text-sm font-medium text-gray-700 mb-1") Rate (% p.a.)
+                                input(type="number", value="6.5", step="0.1", min="0", class="est-rate w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none")
+                            div
+                                label(class="block text-sm font-medium text-gray-700 mb-1") Tenure (years)
+                                input(type="number", value="3", min="1", max="10", class="est-tenure w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none")
+                        div(class="mt-6 text-center")
+                            p(class="text-gray-600") Estimated Monthly Payment
+                            p(class="est-result text-3xl font-bold text-blue-700 mt-1") $0
+                            p(class="text-xs text-gray-400 mt-2") *Estimates only. Actual rates and terms may vary upon approval.
+            section(class="relative py-12 lg:py-24 overflow-hidden")
+                img(class="absolute bottom-0 left-0", src="flow-assets/footer/waves-lines-left-bottom.png", alt="")
+                div(class="container px-4 mx-auto relative")
+                    div(class="flex flex-wrap mb-12 md:mb-24 xl:mb-40 -mx-4")
+                        div(class="w-full lg:w-2/12 xl:w-3/12 px-4 mb-16 lg:mb-0")
+                            a(class="inline-block mb-4", href="#")
+                                img(class="h-8", src="flow-assets/logos/flow-logo.svg", alt="")
+                        div(class="w-full md:w-7/12 lg:w-7/12 xl:w-6/12 px-4 mb-16 lg:mb-0")
+                            div(class="flex flex-wrap -mx-4")
+                                div(class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0")
+                                    h3(class="mb-6 font-bold") Platform
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Solutions
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") How it works
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Pricing
+                                div(class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0")
+                                    h3(class="mb-6 font-bold") Resources
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Blog
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Help Center
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Support
+                                div(class="w-full xs:w-1/3 px-4")
+                                    h3(class="mb-6 font-bold") Company
+                                    ul
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") About
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Our Mission
+                                        li(class="mb-4")
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Careers
+                                        li
+                                            a(class="inline-block text-gray-600 hover:text-lime-500 font-medium", href="#") Contact
+                        div(class="w-full md:w-5/12 lg:w-3/12 xl:w-3/12 px-4")
+                            div(class="flex flex-col w-full md:items-end")
+                                div
+                                    a(href="#", class="group flex mb-4 items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                g(clip-path="url(#clip0_229_2133)")
+                                                    path(d="M13.8577 23.9999V13.0532H17.5306L18.0816 8.78575H13.8577V6.06164C13.8577 4.82652 14.1993 3.98479 15.9725 3.98479L18.2303 3.98387V0.166954C17.8398 0.116212 16.4995 -0.00012207 14.9395 -0.00012207C11.682 -0.00012207 9.45185 1.98824 9.45185 5.639V8.78575H5.76782V13.0532H9.45185V23.9999H13.8577Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on Facebook
+                                    |                   
+                                    a(href="#", class="group flex mb-4 items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                path(d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on Instagram
+                                    |                   
+                                    a(href="#", class="group flex items-center")
+                                        div(class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200")
+                                            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewbox="0 0 24 24", fill="none")
+                                                path(d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z", fill="currentColor")
+                                        span(class="ml-4 font-medium") Follow us on LinkedIn
+                    div(class="md:text-right")
+                        p(class="text-sm text-gray-500") © 2026 Flow. All rights reserved.
+        script(type="text/javascript", src="js/1286481.js?v=1782722021", data-custom-component-id="1286481")
+        script(type="text/javascript", src="js/global-88881.js?v=1782722021")

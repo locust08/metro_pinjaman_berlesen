@@ -1,0 +1,13 @@
+node_modules/
+.playwright-mcp/
+
+*.log
+*.err.log
+
+.env
+.env.*
+!.env.example
+
+dist/
+build/
+.cache/
