@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "local-1783310182025",
+    "slotKey": "2026-08-01|09:00",
+    "cancelToken": "f04e5655495d1875ae5881a0cb94d27b09ee428f3972d853",
+    "status": "Cancelled",
+    "source": "Website",
+    "submittedAt": "2026-07-06T03:56:22.026Z",
+    "name": "Codex Email Test",
+    "email": "codex-test@example.com",
+    "phone": "0170000000",
+    "loanType": "Personal Loan",
+    "date": "2026-08-01",
+    "time": "09:00",
+    "message": "Temporary email integration test",
+    "notionSynced": true,
+    "cancelUrl": "http://localhost:3002/api/bookings/cancel?id=local-1783310182025&token=f04e5655495d1875ae5881a0cb94d27b09ee428f3972d853",
+    "notionPageId": "3954fcc4-f701-81b0-82d2-ee3e9df1ccc5",
+    "notionUrl": "https://app.notion.com/p/Codex-Email-Test-2026-08-01-09-00-3954fcc4f70181b082d2ee3e9df1ccc5",
+    "emailSent": true,
+    "cancelledAt": "2026-07-06T03:56:54.100Z"
+  }
+]
