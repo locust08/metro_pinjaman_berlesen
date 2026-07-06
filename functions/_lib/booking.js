@@ -1,5 +1,6 @@
 const NOTION_VERSION = '2022-06-28';
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
+const WHATSAPP_GRAPH_HOST = 'https://graph.facebook.com';
 const DEFAULT_DATABASE_ID = 'fa9a71965f8d40ff92276ba56aa2d69f';
 const DEFAULT_APPOINTMENT_DURATION_MINUTES = 30;
 const ACTIVE_STATUSES = ['Pending Confirmation', 'Confirmed - Booked'];
@@ -97,6 +98,10 @@ export function getConfig(env) {
     resendFromEmail: env.RESEND_FROM_EMAIL_DEV || env.RESEND_FROM_EMAIL || env.RESEND_FROM_EMAIL_PROD || 'Metro Pinjaman Berlesen <no-reply@locus-t.com.my>',
     resendAdminEmails: env.RESEND_CONFIRMATION_TO_EMAIL_DEV || env.RESEND_TO_EMAIL_DEV || env.RESEND_TO_EMAILS || env.RESEND_TO_EMAIL || env.RESEND_TO_EMAIL_PROD || '',
     bookingBaseUrl: env.BOOKING_BASE_URL || 'https://metropinjamanberlesen.pages.dev',
+    whatsappAccessToken: env.WHATSAPP_ACCESS_TOKEN || '',
+    whatsappPhoneNumberId: env.WHATSAPP_PHONE_NUMBER_ID || '',
+    whatsappApiVersion: env.WHATSAPP_API_VERSION || 'v23.0',
+    whatsappTestRecipient: env.WHATSAPP_TEST_RECIPIENT || '',
   };
 }
 
@@ -216,6 +221,7 @@ export function pageToBooking(page) {
     time,
     cancelToken: props['Cancel Token']?.rich_text?.map((part) => part.plain_text).join('') || '',
     cancelUrl: props['Cancel URL']?.url || '',
+    confirmUrl: '',
   };
 }
 
@@ -258,7 +264,8 @@ export async function createBookingPage(config, payload) {
     body: JSON.stringify({ properties: { 'Cancel URL': { url: realCancelUrl } } }),
   });
 
-  return { ...pageToBooking(page), id: page.id, cancelToken: token, cancelUrl: realCancelUrl, date: payload.date, time: payload.time };
+  const confirmUrl = `${config.bookingBaseUrl}/api/bookings/confirm?id=${page.id}&token=${token}`;
+  return { ...pageToBooking(page), id: page.id, cancelToken: token, cancelUrl: realCancelUrl, confirmUrl, date: payload.date, time: payload.time };
 }
 
 export async function cancelBookingPage(config, pageId, token) {
@@ -278,6 +285,27 @@ export async function cancelBookingPage(config, pageId, token) {
   });
 
   return { ...booking, status: 'Cancelled' };
+}
+
+export async function confirmBookingPage(config, pageId, token) {
+  const page = await notionRequest(config, `/pages/${pageId}`);
+  const booking = pageToBooking(page);
+
+  if (!booking.cancelToken || booking.cancelToken !== token) return null;
+  if (booking.status === 'Cancelled') return null;
+
+  await notionRequest(config, `/pages/${pageId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      properties: {
+        Status: { select: { name: 'Confirmed - Booked' } },
+      },
+    }),
+  });
+
+  const cancelUrl = booking.cancelUrl || `${config.bookingBaseUrl}/api/bookings/cancel?id=${pageId}&token=${token}`;
+  const confirmUrl = `${config.bookingBaseUrl}/api/bookings/confirm?id=${pageId}&token=${token}`;
+  return { ...booking, id: pageId, status: 'Confirmed - Booked', cancelUrl, confirmUrl };
 }
 
 function formatIcsDate(date) {
@@ -444,7 +472,8 @@ export async function sendBookingEmails(config, booking) {
     `Preferred Slot: ${preferredSlot}`,
     `Loan Type: ${booking.loanType}`,
     '',
-    'Our team will contact you to confirm the appointment. A calendar file is attached for your convenience.',
+    'Please confirm or cancel your appointment request using the links below.',
+    `Confirm appointment: ${booking.confirmUrl}`,
     `Cancel appointment: ${booking.cancelUrl}`,
     `WhatsApp: ${WHATSAPP_URL}`,
     `Location: ${GOOGLE_MAPS_URL}`,
@@ -470,18 +499,17 @@ export async function sendBookingEmails(config, booking) {
     reference,
     body: `
       <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
-      <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. Our team will contact you to confirm this appointment.</p>
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Thank you. We have received your appointment request. Please confirm or cancel your appointment using the buttons below.</p>
       <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:700;">Pending Confirmation</div>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
-      <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">A calendar file is attached to this email. If you need to change your appointment, please cancel this request first and submit a new preferred slot.</p>
+      <p style="margin:18px 0 0;font-size:14px;line-height:1.7;color:#334155;">After you confirm, we will send the calendar invite for this appointment. If you need to change your appointment, please cancel this request first and submit a new preferred slot.</p>
       <div style="margin-top:22px;">
-        ${buttonHtml(booking.cancelUrl, 'Cancel Appointment')}
+        ${buttonHtml(booking.confirmUrl, 'Confirm Appointment')}
+        ${buttonHtml(booking.cancelUrl, 'Cancel Appointment', 'secondary')}
         ${buttonHtml(WHATSAPP_URL, 'WhatsApp Us', 'secondary')}
         ${buttonHtml(GOOGLE_MAPS_URL, 'View Location', 'secondary')}
       </div>`,
   });
-  const calendarInvite = buildCalendarInvite(booking);
-
   const [admin, client] = await Promise.all([
     sendResendEmail(config, {
       to: config.resendAdminEmails,
@@ -495,9 +523,126 @@ export async function sendBookingEmails(config, booking) {
       subject: 'We received your Metro Pinjaman Berlesen appointment request',
       text: clientText,
       html: clientHtml,
-      attachments: [{ filename: 'metro-pinjaman-appointment.ics', content: btoa(calendarInvite) }],
     }),
   ]);
 
   return { admin, client };
+}
+
+function normalizeWhatsAppRecipient(value) {
+  const digits = cleanValue(value).replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.startsWith('60')) return digits;
+  if (digits.startsWith('0')) return `6${digits}`;
+  return digits;
+}
+
+export async function sendWhatsAppText(config, { to, body }) {
+  const recipient = normalizeWhatsAppRecipient(config.whatsappTestRecipient || to);
+  if (!config.whatsappAccessToken || !config.whatsappPhoneNumberId || !recipient) {
+    return { ok: false, error: 'Missing WhatsApp configuration or recipient.' };
+  }
+
+  const response = await fetch(`${WHATSAPP_GRAPH_HOST}/${config.whatsappApiVersion}/${config.whatsappPhoneNumberId}/messages`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${config.whatsappAccessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      messaging_product: 'whatsapp',
+      recipient_type: 'individual',
+      to: recipient,
+      type: 'text',
+      text: {
+        preview_url: true,
+        body,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    return { ok: false, error: `WhatsApp returned ${response.status}: ${(await response.text()).slice(0, 500)}` };
+  }
+
+  return { ok: true };
+}
+
+export async function sendBookingWhatsApp(config, booking) {
+  const body = [
+    `Hi ${booking.name}, thank you for your Metro Pinjaman Berlesen appointment request.`,
+    '',
+    `Preferred slot: ${formatAppointmentDate(booking)}`,
+    `Loan type: ${booking.loanType}`,
+    '',
+    'Please confirm or cancel using these links:',
+    `Confirm: ${booking.confirmUrl}`,
+    `Cancel: ${booking.cancelUrl}`,
+  ].join('\n');
+
+  return sendWhatsAppText(config, { to: booking.phone, body });
+}
+
+export async function sendConfirmedEmails(config, booking) {
+  const preferredSlot = formatAppointmentDate(booking);
+  const reference = bookingReference(booking);
+  const calendarInvite = buildCalendarInvite(booking);
+  const text = [
+    `Hi ${booking.name},`,
+    '',
+    'Your appointment is confirmed.',
+    `Preferred Slot: ${preferredSlot}`,
+    `Loan Type: ${booking.loanType}`,
+    `Cancel appointment: ${booking.cancelUrl}`,
+    '',
+    'A calendar file is attached.',
+    'Metro Pinjaman Berlesen',
+  ].join('\n');
+  const html = emailShell({
+    title: 'Appointment confirmed',
+    preheader: `Your appointment for ${preferredSlot} is confirmed.`,
+    reference,
+    body: `
+      <p style="margin:0 0 16px;font-size:16px;color:#0f172a;font-weight:700;">Hi ${escapeHtml(booking.name)},</p>
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">Your appointment is confirmed. We attached a calendar file so you can add it to your calendar.</p>
+      <div style="display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:700;">Confirmed - Booked</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;border-collapse:separate;border-spacing:0;overflow:hidden;">${rowsHtml(bookingRows(booking))}</table>
+      <div style="margin-top:22px;">
+        ${buttonHtml(booking.cancelUrl, 'Cancel Appointment')}
+        ${buttonHtml(WHATSAPP_URL, 'WhatsApp Us', 'secondary')}
+        ${buttonHtml(GOOGLE_MAPS_URL, 'View Location', 'secondary')}
+      </div>`,
+  });
+
+  const [client, admin] = await Promise.all([
+    sendResendEmail(config, {
+      to: booking.email,
+      subject: 'Your Metro Pinjaman Berlesen appointment is confirmed',
+      text,
+      html,
+      attachments: [{ filename: 'metro-pinjaman-appointment.ics', content: btoa(calendarInvite) }],
+    }),
+    sendResendEmail(config, {
+      to: config.resendAdminEmails,
+      replyTo: booking.email,
+      subject: `Appointment confirmed: ${booking.name} - ${booking.date} ${booking.time}`,
+      text,
+      html,
+    }),
+  ]);
+
+  return { client, admin };
+}
+
+export async function sendConfirmedWhatsApp(config, booking) {
+  const body = [
+    `Hi ${booking.name}, your Metro Pinjaman Berlesen appointment is confirmed.`,
+    '',
+    `Preferred slot: ${formatAppointmentDate(booking)}`,
+    `Loan type: ${booking.loanType}`,
+    '',
+    `Cancel if needed: ${booking.cancelUrl}`,
+  ].join('\n');
+
+  return sendWhatsAppText(config, { to: booking.phone, body });
 }

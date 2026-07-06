@@ -5,6 +5,7 @@ import {
   getConfig,
   jsonResponse,
   sendBookingEmails,
+  sendBookingWhatsApp,
   slotKey,
   validateBooking,
 } from '../_lib/booking.js';
@@ -42,6 +43,8 @@ export async function onRequestPost({ request, env }) {
     const emailResults = await sendBookingEmails(config, booking);
     if (!emailResults.admin.ok) console.error('[booking] Admin email failed:', emailResults.admin.error);
     if (!emailResults.client.ok) console.error('[booking] Client email failed:', emailResults.client.error);
+    const whatsappResult = await sendBookingWhatsApp(config, booking);
+    if (!whatsappResult.ok) console.error('[booking] WhatsApp message failed:', whatsappResult.error);
 
     return jsonResponse({ message: 'Booking submitted.', booking }, 201);
   } catch (error) {
