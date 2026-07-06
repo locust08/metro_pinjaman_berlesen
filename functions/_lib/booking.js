@@ -314,9 +314,10 @@ export function buildCalendarInvite(booking) {
 }
 
 const OFFICE_ADDRESS = 'Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur';
-const OFFICE_PHONE = '+60 10-215 0037';
+const OFFICE_PHONE = '+60 11-7007 3191';
 const OFFICE_EMAIL = 'metropinjamanberlesan@gmail.com';
-const WHATSAPP_URL = 'https://wa.me/60102150037';
+const WHATSAPP_MESSAGE = 'Hi Metro Pinjaman Berlesen, I would like to enquire about a loan appointment.';
+const WHATSAPP_URL = `https://wa.me/601170073191?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b';
 
 function bookingReference(booking) {

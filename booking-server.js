@@ -18,9 +18,10 @@ const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL_DEV || process.env.RESEN
 const RESEND_ADMIN_EMAILS = process.env.RESEND_CONFIRMATION_TO_EMAIL_DEV || process.env.RESEND_TO_EMAIL_DEV || process.env.RESEND_TO_EMAILS || process.env.RESEND_TO_EMAIL || process.env.RESEND_TO_EMAIL_PROD || '';
 const BOOKING_BASE_URL = process.env.BOOKING_BASE_URL || `http://localhost:${PORT}`;
 const OFFICE_ADDRESS = 'Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur';
-const OFFICE_PHONE = '+60 10-215 0037';
+const OFFICE_PHONE = '+60 11-7007 3191';
 const OFFICE_EMAIL = 'metropinjamanberlesan@gmail.com';
-const WHATSAPP_URL = 'https://wa.me/60102150037';
+const WHATSAPP_MESSAGE = 'Hi Metro Pinjaman Berlesen, I would like to enquire about a loan appointment.';
+const WHATSAPP_URL = `https://wa.me/601170073191?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b';
 
 const activeStatuses = new Set(['Pending Confirmation', 'Confirmed - Booked']);
@@ -212,7 +213,7 @@ function buildCalendarInvite(booking) {
     `DTEND:${formatIcsDate(end)}`,
     'STATUS:TENTATIVE',
     `SUMMARY:${escapeIcs(`Loan Appointment - ${booking.loanType}`)}`,
-    `DESCRIPTION:${escapeIcs(`Metro Pinjaman Berlesen appointment. Contact: +60 10-215 0037. Cancel: ${booking.cancelUrl || ''}`)}`,
+    `DESCRIPTION:${escapeIcs(`Metro Pinjaman Berlesen appointment. Contact: +60 11-7007 3191. Cancel: ${booking.cancelUrl || ''}`)}`,
     'LOCATION:Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur',
     'END:VEVENT',
     'END:VCALENDAR',
