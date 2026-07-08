@@ -12,5 +12,7 @@ dist/
 build/
 .next/
 out/
+public/_next/
+public/*.html
 .cache/
 tsconfig.tsbuildinfo
