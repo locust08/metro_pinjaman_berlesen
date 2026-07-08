@@ -1,37 +1,30 @@
-# The Shuffle Editor (https://shuffle.dev)
+# Metro Pinjaman Berlesen
 
-NOTE: npm commands overwrite the ./public directory.
+Next.js static export for the Metro Pinjaman Berlesen website, with Cloudflare Pages Functions for booking APIs.
 
-## 1. Getting Started
+## Development
 
-Project's source files are placed in ./src/ directory. 
-* ./src/assets - default static files (eg. image placeholders). You should replace them with your own files.
-* ./src/tailwind/ - Tailwind config file used to build the theme. Variables used in Theme Customizer are located in tailwind.config.js file.
-
-All your pages (templates) are stored in separated .pug or .html files (depends on your export preferences)
-* ./src/pug/*.pug 
-* ./src/html/*.html 
-
-## 2. Installation
-
+```bash
+npm install
+npm run dev
 ```
-# Install dependencies
-npm install 
 
-# Run dev server with live preview (Browsersync)
-npm run watch
+## Build
 
-# Or make a production build 
+```bash
 npm run build
 ```
 
-## 3. Contact
+The production build exports static files to `out/`.
 
-If you have found any bugs in the Tailwind Builder, have any questions, 
-comments or ideas for new features feel free to contact us:
+## Cloudflare Pages
 
-support@shuffle.dev
+Use these build settings:
 
-## 4. Credits & Special thanks
+```text
+Framework preset: Next.js
+Build command: npm run build
+Build output directory: out
+```
 
-We use placeholders from https://unsplash.com/
+The `functions/` directory provides the `/api/bookings` routes used by the contact form.

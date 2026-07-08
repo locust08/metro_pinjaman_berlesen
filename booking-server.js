@@ -335,7 +335,6 @@ function buildAdminEmail(booking) {
     <div style="margin-top:22px;">
       ${buttonHtml(booking.notionUrl, 'Open in Notion')}
       ${buttonHtml(`mailto:${booking.email}`, 'Reply to Client', 'secondary')}
-      ${buttonHtml(WHATSAPP_URL, 'Open WhatsApp', 'secondary')}
     </div>`;
 
   return {
