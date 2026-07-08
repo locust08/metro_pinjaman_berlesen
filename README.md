@@ -25,6 +25,9 @@ Use these build settings:
 Framework preset: Next.js
 Build command: npm run build
 Build output directory: out
+Node.js version: 22
 ```
+
+The repository also includes `wrangler.toml` with `pages_build_output_dir = "out"` and `.nvmrc` with Node 22 so Cloudflare Pages uses the same static export settings during Git deployments.
 
 The `functions/` directory provides the `/api/bookings` routes used by the contact form.
