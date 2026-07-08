@@ -5,13 +5,38 @@ This Next.js static-export site loads Google Tag Manager from `public/js/global-
 ## Production Resources
 
 - GTM account: `LT Automation 6346744109`
-- GTM container name: `Metro Pinjaman Berlesen`
-- GTM container ID: `GTM-PFSGCN88`
+- Web GTM container name: `Metro Pinjaman Berlesen`
+- Web GTM container ID: `GTM-PFSGCN88`
+- Server GTM container name: `Metro Pinjaman Berlesen Server`
+- Server GTM container ID: `GTM-PRF3538V`
+- Stape sGTM container name: `Metro Pinjaman Berlesen Server`
+- Stape container identifier: `eqmahhxr`
+- Stape tagging server URL: `https://eqmahhxr.apd.stape.io`
+- Stape server region: `AP East (Singapore)`
 - GA4 account: `LT Automation 389036374`
 - GA4 property name: `Metro Pinjaman Berlesen`
 - GA4 property ID: `544621007`
 - GA4 web stream ID: `15218086624`
 - GA4 measurement ID: `G-2R37LT2QLR`
+
+## Server-Side Routing
+
+On July 8, 2026, the Web GTM container was published as version 4:
+
+- Version name: `Route GA4 through Stape server container`
+- Change: added `server_container_url=https://eqmahhxr.apd.stape.io` to the Google tag.
+
+The Server GTM container is hosted in Stape on the free container plan.
+
+On July 8, 2026, the Server GTM container was published as version 2:
+
+- Version name: `Add GA4 server forwarding`
+- Tag: `GA4 - Forward All Events`
+- Tag type: `Google Analytics: GA4`
+- Measurement ID: `G-2R37LT2QLR`
+- Event name: default incoming `event.event_name`
+- Trigger: `All Events`
+- Change: forwards all incoming GA4 web events from the server container to GA4.
 
 The production Doppler config `locus-t-ai-backend/prd` has been updated with:
 
