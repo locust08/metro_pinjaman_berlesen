@@ -92,7 +92,15 @@ const ContactSectionContact2: React.FC = () => {
     setSuccessMessage('');
     const validationError = validate();
     setErrorMessage(validationError);
-    if (validationError) return;
+    if (validationError) {
+      window.metroTrack?.('lead_form_error', {
+        form_id: 'contact_booking',
+        form_name: 'Contact appointment booking',
+        error_type: 'validation',
+        error_message: validationError,
+      });
+      return;
+    }
 
     setLoading(true);
     try {
@@ -104,7 +112,14 @@ const ContactSectionContact2: React.FC = () => {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        setErrorMessage(data.message || 'This time slot is unavailable. Please choose another time.');
+        const message = data.message || 'This time slot is unavailable. Please choose another time.';
+        setErrorMessage(message);
+        window.metroTrack?.('lead_form_error', {
+          form_id: 'contact_booking',
+          form_name: 'Contact appointment booking',
+          error_type: String(response.status),
+          error_message: message,
+        });
         await loadBookedTimes();
         return;
       }
@@ -114,11 +129,20 @@ const ContactSectionContact2: React.FC = () => {
       window.metroTrack?.('lead_form_submit', {
         form_id: 'contact_booking',
         form_name: 'Contact appointment booking',
+        booking_id: data.booking?.id || '',
+        loan_type: form.loanType,
       });
       updateForm('time', '');
       await loadBookedTimes();
     } catch {
-      setErrorMessage('Booking service is currently unavailable. Please try again later.');
+      const message = 'Booking service is currently unavailable. Please try again later.';
+      setErrorMessage(message);
+      window.metroTrack?.('lead_form_error', {
+        form_id: 'contact_booking',
+        form_name: 'Contact appointment booking',
+        error_type: 'network',
+        error_message: message,
+      });
     } finally {
       setLoading(false);
     }

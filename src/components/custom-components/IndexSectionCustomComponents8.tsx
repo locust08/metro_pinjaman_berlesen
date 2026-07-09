@@ -1,5 +1,8 @@
 import React from 'react';
 
+const whatsappUrl =
+  'https://wa.me/601170073191?text=Hi%20Metro%20Pinjaman%20Berlesen%2C%20I%20would%20like%20to%20enquire%20about%20a%20loan%20appointment.';
+
 const IndexSectionCustomComponents8: React.FC = () => {
     return (
         <div data-from-ai="false" className="removed">
@@ -99,7 +102,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
       <p className="text-lg text-teal-900 mb-10 opacity-80">Apply now and get the funds you need in no time.</p>
       <div className="flex flex-wrap gap-4 justify-center">
         <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-white bg-teal-900 hover:bg-white rounded-full transition duration-200" href="#apply">APPLY NOW</a>
-        <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-teal-900 hover:text-white border border-teal-900 hover:border-teal-900 bg-white hover:bg-teal-900 rounded-full transition duration-200" href="#">WHATSAPP US</a>
+        <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-teal-900 hover:text-white border border-teal-900 hover:border-teal-900 bg-white hover:bg-teal-900 rounded-full transition duration-200" href={whatsappUrl} target="_blank" rel="noopener noreferrer">WHATSAPP US</a>
       </div>
     </div>
   </section>

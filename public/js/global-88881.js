@@ -16,6 +16,7 @@
   window.dataLayer = window.dataLayer || [];
   window.__metroRecentEvents = window.__metroRecentEvents || {};
   window.__metroRecentElements = window.__metroRecentElements || new WeakMap();
+  window.__metroTrackedForms = window.__metroTrackedForms || new WeakMap();
 
   function gtag() {
     window.dataLayer.push(arguments);
@@ -58,6 +59,95 @@
     };
   }
 
+  function uuid() {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      return window.crypto.randomUUID();
+    }
+    return "metro-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+  }
+
+  function storageGet(storage, key) {
+    try {
+      return storage.getItem(key);
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function storageSet(storage, key, value) {
+    try {
+      storage.setItem(key, value);
+    } catch (error) {
+      // Storage can be blocked by privacy settings; tracking still works without persistence.
+    }
+  }
+
+  function persistentId(storage, key) {
+    var value = storageGet(storage, key);
+    if (value) return value;
+    value = uuid();
+    storageSet(storage, key, value);
+    return value;
+  }
+
+  function queryValue(names) {
+    var params = new URLSearchParams(window.location.search);
+    for (var i = 0; i < names.length; i += 1) {
+      var value = params.get(names[i]);
+      if (value) return value;
+    }
+    return "";
+  }
+
+  function deviceType() {
+    var width = window.innerWidth || document.documentElement.clientWidth || 0;
+    var ua = navigator.userAgent || "";
+    if (/ipad|tablet/i.test(ua) || (width >= 768 && width <= 1024 && /mobile/i.test(ua))) return "tablet";
+    if (/mobile|android|iphone|ipod/i.test(ua) || width < 768) return "mobile";
+    return "desktop";
+  }
+
+  function platformFromAttribution(payload) {
+    var source = String(payload.utm_source || "").toLowerCase();
+    var referrer = String(payload.referrer || "").toLowerCase();
+    var clickId = String(payload.platform_click_id || "").toLowerCase();
+    if (clickId.indexOf("fbclid=") === 0 || source.indexOf("facebook") >= 0 || referrer.indexOf("facebook") >= 0) return "Facebook";
+    if (clickId.indexOf("ttclid=") === 0 || source.indexOf("tiktok") >= 0 || referrer.indexOf("tiktok") >= 0) return "TikTok";
+    if (clickId.indexOf("gclid=") === 0 || clickId.indexOf("gbraid=") === 0 || clickId.indexOf("wbraid=") === 0 || source.indexOf("google") >= 0 || referrer.indexOf("google") >= 0) return "Google";
+    if (clickId.indexOf("msclkid=") === 0 || source.indexOf("bing") >= 0 || referrer.indexOf("bing") >= 0) return "Bing";
+    if (source.indexOf("whatsapp") >= 0 || referrer.indexOf("whatsapp") >= 0) return "WhatsApp";
+    if (!source && !referrer) return "Direct";
+    return payload.platform || "";
+  }
+
+  function attributionPayload() {
+    var platformClickId =
+      queryValue(["gclid"]) ? "gclid=" + queryValue(["gclid"]) :
+      queryValue(["fbclid"]) ? "fbclid=" + queryValue(["fbclid"]) :
+      queryValue(["ttclid"]) ? "ttclid=" + queryValue(["ttclid"]) :
+      queryValue(["msclkid"]) ? "msclkid=" + queryValue(["msclkid"]) :
+      queryValue(["wbraid"]) ? "wbraid=" + queryValue(["wbraid"]) :
+      queryValue(["gbraid"]) ? "gbraid=" + queryValue(["gbraid"]) :
+      "";
+    var payload = {
+      visitor_id: persistentId(window.localStorage, "metro_visitor_id"),
+      session_id: persistentId(window.sessionStorage, "metro_session_id"),
+      event_time: new Date().toISOString(),
+      referrer: document.referrer || "",
+      utm_source: queryValue(["utm_source"]),
+      utm_medium: queryValue(["utm_medium"]),
+      utm_campaign: queryValue(["utm_campaign"]),
+      utm_content: queryValue(["utm_content"]),
+      utm_term: queryValue(["utm_term"]),
+      platform_click_id: platformClickId,
+      device_type: deviceType(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+      user_agent: navigator.userAgent || ""
+    };
+    payload.platform = platformFromAttribution(payload);
+    return payload;
+  }
+
   function recentlyTrackedElement(element, lockMs) {
     if (!element) return false;
     var now = Date.now();
@@ -78,7 +168,7 @@
 
   window.metroTrack = function(eventName, eventParams) {
     if (!eventName) return;
-    var payload = Object.assign({ event: eventName }, currentPagePayload(), eventParams || {});
+    var payload = Object.assign({ event: eventName }, currentPagePayload(), attributionPayload(), eventParams || {});
     var eventKey = normalizedEventKey(payload);
     var now = Date.now();
 
@@ -86,6 +176,8 @@
       return;
     }
     window.__metroRecentEvents[eventKey] = now;
+
+    sendVisitorEvent(payload);
 
     if (hasGtm) {
       window.dataLayer.push(payload);
@@ -98,6 +190,21 @@
       window.gtag("event", eventName, ga4Payload);
     }
   };
+
+  function sendVisitorEvent(payload) {
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      var blob = new Blob([body], { type: "application/json" });
+      if (navigator.sendBeacon("/api/events", blob)) return;
+    }
+
+    fetch("/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+      keepalive: true
+    }).catch(function() {});
+  }
 
   function elementUrl(element) {
     if (!element) return "";
@@ -116,19 +223,81 @@
     return "";
   }
 
+  function ctaType(target, url) {
+    var text = cleanText(target.textContent || target.getAttribute("aria-label") || "");
+    if (/apply|application/i.test(text)) return "application";
+    if (/rate|loan|learn|view all/i.test(text)) return "loan_interest";
+    if (/contact|get in touch|submit|book/i.test(text)) return "contact";
+    if (url && url !== "#") return "link";
+    return "";
+  }
+
+  function initPageViewTracking() {
+    window.metroTrack("page_view");
+  }
+
   function initConditionalClickTracking() {
     document.addEventListener("click", function(event) {
-      var target = event.target.closest("a[href], [role='link']");
+      var target = event.target.closest("a[href], button, [role='link'], [role='button']");
       if (!target) return;
 
       var url = elementUrl(target);
       var eventName = eventNameForUrl(url);
-      if (!eventName) return;
       if (recentlyTrackedElement(target, 5000)) return;
+      var text = cleanText(target.textContent || target.getAttribute("aria-label") || "");
 
-      window.metroTrack(eventName, {
+      if (eventName) {
+        window.metroTrack(eventName, {
+          link_url: url,
+          link_text: text
+        });
+        return;
+      }
+
+      var type = ctaType(target, url);
+      if (!type) return;
+
+      window.metroTrack("cta_click", {
+        cta_text: text,
+        cta_url: url,
+        cta_type: type,
         link_url: url,
-        link_text: cleanText(target.textContent || target.getAttribute("aria-label") || "")
+        link_text: text
+      });
+    });
+  }
+
+  function formName(form) {
+    if (form.querySelector("[value='Personal Loan'], [name='loan-type']")) return "Loan application form";
+    if (form.querySelector("input[type='date'], select")) return "Contact appointment booking";
+    return cleanText(form.getAttribute("aria-label") || form.id || "Website form");
+  }
+
+  function formId(form) {
+    if (form.querySelector("input[type='date'], select")) return "contact_booking";
+    if (form.querySelector("[name='loan-type']")) return "how_to_apply_form";
+    return form.id || "website_form";
+  }
+
+  function initFormTracking() {
+    document.addEventListener("focusin", function(event) {
+      var form = event.target.closest && event.target.closest("form");
+      if (!form || window.__metroTrackedForms.get(form)) return;
+      window.__metroTrackedForms.set(form, true);
+      window.metroTrack("lead_form_start", {
+        form_id: formId(form),
+        form_name: formName(form)
+      });
+    });
+
+    document.addEventListener("change", function(event) {
+      var target = event.target;
+      if (!target || !target.matches || !target.matches("select")) return;
+      var selected = target.options && target.selectedIndex >= 0 ? target.options[target.selectedIndex].text : target.value;
+      if (!/loan/i.test(target.name || target.closest("div")?.previousElementSibling?.textContent || "") && !/Personal Loan|Business Loan|Home Loan|Auto Loan/i.test(selected || "")) return;
+      window.metroTrack("loan_type_select", {
+        form_id: formId(target.closest("form") || document.createElement("form")),
+        loan_type: selected
       });
     });
   }
@@ -137,8 +306,14 @@
   loadGa4Fallback();
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initConditionalClickTracking);
+    document.addEventListener("DOMContentLoaded", function() {
+      initPageViewTracking();
+      initConditionalClickTracking();
+      initFormTracking();
+    });
   } else {
+    initPageViewTracking();
     initConditionalClickTracking();
+    initFormTracking();
   }
 })();

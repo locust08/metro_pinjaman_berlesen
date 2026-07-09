@@ -1,5 +1,8 @@
 import React from 'react';
 
+const whatsappUrl =
+  'https://wa.me/601170073191?text=Hi%20Metro%20Pinjaman%20Berlesen%2C%20I%20would%20like%20to%20enquire%20about%20a%20loan%20appointment.';
+
 const HowToApplySectionCustomComponents3: React.FC = () => {
     return (
         <div data-from-ai="false">
@@ -124,7 +127,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
         <div className="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">
           <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Ready to Apply?</h2>
           <p className="text-lg text-gray-600 mb-8">Fill out the quick form below or chat with us instantly on WhatsApp to get started right away.</p>
-          <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white bg-green-500 hover:bg-green-600 rounded-full transition duration-200" href="https://wa.me/0000000000">Chat on WhatsApp</a>
+          <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white bg-green-500 hover:bg-green-600 rounded-full transition duration-200" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
         </div>
         <div className="w-full lg:w-1/2 px-4">
           <form className="p-8 bg-white rounded-2xl shadow-xl">

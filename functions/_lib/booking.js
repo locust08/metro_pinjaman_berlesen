@@ -2,6 +2,7 @@ const NOTION_VERSION = '2022-06-28';
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const WHATSAPP_GRAPH_HOST = 'https://graph.facebook.com';
 const DEFAULT_DATABASE_ID = 'fa9a71965f8d40ff92276ba56aa2d69f';
+const DEFAULT_VISITOR_EVENTS_DATABASE_ID = '3984fcc4f70180ec8e27f466ebc06223';
 const DEFAULT_APPOINTMENT_DURATION_MINUTES = 30;
 const ACTIVE_STATUSES = ['Pending Confirmation', 'Confirmed - Booked'];
 
@@ -94,6 +95,7 @@ export function getConfig(env) {
   return {
     notionToken: env.NOTION_TOKEN || '',
     notionDatabaseId: env.APPOINTMENT_NOTION_DATABASE_ID || env.NOTION_DATABASE_ID || DEFAULT_DATABASE_ID,
+    visitorEventsDatabaseId: env.VISITOR_EVENTS_NOTION_DATABASE_ID || DEFAULT_VISITOR_EVENTS_DATABASE_ID,
     resendApiKey: env.RESEND_API_KEY || '',
     resendFromEmail: env.RESEND_FROM_EMAIL_DEV || env.RESEND_FROM_EMAIL || env.RESEND_FROM_EMAIL_PROD || 'Metro Pinjaman Berlesen <no-reply@locus-t.com.my>',
     resendAdminEmails: env.RESEND_CONFIRMATION_TO_EMAIL_DEV || env.RESEND_TO_EMAIL_DEV || env.RESEND_TO_EMAILS || env.RESEND_TO_EMAIL || env.RESEND_TO_EMAIL_PROD || '',
