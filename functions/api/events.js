@@ -117,6 +117,9 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ ok: true }, 201);
   } catch (error) {
     console.error('[events] Visitor event failed:', error);
-    return jsonResponse({ ok: false }, 202);
+    return jsonResponse({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Visitor event failed.',
+    }, 202);
   }
 }
