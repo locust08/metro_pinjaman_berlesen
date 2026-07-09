@@ -14,3 +14,6 @@ build/
 out/
 .cache/
 tsconfig.tsbuildinfo
+
+public/_next/
+public/*.html

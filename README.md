@@ -30,6 +30,6 @@ Node.js version: 22
 
 The repository also includes `wrangler.toml` with `pages_build_output_dir = "out"` and `.nvmrc`/`.node-version` with Node 22 so Cloudflare Pages uses the same static export settings during Git deployments.
 
-For compatibility with the older Cloudflare Pages output setting, the build also copies the static export from `out/` into `public/` after `next build`. Either `out` or `public` can therefore serve the generated site.
+Generated Next.js output is not tracked in Git. The `public/` directory is kept for source assets such as scripts, images, CSS, and icons.
 
 The `functions/` directory provides the `/api/bookings` routes used by the contact form.
