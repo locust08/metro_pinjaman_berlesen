@@ -99,142 +99,94 @@
           </nav>
         </div>
       </section>
-      <section class="py-12 lg:py-24" x-data="{ showContent: false }">
+      <section id="personal-loan" class="py-12 lg:py-24">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap mb-20 -mx-4">
             <div class="w-full lg:w-1/2 px-4 mb-10 lg:mb-0">
-              <div class="flex flex-col h-full items-start max-w-md">
+              <div class="flex flex-col items-start max-w-md">
                 <h1 class="font-heading text-4xl xs:text-6xl mb-6">Personal Loan</h1>
-                <p class="text-lg text-gray-700 mb-20">Our team boasts top green energy experts, driving innovation in sustainability.</p><a class="inline-flex mt-auto py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" x-on:click.prevent="showContent = true" :class="{'hidden': showContent}" href="#">See all</a>
+                <p class="text-lg text-gray-700 mb-8">Flexible financing for big expenses, debt consolidation, short-term cash needs, or personal projects with a clear monthly repayment plan.</p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" href="/contact.html">Apply now</a>
+                  <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" href="https://wa.me/601170073191?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20a%20personal%20loan.">WhatsApp us</a>
+                </div>
               </div>
             </div>
             <div class="w-full lg:w-1/2 px-4">
-              <div class="max-w-xl"><a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-1.png" alt=""/>
+              <div class="max-w-xl">
+                <div class="flex flex-wrap sm:flex-nowrap mb-8 items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80" alt="Personal loan documents"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-1.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Wade Warren</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-2.png" alt=""/>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Loan from RM500 to RM100,000</h3>
+                    <p class="text-gray-600">Available for applicants with a minimum monthly salary of RM3,000 and a steady source of income.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap sm:flex-nowrap mb-8 items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Monthly repayment planning"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">From Trash to Treasure: The Promising World of Biomass Energy</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-2.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Jenny Wilson</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-3.png" alt=""/>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Monthly repayment plan</h3>
+                    <p class="text-gray-600">Suitable for personal expenses, big purchases, debt consolidation, or short-term cash needs.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap sm:flex-nowrap items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80" alt="Loan application details"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Hydrogen: Fueling the Green Energy Revolution</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-3.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Leslie Alexander</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">5 min read</span></div>
-                    </div>
-                  </div></a></div>
-              <div class="hidden mt-8 max-w-xl" :class="{'hidden': !showContent}"><a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-1.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-1.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Wade Warren</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-2.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">From Trash to Treasure: The Promising World of Biomass Energy</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-2.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Jenny Wilson</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-3.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Hydrogen: Fueling the Green Energy Revolution</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-3.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Leslie Alexander</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">5 min read</span></div>
-                    </div>
-                  </div></a></div>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Required documents</h3>
+                    <ul class="space-y-1.5 text-sm text-gray-600">
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>NRIC and contact number</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>Latest 3 months payslip and bank statement</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>Utility bill, S&amp;P, tenancy agreement, and EPF statement</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="py-12 lg:py-24" x-data="{ showContent: false }">
+      <section id="business-loan" class="py-12 lg:py-24">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap mb-20 -mx-4">
             <div class="w-full lg:w-1/2 px-4 mb-10 lg:mb-0">
-              <div class="flex flex-col h-full items-start max-w-md">
+              <div class="flex flex-col items-start max-w-md">
                 <h1 class="font-heading text-4xl xs:text-6xl mb-6">Business Loan</h1>
-                <p class="text-lg text-gray-700 mb-20">Our team boasts top green energy experts, driving innovation in sustainability.</p><a class="inline-flex mt-auto py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" x-on:click.prevent="showContent = true" :class="{'hidden': showContent}" href="#">See all</a>
+                <p class="text-lg text-gray-700 mb-8">Take your business further with flexible loan tenures, high financing margins, and funding for working capital, stock, overheads, or business activities.</p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" href="/contact.html">Apply now</a>
+                  <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-300" href="https://wa.me/601170073191?text=Hi%2C%20I%20would%20like%20to%20ask%20about%20a%20business%20loan.">WhatsApp us</a>
+                </div>
               </div>
             </div>
             <div class="w-full lg:w-1/2 px-4">
-              <div class="max-w-xl"><a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-1.png" alt=""/>
+              <div class="max-w-xl">
+                <div class="flex flex-wrap sm:flex-nowrap mb-8 items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Business working capital"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-1.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Wade Warren</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-2.png" alt=""/>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Working capital support</h3>
+                    <p class="text-gray-600">Support cash flow, daily operations, stock purchases, overheads, and other working capital needs.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap sm:flex-nowrap mb-8 items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80" alt="Business equipment financing"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">From Trash to Treasure: The Promising World of Biomass Energy</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-2.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Jenny Wilson</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-3.png" alt=""/>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Flexible business funding</h3>
+                    <p class="text-gray-600">Suitable for small businesses and corporate groups that need practical financing solutions.</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap sm:flex-nowrap items-center">
+                  <img class="block w-44 h-44 object-cover rounded-2xl" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Business documents"/>
                   <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Hydrogen: Fueling the Green Energy Revolution</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-3.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Leslie Alexander</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">5 min read</span></div>
-                    </div>
-                  </div></a></div>
-              <div class="hidden mt-8 max-w-xl" :class="{'hidden': !showContent}"><a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-1.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Wind Power: A Breath of Fresh Air for Clean Energy Enthusiasts</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-1.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Wade Warren</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group mb-8 items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-2.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">From Trash to Treasure: The Promising World of Biomass Energy</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-2.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Jenny Wilson</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">7 min read</span></div>
-                    </div>
-                  </div></a>                <a class="flex flex-wrap sm:flex-nowrap group items-center" href="#"><img class="block w-44 h-44 rounded-2xl" src="flow-assets/blog/image-sm-3.png" alt=""/>
-                  <div class="mt-6 sm:mt-0 sm:ml-8">
-                    <h3 class="text-2xl font-medium group-hover:text-teal-600 transition duration-200 mb-6">Hydrogen: Fueling the Green Energy Revolution</h3>
-                    <div class="flex items-center"><img class="w-8 h-8 rounded-full" src="flow-assets/blog/circle-avatar-3.png" alt=""/>
-                      <div class="flex items-center ml-4"><span class="text-sm font-medium">Leslie Alexander</span>                        <span class="mx-2 sm:mx-4">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewbox="0 0 4 4" fill="none">
-                            <circle cx="2" cy="2" r="2" fill="#929C9A"></circle>
-                          </svg></span>                        <span class="text-sm font-medium">5 min read</span></div>
-                    </div>
-                  </div></a></div>
+                    <h3 class="text-2xl font-medium transition duration-200 mb-4">Required documents</h3>
+                    <ul class="space-y-1.5 text-sm text-gray-600">
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>NRIC copy and name card</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>Borang B and Borang D</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>Latest 3 months bank statement</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>S&amp;P and latest electric &amp; water bill</span></li>
+                      <li class="flex items-start"><span class="mt-2 mr-3 w-1.5 h-1.5 bg-teal-900 rounded-full flex-none"></span><span>Form 24/49, 42, 11A and latest EPF statement</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -242,178 +194,109 @@
       <section class="relative py-12 lg:py-24 overflow-hidden"><img class="absolute top-0 right-0" src="flow-assets/pricing/waves-right-top.png" alt=""/>
         <div class="container mx-auto px-4 relative">
           <div class="max-w-2xl mx-auto text-center mb-20">
-            <h1 class="font-heading text-5xl sm:text-6xl tracking-xs mb-6">Pricing</h1>
-            <p class="text-lg text-gray-700">Our pricing plans are simple and designed to cater to households and companies of various sizes. Choose a plan that suits your needs and budget.</p>
+            <h1 class="font-heading text-5xl sm:text-6xl tracking-xs mb-6">Loan Comparison</h1>
+            <p class="text-lg text-gray-700">Compare personal and business loan options so you can choose the financing that fits your needs.</p>
           </div>
-          <div class="flex flex-wrap -mx-4 mb-24">
-            <div class="w-full lg:w-1/3 px-4 mb-8 lg:mb-0">              </div>            
-            <div class="w-full lg:w-1/3 px-4 mb-8 lg:mb-0">              </div>            
-            <div class="w-full lg:w-1/3 px-4">              </div>            
-          </div>
-          <div class="pb-4 overflow-x-scroll">
-            <h4 class="font-heading text-3xl font-medium text-center mb-8">Compare benefits</h4>
-            <table class="min-w-max">
+          <div class="pb-4 overflow-x-auto">
+            <h4 class="font-heading text-3xl font-medium text-center mb-8">Compare loan types</h4>
+            <table class="min-w-max lg:min-w-0 lg:w-full mx-auto">
               <thead>
                 <tr>
                   <th class="w-72 pr-4"></th>
-                  <th class="w-72 px-4">
-                    <div class="py-4 px-2 shadow-md rounded-2xl"><span class="block font-medium">Basic</span>
-                      <div class="flex items-center justify-center"><span class="font-medium">$59</span>                        <span class="ml-1 font-medium text-gray-700">/month</span></div>
-                    </div>
+                  <th class="w-96 px-4">
+                    <div class="py-4 px-2 border border-lime-500 shadow-md rounded-2xl"><span class="block font-medium">Personal Loan</span>                      <span class="font-medium text-gray-700">For individual needs</span></div>
                   </th>
-                  <th class="w-72 px-4">
-                    <div class="py-4 px-2 shadow-md rounded-2xl"><span class="block font-medium">Premium</span>
-                      <div class="flex items-center justify-center"><span class="font-medium">$129</span>                        <span class="ml-1 font-medium text-gray-700">/month</span></div>
-                    </div>
-                  </th>
-                  <th class="w-72 pl-4">
-                    <div class="py-4 px-2 shadow-md rounded-2xl"><span class="block font-medium">Enterprise</span>                      <span class="font-medium">Custom</span></div>
+                  <th class="w-96 pl-4">
+                    <div class="py-4 px-2 border border-lime-500 shadow-md rounded-2xl"><span class="block font-medium">Business Loan</span>                      <span class="font-medium text-gray-700">For company growth</span></div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <div class="py-8"><span class="text-xl font-medium">Support</span></div>
+                    <div class="py-8"><span class="text-xl font-medium">Loan details</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Installation Fee</span></div>
+                    <div class="py-8"><span class="text-sm">Best for</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">$119</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Personal expenses, emergencies, education, or home needs</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">No Installation Fee</span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">No Installation Fee</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Working capital, equipment, inventory, or business expansion</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Satisfaction Guarantee</span></div>
+                    <div class="py-8"><span class="text-sm">Indicative rate</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">From 6.5% p.a.</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">From 8.0% p.a.</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">24/7 Customer Support</span></div>
+                    <div class="py-8"><span class="text-sm">Loan amount</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#EDF2F1"></rect>
-                          <path d="M14.2664 6.40002L7.06641 13.6M7.06641 6.40002L14.2664 13.6" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Smaller to medium financing needs</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Higher limits based on business profile</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Smart Energy Monitoring</span></div>
+                    <div class="py-8"><span class="text-sm">Repayment tenure</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#EDF2F1"></rect>
-                          <path d="M14.2664 6.40002L7.06641 13.6M7.06641 6.40002L14.2664 13.6" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Flexible monthly installments</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
-                          <rect x="0.666504" width="20" height="20" rx="10" fill="#BEF264"></rect>
-                          <path d="M15.4667 6.40002L8.8667 13L5.8667 10" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Structured around business cash flow</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="pt-12">
-                    <div class="py-8"><span class="text-xl font-medium">Energy Supply</span></div>
+                    <div class="py-8"><span class="text-xl font-medium">Application needs</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Renewable Energy Sources</span></div>
+                    <div class="py-8"><span class="text-sm">Documents</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">50%</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Identity, income, and bank details</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">75%</span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">90%</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Business registration, bank statements, and company financials</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Carbon Offsetting</span></div>
+                    <div class="py-8"><span class="text-sm">Approval focus</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">1.5 metric tons CO2e</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Personal income and repayment ability</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">5 metric tons CO2e</span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">Custom</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Business revenue, operations, and cash flow</span></div>
                   </td>
                 </tr>
                 <tr>
                   <td class="border-b">
-                    <div class="py-8"><span class="text-sm">Energy Consumption Limit</span></div>
+                    <div class="py-8"><span class="text-sm">Support</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">500 kWh</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Guided application assistance</span></div>
                   </td>
                   <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">1,000 kWh</span></div>
-                  </td>
-                  <td class="border-b">
-                    <div class="py-8 text-center"><span class="text-sm">Custom</span></div>
+                    <div class="py-8 text-center"><span class="text-sm">Guided application assistance for business documents</span></div>
                   </td>
                 </tr>
               </tbody>
@@ -423,106 +306,74 @@
       </section>
       <section class="bg-white">
         <div class="max-w-6xl mx-auto px-6 py-16">
-          <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center">Interest Rates & Repayment</h2>
+          <h2 class="text-3xl font-bold text-teal-900 mb-4 text-center">Interest Rates & Repayment</h2>
           <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Transparent pricing with flexible repayment options designed to fit your budget.</p>
           <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
-              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold">%</div>
+              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-lime-500 text-teal-900 rounded-full text-2xl font-bold">%</div>
               <h3 class="text-xl font-semibold text-gray-900 mb-2">Competitive Rates</h3>
               <p class="text-gray-600">
                                     Personal loans from
-                                    <span class="font-semibold text-blue-700">6.5% p.a.</span>                    and business loans from
-                                    <span class="font-semibold text-blue-700">8.0% p.a.</span>
+                                    <span class="font-semibold text-teal-900">6.5% p.a.</span>                    and business loans from
+                                    <span class="font-semibold text-teal-900">8.0% p.a.</span>
               </p>
             </div>
             <div class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
-              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold">$</div>
+              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-lime-500 text-teal-900 rounded-full text-2xl font-bold">$</div>
               <h3 class="text-xl font-semibold text-gray-900 mb-2">Flexible Repayment</h3>
               <p class="text-gray-600">Choose monthly installments that suit your cash flow, with no hidden fees or surprises.</p>
             </div>
             <div class="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
-              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold">↻</div>
+              <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-lime-500 text-teal-900 rounded-full text-2xl font-bold">↻</div>
               <h3 class="text-xl font-semibold text-gray-900 mb-2">Early Settlement</h3>
               <p class="text-gray-600">Pay off your loan early and save on interest with low or zero prepayment penalties.</p>
             </div>
           </div> 
-          <div class="mt-12 bg-blue-50 rounded-2xl p-8 max-w-3xl mx-auto loan-estimator">
-            <h3 class="text-xl font-semibold text-blue-900 mb-6 text-center">Estimate Your Monthly Repayment</h3>
+          <div class="mt-12 bg-lime-50 rounded-2xl p-8 w-full loan-estimator">
+            <h3 class="text-xl font-semibold text-teal-900 mb-6 text-center">Estimate Your Monthly Repayment</h3>
             <div class="grid sm:grid-cols-3 gap-5">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
-                <input class="est-amount w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" type="number" value="10000" min="1000"/>
+                <input class="est-amount w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-lime-500 focus:outline-none" type="number" value="10000" min="1000"/>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Rate (% p.a.)</label>
-                <input class="est-rate w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" type="number" value="6.5" step="0.1" min="0"/>
+                <input class="est-rate w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-lime-500 focus:outline-none" type="number" value="6.5" step="0.1" min="0"/>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Tenure (years)</label>
-                <input class="est-tenure w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" type="number" value="3" min="1" max="10"/>
+                <input class="est-tenure w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-lime-500 focus:outline-none" type="number" value="3" min="1" max="10"/>
               </div>
             </div>
             <div class="mt-6 text-center">
               <p class="text-gray-600">Estimated Monthly Payment</p>
-              <p class="est-result text-3xl font-bold text-blue-700 mt-1">$0</p>
+              <p class="est-result text-3xl font-bold text-teal-900 mt-1">$0</p>
               <p class="text-xs text-gray-400 mt-2">*Estimates only. Actual rates and terms may vary upon approval.</p>
             </div>
           </div>
         </div>
       </section>
-      <section class="relative py-12 lg:py-24 overflow-hidden"><img class="absolute bottom-0 left-0" src="flow-assets/footer/waves-lines-left-bottom.png" alt=""/>
+      <section class="relative py-12 lg:py-24 overflow-hidden" style="background-color: #fafafa;"><img class="absolute bottom-0 left-0" src="flow-assets/footer/waves-lines-left-bottom.png" alt=""/>
         <div class="container px-4 mx-auto relative">
           <div class="flex flex-wrap mb-12 md:mb-24 xl:mb-40 -mx-4">
-            <div class="w-full lg:w-2/12 xl:w-3/12 px-4 mb-16 lg:mb-0"><a class="inline-block mb-4" href="#"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt=""/></a></div>
-            <div class="w-full md:w-7/12 lg:w-7/12 xl:w-6/12 px-4 mb-16 lg:mb-0">
-              <div class="flex flex-wrap -mx-4">
-                <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
-                  <h3 class="mb-6 font-bold">Platform</h3>
+            <div class="w-full lg:w-3/12 px-4 mb-16 lg:mb-0"><a class="inline-block mb-4" href="index.html"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt=""/></a></div>
+            <div class="w-full md:w-8/12 lg:w-6/12 px-4 mb-16 lg:mb-0">
+              <div class="grid sm:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="mb-6 font-bold">Pages</h3>
                   <ul>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Solutions</a></li>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">How it works</a></li>
-                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Pricing</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="index.html">Home</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="about_us.html">About us</a></li>
+                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="loan.html">Loan</a></li>
                   </ul>
                 </div>
-                <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
-                  <h3 class="mb-6 font-bold">Resources</h3>
+                <div>
+                  <h3 class="mb-6 font-bold">Help</h3>
                   <ul>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Blog</a></li>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Help Center</a></li>
-                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Support</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="how_to_apply.html">How to apply</a></li>
+                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="contact.html">Contact us</a></li>
                   </ul>
                 </div>
-                <div class="w-full xs:w-1/3 px-4">
-                  <h3 class="mb-6 font-bold">Company</h3>
-                  <ul>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">About</a></li>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Our Mission</a></li>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Careers</a></li>
-                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Contact</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="w-full md:w-5/12 lg:w-3/12 xl:w-3/12 px-4">
-              <div class="flex flex-col w-full md:items-end">
-                <div><a class="group flex mb-4 items-center" href="#">
-                    <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                        <g clip-path="url(#clip0_229_2133)">
-                          <path d="M13.8577 23.9999V13.0532H17.5306L18.0816 8.78575H13.8577V6.06164C13.8577 4.82652 14.1993 3.98479 15.9725 3.98479L18.2303 3.98387V0.166954C17.8398 0.116212 16.4995 -0.00012207 14.9395 -0.00012207C11.682 -0.00012207 9.45185 1.98824 9.45185 5.639V8.78575H5.76782V13.0532H9.45185V23.9999H13.8577Z" fill="currentColor"></path>
-                        </g>
-                      </svg>
-                    </div><span class="ml-4 font-medium">Follow us on Facebook</span></a>                  <a class="group flex mb-4 items-center" href="#">
-                    <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                        <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z" fill="currentColor"></path>
-                      </svg>
-                    </div><span class="ml-4 font-medium">Follow us on Instagram</span></a>                  <a class="group flex items-center" href="#">
-                    <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-black group-hover:text-lime-500 bg-lime-500 group-hover:bg-black rounded-full transition duration-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                        <path d="M19 3C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19ZM18.5 18.5V13.2C18.5 12.3354 18.1565 11.5062 17.5452 10.8948C16.9338 10.2835 16.1046 9.94 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17C14.6813 12.17 15.0374 12.3175 15.2999 12.5801C15.5625 12.8426 15.71 13.1987 15.71 13.57V18.5H18.5ZM6.88 8.56C7.32556 8.56 7.75288 8.383 8.06794 8.06794C8.383 7.75288 8.56 7.32556 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C6.43178 5.19 6.00193 5.36805 5.68499 5.68499C5.36805 6.00193 5.19 6.43178 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z" fill="currentColor"></path>
-                      </svg>
-                    </div><span class="ml-4 font-medium">Follow us on LinkedIn</span></a></div>
               </div>
             </div>
           </div>

@@ -12,6 +12,10 @@ const VALID_EVENTS = new Set([
   'whatsapp_click',
   'google_maps_click',
   'waze_click',
+  'form_start',
+  'form_submit',
+  'booking_created',
+  'appointment_cancel',
   'lead_form_start',
   'lead_form_submit',
   'lead_form_error',
@@ -37,8 +41,15 @@ function urlValue(value) {
   return { url: /^https?:\/\//i.test(url) ? url : null };
 }
 
-function eventPayload(payload) {
+export function normalizeEventName(eventName) {
+  return VALID_EVENTS.has(eventName) ? eventName : 'cta_click';
+}
+
+export function buildEventPayloadJson(payload) {
   const allowed = {
+    booking_id: trimText(payload.booking_id || payload.lead_id, 160),
+    booking_status: trimText(payload.booking_status, 100),
+    preferred_slot: trimText(payload.preferred_slot, 120),
     form_id: trimText(payload.form_id, 120),
     form_name: trimText(payload.form_name, 160),
     link_text: trimText(payload.link_text, 200),
@@ -63,7 +74,7 @@ function eventId(payload) {
 }
 
 async function createVisitorEvent(config, payload) {
-  const eventName = VALID_EVENTS.has(payload.event) ? payload.event : 'cta_click';
+  const eventName = normalizeEventName(payload.event);
   const properties = {
     'Event ID': { title: [{ text: { content: eventId({ ...payload, event: eventName }) } }] },
     'Event Name': selectValue(eventName),
@@ -87,7 +98,7 @@ async function createVisitorEvent(config, payload) {
     City: richText(payload.city),
     Timezone: richText(payload.timezone),
     'User Agent': richText(payload.user_agent),
-    'Event Payload': richText(eventPayload(payload)),
+    'Event Payload': richText(buildEventPayloadJson(payload)),
   };
 
   return notionRequest(config, '/pages', {

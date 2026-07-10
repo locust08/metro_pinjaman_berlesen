@@ -284,7 +284,7 @@
       var form = event.target.closest && event.target.closest("form");
       if (!form || window.__metroTrackedForms.get(form)) return;
       window.__metroTrackedForms.set(form, true);
-      window.metroTrack("lead_form_start", {
+      window.metroTrack("form_start", {
         form_id: formId(form),
         form_name: formName(form)
       });

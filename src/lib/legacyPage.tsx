@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Head from 'next/head';
 
 export type LegacyPageProps = {
@@ -7,15 +7,96 @@ export type LegacyPageProps = {
   bodyHtml: string;
 };
 
+declare global {
+  interface Window {
+    Alpine?: {
+      initTree?: (element: Element) => void;
+    };
+  }
+}
+
 export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPageProps) {
+  const pageRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    const pageElement = pageRef.current;
+
+    if (pageElement && pageElement.dataset.legacyPageHydrated !== 'true') {
+      pageElement.dataset.legacyPageHydrated = 'true';
+      const scripts = Array.from(pageElement.querySelectorAll<HTMLScriptElement>('script'));
+
+      scripts.forEach((script) => {
+        const replacement = document.createElement('script');
+
+        Array.from(script.attributes).forEach((attribute) => {
+          replacement.setAttribute(attribute.name, attribute.value);
+        });
+
+        if (!script.src) {
+          replacement.text = script.text;
+        }
+
+        script.replaceWith(replacement);
+      });
+
+      window.Alpine?.initTree?.(pageElement);
+    }
+
+    document.querySelectorAll('[data-next-hide-fouc]').forEach((element) => {
+      element.remove();
+    });
+
+    document.querySelectorAll('.removed').forEach((element) => {
+      element.classList.remove('removed');
+    });
+
     const classes = Array.from(document.body.classList);
     document.body.classList.remove(...classes);
 
     if (bodyClassName) {
       document.body.classList.add(...bodyClassName.split(/\s+/).filter(Boolean));
     }
-  }, [bodyClassName]);
+
+    const counters = Array.from(document.querySelectorAll<HTMLElement>('.js-stat-counter'));
+    const animateCounter = (counter: HTMLElement) => {
+      if (counter.dataset.animated === 'true') return;
+
+      counter.dataset.animated = 'true';
+      const target = Number(counter.dataset.target || '0');
+      const suffix = counter.dataset.suffix || '';
+      const duration = 1200;
+      const start = performance.now();
+
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(target * eased);
+
+        counter.textContent = `${value.toLocaleString()}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    counters.forEach((counter) => observer.observe(counter));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [bodyClassName, bodyHtml]);
 
   return (
     <>
@@ -23,7 +104,7 @@ export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPag
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
-      <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+      <div ref={pageRef} dangerouslySetInnerHTML={{ __html: bodyHtml }} />
     </>
   );
 }
