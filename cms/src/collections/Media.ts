@@ -9,7 +9,13 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
+      label: 'Alt text',
       required: true,
+    },
+    {
+      name: 'internalName',
+      type: 'text',
+      label: 'Internal name',
     },
   ],
   upload: {

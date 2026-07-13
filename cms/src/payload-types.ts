@@ -88,10 +88,20 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
-    'site-content': SiteContent;
+    'site-settings': SiteSetting;
+    'home-page': HomePage;
+    'about-us-page': AboutUsPage;
+    'loan-page': LoanPage;
+    'how-to-apply-page': HowToApplyPage;
+    'contact-us-page': ContactUsPage;
   };
   globalsSelect: {
-    'site-content': SiteContentSelect<false> | SiteContentSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'about-us-page': AboutUsPageSelect<false> | AboutUsPageSelect<true>;
+    'loan-page': LoanPageSelect<false> | LoanPageSelect<true>;
+    'how-to-apply-page': HowToApplyPageSelect<false> | HowToApplyPageSelect<true>;
+    'contact-us-page': ContactUsPageSelect<false> | ContactUsPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -153,6 +163,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  internalName?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -265,6 +276,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  internalName?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -317,264 +329,918 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-content".
+ * via the `definition` "site-settings".
  */
-export interface SiteContent {
+export interface SiteSetting {
   id: number;
-  pages?: {
-    home?: {
-      /**
-       * Text slots follow the public page order. Edit the text value only.
-       */
-      textSlots?:
-        | {
-            key: string;
-            label: string;
-            text: string;
-            id?: string | null;
-          }[]
-        | null;
-      /**
-       * Image slots follow the public page image order.
-       */
-      imageSlots?:
-        | {
-            key: string;
-            label: string;
-            image?: (number | null) | Media;
-            fallbackSrc?: string | null;
-            fallbackAlt?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    about?: {
-      /**
-       * Text slots follow the public page order. Edit the text value only.
-       */
-      textSlots?:
-        | {
-            key: string;
-            label: string;
-            text: string;
-            id?: string | null;
-          }[]
-        | null;
-      /**
-       * Image slots follow the public page image order.
-       */
-      imageSlots?:
-        | {
-            key: string;
-            label: string;
-            image?: (number | null) | Media;
-            fallbackSrc?: string | null;
-            fallbackAlt?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    loan?: {
-      /**
-       * Text slots follow the public page order. Edit the text value only.
-       */
-      textSlots?:
-        | {
-            key: string;
-            label: string;
-            text: string;
-            id?: string | null;
-          }[]
-        | null;
-      /**
-       * Image slots follow the public page image order.
-       */
-      imageSlots?:
-        | {
-            key: string;
-            label: string;
-            image?: (number | null) | Media;
-            fallbackSrc?: string | null;
-            fallbackAlt?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    howToApply?: {
-      /**
-       * Text slots follow the public page order. Edit the text value only.
-       */
-      textSlots?:
-        | {
-            key: string;
-            label: string;
-            text: string;
-            id?: string | null;
-          }[]
-        | null;
-      /**
-       * Image slots follow the public page image order.
-       */
-      imageSlots?:
-        | {
-            key: string;
-            label: string;
-            image?: (number | null) | Media;
-            fallbackSrc?: string | null;
-            fallbackAlt?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    contact?: {
-      /**
-       * Text slots follow the public page order. Edit the text value only.
-       */
-      textSlots?:
-        | {
-            key: string;
-            label: string;
-            text: string;
-            id?: string | null;
-          }[]
-        | null;
-      /**
-       * Image slots follow the public page image order.
-       */
-      imageSlots?:
-        | {
-            key: string;
-            label: string;
-            image?: (number | null) | Media;
-            fallbackSrc?: string | null;
-            fallbackAlt?: string | null;
-            id?: string | null;
-          }[]
-        | null;
-    };
+  header: {
+    websiteLogo?: (number | null) | Media;
+    mobileDrawerLogo?: (number | null) | Media;
+    aboutUsMenuLabel: string;
+    loanMenuLabel: string;
+    howToApplyMenuLabel: string;
+    contactUsMenuLabel: string;
+    applyNowButtonLabel: string;
+    loginButtonLabel: string;
+    newsletterLabel: string;
   };
+  footer: {
+    footerLogo?: (number | null) | Media;
+    pagesColumnHeading: string;
+    homeLinkLabel: string;
+    aboutUsLinkLabel: string;
+    loanLinkLabel: string;
+    helpColumnHeading: string;
+    howToApplyLinkLabel: string;
+    contactUsLinkLabel: string;
+    copyrightText: string;
+  };
+  contactDetails: {
+    supportEmail: string;
+    displayPhoneNumber: string;
+    telephoneLinkNumber: string;
+    whatsappNumber: string;
+    defaultWhatsappMessage: string;
+    businessHours: string;
+    officeName: string;
+    officeAddress: string;
+    wazeUrl?: string | null;
+    googleMapsUrl?: string | null;
+  };
+  formMessages: {
+    sendingMessage: string;
+    successfulSubmissionMessage: string;
+    failedSubmissionMessage: string;
+    validationSummaryMessage: string;
+  };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-content_select".
+ * via the `definition` "home-page".
  */
-export interface SiteContentSelect<T extends boolean = true> {
-  pages?:
+export interface HomePage {
+  id: number;
+  seo: {
+    title: string;
+    description?: string | null;
+  };
+  hero: {
+    eyebrow: string;
+    mainHeading: string;
+    description: string;
+    primaryButtonLabel: string;
+    secondaryButtonLabel: string;
+    leftTopImage?: (number | null) | Media;
+    rightTopImage?: (number | null) | Media;
+    bottomLeftImage?: (number | null) | Media;
+    bottomRightImage?: (number | null) | Media;
+  };
+  howItWorks: {
+    heading: string;
+    description: string;
+    steps?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  statistics?: {
+    items?:
+      | {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  loanOptions: {
+    heading: string;
+    description: string;
+    cards?:
+      | {
+          image?: (number | null) | Media;
+          title: string;
+          description: string;
+          linkLabel: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyChooseUs: {
+    image?: (number | null) | Media;
+    heading: string;
+    features?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  readyToGetStarted: {
+    heading: string;
+    description: string;
+    applyButtonLabel: string;
+    whatsappButtonLabel: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us-page".
+ */
+export interface AboutUsPage {
+  id: number;
+  seo: {
+    title: string;
+    description?: string | null;
+  };
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    mainHeading: string;
+    description: string;
+  };
+  whoWeAre: {
+    image?: (number | null) | Media;
+    heading: string;
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    statistics?:
+      | {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyChooseUs: {
+    heading: string;
+    description: string;
+    features?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  trustAndSecurity: {
+    heading: string;
+    description: string;
+    items?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+    image?: (number | null) | Media;
+  };
+  whoWeHelp: {
+    heading: string;
+    description: string;
+    cards?:
+      | {
+          image?: (number | null) | Media;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  readyToGetStarted: {
+    heading: string;
+    description: string;
+    applyButtonLabel: string;
+    advisorButtonLabel: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loan-page".
+ */
+export interface LoanPage {
+  id: number;
+  seo: {
+    title: string;
+    description?: string | null;
+  };
+  hero: {
+    mainHeading: string;
+    description: string;
+    primaryButtonLabel: string;
+    secondaryButtonLabel: string;
+    image?: (number | null) | Media;
+  };
+  personalLoan: {
+    heading: string;
+    description: string;
+    applyButtonLabel: string;
+    whatsappButtonLabel: string;
+    features?:
+      | {
+          image?: (number | null) | Media;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+    requirements: {
+      image?: (number | null) | Media;
+      heading: string;
+      items?:
+        | {
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  businessLoan: {
+    heading: string;
+    description: string;
+    applyButtonLabel: string;
+    whatsappButtonLabel: string;
+    features?:
+      | {
+          image?: (number | null) | Media;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+    requirements: {
+      image?: (number | null) | Media;
+      heading: string;
+      items?:
+        | {
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  comparison: {
+    heading: string;
+    description: string;
+    tableHeading: string;
+    personalColumn: {
+      title: string;
+      subtitle: string;
+    };
+    businessColumn: {
+      title: string;
+      subtitle: string;
+    };
+    rows?:
+      | {
+          label: string;
+          personalValue: string;
+          businessValue: string;
+          id?: string | null;
+        }[]
+      | null;
+    loanDetailsHeading: string;
+    applicationNeedsHeading: string;
+  };
+  interestRates: {
+    heading: string;
+    description: string;
+    features?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  estimator: {
+    heading: string;
+    disclaimer: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "how-to-apply-page".
+ */
+export interface HowToApplyPage {
+  id: number;
+  seo: {
+    title: string;
+    description?: string | null;
+  };
+  hero: {
+    mainHeading: string;
+    description: string;
+    primaryButtonLabel: string;
+  };
+  steps: {
+    heading: string;
+    description: string;
+    items?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  requiredDocuments: {
+    image?: (number | null) | Media;
+    heading: string;
+    description: string;
+    items?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  eligibility: {
+    heading: string;
+    description: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  readyToApply: {
+    heading: string;
+    description: string;
+    whatsappButtonLabel: string;
+    submitButtonLabel: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-us-page".
+ */
+export interface ContactUsPage {
+  id: number;
+  seo: {
+    title: string;
+    description?: string | null;
+  };
+  contactForm: {
+    heading: string;
+    description: string;
+    submitButtonLabel: string;
+    image?: (number | null) | Media;
+  };
+  contactMethods: {
+    email: {
+      heading: string;
+      description: string;
+    };
+    phone: {
+      heading: string;
+      description: string;
+    };
+    office: {
+      heading: string;
+      description: string;
+    };
+  };
+  faq: {
+    heading: string;
+    description: string;
+    items?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  stillHaveQuestions: {
+    heading: string;
+    description: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  header?:
     | T
     | {
-        home?:
+        websiteLogo?: T;
+        mobileDrawerLogo?: T;
+        aboutUsMenuLabel?: T;
+        loanMenuLabel?: T;
+        howToApplyMenuLabel?: T;
+        contactUsMenuLabel?: T;
+        applyNowButtonLabel?: T;
+        loginButtonLabel?: T;
+        newsletterLabel?: T;
+      };
+  footer?:
+    | T
+    | {
+        footerLogo?: T;
+        pagesColumnHeading?: T;
+        homeLinkLabel?: T;
+        aboutUsLinkLabel?: T;
+        loanLinkLabel?: T;
+        helpColumnHeading?: T;
+        howToApplyLinkLabel?: T;
+        contactUsLinkLabel?: T;
+        copyrightText?: T;
+      };
+  contactDetails?:
+    | T
+    | {
+        supportEmail?: T;
+        displayPhoneNumber?: T;
+        telephoneLinkNumber?: T;
+        whatsappNumber?: T;
+        defaultWhatsappMessage?: T;
+        businessHours?: T;
+        officeName?: T;
+        officeAddress?: T;
+        wazeUrl?: T;
+        googleMapsUrl?: T;
+      };
+  formMessages?:
+    | T
+    | {
+        sendingMessage?: T;
+        successfulSubmissionMessage?: T;
+        failedSubmissionMessage?: T;
+        validationSummaryMessage?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        mainHeading?: T;
+        description?: T;
+        primaryButtonLabel?: T;
+        secondaryButtonLabel?: T;
+        leftTopImage?: T;
+        rightTopImage?: T;
+        bottomLeftImage?: T;
+        bottomRightImage?: T;
+      };
+  howItWorks?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        steps?:
           | T
           | {
-              textSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    text?: T;
-                    id?: T;
-                  };
-              imageSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    image?: T;
-                    fallbackSrc?: T;
-                    fallbackAlt?: T;
-                    id?: T;
-                  };
+              title?: T;
+              description?: T;
+              id?: T;
             };
-        about?:
+      };
+  statistics?:
+    | T
+    | {
+        items?:
           | T
           | {
-              textSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    text?: T;
-                    id?: T;
-                  };
-              imageSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    image?: T;
-                    fallbackSrc?: T;
-                    fallbackAlt?: T;
-                    id?: T;
-                  };
+              value?: T;
+              label?: T;
+              id?: T;
             };
-        loan?:
+      };
+  loanOptions?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        cards?:
           | T
           | {
-              textSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    text?: T;
-                    id?: T;
-                  };
-              imageSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    image?: T;
-                    fallbackSrc?: T;
-                    fallbackAlt?: T;
-                    id?: T;
-                  };
+              image?: T;
+              title?: T;
+              description?: T;
+              linkLabel?: T;
+              id?: T;
             };
-        howToApply?:
+      };
+  whyChooseUs?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        features?:
           | T
           | {
-              textSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    text?: T;
-                    id?: T;
-                  };
-              imageSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    image?: T;
-                    fallbackSrc?: T;
-                    fallbackAlt?: T;
-                    id?: T;
-                  };
+              title?: T;
+              description?: T;
+              id?: T;
             };
-        contact?:
+      };
+  readyToGetStarted?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        applyButtonLabel?: T;
+        whatsappButtonLabel?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-us-page_select".
+ */
+export interface AboutUsPageSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        mainHeading?: T;
+        description?: T;
+      };
+  whoWeAre?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        paragraphs?:
           | T
           | {
-              textSlots?:
+              text?: T;
+              id?: T;
+            };
+        statistics?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  whyChooseUs?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  trustAndSecurity?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  whoWeHelp?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        cards?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  readyToGetStarted?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        applyButtonLabel?: T;
+        advisorButtonLabel?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loan-page_select".
+ */
+export interface LoanPageSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  hero?:
+    | T
+    | {
+        mainHeading?: T;
+        description?: T;
+        primaryButtonLabel?: T;
+        secondaryButtonLabel?: T;
+        image?: T;
+      };
+  personalLoan?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        applyButtonLabel?: T;
+        whatsappButtonLabel?: T;
+        features?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        requirements?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              items?:
                 | T
                 | {
-                    key?: T;
-                    label?: T;
                     text?: T;
-                    id?: T;
-                  };
-              imageSlots?:
-                | T
-                | {
-                    key?: T;
-                    label?: T;
-                    image?: T;
-                    fallbackSrc?: T;
-                    fallbackAlt?: T;
                     id?: T;
                   };
             };
       };
+  businessLoan?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        applyButtonLabel?: T;
+        whatsappButtonLabel?: T;
+        features?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        requirements?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  comparison?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        tableHeading?: T;
+        personalColumn?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+            };
+        businessColumn?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+            };
+        rows?:
+          | T
+          | {
+              label?: T;
+              personalValue?: T;
+              businessValue?: T;
+              id?: T;
+            };
+        loanDetailsHeading?: T;
+        applicationNeedsHeading?: T;
+      };
+  interestRates?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  estimator?:
+    | T
+    | {
+        heading?: T;
+        disclaimer?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "how-to-apply-page_select".
+ */
+export interface HowToApplyPageSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  hero?:
+    | T
+    | {
+        mainHeading?: T;
+        description?: T;
+        primaryButtonLabel?: T;
+      };
+  steps?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  requiredDocuments?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  eligibility?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  readyToApply?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        whatsappButtonLabel?: T;
+        submitButtonLabel?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-us-page_select".
+ */
+export interface ContactUsPageSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  contactForm?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        submitButtonLabel?: T;
+        image?: T;
+      };
+  contactMethods?:
+    | T
+    | {
+        email?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+            };
+        phone?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+            };
+        office?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
+  stillHaveQuestions?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
