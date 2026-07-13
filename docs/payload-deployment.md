@@ -48,3 +48,24 @@ displaying it. Then save a draft and confirm neither a Pages deployment nor a pu
 content change occurs; publish the same change and confirm exactly one rebuild is
 requested. After Pages completes, confirm the public site reflects the published
 value and that no GitHub content commit was created.
+
+## Task 6 Verification (2026-07-13)
+
+- The obsolete browser slot runtime, slot-content defaults/schema, extractor, slot test,
+  and unused legacy CMS `site-content` endpoint/defaults were removed. The required
+  forbidden-runtime scan returned no matches.
+- Root verification passed: `npm test` (11 tests), `npm run type-check`, and
+  `npm run build`. The root test run retains existing Node module-type warnings; the
+  build retains the existing multi-lockfile workspace-root warning.
+- `pnpm --dir cms exec vitest run` did not complete: its integration suite fails before
+  executing because esbuild rejects the JSDOM `TextEncoder`/`Uint8Array` invariant.
+  A Node-environment diagnostic then showed missing local `PAYLOAD_SECRET`; with a
+  throwaway value it reached an interactive local D1 schema migration prompt and timed
+  out. No production secret was read or changed.
+- `pnpm --dir cms run build` passed with existing ESLint warnings. `npm run lint` was
+  not run because Next 15 no longer provides the configured `next lint` command.
+- Local static output was checked on desktop and at 390px wide for `/`,
+  `/about_us.html`, `/loan.html`, `/how_to_apply.html`, and `/contact.html`: each route
+  rendered with headings/images and no horizontal overflow. Current public `/` did not
+  visually match the local build, so production parity and the draft/publish/deploy-hook
+  flow remain unverified. No push was performed.

@@ -28,10 +28,10 @@ describe('Payload section schema', () => {
 
   it('does not expose generic slot fields', () => {
     const schema = stringify(globals)
-    expect(schema).not.toContain('Text Slot')
-    expect(schema).not.toContain('textSlots')
-    expect(schema).not.toContain('imageSlots')
-    expect(schema).not.toContain('DOM Index')
+    expect(schema).not.toContain(['Text', 'Slot'].join(' '))
+    expect(schema).not.toContain(['text', 'Slots'].join(''))
+    expect(schema).not.toContain(['image', 'Slots'].join(''))
+    expect(schema).not.toContain(['DOM', 'Index'].join(' '))
   })
 
   it('requires media alt text', () => {

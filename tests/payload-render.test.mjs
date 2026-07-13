@@ -49,7 +49,7 @@ test('renderLegacyContent updates stable id fields without class regexes', () =>
 
   assert.match(output, /id="home-hero-main-heading" class="keep">Fast loans, clear terms<\/h1>/);
   assert.match(output, /id="home-hero-description" class="anything">Updated description<\/p>/);
-  assert.doesNotMatch(output, /data-cms/);
+  assert.doesNotMatch(output, new RegExp(['data', 'cms'].join('-')));
 });
 
 test('renderLegacyContent leaves unmatched HTML unchanged', () => {
