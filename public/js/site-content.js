@@ -1,7 +1,4 @@
 (function () {
-  var pageId = window.__METRO_PAGE_ID__;
-  if (!pageId) return;
-
   var endpoints = window.METRO_CMS_CONTENT_URL
     ? [window.METRO_CMS_CONTENT_URL]
     : [
@@ -14,50 +11,6 @@
       if (value && typeof value === 'object' && key in value) return value[key];
       return undefined;
     }, source);
-  }
-
-  function isVisibleTextNode(node) {
-    if (!node || !node.nodeValue || !node.nodeValue.trim()) return false;
-    var tagName = node.parentElement && node.parentElement.tagName;
-    return ['SCRIPT', 'STYLE', 'SVG', 'NOSCRIPT'].indexOf(tagName) === -1;
-  }
-
-  function textNodesInOrder(root) {
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-    var nodes = [];
-    var node = walker.nextNode();
-
-    while (node) {
-      if (isVisibleTextNode(node)) nodes.push(node);
-      node = walker.nextNode();
-    }
-
-    return nodes;
-  }
-
-  function applyTextSlots(content) {
-    var slots = getByPath(content, 'pages.' + pageId + '.textSlots');
-    if (!Array.isArray(slots)) return;
-
-    textNodesInOrder(document.body).forEach(function (node, index) {
-      var slot = slots[index];
-      if (slot && typeof slot.text === 'string') {
-        node.nodeValue = slot.text;
-      }
-    });
-  }
-
-  function applyImageSlots(content) {
-    var slots = getByPath(content, 'pages.' + pageId + '.imageSlots');
-    if (!Array.isArray(slots)) return;
-
-    document.querySelectorAll('img').forEach(function (element, index) {
-      var slot = slots[index];
-      var image = slot && slot.image;
-      if (!image || typeof image !== 'object') return;
-      if (typeof image.src === 'string') element.setAttribute('src', image.src);
-      if (typeof image.alt === 'string') element.setAttribute('alt', image.alt);
-    });
   }
 
   function applyKeyedFields(content) {
@@ -99,8 +52,6 @@
 
   fetchContentWithFallback(0)
     .then(function (content) {
-      applyTextSlots(content);
-      applyImageSlots(content);
       applyKeyedFields(content);
     })
     .catch(function () {

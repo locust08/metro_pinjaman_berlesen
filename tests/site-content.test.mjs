@@ -83,7 +83,7 @@ test('applySiteContent replaces text, html, links, and image slots by stable CMS
   assert.equal(imageNode.attributes.alt, 'Customer at desk');
 });
 
-test('applySiteContent replaces ordered page text and image slots without annotations', () => {
+test('applySiteContent leaves unannotated page text and image slots untouched', () => {
   const textNodes = [
     { nodeValue: 'Old heading', parentElement: { tagName: 'H1' } },
     { nodeValue: 'Old body', parentElement: { tagName: 'P' } },
@@ -125,9 +125,9 @@ test('applySiteContent replaces ordered page text and image slots without annota
 
   applySiteContent(root, content, 'home');
 
-  assert.equal(textNodes[0].nodeValue, 'New heading');
-  assert.equal(textNodes[1].nodeValue, 'New body');
+  assert.equal(textNodes[0].nodeValue, 'Old heading');
+  assert.equal(textNodes[1].nodeValue, 'Old body');
   assert.equal(textNodes[2].nodeValue, 'Hidden script');
-  assert.equal(imageNode.attributes.src, 'new.jpg');
-  assert.equal(imageNode.attributes.alt, 'New image');
+  assert.equal(imageNode.attributes.src, 'old.jpg');
+  assert.equal(imageNode.attributes.alt, 'Old image');
 });

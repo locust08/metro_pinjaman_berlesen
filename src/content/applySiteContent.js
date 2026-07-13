@@ -36,56 +36,6 @@ export function mergeSiteContent(fallback, remote) {
   return deepMerge(fallback, remote);
 }
 
-function isVisibleTextNode(node) {
-  if (!node?.nodeValue?.trim()) return false;
-  const tagName = node.parentElement?.tagName;
-  return !['SCRIPT', 'STYLE', 'SVG', 'NOSCRIPT'].includes(tagName);
-}
-
-function textNodesInOrder(root) {
-  if (typeof root.createTreeWalker !== 'function') return [];
-  const showText = globalThis.NodeFilter?.SHOW_TEXT || 4;
-  const walker = root.createTreeWalker(root.body || root, showText);
-  const nodes = [];
-  let node = walker.nextNode();
-
-  while (node) {
-    if (isVisibleTextNode(node)) nodes.push(node);
-    node = walker.nextNode();
-  }
-
-  return nodes;
-}
-
-function applyTextSlots(root, content, pageId) {
-  const slots = getByPath(content, `pages.${pageId}.textSlots`);
-  if (!Array.isArray(slots)) return;
-
-  textNodesInOrder(root).forEach((node, index) => {
-    const slot = slots[index];
-    if (slot && typeof slot.text === 'string') {
-      node.nodeValue = slot.text;
-    }
-  });
-}
-
-function applyImageSlots(root, content, pageId) {
-  const slots = getByPath(content, `pages.${pageId}.imageSlots`);
-  if (!Array.isArray(slots)) return;
-
-  root.querySelectorAll('img').forEach((element, index) => {
-    const slot = slots[index];
-    const image = slot?.image;
-    if (!image || typeof image !== 'object') return;
-    if (typeof image.src === 'string') {
-      element.setAttribute('src', image.src);
-    }
-    if (typeof image.alt === 'string') {
-      element.setAttribute('alt', image.alt);
-    }
-  });
-}
-
 function applyText(root, content) {
   root.querySelectorAll('[data-cms-text]').forEach((element) => {
     const value = getByPath(content, element.getAttribute('data-cms-text'));
@@ -126,12 +76,7 @@ function applyImages(root, content) {
   });
 }
 
-export function applySiteContent(root, content, pageId = '') {
-  if (pageId) {
-    applyTextSlots(root, content, pageId);
-    applyImageSlots(root, content, pageId);
-  }
-
+export function applySiteContent(root, content) {
   applyText(root, content);
   applyHtml(root, content);
   applyLinks(root, content);
