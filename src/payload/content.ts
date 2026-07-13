@@ -10,7 +10,7 @@ export type PublicPayloadContent = {
     contactDetails: { supportEmail: string; displayPhoneNumber: string; telephoneLinkNumber: string; whatsappNumber: string; defaultWhatsappMessage: string; businessHours: string; officeName: string; officeAddress: string; wazeUrl: string; googleMapsUrl: string; };
     formMessages: { successfulSubmissionMessage: string; failedSubmissionMessage: string; sendingMessage: string; validationSummaryMessage: string; };
   };
-  homePage: Record<string, any>; aboutUsPage: Record<string, any>; loanPage: Record<string, any>; howToApplyPage: Record<string, any>; contactUsPage: Record<string, any>;
+  homePage: Record<string, unknown>; aboutUsPage: Record<string, unknown>; loanPage: Record<string, unknown>; howToApplyPage: Record<string, unknown>; contactUsPage: Record<string, unknown>;
 };
 
 export const defaultPayloadContent: PublicPayloadContent = {
@@ -67,6 +67,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "homePage": {
     "seo": {
+      "title": "LoanEase — Homepage",
       "description": ""
     },
     "hero": {
@@ -188,6 +189,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "aboutUsPage": {
     "seo": {
+      "title": "About Us | Metro Pinjaman Berlesen",
       "description": ""
     },
     "hero": {
@@ -322,6 +324,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "loanPage": {
     "seo": {
+      "title": "Loan | Metro Pinjaman Berlesen",
       "description": ""
     },
     "hero": {
@@ -485,6 +488,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "howToApplyPage": {
     "seo": {
+      "title": "How To Apply | Metro Pinjaman Berlesen",
       "description": ""
     },
     "hero": {
@@ -559,6 +563,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "contactUsPage": {
     "seo": {
+      "title": "Contact Us | Metro Pinjaman Berlesen",
       "description": ""
     },
     "contactForm": {
