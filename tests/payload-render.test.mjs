@@ -58,6 +58,50 @@ test('renderLegacyContent leaves unmatched HTML unchanged', () => {
   assert.equal(output, html);
 });
 
+test('renderLegacyContent escapes hostile editor text without creating executable nodes', () => {
+  const html = '<main><h1 id="home-hero-main-heading">Safe heading</h1><script>window.legacy = true</script></main>';
+  const content = structuredClone(defaultPayloadContent);
+  content.homePage.hero.mainHeading = '<script>window.injected = true</script><img src=x onerror="alert(1)">';
+
+  const output = renderLegacyContent(html, 'home', content);
+  const root = parse(output);
+
+  assert.equal(root.querySelectorAll('script').length, 1, 'only the existing legacy script remains');
+  assert.equal(root.querySelectorAll('img').length, 0, 'hostile editor text cannot create an image node');
+  assert.match(output, /&lt;script&gt;window\.injected = true&lt;\/script&gt;/);
+  assert.match(output, /&lt;img src=x onerror=&quot;alert\(1\)&quot;&gt;/);
+});
+
+test('renderLegacyContent blocks unsafe href and image source overrides', () => {
+  const html = '<a id="site-contact-waze-link" href="/safe-map">Map</a><img id="contact-form-image" src="/safe-image.png" alt="Safe">';
+  const content = structuredClone(defaultPayloadContent);
+  content.siteSettings.contactDetails.wazeUrl = 'javascript:alert(1)';
+  content.contactUsPage.contactForm.image = { src: 'javascript:alert(2)', alt: 'Updated alt' };
+
+  const root = parse(renderLegacyContent(html, 'contactUs', content));
+
+  assert.equal(root.querySelector('#site-contact-waze-link').getAttribute('href'), '/safe-map');
+  assert.equal(root.querySelector('#contact-form-image').getAttribute('src'), '/safe-image.png');
+  assert.equal(root.querySelector('#contact-form-image').getAttribute('alt'), 'Updated alt');
+});
+
+test('renderLegacyContent maps all statistic values to their counter targets', () => {
+  const html = [1, 2, 3, 4]
+    .map((index) => `<span id="home-statistic-${index}-value" class="js-stat-counter" data-target="0" data-suffix="">0</span>`)
+    .join('');
+  const content = structuredClone(defaultPayloadContent);
+
+  const root = parse(renderLegacyContent(html, 'home', content));
+
+  assert.deepEqual(
+    [1, 2, 3, 4].map((index) => {
+      const counter = root.querySelector(`#home-statistic-${index}-value`);
+      return [counter.getAttribute('data-target'), counter.getAttribute('data-suffix')];
+    }),
+    [['4', ''], ['2', ''], ['24', 'h'], ['100', '%']],
+  );
+});
+
 test('every renderer binding resolves exactly once in its real legacy template', () => {
   for (const [pageId, filename] of Object.entries(legacyPages)) {
     const root = parse(fs.readFileSync(path.join(legacyDirectory, filename), 'utf8'));

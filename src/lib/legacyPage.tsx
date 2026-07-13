@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 export type LegacyPageContent = {
   title: string;
+  description: string;
   bodyClassName: string;
   bodyHtml: string;
 };
@@ -17,7 +18,7 @@ declare global {
   }
 }
 
-export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPageProps) {
+export default function LegacyPage({ title, description, bodyClassName, bodyHtml }: LegacyPageProps) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -104,6 +105,7 @@ export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPag
     <>
       <Head>
         <title>{title}</title>
+        {description ? <meta name="description" content={description} /> : null}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
       <div ref={pageRef} dangerouslySetInnerHTML={{ __html: bodyHtml }} />

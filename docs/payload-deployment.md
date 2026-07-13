@@ -7,6 +7,7 @@
 - Payload CMS: separate `cms/` Next/Payload app deployed as Cloudflare Worker `metropinjamanberlesen-payload-cms`.
 - Database: Cloudflare D1 binding `D1`, database `metropinjamanberlesen_payload`.
 - Media storage: Cloudflare R2 binding `R2`, bucket `metropinjamanberlesen-payload-media`.
+- Public CMS origin: `PAYLOAD_PUBLIC_SERVER_URL`, defaulting to the current Worker URL. The published endpoint resolves relative `/api/media/file/...` upload URLs against this origin before the static frontend consumes them.
 - Admin domain: the Worker URL is active; `admin.metropinjamanberlesen.com` needs the domain zone added to the Cloudflare account before route attachment.
 
 The static frontend remains the owner of the route structure, legacy markup, Tailwind

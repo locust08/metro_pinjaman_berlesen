@@ -14,6 +14,26 @@ function stringify(value: unknown) {
   return JSON.stringify(value)
 }
 
+function findNamedField(value: unknown, name: string): Record<string, unknown> | undefined {
+  if (Array.isArray(value)) {
+    for (const child of value) {
+      const match = findNamedField(child, name)
+      if (match) return match
+    }
+  }
+
+  if (typeof value === 'object' && value !== null) {
+    const record = value as Record<string, unknown>
+    if (record.name === name) return record
+    for (const child of Object.values(record)) {
+      const match = findNamedField(child, name)
+      if (match) return match
+    }
+  }
+
+  return undefined
+}
+
 describe('Payload section schema', () => {
   it('defines the six required globals', () => {
     expect(globals.map((global) => global.slug)).toEqual([
@@ -51,5 +71,23 @@ describe('Payload section schema', () => {
     globals.forEach((global) => {
       expect(global.versions).toMatchObject({ drafts: true, max: 20 })
     })
+  })
+
+  it('does not expose fields without stable production targets', () => {
+    const siteSettings = stringify(SiteSettings)
+    for (const field of [
+      'telephoneLinkNumber',
+      'whatsappNumber',
+      'defaultWhatsappMessage',
+      'businessHours',
+      'formMessages',
+    ]) {
+      expect(siteSettings).not.toContain(`"name":"${field}"`)
+    }
+
+    const phone = findNamedField(ContactUsPage, 'phone')
+    const stillHaveQuestions = findNamedField(ContactUsPage, 'stillHaveQuestions')
+    expect(stringify(phone)).not.toContain('"name":"description"')
+    expect(stringify(stillHaveQuestions)).not.toContain('"name":"description"')
   })
 })

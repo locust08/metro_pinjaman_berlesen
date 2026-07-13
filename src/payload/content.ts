@@ -7,8 +7,7 @@ export type PublicPayloadContent = {
   siteSettings: {
     header: { websiteLogo: ImageValue; mobileDrawerLogo: ImageValue; aboutUsMenuLabel: string; loanMenuLabel: string; howToApplyMenuLabel: string; contactUsMenuLabel: string; applyNowButtonLabel: string; loginButtonLabel: string; newsletterLabel: string; };
     footer: { footerLogo: ImageValue; pagesColumnHeading: string; homeLinkLabel: string; aboutUsLinkLabel: string; loanLinkLabel: string; helpColumnHeading: string; howToApplyLinkLabel: string; contactUsLinkLabel: string; copyrightText: string; };
-    contactDetails: { supportEmail: string; displayPhoneNumber: string; telephoneLinkNumber: string; whatsappNumber: string; defaultWhatsappMessage: string; businessHours: string; officeName: string; officeAddress: string; wazeUrl: string; googleMapsUrl: string; };
-    formMessages: { successfulSubmissionMessage: string; failedSubmissionMessage: string; sendingMessage: string; validationSummaryMessage: string; };
+    contactDetails: { supportEmail: string; displayPhoneNumber: string; officeName: string; officeAddress: string; wazeUrl: string; googleMapsUrl: string; };
   };
   homePage: Record<string, unknown>; aboutUsPage: Record<string, unknown>; loanPage: Record<string, unknown>; howToApplyPage: Record<string, unknown>; contactUsPage: Record<string, unknown>;
 };
@@ -49,20 +48,10 @@ export const defaultPayloadContent: PublicPayloadContent = {
     "contactDetails": {
       "supportEmail": "metropinjamanberlesan@gmail.com",
       "displayPhoneNumber": "+60 11-7007 3191",
-      "telephoneLinkNumber": "+601170073191",
-      "whatsappNumber": "601170073191",
-      "defaultWhatsappMessage": "Hi Metro Pinjaman Berlesen, I would like to enquire about a loan appointment.",
-      "businessHours": "24/7",
       "officeName": "Metro Pinjaman Berlesen",
       "officeAddress": "Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur",
       "wazeUrl": "https://www.waze.com/live-map/directions/my/wilayah-persekutuan-kuala-lumpur/kuala-lumpur/jalan-metro-1?to=place.ElpKYWxhbiBNZXRybyAxLCBNZXRybyBQcmltYSwgNTIxMDAgS3VhbGEgTHVtcHVyLCBXaWxheWFoIFBlcnNla3V0dWFuIEt1YWxhIEx1bXB1ciwgTWFsYXlzaWEiLiosChQKEglr0ecfQEbMMRELOdpZeIzxyxIUChIJ35pfkUBGzDERuup-yz1DT3Y",
       "googleMapsUrl": "https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b?sa=X&ved=1t:242&ictx=111"
-    },
-    "formMessages": {
-      "sendingMessage": "Sending...",
-      "successfulSubmissionMessage": "Booking submitted.",
-      "failedSubmissionMessage": "Sorry, we could not submit your appointment right now. Please try again or contact us on WhatsApp.",
-      "validationSummaryMessage": "Please complete all required fields."
     }
   },
   "homePage": {
@@ -581,8 +570,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
         "description": "Email us for loan enquiries and application support."
       },
       "phone": {
-        "heading": "Phone",
-        "description": "We are open 24 hours and 7 days a week"
+        "heading": "Phone"
       },
       "office": {
         "heading": "HQ Office",
@@ -616,8 +604,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
       ]
     },
     "stillHaveQuestions": {
-      "heading": "Still have questions?",
-      "description": "For assistance, please visit our Contact Us page or contact us on WhatsApp at +60 11-7007 3191. Our team is ready to help with your loan enquiry and application."
+      "heading": "Still have questions?"
     }
   }
 };

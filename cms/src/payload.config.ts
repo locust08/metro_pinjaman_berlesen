@@ -16,7 +16,7 @@ import { HomePage } from './globals/HomePage'
 import { HowToApplyPage } from './globals/HowToApplyPage'
 import { LoanPage } from './globals/LoanPage'
 import { SiteSettings } from './globals/SiteSettings'
-import { publishedContentEndpoint } from './endpoints/publishedContent'
+import { DEFAULT_PAYLOAD_PUBLIC_SERVER_URL, publishedContentEndpoint } from './endpoints/publishedContent'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -57,6 +57,7 @@ const payloadSecret =
   ''
 
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || DEFAULT_PAYLOAD_PUBLIC_SERVER_URL,
   admin: {
     user: Users.slug,
     importMap: {

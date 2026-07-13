@@ -41,22 +41,10 @@ export const SiteSettings: GlobalConfig = {
       section('contactDetails', 'Contact details', [
         requiredText('supportEmail', 'Support email'),
         requiredText('displayPhoneNumber', 'Display phone number'),
-        requiredText('telephoneLinkNumber', 'Telephone link number'),
-        requiredText('whatsappNumber', 'WhatsApp number'),
-        requiredTextarea('defaultWhatsappMessage', 'Default WhatsApp message'),
-        requiredText('businessHours', 'Business hours'),
         requiredText('officeName', 'Office name'),
         requiredTextarea('officeAddress', 'Office address'),
         optionalText('wazeUrl', 'Waze URL'),
         optionalText('googleMapsUrl', 'Google Maps URL'),
-      ]),
-    ]),
-    tab('Form Messages', [
-      section('formMessages', 'Form messages', [
-        requiredText('sendingMessage', 'Sending message'),
-        requiredText('successfulSubmissionMessage', 'Successful submission message'),
-        requiredTextarea('failedSubmissionMessage', 'Failed submission message'),
-        requiredText('validationSummaryMessage', 'Validation summary message'),
       ]),
     ]),
   ])],

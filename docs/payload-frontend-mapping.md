@@ -22,37 +22,15 @@ responsive layouts. Logo image positions do not share a field when their
 legacy fallback assets differ: `header.websiteLogo` supplies the desktop/main
 logo and `header.mobileDrawerLogo` supplies the mobile drawer logo.
 
-## Task 2 Renderer Scope
+## Active Rendering Scope
 
-The tables below remain the complete future Payload field inventory. For Task 2,
-every table row is an active renderer binding except the explicit exclusions in
-this section. The active mapping contract therefore contains 275 stable IDs and
-is required to exactly match `legacyContentBindings` in
+Every editor field below has an active production target. The 277 rows with a
+`#stable-id` target are required to exactly match `legacyContentBindings` in
 `src/payload/renderLegacyContent.ts`; `tests/payload-render.test.mjs` enforces
-that relationship.
-
-These 17 rows are intentionally out of active Task 2 rendering scope because
-the preserved legacy templates have no safe one-to-one element or attribute
-target. They remain documented so a future markup and CMS change can implement
-them deliberately rather than silently dropping the field.
-
-- `about-us-seo-description`: the legacy template has no meta-description element.
-- `contact-method-phone-description`: the legacy card has no separate description node.
-- `contact-seo-description`: the legacy template has no meta-description element.
-- `contact-still-have-questions-description`: the visible CTA copy is a multi-node composite.
-- `home-seo-description`: the legacy template has no meta-description element.
-- `home-statistic-3-value`: the visible statistic is part of a composite text node.
-- `home-statistic-4-value`: the visible statistic is part of a composite text node.
-- `how-to-apply-seo-description`: the legacy template has no meta-description element.
-- `loan-seo-description`: the legacy template has no meta-description element.
-- `site-contact-business-hours`: the visible value is part of a composite contact string.
-- `site-contact-phone-link`: the legacy telephone target is not represented by a dedicated anchor attribute.
-- `site-contact-whatsapp-link`: the legacy WhatsApp destination is embedded in Alpine click behavior.
-- `site-contact-whatsapp-message`: the legacy WhatsApp message is embedded in Alpine click behavior.
-- `site-form-failure-message`: the value exists only inside Alpine form state.
-- `site-form-sending-message`: the value exists only inside Alpine form state.
-- `site-form-success-message`: the value exists only inside Alpine form state.
-- `site-form-validation-message`: the value exists only inside Alpine form state.
+that relationship. SEO descriptions use the explicit
+`LegacyPageContent.description` property and are rendered by Next Head during
+static generation. Fields that could not map one-to-one without changing form,
+link, or composite-text behavior are not exposed in the schema or defaults.
 
 ## Site Settings
 
@@ -90,18 +68,10 @@ them deliberately rather than silently dropping the field.
 | Site Settings | footer.copyrightText | #site-footer-copyright | src/legacy-pages/*.html | Footer | Copyright text | Yes | (c) 2026 Flow. All rights reserved. |
 | Site Settings | contactDetails.supportEmail | #site-contact-support-email | src/legacy-pages/contact.html | Contact Details Section | Support email | Yes | metropinjamanberlesan@gmail.com |
 | Site Settings | contactDetails.displayPhoneNumber | #site-contact-phone-number | src/legacy-pages/contact.html | Contact Details Section | Display phone number | Yes | +60 11-7007 3191 |
-| Site Settings | contactDetails.telephoneLinkNumber | #site-contact-phone-link | src/legacy-pages/contact.html | Contact Details Section | Telephone link number | Yes | +601170073191 |
-| Site Settings | contactDetails.whatsappNumber | #site-contact-whatsapp-link | src/legacy-pages/contact.html | Contact Details Section | WhatsApp destination number | Yes | 601170073191 |
-| Site Settings | contactDetails.defaultWhatsappMessage | #site-contact-whatsapp-message | src/legacy-pages/contact.html | Contact Details Section | WhatsApp prefilled message | Yes | Hi Metro Pinjaman Berlesen, I would like to enquire about a loan appointment. |
-| Site Settings | contactDetails.businessHours | #site-contact-business-hours | src/legacy-pages/contact.html | Contact Details Section | Availability text | Yes | 24/7 |
 | Site Settings | contactDetails.officeName | #site-contact-office-name | src/legacy-pages/contact.html | Contact Details Section | Office name | Yes | Metro Pinjaman Berlesen |
 | Site Settings | contactDetails.officeAddress | #site-contact-office-address | src/legacy-pages/contact.html | Contact Details Section | Office address | Yes | Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur |
 | Site Settings | contactDetails.wazeUrl | #site-contact-waze-link | src/legacy-pages/contact.html | Contact Details Section | Waze map link | Yes | Current Jalan Metro 1 Waze URL |
 | Site Settings | contactDetails.googleMapsUrl | #site-contact-google-maps-link | src/legacy-pages/contact.html | Contact Details Section | Google Maps link | Yes | Current Jalan Metro 1 Google Maps URL |
-| Site Settings | formMessages.sendingMessage | #site-form-sending-message | src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html | Appointment Form | Submitting state label | Yes | Submitting... |
-| Site Settings | formMessages.successfulSubmissionMessage | #site-form-success-message | src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html | Appointment Form | Success message | Yes | Booking submitted. |
-| Site Settings | formMessages.failedSubmissionMessage | #site-form-failure-message | src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html | Appointment Form | Submission failure message | Yes | Sorry, we could not submit your appointment right now. Please try again or contact us on WhatsApp. |
-| Site Settings | formMessages.validationSummaryMessage | #site-form-validation-message | src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html | Appointment Form | Validation summary | Yes | Please complete all required fields. |
 
 ## Home Page
 
@@ -112,7 +82,7 @@ Footer.
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Home Page | seo.title | #home-seo-title | src/legacy-pages/index.html | Document metadata | HTML title | No | Page title |
-| Home Page | seo.description | #home-seo-description | src/legacy-pages/index.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
+| Home Page | seo.description | LegacyPageContent.description | src/lib/legacyPageData.ts | Next Head | Meta description | No | Empty |
 | Home Page | hero.eyebrow | #home-hero-eyebrow | src/legacy-pages/index.html | Hero Section | Eyebrow label | No | Powering Tomorrow |
 | Home Page | hero.mainHeading | #home-hero-main-heading | src/legacy-pages/index.html | Hero Section | Main h1 | No | Simple Loans, |
 | Home Page | hero.description | #home-hero-description | src/legacy-pages/index.html | Hero Section | Hero paragraph | No | Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending. |
@@ -172,7 +142,7 @@ Section, Footer.
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | About Us Page | seo.title | #about-us-seo-title | src/legacy-pages/about_us.html | Document metadata | HTML title | No | Page title |
-| About Us Page | seo.description | #about-us-seo-description | src/legacy-pages/about_us.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
+| About Us Page | seo.description | LegacyPageContent.description | src/lib/legacyPageData.ts | Next Head | Meta description | No | Empty |
 | About Us Page | hero.backgroundImage | #about-us-hero-background-image | src/legacy-pages/about_us.html | Hero Section | Hero background image | No | https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80 |
 | About Us Page | hero.mainHeading | #about-us-hero-main-heading | src/legacy-pages/about_us.html | Hero Section | Main heading | No | Lending you trust, building your future. |
 | About Us Page | hero.description | #about-us-hero-description | src/legacy-pages/about_us.html | Hero Section | Hero description | No | We help individuals and businesses access fair, fast and transparent loan solutions-so you can focus on what matters most. |
@@ -237,7 +207,7 @@ fixed calculator), Footer. Calculator inputs and results remain frontend logic.
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Loan Page | seo.title | #loan-seo-title | src/legacy-pages/loan.html | Document metadata | HTML title | No | Page title |
-| Loan Page | seo.description | #loan-seo-description | src/legacy-pages/loan.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
+| Loan Page | seo.description | LegacyPageContent.description | src/lib/legacyPageData.ts | Next Head | Meta description | No | Empty |
 | Loan Page | hero.mainHeading | #loan-hero-main-heading | src/legacy-pages/loan.html | Hero Section | Main heading | No | The Future of Green Energy |
 | Loan Page | hero.description | #loan-hero-description | src/legacy-pages/loan.html | Hero Section | Hero description | No | Our commitment to green energy is paving the way for a cleaner, healthier planet. Join us on a journey towards a future where clean, renewable energy sources transform the way we power our lives. |
 | Loan Page | hero.primaryButtonLabel | #loan-hero-primary-button-label | src/legacy-pages/loan.html | Hero Section | Primary CTA label | No | See our solutions |
@@ -324,7 +294,7 @@ Documents, Eligibility Requirements, Ready To Apply (appointment form), Footer.
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | How To Apply Page | seo.title | #how-to-apply-seo-title | src/legacy-pages/how_to_apply.html | Document metadata | HTML title | No | Page title |
-| How To Apply Page | seo.description | #how-to-apply-seo-description | src/legacy-pages/how_to_apply.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
+| How To Apply Page | seo.description | LegacyPageContent.description | src/lib/legacyPageData.ts | Next Head | Meta description | No | Empty |
 | How To Apply Page | hero.mainHeading | #how-to-apply-hero-main-heading | src/legacy-pages/how_to_apply.html | Hero Section | Main heading | No | Get Your Loan in Simple Steps |
 | How To Apply Page | hero.description | #how-to-apply-hero-description | src/legacy-pages/how_to_apply.html | Hero Section | Hero description | No | Applying for a loan with us is fast and hassle-free. Follow our easy guide below to complete your application and get the funds you need. |
 | How To Apply Page | hero.primaryButtonLabel | #how-to-apply-hero-primary-button-label | src/legacy-pages/how_to_apply.html | Hero Section | Primary CTA label | No | Start Your Application |
@@ -368,7 +338,7 @@ FAQ, Still Have Questions CTA, Footer.
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Contact Us Page | seo.title | #contact-seo-title | src/legacy-pages/contact.html | Document metadata | HTML title | No | Page title |
-| Contact Us Page | seo.description | #contact-seo-description | src/legacy-pages/contact.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
+| Contact Us Page | seo.description | LegacyPageContent.description | src/lib/legacyPageData.ts | Next Head | Meta description | No | Empty |
 | Contact Us Page | contactForm.heading | #contact-form-heading | src/legacy-pages/contact.html | Contact Us and Appointment Form | Main heading | No | Contact us |
 | Contact Us Page | contactForm.description | #contact-form-description | src/legacy-pages/contact.html | Contact Us and Appointment Form | Intro paragraph | No | Contact Metro Pinjaman Berlesen for personal and business loan enquiries. Our team is ready to assist you 24/7. |
 | Contact Us Page | contactForm.submitButtonLabel | #contact-form-submit-label | src/legacy-pages/contact.html | Contact Us and Appointment Form | Appointment submit label | No | Submit |
@@ -376,7 +346,6 @@ FAQ, Still Have Questions CTA, Footer.
 | Contact Us Page | contactMethods.email.heading | #contact-method-email-heading | src/legacy-pages/contact.html | Contact Details | Email card heading | No | Email |
 | Contact Us Page | contactMethods.email.description | #contact-method-email-description | src/legacy-pages/contact.html | Contact Details | Email card description | No | Email us for loan enquiries and application support. |
 | Contact Us Page | contactMethods.phone.heading | #contact-method-phone-heading | src/legacy-pages/contact.html | Contact Details | Phone card heading | No | Phone |
-| Contact Us Page | contactMethods.phone.description | #contact-method-phone-description | src/legacy-pages/contact.html | Contact Details | Phone card description | No | We are open 24 hours and 7 days a week |
 | Contact Us Page | contactMethods.office.heading | #contact-method-office-heading | src/legacy-pages/contact.html | Contact Details | Office card heading | No | HQ Office |
 | Contact Us Page | contactMethods.office.description | #contact-method-office-description | src/legacy-pages/contact.html | Contact Details | Office card description | No | Visit us at our office |
 | Contact Us Page | faq.heading | #contact-faq-heading | src/legacy-pages/contact.html | FAQ Section | Section heading | No | FAQ |
@@ -392,7 +361,6 @@ FAQ, Still Have Questions CTA, Footer.
 | Contact Us Page | faq.items[4].question | #contact-faq-5-question | src/legacy-pages/contact.html | FAQ Section | Fifth FAQ question | No | What documents do I need? |
 | Contact Us Page | faq.items[4].answer | #contact-faq-5-answer | src/legacy-pages/contact.html | FAQ Section | Fifth FAQ answer | No | Required documents may include NRIC, contact number, latest 3 months pay slip, latest 3 months bank statement, latest utility bills, EPF statement, S&P, or tenancy agreement. |
 | Contact Us Page | stillHaveQuestions.heading | #contact-still-have-questions-heading | src/legacy-pages/contact.html | Still Have Questions CTA | CTA heading | No | Still have questions? |
-| Contact Us Page | stillHaveQuestions.description | #contact-still-have-questions-description | src/legacy-pages/contact.html | Still Have Questions CTA | CTA description | No | For assistance, please visit our Contact Us page or contact us on WhatsApp at +60 11-7007 3191. Our team is ready to help with your loan enquiry and application. |
 
 ## Maintenance Rules
 

@@ -2,7 +2,7 @@ import { parse } from 'node-html-parser';
 import type { PublicPayloadContent, SitePageId } from './content';
 
 type LegacyPageFile = 'index.html' | 'about_us.html' | 'loan.html' | 'how_to_apply.html' | 'contact.html';
-type BindingKind = 'text' | 'image' | 'href';
+type BindingKind = 'text' | 'image' | 'href' | 'counter';
 
 export type LegacyContentBinding = {
   id: string;
@@ -552,7 +552,7 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "pages": [
       "index.html"
     ],
-    "kind": "text"
+    "kind": "counter"
   },
   {
     "id": "home-statistic-1-label",
@@ -568,7 +568,23 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "pages": [
       "index.html"
     ],
-    "kind": "text"
+    "kind": "counter"
+  },
+  {
+    "id": "home-statistic-3-value",
+    "path": "homePage.statistics.items[2].value",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "counter"
+  },
+  {
+    "id": "home-statistic-4-value",
+    "path": "homePage.statistics.items[3].value",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "counter"
   },
   {
     "id": "home-statistic-2-label",
@@ -2304,18 +2320,58 @@ function getValue(content: PublicPayloadContent, path: string): unknown {
   return path.replace(/\[(\d+)\]/g, '.$1').split('.').reduce<unknown>((value, key) => (value && typeof value === 'object' ? (value as Record<string, unknown>)[key] : undefined), content);
 }
 
+function escapeHtmlText(value: unknown): string {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function isSafeUrl(value: string, kind: 'href' | 'image'): boolean {
+  const candidate = value.trim();
+  if (!candidate || /[\u0000-\u001f\u007f]/.test(candidate) || candidate.startsWith('//') || candidate.startsWith('\\\\')) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(candidate, 'https://legacy-page.invalid/');
+    const isRelativePath = parsed.origin === 'https://legacy-page.invalid';
+    if (isRelativePath) return true;
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return true;
+    return kind === 'href' && (parsed.protocol === 'mailto:' || parsed.protocol === 'tel:');
+  } catch {
+    return false;
+  }
+}
+
 function renderBinding(root: ReturnType<typeof parse>, binding: LegacyContentBinding, value: unknown) {
   if (value == null) return;
   const element = root.querySelector('#' + binding.id);
   if (!element) return;
   if (binding.kind === 'image' && typeof value === 'object' && value && 'src' in value) {
     const image = value as { src: string; alt?: string };
-    element.setAttribute('src', image.src);
+    if (typeof image.src === 'string' && isSafeUrl(image.src, 'image')) {
+      element.setAttribute('src', image.src.trim());
+    }
     element.setAttribute('alt', image.alt || '');
     return;
   }
-  if (binding.kind === 'href') { element.setAttribute('href', String(value)); return; }
-  element.set_content(String(value));
+  if (binding.kind === 'href') {
+    const href = String(value);
+    if (isSafeUrl(href, 'href')) element.setAttribute('href', href.trim());
+    return;
+  }
+  if (binding.kind === 'counter') {
+    const match = /^(\d+(?:\.\d+)?)(.*)$/.exec(String(value).trim());
+    if (match) {
+      element.setAttribute('data-target', match[1]);
+      element.setAttribute('data-suffix', match[2]);
+    }
+    return;
+  }
+  element.set_content(escapeHtmlText(value));
 }
 
 export function renderLegacyContent(html: string, pageId: SitePageId, content: PublicPayloadContent): string {

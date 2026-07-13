@@ -19,7 +19,10 @@ function isRecord(value: unknown): value is RecordValue {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function createPayload(initial: RecordValue): SeedPayload & { updateGlobal: ReturnType<typeof vi.fn> } {
+function createPayload(initial: RecordValue): SeedPayload & {
+  findGlobal: ReturnType<typeof vi.fn>
+  updateGlobal: ReturnType<typeof vi.fn>
+} {
   const content = structuredClone(initial)
   const updateGlobal = vi.fn(async ({ slug, data }: { slug: string; data: RecordValue }) => {
     content[slug] = merge((content[slug] as RecordValue) ?? {}, data)
@@ -61,5 +64,44 @@ describe('canonical content seed', () => {
     await seedPayloadContent(payload, homeSeed)
 
     expect(payload.updateGlobal).not.toHaveBeenCalled()
+  })
+
+  it('reads the latest draft and keeps pending draft-only edits unpublished', async () => {
+    const payload = createPayload({
+      'home-page': {
+        _status: 'draft',
+        hero: {
+          mainHeading: 'Pending admin heading',
+          description: null,
+        },
+      },
+    })
+
+    await seedPayloadContent(payload, homeSeed)
+
+    expect(payload.findGlobal).toHaveBeenCalledWith({ slug: 'home-page', depth: 0, draft: true })
+    expect(payload.updateGlobal).toHaveBeenCalledWith(expect.objectContaining({
+      slug: 'home-page',
+      draft: true,
+    }))
+    const update = payload.updateGlobal.mock.calls[0][0]
+    expect(update.data.hero).not.toHaveProperty('mainHeading')
+  })
+
+  it('does not overwrite existing values while seeding a published global', async () => {
+    const payload = createPayload({
+      'home-page': {
+        _status: 'published',
+        hero: {
+          mainHeading: 'Published admin heading',
+          description: null,
+        },
+      },
+    })
+
+    await seedPayloadContent(payload, homeSeed)
+
+    expect(payload.updateGlobal).toHaveBeenCalledWith(expect.objectContaining({ draft: false }))
+    expect(payload.updateGlobal.mock.calls[0][0].data.hero).not.toHaveProperty('mainHeading')
   })
 })

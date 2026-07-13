@@ -7,7 +7,7 @@ type RecordValue = Record<string, unknown>
 
 export type SeedPayload = {
   findGlobal: (args: { depth: number; draft: boolean; slug: string }) => Promise<unknown>
-  updateGlobal: (args: { data: RecordValue; slug: string }) => Promise<unknown>
+  updateGlobal: (args: { data: RecordValue; draft: boolean; slug: string }) => Promise<unknown>
 }
 
 export const globalSeeds = [
@@ -59,12 +59,16 @@ export async function seedPayloadContent(
   seeds: readonly (readonly [string, unknown])[] = globalSeeds,
 ) {
   for (const [slug, canonicalContent] of seeds) {
-    const existing = await payload.findGlobal({ slug, depth: 0, draft: false })
+    const existing = await payload.findGlobal({ slug, depth: 0, draft: true })
     const defaults = toPayloadValue(canonicalContent)
     const data = missingValues(existing, defaults)
 
     if (data !== undefined) {
-      await payload.updateGlobal({ slug, data: data as RecordValue })
+      await payload.updateGlobal({
+        slug,
+        data: data as RecordValue,
+        draft: isRecord(existing) && existing._status === 'draft',
+      })
     }
   }
 }

@@ -358,20 +358,10 @@ export interface SiteSetting {
   contactDetails: {
     supportEmail: string;
     displayPhoneNumber: string;
-    telephoneLinkNumber: string;
-    whatsappNumber: string;
-    defaultWhatsappMessage: string;
-    businessHours: string;
     officeName: string;
     officeAddress: string;
     wazeUrl?: string | null;
     googleMapsUrl?: string | null;
-  };
-  formMessages: {
-    sendingMessage: string;
-    successfulSubmissionMessage: string;
-    failedSubmissionMessage: string;
-    validationSummaryMessage: string;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -717,7 +707,6 @@ export interface ContactUsPage {
     };
     phone: {
       heading: string;
-      description: string;
     };
     office: {
       heading: string;
@@ -737,7 +726,6 @@ export interface ContactUsPage {
   };
   stillHaveQuestions: {
     heading: string;
-    description: string;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -779,22 +767,10 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         supportEmail?: T;
         displayPhoneNumber?: T;
-        telephoneLinkNumber?: T;
-        whatsappNumber?: T;
-        defaultWhatsappMessage?: T;
-        businessHours?: T;
         officeName?: T;
         officeAddress?: T;
         wazeUrl?: T;
         googleMapsUrl?: T;
-      };
-  formMessages?:
-    | T
-    | {
-        sendingMessage?: T;
-        successfulSubmissionMessage?: T;
-        failedSubmissionMessage?: T;
-        validationSummaryMessage?: T;
       };
   _status?: T;
   updatedAt?: T;
@@ -1212,7 +1188,6 @@ export interface ContactUsPageSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
-              description?: T;
             };
         office?:
           | T
@@ -1238,7 +1213,6 @@ export interface ContactUsPageSelect<T extends boolean = true> {
     | T
     | {
         heading?: T;
-        description?: T;
       };
   _status?: T;
   updatedAt?: T;
