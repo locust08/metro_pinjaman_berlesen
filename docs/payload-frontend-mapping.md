@@ -15,20 +15,30 @@ cards, steps, list items, and FAQ items; editors cannot add, remove, or reorder
 them. The canonical defaults for every fallback value will live in
 `src/payload/content.ts`, which both the frontend fallback and Payload seed use.
 
-The header and footer identifiers occur once per legacy document. The matching
-desktop/mobile rendering of a shared field is handled by the fixed frontend
-component/template, not by a second CMS field.
+Desktop and mobile header markup is separate in the legacy templates. Each
+visible variant therefore receives its own stable identifier row, but desktop
+and mobile variants of the same value intentionally share one Payload field
+path. The fixed frontend component/template applies that one value to every
+mapped variant; it must not introduce a second CMS field for a breakpoint.
 
 ## Site Settings
 
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Site Settings | header.websiteLogo | #site-header-logo | src/legacy-pages/*.html | Header | Header logo image | Yes | flow-assets/logos/flow-logo.svg |
-| Site Settings | header.aboutUsMenuLabel | #site-header-nav-about-us | src/legacy-pages/*.html | Header | About us nav label | Yes | About us |
-| Site Settings | header.loanMenuLabel | #site-header-nav-loan | src/legacy-pages/*.html | Header | Loan nav label | Yes | Loan |
-| Site Settings | header.howToApplyMenuLabel | #site-header-nav-how-to-apply | src/legacy-pages/*.html | Header | How to apply nav label | Yes | How to apply |
-| Site Settings | header.contactUsMenuLabel | #site-header-nav-contact-us | src/legacy-pages/*.html | Header | Contact us nav label | Yes | Contact us |
-| Site Settings | header.applyNowButtonLabel | #site-header-apply-now-label | src/legacy-pages/*.html | Header | Apply now button label | Yes | Apply now |
+| Site Settings | header.websiteLogo | #site-header-logo | src/legacy-pages/*.html | Header | Desktop header logo image | Yes | flow-assets/logos/flow-logo.svg |
+| Site Settings | header.websiteLogo | #site-header-mobile-logo | src/legacy-pages/*.html | Header | Mobile drawer logo image | Yes | flow-assets/logos/sign-logo-flow.svg |
+| Site Settings | header.aboutUsMenuLabel | #site-header-nav-about-us | src/legacy-pages/*.html | Header | Desktop About us nav label | Yes | About us |
+| Site Settings | header.aboutUsMenuLabel | #site-header-mobile-nav-about-us | src/legacy-pages/*.html | Header | Mobile About us nav label | Yes | About us |
+| Site Settings | header.loanMenuLabel | #site-header-nav-loan | src/legacy-pages/*.html | Header | Desktop Loan nav label | Yes | Loan |
+| Site Settings | header.loanMenuLabel | #site-header-mobile-nav-loan | src/legacy-pages/*.html | Header | Mobile Loan nav label | Yes | Loan |
+| Site Settings | header.howToApplyMenuLabel | #site-header-nav-how-to-apply | src/legacy-pages/*.html | Header | Desktop How to apply nav label | Yes | How to apply |
+| Site Settings | header.howToApplyMenuLabel | #site-header-mobile-nav-how-to-apply | src/legacy-pages/*.html | Header | Mobile How to apply nav label | Yes | How to apply |
+| Site Settings | header.contactUsMenuLabel | #site-header-nav-contact-us | src/legacy-pages/*.html | Header | Desktop Contact us nav label | Yes | Contact us |
+| Site Settings | header.contactUsMenuLabel | #site-header-mobile-nav-contact-us | src/legacy-pages/*.html | Header | Mobile Contact us nav label | Yes | Contact us |
+| Site Settings | header.applyNowButtonLabel | #site-header-apply-now-label | src/legacy-pages/*.html | Header | Desktop Apply now button label | Yes | Apply now |
+| Site Settings | header.applyNowButtonLabel | #site-header-mobile-apply-now-label | src/legacy-pages/about_us.html | Header | Mobile drawer Apply now button label | Yes | Apply now |
+| Site Settings | header.loginButtonLabel | #site-header-mobile-login-label | src/legacy-pages/index.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Mobile drawer Login button label | Yes | Login |
+| Site Settings | header.newsletterLabel | #site-header-mobile-newsletter-label | src/legacy-pages/index.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Mobile drawer Newsletter label | Yes | Newsletter |
 | Site Settings | footer.footerLogo | #site-footer-logo | src/legacy-pages/*.html | Footer | Footer logo image | Yes | flow-assets/logos/flow-logo.svg |
 | Site Settings | footer.pagesColumnHeading | #site-footer-pages-heading | src/legacy-pages/*.html | Footer | Pages column heading | Yes | Pages |
 | Site Settings | footer.homeLinkLabel | #site-footer-link-home | src/legacy-pages/*.html | Footer | Home link label | Yes | Home |
@@ -65,7 +75,7 @@ Footer.
 | Home Page | seo.description | #home-seo-description | src/legacy-pages/index.html | Document metadata | Meta description | No | Empty (not present in current HTML) |
 | Home Page | hero.eyebrow | #home-hero-eyebrow | src/legacy-pages/index.html | Hero Section | Eyebrow label | No | Powering Tomorrow |
 | Home Page | hero.mainHeading | #home-hero-main-heading | src/legacy-pages/index.html | Hero Section | Main h1 | No | Simple Loans, |
-| Home Page | hero.description | #home-hero-description | src/legacy-pages/index.html | Hero Section | Hero paragraph | No | Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises - just straightforward lending. |
+| Home Page | hero.description | #home-hero-description | src/legacy-pages/index.html | Hero Section | Hero paragraph | No | Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending. |
 | Home Page | hero.primaryButtonLabel | #home-hero-primary-button-label | src/legacy-pages/index.html | Hero Section | Primary CTA label | No | Check Your Rate |
 | Home Page | hero.secondaryButtonLabel | #home-hero-secondary-button-label | src/legacy-pages/index.html | Hero Section | Secondary CTA label | No | Learn More |
 | Home Page | hero.leftTopImage | #home-hero-left-top-image | src/legacy-pages/index.html | Hero Section | Decorative left-top image | No | flow-assets/headers/header-4-left-top.png |
