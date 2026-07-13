@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, titleDescriptionFields, versioning } from './fields/common'
+import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
 
 const loanFeatureFields = [imageUpload('image', 'Image'), ...titleDescriptionFields()]
 const requirementFields = [requiredTextarea('text', 'Requirement')]
@@ -21,6 +22,7 @@ const loanSection = (name: 'personalLoan' | 'businessLoan', label: string, requi
 
 export const LoanPage: GlobalConfig = {
   slug: 'loan-page', label: 'Loan Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
+  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Hero', [section('hero', 'Hero', [requiredText('mainHeading', 'Main heading'), requiredTextarea('description', 'Description'), requiredText('primaryButtonLabel', 'Primary button label'), requiredText('secondaryButtonLabel', 'Secondary button label'), imageUpload('image', 'Image')])]),

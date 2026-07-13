@@ -1,11 +1,13 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, titleDescriptionFields, versioning } from './fields/common'
+import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
 
 const cardFields = [imageUpload('image', 'Image'), ...titleDescriptionFields(), requiredText('linkLabel', 'Link label')]
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page', label: 'Home Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
+  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Hero', [section('hero', 'Hero', [requiredText('eyebrow', 'Eyebrow'), requiredText('mainHeading', 'Main heading'), requiredTextarea('description', 'Description'), requiredText('primaryButtonLabel', 'Primary button label'), requiredText('secondaryButtonLabel', 'Secondary button label'), imageUpload('leftTopImage', 'Left top image'), imageUpload('rightTopImage', 'Right top image'), imageUpload('bottomLeftImage', 'Bottom left image'), imageUpload('bottomRightImage', 'Bottom right image')])]),

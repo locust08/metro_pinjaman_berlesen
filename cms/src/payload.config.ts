@@ -16,6 +16,7 @@ import { HomePage } from './globals/HomePage'
 import { HowToApplyPage } from './globals/HowToApplyPage'
 import { LoanPage } from './globals/LoanPage'
 import { SiteSettings } from './globals/SiteSettings'
+import { publishedContentEndpoint } from './endpoints/publishedContent'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -64,6 +65,7 @@ export default buildConfig({
   },
   collections: [Users, Media],
   globals: [SiteSettings, HomePage, AboutUsPage, LoanPage, HowToApplyPage, ContactUsPage],
+  endpoints: [publishedContentEndpoint],
   cors: [
     'https://metropinjamanberlesen.pages.dev',
     'https://12add699.metropinjamanberlesen.pages.dev',

@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { imageUpload, optionalText, requiredText, requiredTextarea, section, tab, tabs, versioning } from './fields/common'
+import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
@@ -8,6 +9,7 @@ export const SiteSettings: GlobalConfig = {
   access: { read: () => true },
   admin: { group: 'Website' },
   versions: versioning,
+  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('Header', [
       section('header', 'Header', [
