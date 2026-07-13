@@ -1,11 +1,16 @@
-import { getPayload } from 'payload'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { defaultPayloadContent } from '../../../src/payload/content'
-import config from '../payload.config'
 
 type RecordValue = Record<string, unknown>
 
-const globalSeeds = [
+export type SeedPayload = {
+  findGlobal: (args: { depth: number; draft: boolean; slug: string }) => Promise<unknown>
+  updateGlobal: (args: { data: RecordValue; slug: string }) => Promise<unknown>
+}
+
+export const globalSeeds = [
   ['site-settings', defaultPayloadContent.siteSettings],
   ['home-page', defaultPayloadContent.homePage],
   ['about-us-page', defaultPayloadContent.aboutUsPage],
@@ -49,10 +54,11 @@ function missingValues(existing: unknown, defaults: unknown): unknown {
   return missing.length > 0 ? Object.fromEntries(missing) : undefined
 }
 
-async function seedContent() {
-  const payload = await getPayload({ config })
-
-  for (const [slug, canonicalContent] of globalSeeds) {
+export async function seedPayloadContent(
+  payload: SeedPayload,
+  seeds: readonly (readonly [string, unknown])[] = globalSeeds,
+) {
+  for (const [slug, canonicalContent] of seeds) {
     const existing = await payload.findGlobal({ slug, depth: 0, draft: false })
     const defaults = toPayloadValue(canonicalContent)
     const data = missingValues(existing, defaults)
@@ -63,7 +69,18 @@ async function seedContent() {
   }
 }
 
-seedContent().catch((error) => {
+async function seedContent() {
+  const [{ getPayload }, { default: config }] = await Promise.all([
+    import('payload'),
+    import('../payload.config'),
+  ])
+  const payload = await getPayload({ config })
+  await seedPayloadContent(payload as unknown as SeedPayload)
+}
+
+const executedFile = process.argv[1]
+
+if (executedFile && path.resolve(executedFile) === fileURLToPath(import.meta.url)) seedContent().catch((error) => {
   console.error('Unable to seed default CMS content.', error)
   process.exitCode = 1
 })
