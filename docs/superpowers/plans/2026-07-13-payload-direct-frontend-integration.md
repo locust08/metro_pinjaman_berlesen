@@ -1,42 +1,53 @@
 # Payload Direct Frontend Integration Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the generic Payload slot CMS with clear page/section Globals and connect published Payload content directly into the existing Metro Pinjaman Berlesen frontend without changing the rendered layout.
 
-**Architecture:** Keep the root Next app as the public frontend and the `cms/` Payload app as the separate Cloudflare Worker CMS. The frontend currently renders legacy HTML through `src/lib/legacyPage.tsx`; integration will happen through a server-side content adapter that applies explicit field mappings to known HTML sections before static export, never through browser DOM walking. Payload will expose published JSON from six Globals: `Site Settings`, `Home Page`, `About Us Page`, `Loan Page`, `How To Apply Page`, and `Contact Us Page`.
+**Architecture:** Keep the root Next app as the public frontend and the `cms/` Payload app as the separate Cloudflare Worker CMS. The frontend currently renders legacy HTML through `src/lib/legacyPage.tsx`; integration will use stable frontend identifiers plus a server-side HTML parser during static export, never class-name regexes, text order, or browser-side DOM mutation. Payload will expose published JSON from six Globals and call a Cloudflare Pages Deploy Hook after published Global changes so admin publishes rebuild the static site without GitHub content commits.
 
-**Tech Stack:** Next.js 15 static export, legacy HTML page imports, Payload CMS 3.82, Cloudflare Workers, Cloudflare Pages, Cloudflare D1, Cloudflare R2, TypeScript, Node test runner, Vitest for CMS where existing.
+**Tech Stack:** Next.js 15 static export, legacy HTML page imports, Payload CMS 3.82, Cloudflare Workers, Cloudflare Pages Deploy Hook, Cloudflare D1, Cloudflare R2, TypeScript, `node-html-parser`, Node test runner, Vitest for CMS where existing.
 
 ## Global Constraints
 
-- The latest attachment is the source of truth.
+- The latest attachment and the user's six corrections are the source of truth.
+- Execute with Subagent-Driven Development: one implementer subagent per task, task review after each task, final review at the end.
+- Do not push automatically until final verification passes.
 - The current website design, page structure, routes, forms, calculator, GTM/GA4 tracking, Tailwind classes, responsive behavior, animations, spacing, and section order must remain visually unchanged.
 - Payload controls headings, paragraphs, button labels, editable content images, contact details, FAQ content, loan information, and SEO content.
 - Frontend code controls layout, section order, styling, routes, icons, forms, calculator logic, appointment behavior, and tracking.
 - Do not use generic fields such as `Text Slot 01`, `home.text.0`, `homeText1`, `Content Slot`, or `DOM Index`.
-- Do not walk the rendered DOM, replace text by order, search text nodes, mutate the page after load, or use `data-cms-*` attributes as the content replacement mechanism.
-- Every editable field must map to one clear visible frontend element.
+- Do not walk the rendered browser DOM, replace text by order, search text nodes, mutate the page after load, or use `data-cms-*` attributes as the content replacement mechanism.
+- Do not locate editable elements using class-name regexes such as `<h1 class="font-heading...">`.
+- Every editable field must map to one explicit stable frontend identifier, such as `#home-hero-main-heading`.
+- Stable identifiers must not affect layout, styling, animations, or responsive behavior.
+- Use a real server-side HTML parser for legacy HTML mapping.
+- Use one canonical structured default-content source. Frontend fallback and Payload seed must import from or be generated from that source.
 - Admin content edits must not modify GitHub source code.
 - Draft content must not appear in normal public requests.
+- Published Payload changes must call `CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` only when content is published, never when saving drafts.
+- The deploy hook URL must live in environment variables and must never be committed.
+- Deploy-hook failure must be logged/handled without failing or rolling back the saved Payload content.
 - Existing Payload content must not be reset during normal deployments.
+- Future editable frontend changes must include a stable identifier, Payload schema field, mapping entry, default value, migration or safe seed update, and test.
+- Removed or renamed editable elements must preserve or migrate existing Payload data safely.
 - The admin subdomain remains blocked until `metropinjamanberlesen.com` exists in the Cloudflare account; Worker URL remains the usable CMS URL until DNS is fixed.
 
 ---
 
 ## File Structure
 
-- Create `docs/payload-frontend-mapping.md`: required mapping document before frontend changes.
-- Create `docs/payload-deployment.md`: Cloudflare/GitHub/database/media/deploy hook behavior.
-- Create `src/payload/defaults.ts`: bundled default content matching the current frontend.
-- Create `src/payload/types.ts`: public frontend content types.
+- Create `docs/payload-frontend-mapping.md`: required mapping document before frontend connection.
+- Create `docs/payload-deployment.md`: Cloudflare/GitHub/database/media/deploy hook behavior, including the automatic publish flow.
+- Create `src/payload/content.ts`: canonical structured default content and shared public content types.
 - Create `src/payload/fetchPayloadContent.ts`: published-content fetcher with fallback behavior.
-- Create `src/payload/renderLegacyContent.ts`: explicit server-side HTML content mapper.
+- Create `src/payload/renderLegacyContent.ts`: stable-ID server-side HTML parser mapper.
+- Modify `src/legacy-pages/*.html`: add stable IDs only to editable elements; do not change classes, layout, text, routes, or scripts.
 - Modify `src/lib/legacyPageData.ts`: load page HTML and apply explicit Payload/default content before export.
 - Modify `src/lib/legacyPage.tsx`: remove `/js/site-content.js` and keep legacy hydration behavior only.
-- Modify `src/pages/*.tsx`: pass page IDs and content fetch options to `loadLegacyPage`.
+- Modify `src/pages/*.tsx`: pass page IDs to `loadLegacyPage`.
+- Create `tests/payload-render.test.mjs`: proves stable-ID mapping updates intended fields and leaves unrelated HTML unchanged.
 - Remove or stop using `public/js/site-content.js`, `src/content/applySiteContent.js`, `src/content/defaultSiteContent.js`, `src/content/siteContentSchema.js`, and `scripts/extract-site-content.mjs` after replacement tests pass.
-- Create `tests/payload-render.test.mjs`: proves explicit mapping changes intended fields and leaves unrelated HTML unchanged.
 - Modify `cms/src/collections/Media.ts`: add `internalName`, keep required `alt`, keep Upload config.
 - Replace `cms/src/globals/SiteContent.ts` with six Globals:
   - `cms/src/globals/SiteSettings.ts`
@@ -46,24 +57,24 @@
   - `cms/src/globals/HowToApplyPage.ts`
   - `cms/src/globals/ContactUsPage.ts`
 - Create `cms/src/globals/fields/common.ts`: shared field helpers for SEO, buttons, cards, fixed arrays, images, and admin descriptions.
+- Create `cms/src/hooks/triggerPagesDeploy.ts`: shared Payload `afterChange` hook for all six Globals.
 - Replace `cms/src/endpoints/siteContent.ts` with `cms/src/endpoints/publishedContent.ts`: returns all published Globals normalized for the frontend.
 - Modify `cms/src/payload.config.ts`: register new Globals/endpoints, remove old `SiteContent`.
-- Create `cms/src/seed/defaultContent.ts`: safe default content object matching `src/payload/defaults.ts`.
-- Create `cms/src/seed/seedContent.ts`: idempotent manual seed runner.
-- Add `cms/src/migrations/<timestamp>_section_globals.ts`: new schema migration after `payload migrate:create`.
-- Create `cms/tests/schema.test.mts`: validates Global slugs, no slot fields, array row limits, Media alt required, draft enabled.
+- Create `cms/src/seed/seedContent.ts`: idempotent manual seed runner that imports canonical defaults from `src/payload/content.ts`.
+- Create `cms/tests/schema.test.mts`: validates Global slugs, no slot fields, fixed row limits, Media alt required, draft enabled.
+- Create `cms/tests/deployHook.test.mts`: proves draft saves do not trigger deploy hook and published changes do trigger it.
 
 ---
 
-### Task 1: Architecture And Mapping Documents
+### Task 1: Mapping, Deployment Docs, And Stable Identifier Inventory
 
 **Files:**
 - Create: `docs/payload-frontend-mapping.md`
 - Create: `docs/payload-deployment.md`
 
 **Interfaces:**
-- Produces: human-readable field map used by schema and frontend tasks.
-- Produces: deployment decision record for static frontend update behavior.
+- Produces: stable identifier inventory used by Task 2 and later frontend mapping.
+- Produces: deployment decision record requiring automatic deploy hook behavior.
 
 - [ ] **Step 1: Inspect current page sections from repository HTML**
 
@@ -80,29 +91,30 @@ Expected: each legacy page reports the section order used for the mapping.
 Create the mapping with these columns for every editable field:
 
 ```markdown
-| Payload Global | Field path | Frontend file | Frontend section | Visible element | Shared | Fallback value |
-| --- | --- | --- | --- | --- | --- | --- |
+| Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 ```
 
-Start with these required entries:
+Required examples:
 
 ```markdown
-| Site Settings | header.aboutUsMenuLabel | src/legacy-pages/*.html | Header | About us nav label | Yes | About us |
-| Site Settings | header.loanMenuLabel | src/legacy-pages/*.html | Header | Loan nav label | Yes | Loan |
-| Site Settings | header.howToApplyMenuLabel | src/legacy-pages/*.html | Header | How to apply nav label | Yes | How to apply |
-| Site Settings | header.contactUsMenuLabel | src/legacy-pages/*.html | Header | Contact us nav label | Yes | Contact us |
-| Site Settings | header.applyNowButtonLabel | src/legacy-pages/*.html | Header | Apply now button label | Yes | Apply now |
-| Home Page | hero.mainHeading | src/legacy-pages/index.html | Hero Section | Main h1 | No | Simple Loans, |
-| Home Page | howItWorks.steps[0].title | src/legacy-pages/index.html | How It Works Section | Step 1 title | No | Select Loan |
-| Home Page | statistics.items[0].value | src/legacy-pages/index.html | Statistics Strip | Statistic 1 value | No | current HTML value |
-| Contact Us Page | faq.items[0].question | src/legacy-pages/contact.html | FAQ Section | First FAQ question | No | current HTML question |
+| Site Settings | header.aboutUsMenuLabel | #site-header-nav-about-us | src/legacy-pages/*.html | Header | About us nav label | Yes | About us |
+| Site Settings | header.loanMenuLabel | #site-header-nav-loan | src/legacy-pages/*.html | Header | Loan nav label | Yes | Loan |
+| Site Settings | header.howToApplyMenuLabel | #site-header-nav-how-to-apply | src/legacy-pages/*.html | Header | How to apply nav label | Yes | How to apply |
+| Site Settings | header.contactUsMenuLabel | #site-header-nav-contact-us | src/legacy-pages/*.html | Header | Contact us nav label | Yes | Contact us |
+| Site Settings | header.applyNowButtonLabel | #site-header-apply-now-label | src/legacy-pages/*.html | Header | Apply now button label | Yes | Apply now |
+| Home Page | hero.mainHeading | #home-hero-main-heading | src/legacy-pages/index.html | Hero Section | Main h1 | No | Simple Loans, |
+| Home Page | hero.description | #home-hero-description | src/legacy-pages/index.html | Hero Section | Hero paragraph | No | Current visible paragraph |
+| Home Page | howItWorks.steps[0].title | #home-how-it-works-step-1-title | src/legacy-pages/index.html | How It Works Section | Step 1 title | No | Select Loan |
+| Home Page | statistics.items[0].value | #home-statistic-1-value | src/legacy-pages/index.html | Statistics Strip | Statistic 1 value | No | Current HTML value |
+| Contact Us Page | faq.items[0].question | #contact-faq-1-question | src/legacy-pages/contact.html | FAQ Section | First FAQ question | No | Current HTML question |
 ```
 
-Fill the rest from the current HTML, including all fields in the latest brief.
+Fill the remaining rows from current HTML and the latest brief. Do not invent sections.
 
 - [ ] **Step 3: Write `docs/payload-deployment.md`**
 
-Document the confirmed architecture:
+Document the confirmed architecture and automatic publish flow:
 
 ```markdown
 # Payload And Frontend Deployment
@@ -116,14 +128,15 @@ Document the confirmed architecture:
 - Media storage: Cloudflare R2 binding `R2`, bucket `metropinjamanberlesen-payload-media`.
 - Admin domain: Worker URL is active; `admin.metropinjamanberlesen.com` needs the domain zone added to the Cloudflare account before route attachment.
 
-## Update Behavior
+## Required Publish Flow
 
-The public frontend is fully static. Published Payload edits cannot appear on `metropinjamanberlesen.pages.dev` until either:
+Admin edits Payload -> Admin saves draft -> no frontend deploy.
 
-1. A Cloudflare Pages deploy hook rebuilds the static site after publish, or
-2. The frontend architecture changes to runtime rendering.
+Admin publishes Payload -> Payload `afterChange` hook calls `CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` -> Cloudflare Pages rebuilds the static frontend -> live website shows new published content -> GitHub remains unchanged.
 
-This implementation must prepare a Payload after-change hook or documented deploy hook call, but secrets must not be committed.
+## Secret Handling
+
+`CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` is an environment variable/Worker secret. It must not be committed or printed in logs.
 ```
 
 - [ ] **Step 4: Commit docs**
@@ -132,42 +145,50 @@ Run:
 
 ```powershell
 git add docs/payload-frontend-mapping.md docs/payload-deployment.md
-git commit -m "Document Payload frontend mapping"
+git commit -m "Document Payload mapping and deploy flow"
 ```
 
-Expected: commit succeeds.
+Expected: commit succeeds locally. Do not push.
 
 ---
 
-### Task 2: Shared Content Defaults And Frontend Renderer Tests
+### Task 2: Canonical Defaults, Stable IDs, And Parser Renderer
 
 **Files:**
-- Create: `src/payload/types.ts`
-- Create: `src/payload/defaults.ts`
+- Create: `src/payload/content.ts`
 - Create: `src/payload/renderLegacyContent.ts`
+- Modify: `src/legacy-pages/index.html`
+- Modify: `src/legacy-pages/about_us.html`
+- Modify: `src/legacy-pages/loan.html`
+- Modify: `src/legacy-pages/how_to_apply.html`
+- Modify: `src/legacy-pages/contact.html`
 - Create: `tests/payload-render.test.mjs`
+- Modify: `package.json`
 
 **Interfaces:**
 - Produces: `defaultPayloadContent: PublicPayloadContent`
 - Produces: `renderLegacyContent(html: string, pageId: SitePageId, content: PublicPayloadContent): string`
-- Consumes: mapping document from Task 1.
+- Consumes: stable IDs from `docs/payload-frontend-mapping.md`.
 
-- [ ] **Step 1: Define frontend types**
+- [ ] **Step 1: Add parser dependency**
 
-Create `src/payload/types.ts`:
+Run:
+
+```powershell
+npm install node-html-parser
+```
+
+Expected: `package.json` and `package-lock.json` include `node-html-parser`.
+
+- [ ] **Step 2: Create canonical defaults**
+
+Create `src/payload/content.ts` with:
 
 ```ts
 export type SitePageId = 'home' | 'aboutUs' | 'loan' | 'howToApply' | 'contactUs';
 
-export type ImageValue = {
-  src: string;
-  alt: string;
-};
-
-export type LabeledText = {
-  title: string;
-  description: string;
-};
+export type ImageValue = { src: string; alt: string };
+export type LabeledText = { title: string; description: string };
 
 export type PublicPayloadContent = {
   siteSettings: {
@@ -215,16 +236,6 @@ export type PublicPayloadContent = {
   howToApplyPage: Record<string, unknown>;
   contactUsPage: Record<string, unknown>;
 };
-```
-
-- [ ] **Step 2: Add defaults from current frontend**
-
-Create `src/payload/defaults.ts` exporting `defaultPayloadContent`. Values must be copied from `src/legacy-pages/*.html`; do not rewrite template content in this task.
-
-Use this shape for the Home page and repeat equivalent structured objects for other pages:
-
-```ts
-import type { PublicPayloadContent } from './types';
 
 export const defaultPayloadContent: PublicPayloadContent = {
   siteSettings: {
@@ -271,7 +282,13 @@ export const defaultPayloadContent: PublicPayloadContent = {
       validationSummaryMessage: 'Please complete all required fields.',
     },
   },
-  homePage: {},
+  homePage: {
+    hero: {
+      mainHeading: 'Simple Loans,',
+      description:
+        'Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending.',
+    },
+  },
   aboutUsPage: {},
   loanPage: {},
   howToApplyPage: {},
@@ -279,7 +296,21 @@ export const defaultPayloadContent: PublicPayloadContent = {
 };
 ```
 
-- [ ] **Step 3: Write failing renderer tests**
+Expand page defaults from the mapping document as implementation proceeds. This is the only canonical default content source; CMS seed imports from this file.
+
+- [ ] **Step 3: Add stable IDs to legacy HTML**
+
+Add IDs from `docs/payload-frontend-mapping.md` to editable elements only.
+
+Example:
+
+```html
+<h1 id="home-hero-main-heading" class="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8">Simple Loans,</h1>
+```
+
+Do not change element classes, text, order, scripts, `x-data`, routes, or wrapping structure.
+
+- [ ] **Step 4: Write parser renderer tests**
 
 Create `tests/payload-render.test.mjs`:
 
@@ -287,22 +318,20 @@ Create `tests/payload-render.test.mjs`:
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { renderLegacyContent } from '../src/payload/renderLegacyContent.ts';
-import { defaultPayloadContent } from '../src/payload/defaults.ts';
+import { defaultPayloadContent } from '../src/payload/content.ts';
 
-test('renderLegacyContent updates only explicit home hero fields', () => {
-  const html = '<h1 class="keep">Simple Loans,</h1><p class="text-lg text-gray-700 mb-10">Old description</p>';
+test('renderLegacyContent updates stable id fields without class regexes', () => {
+  const html = '<h1 id="home-hero-main-heading" class="keep">Simple Loans,</h1><p id="home-hero-description" class="anything">Old description</p>';
   const content = structuredClone(defaultPayloadContent);
-  content.homePage = {
-    hero: {
-      mainHeading: 'Fast loans, clear terms',
-      description: 'Updated description',
-    },
+  content.homePage.hero = {
+    mainHeading: 'Fast loans, clear terms',
+    description: 'Updated description',
   };
 
   const output = renderLegacyContent(html, 'home', content);
 
-  assert.match(output, /<h1 class="keep">Fast loans, clear terms<\/h1>/);
-  assert.match(output, /<p class="text-lg text-gray-700 mb-10">Updated description<\/p>/);
+  assert.match(output, /id="home-hero-main-heading" class="keep">Fast loans, clear terms<\/h1>/);
+  assert.match(output, /id="home-hero-description" class="anything">Updated description<\/p>/);
   assert.doesNotMatch(output, /data-cms/);
 });
 
@@ -313,52 +342,25 @@ test('renderLegacyContent leaves unmatched HTML unchanged', () => {
 });
 ```
 
-Run:
+- [ ] **Step 5: Implement parser renderer**
 
-```powershell
-npm test
-```
-
-Expected: fails because `src/payload/renderLegacyContent.ts` does not exist.
-
-- [ ] **Step 4: Implement explicit renderer**
-
-Create `src/payload/renderLegacyContent.ts` with pure functions:
+Create `src/payload/renderLegacyContent.ts`:
 
 ```ts
-import type { PublicPayloadContent, SitePageId } from './types';
+import { parse } from 'node-html-parser';
+import type { PublicPayloadContent, SitePageId } from './content';
 
-function escapeHtml(value: unknown): string {
-  return String(value ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
+function setText(root: ReturnType<typeof parse>, selector: string, value: unknown) {
+  if (value == null) return;
+  const element = root.querySelector(selector);
+  if (!element) return;
+  element.set_content(String(value));
 }
 
-function replaceFirst(source: string, pattern: RegExp, replacement: string): string {
-  return source.replace(pattern, replacement);
-}
-
-function replaceTextBetween(source: string, pattern: RegExp, value: unknown): string {
-  return replaceFirst(source, pattern, (_match, before, _old, after) => {
-    return `${before}${escapeHtml(value)}${after}`;
-  });
-}
-
-function renderHome(html: string, content: PublicPayloadContent): string {
+function renderHome(root: ReturnType<typeof parse>, content: PublicPayloadContent) {
   const hero = (content.homePage as { hero?: Record<string, unknown> }).hero || {};
-  let output = html;
-
-  if (hero.mainHeading != null) {
-    output = replaceTextBetween(output, /(<h1 class="font-heading[^"]*">)([\s\S]*?)(<\/h1>)/, hero.mainHeading);
-  }
-
-  if (hero.description != null) {
-    output = replaceTextBetween(output, /(<p class="text-lg text-gray-700 mb-10">)([\s\S]*?)(<\/p>)/, hero.description);
-  }
-
-  return output;
+  setText(root, '#home-hero-main-heading', hero.mainHeading);
+  setText(root, '#home-hero-description', hero.description);
 }
 
 export function renderLegacyContent(
@@ -366,12 +368,22 @@ export function renderLegacyContent(
   pageId: SitePageId,
   content: PublicPayloadContent,
 ): string {
-  if (pageId === 'home') return renderHome(html, content);
-  return html;
+  const root = parse(html, {
+    blockTextElements: {
+      script: true,
+      style: true,
+      pre: true,
+      noscript: true,
+    },
+  });
+
+  if (pageId === 'home') renderHome(root, content);
+
+  return root.toString();
 }
 ```
 
-- [ ] **Step 5: Run tests**
+- [ ] **Step 6: Run tests**
 
 Run:
 
@@ -380,6 +392,17 @@ npm test
 ```
 
 Expected: tests pass.
+
+- [ ] **Step 7: Commit task**
+
+Run:
+
+```powershell
+git add package.json package-lock.json src/payload/content.ts src/payload/renderLegacyContent.ts src/legacy-pages tests/payload-render.test.mjs
+git commit -m "Add stable Payload frontend mapping renderer"
+```
+
+Expected: commit succeeds locally. Do not push.
 
 ---
 
@@ -401,6 +424,7 @@ Expected: tests pass.
 **Interfaces:**
 - Produces Global slugs: `site-settings`, `home-page`, `about-us-page`, `loan-page`, `how-to-apply-page`, `contact-us-page`.
 - Produces Media fields: `alt`, `internalName`.
+- Consumes shared hook from Task 4 after Task 4 is complete.
 
 - [ ] **Step 1: Add schema tests**
 
@@ -454,166 +478,30 @@ describe('Payload section schema', () => {
     expect(schema).toContain('"minRows":3');
     expect(schema).toContain('"maxRows":3');
   });
+
+  it('enables drafts and versions for every global', () => {
+    globals.forEach((global) => {
+      expect(global.versions).toMatchObject({ drafts: true, maxPerDoc: 20 });
+    });
+  });
 });
 ```
 
-Run:
+- [ ] **Step 2: Create field helpers**
 
-```powershell
-pnpm exec vitest run cms/tests/schema.test.mts
-```
-
-Expected: fails until globals exist.
-
-- [ ] **Step 2: Create shared field helpers**
-
-Create `cms/src/globals/fields/common.ts`:
-
-```ts
-import type { Field } from 'payload';
-
-export const requiredText = (name: string, label: string, adminDescription?: string): Field => ({
-  name,
-  label,
-  type: 'text',
-  required: true,
-  admin: adminDescription ? { description: adminDescription } : undefined,
-});
-
-export const optionalText = (name: string, label: string, adminDescription?: string): Field => ({
-  name,
-  label,
-  type: 'text',
-  admin: adminDescription ? { description: adminDescription } : undefined,
-});
-
-export const requiredTextarea = (name: string, label: string, adminDescription?: string): Field => ({
-  name,
-  label,
-  type: 'textarea',
-  required: true,
-  admin: adminDescription ? { description: adminDescription } : undefined,
-});
-
-export const imageUpload = (name: string, label: string, required = false, adminDescription?: string): Field => ({
-  name,
-  label,
-  type: 'upload',
-  relationTo: 'media',
-  required,
-  admin: adminDescription ? { description: adminDescription } : undefined,
-});
-
-export const seoFields = (): Field => ({
-  name: 'seo',
-  label: 'SEO',
-  type: 'group',
-  fields: [
-    optionalText('metaTitle', 'Meta title', 'Recommended length is approximately 50-60 characters.'),
-    {
-      name: 'metaDescription',
-      label: 'Meta description',
-      type: 'textarea',
-      admin: { description: 'Recommended length is approximately 140-160 characters.' },
-    },
-    imageUpload('socialSharingImage', 'Social sharing image'),
-  ],
-});
-
-export const titleDescriptionFields = (titleLabel = 'Title', descriptionLabel = 'Description'): Field[] => [
-  requiredText('title', titleLabel),
-  requiredTextarea('description', descriptionLabel),
-];
-```
+Create `cms/src/globals/fields/common.ts` with `requiredText`, `optionalText`, `requiredTextarea`, `imageUpload`, `seoFields`, `titleDescriptionFields`, and fixed-row array helpers.
 
 - [ ] **Step 3: Update Media collection**
 
-Modify `cms/src/collections/Media.ts` fields:
+Add `label: 'Alt text'` to `alt`, keep `required: true`, and add optional `internalName`.
 
-```ts
-fields: [
-  {
-    name: 'alt',
-    label: 'Alt text',
-    type: 'text',
-    required: true,
-  },
-  {
-    name: 'internalName',
-    label: 'Internal image name',
-    type: 'text',
-    admin: {
-      description: 'Optional editor-only name to make this image easier to find.',
-    },
-  },
-],
-```
+- [ ] **Step 4: Create six section Globals**
 
-- [ ] **Step 4: Create section Globals**
-
-Create the six Global files. Each must set:
-
-```ts
-versions: {
-  drafts: true,
-  maxPerDoc: 20,
-},
-admin: {
-  group: 'Website',
-},
-access: {
-  read: () => true,
-},
-```
-
-For `HomePage`, include exact tabs:
-
-```ts
-export const HomePage: GlobalConfig = {
-  slug: 'home-page',
-  label: 'Home Page',
-  admin: { group: 'Website' },
-  access: { read: () => true },
-  versions: { drafts: true, maxPerDoc: 20 },
-  fields: [
-    {
-      type: 'tabs',
-      tabs: [
-        { label: 'Hero Section', fields: [/* hero fields */] },
-        { label: 'How It Works Section', fields: [/* steps minRows/maxRows 4 */] },
-        { label: 'Statistics Strip', fields: [/* statistics minRows/maxRows 4 */] },
-        { label: 'Loan Options Section', fields: [/* two explicit groups */] },
-        { label: 'Why Choose Us Section', fields: [/* features minRows/maxRows 3 */] },
-        { label: 'Ready To Get Started Section', fields: [/* CTA fields */] },
-        { label: 'SEO', fields: [seoFields()] },
-      ],
-    },
-  ],
-};
-```
-
-Repeat the exact tabs from the latest brief for all other page Globals.
+Create one file per Global using exact tabs from the latest brief. Use arrays only for repeating content and fixed row counts where required.
 
 - [ ] **Step 5: Register Globals**
 
-Modify `cms/src/payload.config.ts`:
-
-```ts
-import { SiteSettings } from './globals/SiteSettings';
-import { HomePage } from './globals/HomePage';
-import { AboutUsPage } from './globals/AboutUsPage';
-import { LoanPage } from './globals/LoanPage';
-import { HowToApplyPage } from './globals/HowToApplyPage';
-import { ContactUsPage } from './globals/ContactUsPage';
-```
-
-Replace:
-
-```ts
-globals: [SiteContent],
-```
-
-with:
+Modify `cms/src/payload.config.ts` to remove `SiteContent` and register:
 
 ```ts
 globals: [SiteSettings, HomePage, AboutUsPage, LoanPage, HowToApplyPage, ContactUsPage],
@@ -624,90 +512,128 @@ globals: [SiteSettings, HomePage, AboutUsPage, LoanPage, HowToApplyPage, Contact
 Run:
 
 ```powershell
-pnpm exec vitest run cms/tests/schema.test.mts
-pnpm run generate:types
-pnpm run build
+pnpm --dir cms exec vitest run tests/schema.test.mts
+pnpm --dir cms run generate:types
+pnpm --dir cms run build
 ```
 
 Expected: tests pass and Payload builds.
 
+- [ ] **Step 7: Commit task**
+
+Run:
+
+```powershell
+git add cms/src/collections/Media.ts cms/src/globals cms/src/payload.config.ts cms/tests/schema.test.mts cms/src/payload-types.ts
+git commit -m "Add section-based Payload globals"
+```
+
+Expected: commit succeeds locally. Do not push.
+
 ---
 
-### Task 4: Published Content API And Safe Seed
+### Task 4: Published Content API, Canonical Seed, And Deploy Hook
 
 **Files:**
 - Create: `cms/src/endpoints/publishedContent.ts`
-- Create: `cms/src/seed/defaultContent.ts`
 - Create: `cms/src/seed/seedContent.ts`
+- Create: `cms/src/hooks/triggerPagesDeploy.ts`
+- Create: `cms/tests/deployHook.test.mts`
 - Modify: `cms/package.json`
 - Modify: `cms/src/payload.config.ts`
+- Modify: six Global files to use the shared `afterChange` hook.
 
 **Interfaces:**
 - Produces endpoint: `GET /api/published-content`
 - Produces script: `pnpm run seed:content`
+- Produces hook: `triggerPagesDeployAfterPublish`
 
-- [ ] **Step 1: Create default content**
+- [ ] **Step 1: Add deploy hook tests**
 
-Create `cms/src/seed/defaultContent.ts` mirroring `src/payload/defaults.ts`, including all six Globals. Keep current visible website content unchanged.
-
-- [ ] **Step 2: Create published endpoint**
-
-Create `cms/src/endpoints/publishedContent.ts`:
+Create `cms/tests/deployHook.test.mts`:
 
 ```ts
-import type { Endpoint } from 'payload';
+import { describe, expect, it, vi } from 'vitest';
+import { shouldTriggerPagesDeploy, triggerPagesDeployAfterPublish } from '../src/hooks/triggerPagesDeploy';
 
-const globalSlugs = [
-  ['siteSettings', 'site-settings'],
-  ['homePage', 'home-page'],
-  ['aboutUsPage', 'about-us-page'],
-  ['loanPage', 'loan-page'],
-  ['howToApplyPage', 'how-to-apply-page'],
-  ['contactUsPage', 'contact-us-page'],
-] as const;
+describe('Cloudflare Pages deploy hook', () => {
+  it('does not trigger for draft saves', () => {
+    expect(shouldTriggerPagesDeploy({ _status: 'draft' })).toBe(false);
+  });
 
-export const publishedContentEndpoint: Endpoint = {
-  path: '/published-content',
-  method: 'get',
-  handler: async (req) => {
-    const entries = await Promise.all(
-      globalSlugs.map(async ([key, slug]) => [
-        key,
-        await req.payload.findGlobal({
-          slug,
-          depth: 2,
-          draft: false,
-        }),
-      ]),
+  it('triggers for published content', () => {
+    expect(shouldTriggerPagesDeploy({ _status: 'published' })).toBe(true);
+  });
+
+  it('calls the deploy hook URL for published content', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response('', { status: 200 }));
+    const originalFetch = global.fetch;
+    const originalUrl = process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL;
+    global.fetch = fetchMock;
+    process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = 'https://example.com/deploy-hook';
+
+    await triggerPagesDeployAfterPublish({ doc: { _status: 'published' }, req: { payload: { logger: console } } } as any);
+
+    expect(fetchMock).toHaveBeenCalledWith('https://example.com/deploy-hook', { method: 'POST' });
+
+    global.fetch = originalFetch;
+    process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = originalUrl;
+  });
+});
+```
+
+- [ ] **Step 2: Implement deploy hook**
+
+Create `cms/src/hooks/triggerPagesDeploy.ts`:
+
+```ts
+import type { GlobalAfterChangeHook } from 'payload';
+
+export function shouldTriggerPagesDeploy(doc: { _status?: string } | null | undefined): boolean {
+  return doc?._status === 'published';
+}
+
+export const triggerPagesDeployAfterPublish: GlobalAfterChangeHook = async ({ doc, req }) => {
+  if (!shouldTriggerPagesDeploy(doc as { _status?: string })) return doc;
+
+  const url = process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL;
+  if (!url) {
+    req.payload.logger?.warn?.('CLOUDFLARE_PAGES_DEPLOY_HOOK_URL is not configured; skipping frontend rebuild.');
+    return doc;
+  }
+
+  try {
+    const response = await fetch(url, { method: 'POST' });
+    if (!response.ok) {
+      req.payload.logger?.error?.(`Cloudflare Pages deploy hook failed with status ${response.status}.`);
+    }
+  } catch (error) {
+    req.payload.logger?.error?.(
+      `Cloudflare Pages deploy hook request failed: ${error instanceof Error ? error.message : String(error)}`,
     );
+  }
 
-    return Response.json(Object.fromEntries(entries), {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
-      },
-    });
-  },
+  return doc;
 };
 ```
 
-- [ ] **Step 3: Register endpoint**
+- [ ] **Step 3: Attach hook to six Globals**
 
-Modify `cms/src/payload.config.ts`:
-
-```ts
-import { publishedContentEndpoint } from './endpoints/publishedContent';
-```
-
-Set:
+Each Global must include:
 
 ```ts
-endpoints: [publishedContentEndpoint],
+hooks: {
+  afterChange: [triggerPagesDeployAfterPublish],
+},
 ```
 
-- [ ] **Step 4: Add idempotent seed command**
+- [ ] **Step 4: Create published endpoint**
 
-Create `cms/src/seed/seedContent.ts` that logs into Payload local API and writes defaults only for missing fields. Use `findGlobal` first, merge nullish values only, and call `updateGlobal`.
+Create `cms/src/endpoints/publishedContent.ts` returning all six Globals with `draft: false`.
+
+- [ ] **Step 5: Add canonical seed command**
+
+Create `cms/src/seed/seedContent.ts` that imports `defaultPayloadContent` from `../../src/payload/content` via a relative path resolved from `cms/src/seed`. The seed must update only missing/nullish values and must not overwrite existing admin edits.
 
 Add to `cms/package.json`:
 
@@ -715,20 +641,40 @@ Add to `cms/package.json`:
 "seed:content": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seedContent.ts"
 ```
 
-- [ ] **Step 5: Verify API and seed**
+- [ ] **Step 6: Register endpoint**
+
+Modify `cms/src/payload.config.ts`:
+
+```ts
+endpoints: [publishedContentEndpoint],
+```
+
+- [ ] **Step 7: Verify hook, seed, API build**
 
 Run:
 
 ```powershell
-pnpm run seed:content
-pnpm run build
+pnpm --dir cms exec vitest run tests/deployHook.test.mts tests/schema.test.mts
+pnpm --dir cms run seed:content
+pnpm --dir cms run build
 ```
 
-Expected: seed completes without deleting existing content; build passes.
+Expected: tests pass; seed does not overwrite existing values; build passes.
+
+- [ ] **Step 8: Commit task**
+
+Run:
+
+```powershell
+git add cms/src/endpoints/publishedContent.ts cms/src/hooks/triggerPagesDeploy.ts cms/src/seed/seedContent.ts cms/tests/deployHook.test.mts cms/package.json cms/src/payload.config.ts cms/src/globals
+git commit -m "Add published content API and deploy hook"
+```
+
+Expected: commit succeeds locally. Do not push.
 
 ---
 
-### Task 5: Frontend Fetch And Static Update Strategy
+### Task 5: Frontend Fetch And Static Build Integration
 
 **Files:**
 - Create: `src/payload/fetchPayloadContent.ts`
@@ -743,102 +689,25 @@ Expected: seed completes without deleting existing content; build passes.
 
 - [ ] **Step 1: Add fetch helper**
 
-Create `src/payload/fetchPayloadContent.ts`:
-
-```ts
-import { defaultPayloadContent } from './defaults';
-import type { PublicPayloadContent } from './types';
-
-const endpoint =
-  process.env.PAYLOAD_PUBLIC_CONTENT_URL ||
-  'https://metropinjamanberlesen-payload-cms.easondev.workers.dev/api/published-content';
-
-export async function fetchPayloadContent(): Promise<PublicPayloadContent> {
-  try {
-    const response = await fetch(endpoint, {
-      headers: { accept: 'application/json' },
-      cache: 'no-store',
-    });
-
-    if (!response.ok) return defaultPayloadContent;
-
-    const remote = (await response.json()) as Partial<PublicPayloadContent>;
-
-    return {
-      ...defaultPayloadContent,
-      ...remote,
-      siteSettings: {
-        ...defaultPayloadContent.siteSettings,
-        ...(remote.siteSettings || {}),
-      },
-    };
-  } catch {
-    return defaultPayloadContent;
-  }
-}
-```
+Create `src/payload/fetchPayloadContent.ts` that fetches `PAYLOAD_PUBLIC_CONTENT_URL` or the Worker `/api/published-content` URL, merges nullish fallbacks with `defaultPayloadContent`, and returns defaults on network/API failure.
 
 - [ ] **Step 2: Make legacy loader async**
 
-Modify `src/lib/legacyPageData.ts`:
-
-```ts
-import { fetchPayloadContent } from '../payload/fetchPayloadContent';
-import { renderLegacyContent } from '../payload/renderLegacyContent';
-import type { SitePageId } from '../payload/types';
-```
-
-Change signature:
-
-```ts
-export async function loadLegacyPage(fileName: string, pageId: SitePageId): Promise<LegacyPageContent> {
-```
-
-Before return:
-
-```ts
-const content = await fetchPayloadContent();
-const renderedBodyHtml = renderLegacyContent(bodyHtml, pageId, content);
-```
-
-Return `bodyHtml: renderedBodyHtml`.
+Modify `src/lib/legacyPageData.ts` to call `fetchPayloadContent()` and `renderLegacyContent(bodyHtml, pageId, content)` before returning `bodyHtml`.
 
 - [ ] **Step 3: Update pages**
 
-Change each `getStaticProps` to async:
-
-```ts
-export async function getStaticProps() {
-  return { props: await loadLegacyPage('index.html', 'home') };
-}
-```
-
-Use page IDs: `home`, `aboutUs`, `loan`, `howToApply`, `contactUs`.
+Change each `getStaticProps` to async and use page IDs: `home`, `aboutUs`, `loan`, `howToApply`, `contactUs`.
 
 - [ ] **Step 4: Remove browser CMS script injection**
 
-Modify `src/lib/legacyPage.tsx` to remove:
+Modify `src/lib/legacyPage.tsx` to remove the `window.__METRO_PAGE_ID__` script and `/js/site-content.js` script.
 
-```tsx
-<script
-  dangerouslySetInnerHTML={{
-    __html: `window.__METRO_PAGE_ID__=${JSON.stringify(pageId)};`,
-  }}
-/>
-<script src="/js/site-content.js" defer />
-```
+- [ ] **Step 5: Document static update behavior**
 
-Also remove `pageId` from `LegacyPageProps` if unused after page updates.
+Update `docs/payload-deployment.md` to state that static pages update when the deploy hook triggers a Cloudflare Pages rebuild, and admin publishes do not create GitHub commits.
 
-- [ ] **Step 5: Document update behavior**
-
-Update `docs/payload-deployment.md`:
-
-```markdown
-Because the frontend is `output: 'export'`, Payload edits are included when Cloudflare Pages rebuilds the static export. To make admin publish update production automatically, configure a Cloudflare Pages Deploy Hook secret in Payload and call it after publishing. Until that hook exists, run the frontend deployment after CMS content changes.
-```
-
-- [ ] **Step 6: Run frontend tests/build**
+- [ ] **Step 6: Run frontend checks**
 
 Run:
 
@@ -850,17 +719,28 @@ npm run build
 
 Expected: tests/type-check/build pass.
 
+- [ ] **Step 7: Commit task**
+
+Run:
+
+```powershell
+git add src/payload/fetchPayloadContent.ts src/lib/legacyPageData.ts src/lib/legacyPage.tsx src/pages docs/payload-deployment.md
+git commit -m "Connect static frontend to Payload content"
+```
+
+Expected: commit succeeds locally. Do not push.
+
 ---
 
-### Task 6: Full Verification And Cleanup
+### Task 6: Cleanup, Verification, And Production Flow
 
 **Files:**
-- Delete or stop shipping: `public/js/site-content.js`
-- Delete or stop using: `src/content/*`, `scripts/extract-site-content.mjs`
-- Modify tests accordingly.
+- Delete obsolete slot runtime files.
+- Create/update final verification notes in `docs/payload-deployment.md`.
 
 **Interfaces:**
 - Produces clean branch with no generic slot UI or client-side replacement.
+- Produces verified no-push-until-pass final state.
 
 - [ ] **Step 1: Remove obsolete slot runtime**
 
@@ -875,19 +755,17 @@ scripts/extract-site-content.mjs
 tests/site-content.test.mjs
 ```
 
-Only do this after `tests/payload-render.test.mjs` covers the new path.
-
-- [ ] **Step 2: Verify no generic slots remain**
+- [ ] **Step 2: Verify no forbidden slot system remains**
 
 Run:
 
 ```powershell
-rg -n "Text Slot|textSlots|imageSlots|home\\.text|site-content|data-cms|DOM Index" src public cms tests scripts
+rg -n "Text Slot|textSlots|imageSlots|home\\.text|site-content|data-cms|DOM Index|font-heading\\[|replaceTextBetween" src public cms tests scripts
 ```
 
-Expected: no matches except old migration files or documentation explicitly saying the old approach is rejected.
+Expected: no matches except old migration files or docs explicitly rejecting the old approach.
 
-- [ ] **Step 3: Build CMS and frontend**
+- [ ] **Step 3: Run full local checks**
 
 Run:
 
@@ -895,21 +773,15 @@ Run:
 npm test
 npm run type-check
 npm run build
+pnpm --dir cms exec vitest run
 pnpm --dir cms run build
 ```
 
-Expected: all pass. If `npm run lint` still fails because Next 15 removed `next lint`, record that and do not claim lint passed.
+Expected: all pass. If `npm run lint` still fails because Next 15 removed `next lint`, record it and do not claim lint passed.
 
 - [ ] **Step 4: Visual parity check**
 
-Start local frontend:
-
-```powershell
-npm run build
-npx serve out -l 4173
-```
-
-Compare desktop and mobile screenshots for:
+Compare restored production against local build at desktop and mobile for:
 
 ```text
 /
@@ -919,15 +791,45 @@ Compare desktop and mobile screenshots for:
 /contact.html
 ```
 
-Expected: no intentional layout differences from the restored production site.
+Expected: no intentional layout differences. Stable IDs must not affect rendering.
 
-- [ ] **Step 5: Commit final work**
+- [ ] **Step 5: Production deploy-hook verification**
+
+Only after all local checks pass:
+
+1. Confirm `CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` is configured as a CMS Worker secret or environment variable without printing it.
+2. Change Home Page hero heading in Payload.
+3. Save as draft.
+4. Confirm public `https://metropinjamanberlesen.pages.dev/` still shows the previous heading.
+5. Publish the heading.
+6. Confirm Payload calls Cloudflare Pages Deploy Hook.
+7. Wait for Cloudflare Pages deployment to complete.
+8. Confirm public website displays the new heading.
+9. Confirm `git status` and `git log origin/codex/payload-fixed-layout-cms..HEAD` show no GitHub content commit caused by admin editing.
+10. Restore the original heading through Payload and publish again if the test used visible temporary wording.
+
+If any part cannot be completed because the deploy-hook secret is unavailable, report it clearly and do not claim production flow verified.
+
+- [ ] **Step 6: Commit cleanup**
 
 Run:
 
 ```powershell
 git add .
-git commit -m "Implement section-based Payload frontend integration"
+git commit -m "Remove obsolete slot CMS runtime"
+```
+
+Expected: commit succeeds locally. Do not push until Step 7 passes.
+
+- [ ] **Step 7: Final review gate**
+
+Dispatch a final whole-branch code review. Fix all Critical and Important findings. Re-run covering tests after fixes.
+
+- [ ] **Step 8: Push only after final verification passes**
+
+Run only after Steps 1-7 pass or uncompleted checks are explicitly reported:
+
+```powershell
 git push
 ```
 
@@ -937,10 +839,9 @@ Expected: branch pushes to `origin/codex/payload-fixed-layout-cms`.
 
 ## Self-Review Checklist
 
-- Latest attachment requires full integration; Tasks 1-6 cover mapping, schema, seed, frontend fetch, deployment docs, and verification.
-- No frontend layout changes are planned.
-- No generic slot fields are allowed.
-- No browser DOM mutation path remains.
-- Static frontend update limitation is documented and handled through deploy hook documentation rather than guessing runtime behavior.
-- Draft privacy is handled by the published-content endpoint using `draft: false`.
-- The plan does not require exposing secrets.
+- User correction 1: automatic deploy hook is implemented by Task 4 and verified by Task 6.
+- User correction 2: stable IDs plus `node-html-parser` replace regex-by-class in Task 2.
+- User correction 3: one canonical default-content source is `src/payload/content.ts`; seed imports it.
+- User correction 4: future developer change rules are in Global Constraints and mapping docs.
+- User correction 5: real draft/publish/deploy/public/GitHub production flow is in Task 6.
+- User correction 6: no push until final verification passes; Subagent-Driven Development is required.
