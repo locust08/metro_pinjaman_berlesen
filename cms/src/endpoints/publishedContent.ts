@@ -17,8 +17,19 @@ const globalSlugs = [
   ['contactUsPage', 'contact-us-page'],
 ] as const
 
+const singleTextArrayPaths = new Set([
+  'aboutUsPage.whoWeAre.paragraphs',
+  'loanPage.personalLoan.requirements.items',
+  'loanPage.businessLoan.requirements.items',
+  'howToApplyPage.eligibility.items',
+])
+
 function isMediaValue(value: unknown): value is MediaValue {
   return typeof value === 'object' && value !== null && ('url' in value || 'alt' in value)
+}
+
+function isTextRow(value: unknown): value is { text: string } {
+  return typeof value === 'object' && value !== null && 'text' in value && typeof value.text === 'string'
 }
 
 function normalizeMediaUrl(url: string | undefined, publicServerUrl: string): string {
@@ -31,9 +42,13 @@ function normalizeMediaUrl(url: string | undefined, publicServerUrl: string): st
   }
 }
 
-export function normalizeForFrontend(value: unknown, publicServerUrl: string): unknown {
+export function normalizeForFrontend(value: unknown, publicServerUrl: string, path: string[] = []): unknown {
   if (Array.isArray(value)) {
-    return value.map((child) => normalizeForFrontend(child, publicServerUrl))
+    if (singleTextArrayPaths.has(path.join('.')) && value.every(isTextRow)) {
+      return value.map(({ text }) => text)
+    }
+
+    return value.map((child) => normalizeForFrontend(child, publicServerUrl, path))
   }
 
   if (isMediaValue(value)) {
@@ -48,7 +63,7 @@ export function normalizeForFrontend(value: unknown, publicServerUrl: string): u
   return Object.fromEntries(
     Object.entries(value as Record<string, unknown>)
       .filter(([key]) => !['id', 'createdAt', 'updatedAt', '_status'].includes(key))
-      .map(([key, child]) => [key, normalizeForFrontend(child, publicServerUrl)]),
+      .map(([key, child]) => [key, normalizeForFrontend(child, publicServerUrl, [...path, key])]),
   )
 }
 
@@ -65,7 +80,7 @@ export const publishedContentEndpoint: Endpoint = {
     )
 
     const responseBody = Object.fromEntries(
-      globalSlugs.map(([key], index) => [key, normalizeForFrontend(values[index], publicServerUrl)]),
+      globalSlugs.map(([key], index) => [key, normalizeForFrontend(values[index], publicServerUrl, [key])]),
     )
 
     return Response.json(responseBody, {
