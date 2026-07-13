@@ -1,15 +1,15 @@
 
 <html lang="en">
   <head>
-    <title>Page title</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900|Plus+Jakarta+Sans:400,500,600,700,800,900&amp;subset=latin"/>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/tailwind/tailwind.min.css"/>
-    <link rel="stylesheet" href="css/main.css"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png"/>
+    <title id="about-us-seo-title">Page title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900|Plus+Jakarta+Sans:400,500,600,700,800,900&amp;subset=latin">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tailwind/tailwind.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer="defer"></script>
   </head>
   <body class="antialiased bg-body text-body font-body">
@@ -17,15 +17,15 @@
       <section class="bg-white" x-data="{ mobileNavOpen: false }">
         <nav class="mx-4 py-6">
           <div class="container mx-auto px-4">
-            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt=""/></a>
+            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt id="site-header-logo"></a>
               <ul class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex">
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html" id="site-header-nav-about-us">About us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html" id="site-header-nav-loan">Loan</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html" id="site-header-nav-how-to-apply">How to apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html" id="site-header-nav-contact-us">Contact us</a></li>
               </ul>
               <div class="flex items-center justify-end">
-                <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2">Apply now</span><span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
+                <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2" id="site-header-apply-now-label">Apply now</span><span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                         <path d="M4.75 10H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M10 4.75L15.25 10L10 15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -44,8 +44,8 @@
         <div class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50" :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}">
           <div class="fixed inset-0 bg-violet-900 opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
           <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
-            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8" src="flow-assets/logos/sign-logo-flow.svg" alt=""/></a>
-              <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html">Apply now</a>
+            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8" src="flow-assets/logos/sign-logo-flow.svg" alt id="site-header-mobile-drawer-primary-logo"></a>
+              <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html" id="site-header-mobile-drawer-primary-apply-now-label">Apply now</a>
                 <button x-on:click="mobileNavOpen = !mobileNavOpen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                     <path d="M23.2 8.79999L8.80005 23.2M8.80005 8.79999L23.2 23.2" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -55,40 +55,40 @@
             </div>
             <div class="pt-20 pb-12 mb-auto">
               <ul class="flex-col">
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html" id="site-header-mobile-drawer-primary-nav-about-us">About us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html" id="site-header-mobile-drawer-primary-nav-loan">Loan</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html" id="site-header-mobile-drawer-primary-nav-how-to-apply">How to apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html" id="site-header-mobile-drawer-primary-nav-contact-us">Contact us</a></li>
               </ul>
             </div>
           </nav>
         </div> 
-        <div class="relative overflow-hidden"><img class="absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Finance background"/>
+        <div class="relative overflow-hidden"><img class="absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Finance background" id="about-us-hero-background-image">
           <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/60"></div>
           <div class="relative max-w-7xl mx-auto px-4 py-24 xs:py-32"><span class="inline-block px-4 py-1 mb-6 text-sm font-medium tracking-wide bg-lime-500 text-gray-900 rounded-full">About Us</span>
-            <h1 class="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-6 text-white">Lending you trust, building your future.</h1>
+            <h1 class="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-6 text-white" id="about-us-hero-main-heading">Lending you trust, building your future.</h1>
             <p class="text-lg text-gray-200 max-w-2xl">We help individuals and businesses access fair, fast and transparent loan solutions—so you can focus on what matters most.</p>
           </div>
         </div> 
         <div class="max-w-7xl mx-auto px-4 py-20">
           <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div><img class="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Our team"/></div>
+            <div><img class="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Our team" id="about-us-who-we-are-image"></div>
             <div>
-              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Who we are</h2>
+              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6" id="about-us-who-we-are-heading">Who we are</h2>
               <p class="text-lg mb-4 text-gray-600">Founded with a simple mission—to make borrowing simpler, smarter and more human—we've helped thousands of customers secure the funding they need with confidence.</p>
-              <p class="text-lg mb-8 text-gray-600">Our team of financial experts combines years of industry experience with modern technology to deliver loan services that are transparent, secure and tailored to your goals.</p>
+              <p class="text-lg mb-8 text-gray-600" id="about-us-who-we-are-paragraph-2">Our team of financial experts combines years of industry experience with modern technology to deliver loan services that are transparent, secure and tailored to your goals.</p>
               <div class="grid grid-cols-3 gap-6">
                 <div>
-                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1">15K+</p>
-                  <p class="text-sm text-gray-500">Loans funded</p>
+                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1" id="about-us-statistic-1-value">15K+</p>
+                  <p class="text-sm text-gray-500" id="about-us-statistic-1-label">Loans funded</p>
                 </div>
                 <div>
-                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1">$2B+</p>
-                  <p class="text-sm text-gray-500">Capital deployed</p>
+                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1" id="about-us-statistic-2-value">$2B+</p>
+                  <p class="text-sm text-gray-500" id="about-us-statistic-2-label">Capital deployed</p>
                 </div>
                 <div>
-                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1">98%</p>
-                  <p class="text-sm text-gray-500">Satisfaction rate</p>
+                  <p class="font-heading text-4xl tracking-tight text-lime-600 mb-1" id="about-us-statistic-3-value">98%</p>
+                  <p class="text-sm text-gray-500" id="about-us-statistic-3-label">Satisfaction rate</p>
                 </div>
               </div>
             </div>
@@ -97,39 +97,39 @@
         <div class="bg-gray-50">
           <div class="max-w-7xl mx-auto px-4 py-20">
             <div class="max-w-3xl mb-14">
-              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Why choose us</h2>
-              <p class="text-lg text-gray-600">We go beyond just approving loans. Here's what sets our service apart from the rest.</p>
+              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6" id="about-us-why-choose-us-heading">Why choose us</h2>
+              <p class="text-lg text-gray-600" id="about-us-why-choose-us-description">We go beyond just approving loans. Here's what sets our service apart from the rest.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">⚡</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">Fast approvals</h6>
-                <p class="text-gray-600">Get a decision in minutes, not days. Our streamlined process means funds reach you faster.</p>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-1-title">Fast approvals</h6>
+                <p class="text-gray-600" id="about-us-why-choose-us-feature-1-description">Get a decision in minutes, not days. Our streamlined process means funds reach you faster.</p>
               </div>
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">%</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">Competitive rates</h6>
-                <p class="text-gray-600">Transparent pricing with no hidden fees. You always know exactly what you'll pay.</p>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-2-title">Competitive rates</h6>
+                <p class="text-gray-600" id="about-us-why-choose-us-feature-2-description">Transparent pricing with no hidden fees. You always know exactly what you'll pay.</p>
               </div>
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">♥</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">Personalized service</h6>
-                <p class="text-gray-600">Real people, real support. Our advisors guide you through every step of the journey.</p>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-3-title">Personalized service</h6>
+                <p class="text-gray-600" id="about-us-why-choose-us-feature-3-description">Real people, real support. Our advisors guide you through every step of the journey.</p>
               </div>
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">Flexible terms</h6>
-                <p class="text-gray-600">Choose repayment plans that fit your budget and lifestyle, not the other way around.</p>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-4-title">Flexible terms</h6>
+                <p class="text-gray-600" id="about-us-why-choose-us-feature-4-description">Choose repayment plans that fit your budget and lifestyle, not the other way around.</p>
               </div>
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">📱</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">100% online</h6>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-5-title">100% online</h6>
                 <p class="text-gray-600">Apply, track and manage your loan entirely from your phone or computer—anytime.</p>
               </div>
               <div class="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
                 <div class="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">★</div>
-                <h6 class="font-heading text-2xl tracking-tight mb-3">Trusted reputation</h6>
-                <p class="text-gray-600">Thousands of happy customers and top industry ratings back our commitment to you.</p>
+                <h6 class="font-heading text-2xl tracking-tight mb-3" id="about-us-why-choose-us-feature-6-title">Trusted reputation</h6>
+                <p class="text-gray-600" id="about-us-why-choose-us-feature-6-description">Thousands of happy customers and top industry ratings back our commitment to you.</p>
               </div>
             </div>
           </div>
@@ -137,61 +137,61 @@
         <div class="max-w-7xl mx-auto px-4 py-20">
           <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="order-2 md:order-1">
-              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Trust & security</h2>
-              <p class="text-lg mb-8 text-gray-600">Your data and money are protected by industry-leading standards. We treat your security as seriously as you do.</p>
+              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6" id="about-us-trust-and-security-heading">Trust & security</h2>
+              <p class="text-lg mb-8 text-gray-600" id="about-us-trust-and-security-description">Your data and money are protected by industry-leading standards. We treat your security as seriously as you do.</p>
               <ul class="space-y-5">
                 <li class="flex items-start"><span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-lime-500 text-gray-900 rounded-full mr-4 font-bold">✓</span>
                   <div>
-                    <p class="font-semibold mb-1">Bank-level encryption</p>
-                    <p class="text-gray-600">256-bit SSL encryption keeps every transaction safe.</p>
+                    <p class="font-semibold mb-1" id="about-us-trust-and-security-item-1-title">Bank-level encryption</p>
+                    <p class="text-gray-600" id="about-us-trust-and-security-item-1-description">256-bit SSL encryption keeps every transaction safe.</p>
                   </div>
                 </li>
                 <li class="flex items-start"><span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-lime-500 text-gray-900 rounded-full mr-4 font-bold">✓</span>
                   <div>
-                    <p class="font-semibold mb-1">Fully licensed & regulated</p>
-                    <p class="text-gray-600">We operate in full compliance with financial authorities.</p>
+                    <p class="font-semibold mb-1" id="about-us-trust-and-security-item-2-title">Fully licensed & regulated</p>
+                    <p class="text-gray-600" id="about-us-trust-and-security-item-2-description">We operate in full compliance with financial authorities.</p>
                   </div>
                 </li>
                 <li class="flex items-start"><span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-lime-500 text-gray-900 rounded-full mr-4 font-bold">✓</span>
                   <div>
-                    <p class="font-semibold mb-1">Privacy first</p>
-                    <p class="text-gray-600">Your personal information is never sold or shared without consent.</p>
+                    <p class="font-semibold mb-1" id="about-us-trust-and-security-item-3-title">Privacy first</p>
+                    <p class="text-gray-600" id="about-us-trust-and-security-item-3-description">Your personal information is never sold or shared without consent.</p>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="order-1 md:order-2"><img class="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Security"/></div>
+            <div class="order-1 md:order-2"><img class="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Security" id="about-us-trust-and-security-image"></div>
           </div>
         </div> 
         <div class="bg-gray-900 text-white">
           <div class="max-w-7xl mx-auto px-4 py-20">
             <div class="max-w-3xl mb-14">
-              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Who we help</h2>
-              <p class="text-lg text-gray-300">Whatever your goal, we have a loan solution designed for you.</p>
+              <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6" id="about-us-who-we-help-heading">Who we help</h2>
+              <p class="text-lg text-gray-300" id="about-us-who-we-help-description">Whatever your goal, we have a loan solution designed for you.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Home buyers"/>
+              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Home buyers" id="about-us-who-we-help-card-1-image">
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Home buyers</h6>
-                  <p class="text-gray-400">Affordable mortgages to help you own your dream home.</p>
+                  <h6 class="font-heading text-2xl tracking-tight mb-2" id="about-us-who-we-help-card-1-title">Home buyers</h6>
+                  <p class="text-gray-400" id="about-us-who-we-help-card-1-description">Affordable mortgages to help you own your dream home.</p>
                 </div>
               </div>
-              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Small businesses"/>
+              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Small businesses" id="about-us-who-we-help-card-2-image">
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Small businesses</h6>
-                  <p class="text-gray-400">Working capital and growth funding for entrepreneurs.</p>
+                  <h6 class="font-heading text-2xl tracking-tight mb-2" id="about-us-who-we-help-card-2-title">Small businesses</h6>
+                  <p class="text-gray-400" id="about-us-who-we-help-card-2-description">Working capital and growth funding for entrepreneurs.</p>
                 </div>
               </div>
-              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Individuals"/>
+              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Individuals" id="about-us-who-we-help-card-3-image">
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Individuals</h6>
-                  <p class="text-gray-400">Personal loans for life's planned and unexpected moments.</p>
+                  <h6 class="font-heading text-2xl tracking-tight mb-2" id="about-us-who-we-help-card-3-title">Individuals</h6>
+                  <p class="text-gray-400" id="about-us-who-we-help-card-3-description">Personal loans for life's planned and unexpected moments.</p>
                 </div>
               </div>
-              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Students"/>
+              <div class="rounded-3xl overflow-hidden bg-gray-800"><img class="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Students" id="about-us-who-we-help-card-4-image">
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Students</h6>
-                  <p class="text-gray-400">Education financing to invest in your future career.</p>
+                  <h6 class="font-heading text-2xl tracking-tight mb-2" id="about-us-who-we-help-card-4-title">Students</h6>
+                  <p class="text-gray-400" id="about-us-who-we-help-card-4-description">Education financing to invest in your future career.</p>
                 </div>
               </div>
             </div>
@@ -199,31 +199,31 @@
         </div> 
         <div class="max-w-7xl mx-auto px-4 py-20">
           <div class="bg-lime-500 rounded-3xl px-6 py-16 sm:px-16 text-center">
-            <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-gray-900">Ready to get started?</h2>
-            <p class="text-lg text-gray-800 max-w-2xl mx-auto mb-10">Join thousands of satisfied customers who trust us with their financial goals. Apply today and get a decision in minutes.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center"><a class="inline-block px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition" href="#">Apply now</a><a class="inline-block px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition" href="#">Talk to an advisor</a></div>
+            <h2 class="font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-gray-900" id="about-us-ready-to-get-started-heading">Ready to get started?</h2>
+            <p class="text-lg text-gray-800 max-w-2xl mx-auto mb-10" id="about-us-ready-to-get-started-description">Join thousands of satisfied customers who trust us with their financial goals. Apply today and get a decision in minutes.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center"><a class="inline-block px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition" href="#" id="about-us-ready-to-get-started-apply-label">Apply now</a><a class="inline-block px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition" href="#" id="about-us-ready-to-get-started-advisor-label">Talk to an advisor</a></div>
           </div>
         </div>
       </section>
-      <section class="relative py-12 lg:py-24 overflow-hidden" style="background-color: #fafafa;"><img class="absolute bottom-0 left-0" src="flow-assets/footer/waves-lines-left-bottom.png" alt=""/>
+      <section class="relative py-12 lg:py-24 overflow-hidden" style="background-color: #fafafa;"><img class="absolute bottom-0 left-0" src="flow-assets/footer/waves-lines-left-bottom.png" alt="">
         <div class="container px-4 mx-auto relative">
           <div class="flex flex-wrap mb-12 md:mb-24 xl:mb-40 -mx-4">
-            <div class="w-full lg:w-3/12 px-4 mb-16 lg:mb-0"><a class="inline-block mb-4" href="index.html"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt=""/></a></div>
+            <div class="w-full lg:w-3/12 px-4 mb-16 lg:mb-0"><a class="inline-block mb-4" href="index.html"><img class="h-8" src="flow-assets/logos/flow-logo.svg" alt id="site-footer-logo"></a></div>
             <div class="w-full md:w-8/12 lg:w-6/12 px-4 mb-16 lg:mb-0">
               <div class="grid sm:grid-cols-2 gap-8">
                 <div>
-                  <h3 class="mb-6 font-bold">Pages</h3>
+                  <h3 class="mb-6 font-bold" id="site-footer-pages-heading">Pages</h3>
                   <ul>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="index.html">Home</a></li>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="about_us.html">About us</a></li>
-                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="loan.html">Loan</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="index.html" id="site-footer-link-home">Home</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="about_us.html" id="site-footer-link-about-us">About us</a></li>
+                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="loan.html" id="site-footer-link-loan">Loan</a></li>
                   </ul>
                 </div>
                 <div>
-                  <h3 class="mb-6 font-bold">Help</h3>
+                  <h3 class="mb-6 font-bold" id="site-footer-help-heading">Help</h3>
                   <ul>
-                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="how_to_apply.html">How to apply</a></li>
-                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="contact.html">Contact us</a></li>
+                    <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="how_to_apply.html" id="site-footer-link-how-to-apply">How to apply</a></li>
+                    <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="contact.html" id="site-footer-link-contact-us">Contact us</a></li>
                   </ul>
                 </div>
               </div>
