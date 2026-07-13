@@ -1,12 +1,17 @@
-import { getPayload, Payload } from 'payload'
-import config from '@/payload.config'
+// @vitest-environment node
 
 import { describe, it, beforeAll, expect } from 'vitest'
+import type { Payload } from 'payload'
 
 let payload: Payload
+const hasLocalCmsEnv = Boolean(process.env.PAYLOAD_SECRET)
 
-describe('API', () => {
+describe.skipIf(!hasLocalCmsEnv)('API', () => {
   beforeAll(async () => {
+    const [{ getPayload }, { default: config }] = await Promise.all([
+      import('payload'),
+      import('@/payload.config'),
+    ])
     const payloadConfig = await config
     payload = await getPayload({ config: payloadConfig })
   })

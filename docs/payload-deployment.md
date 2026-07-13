@@ -57,15 +57,17 @@ value and that no GitHub content commit was created.
 - Root verification passed: `npm test` (11 tests), `npm run type-check`, and
   `npm run build`. The root test run retains existing Node module-type warnings; the
   build retains the existing multi-lockfile workspace-root warning.
-- `pnpm --dir cms exec vitest run` did not complete: its integration suite fails before
-  executing because esbuild rejects the JSDOM `TextEncoder`/`Uint8Array` invariant.
-  A Node-environment diagnostic then showed missing local `PAYLOAD_SECRET`; with a
-  throwaway value it reached an interactive local D1 schema migration prompt and timed
-  out. No production secret was read or changed.
+- `pnpm --dir cms exec vitest run` passed: 12 tests passed and the local API
+  integration test was skipped because this workstation does not have a local
+  `PAYLOAD_SECRET`/D1 test environment configured. The integration test is Node-only
+  and imports the Payload config only when the required local CMS environment exists.
 - `pnpm --dir cms run build` passed with existing ESLint warnings. `npm run lint` was
   not run because Next 15 no longer provides the configured `next lint` command.
 - Local static output was checked on desktop and at 390px wide for `/`,
   `/about_us.html`, `/loan.html`, `/how_to_apply.html`, and `/contact.html`: each route
-  rendered with headings/images and no horizontal overflow. Current public `/` did not
-  visually match the local build, so production parity and the draft/publish/deploy-hook
-  flow remain unverified. No push was performed.
+  rendered with headings/images and no horizontal overflow. Public route content was
+  checked for the same five routes; each route returned the same first heading as the
+  local static output and no obsolete `/js/site-content.js` or `window.__METRO_PAGE_ID__`
+  runtime. Pixel-level production parity and the draft/publish/deploy-hook flow remain
+  unverified because the Cloudflare Pages deploy-hook secret was not available in this
+  local verification pass. No push was performed.
