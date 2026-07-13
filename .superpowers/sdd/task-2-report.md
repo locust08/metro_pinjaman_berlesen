@@ -43,3 +43,23 @@ Verification after review fixes:
 - `npx tsc --noEmit`: passed.
 - Explicit binding audit: `275 bindings checked; 0 unresolved or duplicate targets.`
 - `git diff --check`: passed.
+
+## Second Review Fixes
+
+Implemented the second-review reconciliation without changing legacy HTML,
+renderer behavior, form behavior, or CMS schema:
+
+- Defined the active Task 2 mapping contract as 275 renderer-safe stable IDs and
+  explicitly documented the 17 out-of-scope rows with their one-to-one target
+  limitations.
+- Added a regression test that parses the mapping document, removes only its
+  explicit exclusions, and requires the resulting active stable-ID inventory to
+  exactly match `legacyContentBindings`.
+- Strengthened href assertions to compare each rendered `href` with the exact
+  configured content value rather than only checking that it is non-empty.
+
+Verification after second review fixes:
+
+- `npm test`: 13 passed, 0 failed (pre-existing `MODULE_TYPELESS_PACKAGE_JSON` warnings only).
+- `npx tsc --noEmit`: passed.
+- `git diff --check`: passed.

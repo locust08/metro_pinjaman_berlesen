@@ -16,10 +16,26 @@ const legacyPages = {
   contactUs: 'contact.html',
 };
 const legacyDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src/legacy-pages');
+const mappingFile = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../docs/payload-frontend-mapping.md');
 
 function contentValue(content, pathExpression) {
   return pathExpression.replace(/\[(\d+)\]/g, '.$1').split('.').reduce((value, key) => value?.[key], content);
 }
+
+function activeMappingIds() {
+  const mapping = fs.readFileSync(mappingFile, 'utf8');
+  const documentedIds = [...mapping.matchAll(/\|\s*#([a-z0-9-]+)\s*\|/g)].map((match) => match[1]);
+  const excludedIds = new Set([...mapping.matchAll(/^- `([a-z0-9-]+)`:/gm)].map((match) => match[1]));
+
+  return documentedIds.filter((id) => !excludedIds.has(id)).sort();
+}
+
+test('renderer bindings exactly match the active documented mapping contract', () => {
+  const documentedIds = activeMappingIds();
+  const rendererIds = legacyContentBindings.map((binding) => binding.id).sort();
+
+  assert.deepEqual(rendererIds, documentedIds);
+});
 
 test('renderLegacyContent updates stable id fields without class regexes', () => {
   const html = '<h1 id="home-hero-main-heading" class="keep">Simple Loans,</h1><p id="home-hero-description" class="anything">Old description</p>';
@@ -65,7 +81,7 @@ test('real templates render metadata, shared responsive labels, images, and link
       const value = contentValue(content, binding.path);
       assert.ok(element, `${filename}: ${binding.id} is rendered`);
       if (binding.kind === 'image') assert.equal(element.getAttribute('src'), value.src, `${binding.id} image source`);
-      if (binding.kind === 'href') assert.ok(element.getAttribute('href'), `${binding.id} href`);
+      if (binding.kind === 'href') assert.equal(element.getAttribute('href'), String(value), `${binding.id} href`);
       if (binding.kind === 'text' && typeof value === 'string') assert.equal(element.text.trim(), value, `${binding.id} text`);
     }
   }

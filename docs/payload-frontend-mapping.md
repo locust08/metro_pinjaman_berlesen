@@ -22,6 +22,38 @@ responsive layouts. Logo image positions do not share a field when their
 legacy fallback assets differ: `header.websiteLogo` supplies the desktop/main
 logo and `header.mobileDrawerLogo` supplies the mobile drawer logo.
 
+## Task 2 Renderer Scope
+
+The tables below remain the complete future Payload field inventory. For Task 2,
+every table row is an active renderer binding except the explicit exclusions in
+this section. The active mapping contract therefore contains 275 stable IDs and
+is required to exactly match `legacyContentBindings` in
+`src/payload/renderLegacyContent.ts`; `tests/payload-render.test.mjs` enforces
+that relationship.
+
+These 17 rows are intentionally out of active Task 2 rendering scope because
+the preserved legacy templates have no safe one-to-one element or attribute
+target. They remain documented so a future markup and CMS change can implement
+them deliberately rather than silently dropping the field.
+
+- `about-us-seo-description`: the legacy template has no meta-description element.
+- `contact-method-phone-description`: the legacy card has no separate description node.
+- `contact-seo-description`: the legacy template has no meta-description element.
+- `contact-still-have-questions-description`: the visible CTA copy is a multi-node composite.
+- `home-seo-description`: the legacy template has no meta-description element.
+- `home-statistic-3-value`: the visible statistic is part of a composite text node.
+- `home-statistic-4-value`: the visible statistic is part of a composite text node.
+- `how-to-apply-seo-description`: the legacy template has no meta-description element.
+- `loan-seo-description`: the legacy template has no meta-description element.
+- `site-contact-business-hours`: the visible value is part of a composite contact string.
+- `site-contact-phone-link`: the legacy telephone target is not represented by a dedicated anchor attribute.
+- `site-contact-whatsapp-link`: the legacy WhatsApp destination is embedded in Alpine click behavior.
+- `site-contact-whatsapp-message`: the legacy WhatsApp message is embedded in Alpine click behavior.
+- `site-form-failure-message`: the value exists only inside Alpine form state.
+- `site-form-sending-message`: the value exists only inside Alpine form state.
+- `site-form-success-message`: the value exists only inside Alpine form state.
+- `site-form-validation-message`: the value exists only inside Alpine form state.
+
 ## Site Settings
 
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
