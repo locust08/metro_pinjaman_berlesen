@@ -2,7 +2,12 @@
   var pageId = window.__METRO_PAGE_ID__;
   if (!pageId) return;
 
-  var endpoint = window.METRO_CMS_CONTENT_URL || 'https://admin.metropinjamanberlesen.com/api/site-content';
+  var endpoints = window.METRO_CMS_CONTENT_URL
+    ? [window.METRO_CMS_CONTENT_URL]
+    : [
+        'https://admin.metropinjamanberlesen.com/api/site-content',
+        'https://metropinjamanberlesen-payload-cms.easondev.workers.dev/api/site-content',
+      ];
 
   function getByPath(source, path) {
     return path.split('.').reduce(function (value, key) {
@@ -74,11 +79,25 @@
     });
   }
 
-  fetch(endpoint, { headers: { accept: 'application/json' } })
-    .then(function (response) {
+  function fetchContent(index) {
+    var endpoint = endpoints[index];
+    if (!endpoint) return Promise.reject(new Error('CMS content unavailable'));
+
+    return fetch(endpoint, { headers: { accept: 'application/json' } }).then(function (response) {
       if (!response.ok) throw new Error('CMS content unavailable');
       return response.json();
-    })
+    });
+  }
+
+  function fetchContentWithFallback(index) {
+    if (index >= endpoints.length) return Promise.reject(new Error('CMS content unavailable'));
+
+    return fetchContent(index).catch(function () {
+      return fetchContentWithFallback(index + 1);
+    });
+  }
+
+  fetchContentWithFallback(0)
     .then(function (content) {
       applyTextSlots(content);
       applyImageSlots(content);

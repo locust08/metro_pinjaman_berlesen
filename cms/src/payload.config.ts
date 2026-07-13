@@ -17,7 +17,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(value) : undefined)
 
-const isCLI = process.argv.some((value) => realpath(value).endsWith(path.join('payload', 'bin.js')))
+const isCLI = process.argv.some((value) => realpath(value)?.endsWith(path.join('payload', 'bin.js')))
 const isProduction = process.env.NODE_ENV === 'production'
 const isNextBuild = process.env.NEXT_PHASE === 'phase-production-build'
 
@@ -46,6 +46,11 @@ const cloudflare =
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
 
+const payloadSecret =
+  (cloudflare.env as CloudflareEnv & { PAYLOAD_SECRET?: string }).PAYLOAD_SECRET ||
+  process.env.PAYLOAD_SECRET ||
+  ''
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -62,7 +67,7 @@ export default buildConfig({
     'http://localhost:3000',
   ],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: payloadSecret,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

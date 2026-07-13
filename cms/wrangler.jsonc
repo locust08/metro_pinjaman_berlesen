@@ -4,6 +4,7 @@
   "name": "metropinjamanberlesen-payload-cms",
   "account_id": "e7c515dde995479daacd82ad79dfc3e8",
   "compatibility_date": "2026-07-13",
+  "workers_dev": true,
   "compatibility_flags": [
     // Enable Node.js API
     // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#nodejs-compatibility-flag
@@ -19,8 +20,9 @@
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "DATABASE_ID",
+      "database_id": "94d48b50-1d5a-4fd9-9ba9-9d41255ebe73",
       "database_name": "metropinjamanberlesen_payload",
+      "preview_database_id": "94d48b50-1d5a-4fd9-9ba9-9d41255ebe73",
       "remote": true,
     },
   ],
@@ -35,6 +37,7 @@
     {
       "binding": "R2",
       "bucket_name": "metropinjamanberlesen-payload-media",
+      "preview_bucket_name": "metropinjamanberlesen-payload-media",
     },
     // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
     // {
