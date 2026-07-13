@@ -87,8 +87,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-content': SiteContent;
+  };
+  globalsSelect: {
+    'site-content': SiteContentSelect<false> | SiteContentSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -310,6 +314,270 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-content".
+ */
+export interface SiteContent {
+  id: number;
+  pages?: {
+    home?: {
+      /**
+       * Text slots follow the public page order. Edit the text value only.
+       */
+      textSlots?:
+        | {
+            key: string;
+            label: string;
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * Image slots follow the public page image order.
+       */
+      imageSlots?:
+        | {
+            key: string;
+            label: string;
+            image?: (number | null) | Media;
+            fallbackSrc?: string | null;
+            fallbackAlt?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    about?: {
+      /**
+       * Text slots follow the public page order. Edit the text value only.
+       */
+      textSlots?:
+        | {
+            key: string;
+            label: string;
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * Image slots follow the public page image order.
+       */
+      imageSlots?:
+        | {
+            key: string;
+            label: string;
+            image?: (number | null) | Media;
+            fallbackSrc?: string | null;
+            fallbackAlt?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    loan?: {
+      /**
+       * Text slots follow the public page order. Edit the text value only.
+       */
+      textSlots?:
+        | {
+            key: string;
+            label: string;
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * Image slots follow the public page image order.
+       */
+      imageSlots?:
+        | {
+            key: string;
+            label: string;
+            image?: (number | null) | Media;
+            fallbackSrc?: string | null;
+            fallbackAlt?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    howToApply?: {
+      /**
+       * Text slots follow the public page order. Edit the text value only.
+       */
+      textSlots?:
+        | {
+            key: string;
+            label: string;
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * Image slots follow the public page image order.
+       */
+      imageSlots?:
+        | {
+            key: string;
+            label: string;
+            image?: (number | null) | Media;
+            fallbackSrc?: string | null;
+            fallbackAlt?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    contact?: {
+      /**
+       * Text slots follow the public page order. Edit the text value only.
+       */
+      textSlots?:
+        | {
+            key: string;
+            label: string;
+            text: string;
+            id?: string | null;
+          }[]
+        | null;
+      /**
+       * Image slots follow the public page image order.
+       */
+      imageSlots?:
+        | {
+            key: string;
+            label: string;
+            image?: (number | null) | Media;
+            fallbackSrc?: string | null;
+            fallbackAlt?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-content_select".
+ */
+export interface SiteContentSelect<T extends boolean = true> {
+  pages?:
+    | T
+    | {
+        home?:
+          | T
+          | {
+              textSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              imageSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    image?: T;
+                    fallbackSrc?: T;
+                    fallbackAlt?: T;
+                    id?: T;
+                  };
+            };
+        about?:
+          | T
+          | {
+              textSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              imageSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    image?: T;
+                    fallbackSrc?: T;
+                    fallbackAlt?: T;
+                    id?: T;
+                  };
+            };
+        loan?:
+          | T
+          | {
+              textSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              imageSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    image?: T;
+                    fallbackSrc?: T;
+                    fallbackAlt?: T;
+                    id?: T;
+                  };
+            };
+        howToApply?:
+          | T
+          | {
+              textSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              imageSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    image?: T;
+                    fallbackSrc?: T;
+                    fallbackAlt?: T;
+                    id?: T;
+                  };
+            };
+        contact?:
+          | T
+          | {
+              textSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              imageSlots?:
+                | T
+                | {
+                    key?: T;
+                    label?: T;
+                    image?: T;
+                    fallbackSrc?: T;
+                    fallbackAlt?: T;
+                    id?: T;
+                  };
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

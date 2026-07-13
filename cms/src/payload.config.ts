@@ -10,6 +10,8 @@ import { r2Storage } from '@payloadcms/storage-r2'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { SiteContent } from './globals/SiteContent'
+import { siteContentEndpoint } from './endpoints/siteContent'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,6 +54,13 @@ export default buildConfig({
     },
   },
   collections: [Users, Media],
+  globals: [SiteContent],
+  endpoints: [siteContentEndpoint],
+  cors: [
+    'https://metropinjamanberlesen.pages.dev',
+    'https://12add699.metropinjamanberlesen.pages.dev',
+    'http://localhost:3000',
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
