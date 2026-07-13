@@ -16,29 +16,37 @@ them. The canonical defaults for every fallback value will live in
 `src/payload/content.ts`, which both the frontend fallback and Payload seed use.
 
 Desktop and mobile header markup is separate in the legacy templates. Each
-visible variant therefore receives its own stable identifier row, but desktop
-and mobile variants of the same value intentionally share one Payload field
-path. The fixed frontend component/template applies that one value to every
-mapped variant; it must not introduce a second CMS field for a breakpoint.
+visible variant therefore receives its own stable identifier row. Labels with
+the same fallback value intentionally share one Payload field path across
+responsive layouts. Logo image positions do not share a field when their
+legacy fallback assets differ: `header.websiteLogo` supplies the desktop/main
+logo and `header.mobileDrawerLogo` supplies the mobile drawer logo.
 
 ## Site Settings
 
 | Payload Global | Field path | Stable frontend identifier | Frontend file | Frontend section | Visible element | Shared | Fallback value |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Site Settings | header.websiteLogo | #site-header-logo | src/legacy-pages/*.html | Header | Desktop header logo image | Yes | flow-assets/logos/flow-logo.svg |
-| Site Settings | header.websiteLogo | #site-header-mobile-logo | src/legacy-pages/*.html | Header | Mobile drawer logo image | Yes | flow-assets/logos/sign-logo-flow.svg |
+| Site Settings | header.mobileDrawerLogo | #site-header-mobile-drawer-primary-logo | src/legacy-pages/index.html (first drawer), src/legacy-pages/about_us.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer logo image | Yes | flow-assets/logos/sign-logo-flow.svg |
+| Site Settings | header.mobileDrawerLogo | #site-header-mobile-drawer-secondary-logo | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer logo image | Yes | flow-assets/logos/sign-logo-flow.svg |
 | Site Settings | header.aboutUsMenuLabel | #site-header-nav-about-us | src/legacy-pages/*.html | Header | Desktop About us nav label | Yes | About us |
-| Site Settings | header.aboutUsMenuLabel | #site-header-mobile-nav-about-us | src/legacy-pages/*.html | Header | Mobile About us nav label | Yes | About us |
+| Site Settings | header.aboutUsMenuLabel | #site-header-mobile-drawer-primary-nav-about-us | src/legacy-pages/index.html (first drawer), src/legacy-pages/about_us.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer About us nav label | Yes | About us |
+| Site Settings | header.aboutUsMenuLabel | #site-header-mobile-drawer-secondary-nav-about-us | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer About us nav label | Yes | About us |
 | Site Settings | header.loanMenuLabel | #site-header-nav-loan | src/legacy-pages/*.html | Header | Desktop Loan nav label | Yes | Loan |
-| Site Settings | header.loanMenuLabel | #site-header-mobile-nav-loan | src/legacy-pages/*.html | Header | Mobile Loan nav label | Yes | Loan |
+| Site Settings | header.loanMenuLabel | #site-header-mobile-drawer-primary-nav-loan | src/legacy-pages/index.html (first drawer), src/legacy-pages/about_us.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer Loan nav label | Yes | Loan |
+| Site Settings | header.loanMenuLabel | #site-header-mobile-drawer-secondary-nav-loan | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer Loan nav label | Yes | Loan |
 | Site Settings | header.howToApplyMenuLabel | #site-header-nav-how-to-apply | src/legacy-pages/*.html | Header | Desktop How to apply nav label | Yes | How to apply |
-| Site Settings | header.howToApplyMenuLabel | #site-header-mobile-nav-how-to-apply | src/legacy-pages/*.html | Header | Mobile How to apply nav label | Yes | How to apply |
+| Site Settings | header.howToApplyMenuLabel | #site-header-mobile-drawer-primary-nav-how-to-apply | src/legacy-pages/index.html (first drawer), src/legacy-pages/about_us.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer How to apply nav label | Yes | How to apply |
+| Site Settings | header.howToApplyMenuLabel | #site-header-mobile-drawer-secondary-nav-how-to-apply | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer How to apply nav label | Yes | How to apply |
 | Site Settings | header.contactUsMenuLabel | #site-header-nav-contact-us | src/legacy-pages/*.html | Header | Desktop Contact us nav label | Yes | Contact us |
-| Site Settings | header.contactUsMenuLabel | #site-header-mobile-nav-contact-us | src/legacy-pages/*.html | Header | Mobile Contact us nav label | Yes | Contact us |
+| Site Settings | header.contactUsMenuLabel | #site-header-mobile-drawer-primary-nav-contact-us | src/legacy-pages/index.html (first drawer), src/legacy-pages/about_us.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer Contact us nav label | Yes | Contact us |
+| Site Settings | header.contactUsMenuLabel | #site-header-mobile-drawer-secondary-nav-contact-us | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer Contact us nav label | Yes | Contact us |
 | Site Settings | header.applyNowButtonLabel | #site-header-apply-now-label | src/legacy-pages/*.html | Header | Desktop Apply now button label | Yes | Apply now |
-| Site Settings | header.applyNowButtonLabel | #site-header-mobile-apply-now-label | src/legacy-pages/about_us.html | Header | Mobile drawer Apply now button label | Yes | Apply now |
-| Site Settings | header.loginButtonLabel | #site-header-mobile-login-label | src/legacy-pages/index.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Mobile drawer Login button label | Yes | Login |
-| Site Settings | header.newsletterLabel | #site-header-mobile-newsletter-label | src/legacy-pages/index.html, src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Mobile drawer Newsletter label | Yes | Newsletter |
+| Site Settings | header.applyNowButtonLabel | #site-header-mobile-drawer-primary-apply-now-label | src/legacy-pages/about_us.html | Header | Primary mobile drawer Apply now button label | Yes | Apply now |
+| Site Settings | header.loginButtonLabel | #site-header-mobile-drawer-primary-login-label | src/legacy-pages/index.html (first drawer), src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer Login button label | Yes | Login |
+| Site Settings | header.loginButtonLabel | #site-header-mobile-drawer-secondary-login-label | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer Login button label | Yes | Login |
+| Site Settings | header.newsletterLabel | #site-header-mobile-drawer-primary-newsletter-label | src/legacy-pages/index.html (first drawer), src/legacy-pages/contact.html, src/legacy-pages/how_to_apply.html, src/legacy-pages/loan.html | Header | Primary mobile drawer Newsletter label | Yes | Newsletter |
+| Site Settings | header.newsletterLabel | #site-header-mobile-drawer-secondary-newsletter-label | src/legacy-pages/index.html (second drawer) | Header | Secondary mobile drawer Newsletter label | Yes | Newsletter |
 | Site Settings | footer.footerLogo | #site-footer-logo | src/legacy-pages/*.html | Footer | Footer logo image | Yes | flow-assets/logos/flow-logo.svg |
 | Site Settings | footer.pagesColumnHeading | #site-footer-pages-heading | src/legacy-pages/*.html | Footer | Pages column heading | Yes | Pages |
 | Site Settings | footer.homeLinkLabel | #site-footer-link-home | src/legacy-pages/*.html | Footer | Home link label | Yes | Home |
