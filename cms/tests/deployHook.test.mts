@@ -38,14 +38,16 @@ describe('Cloudflare Pages deploy hook', () => {
   })
 
   it('logs a rejected deploy request without rejecting the save', async () => {
-    const fetchMock = vi.fn().mockRejectedValue(new Error('offline'))
+    const secretUrl = 'https://example.com/deploy-hook?token=fake-secret'
+    const fetchMock = vi.fn().mockRejectedValue(new Error(`request failed for ${secretUrl}`))
     const error = vi.fn()
     global.fetch = fetchMock
-    process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = 'https://example.com/deploy-hook'
+    process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = secretUrl
 
     await expect(triggerPagesDeployAfterPublish({ doc: { _status: 'published' }, req: { payload: { logger: { error } } } } as any)).resolves.toMatchObject({ _status: 'published' })
 
-    expect(error).toHaveBeenCalledWith('Cloudflare Pages deploy hook request failed: offline')
+    expect(error).toHaveBeenCalledWith('Cloudflare Pages deploy hook request failed.')
+    expect(error).not.toHaveBeenCalledWith(expect.stringContaining('fake-secret'))
   })
 
   it('logs a non-OK deploy response without rejecting the save', async () => {

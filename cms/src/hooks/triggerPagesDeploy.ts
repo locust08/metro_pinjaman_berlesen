@@ -18,10 +18,8 @@ export const triggerPagesDeployAfterPublish: GlobalAfterChangeHook = async ({ do
     if (!response.ok) {
       req.payload.logger?.error?.(`Cloudflare Pages deploy hook failed with status ${response.status}.`)
     }
-  } catch (error) {
-    req.payload.logger?.error?.(
-      `Cloudflare Pages deploy hook request failed: ${error instanceof Error ? error.message : String(error)}`,
-    )
+  } catch {
+    req.payload.logger?.error?.('Cloudflare Pages deploy hook request failed.')
   }
 
   return doc
