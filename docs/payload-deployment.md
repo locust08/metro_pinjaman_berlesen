@@ -1,0 +1,49 @@
+# Payload And Frontend Deployment
+
+## Current Architecture
+
+- Frontend: root Next.js 15 static export; `next.config.js` has `output: 'export'`.
+- Frontend hosting: Cloudflare Pages project `metropinjamanberlesen`, output directory `out`, configured in `wrangler.toml`.
+- Payload CMS: separate `cms/` Next/Payload app deployed as Cloudflare Worker `metropinjamanberlesen-payload-cms`.
+- Database: Cloudflare D1 binding `D1`, database `metropinjamanberlesen_payload`.
+- Media storage: Cloudflare R2 binding `R2`, bucket `metropinjamanberlesen-payload-media`.
+- Admin domain: the Worker URL is active; `admin.metropinjamanberlesen.com` needs the domain zone added to the Cloudflare account before route attachment.
+
+The static frontend remains the owner of the route structure, legacy markup, Tailwind
+classes, responsive behavior, animation, forms, calculator, appointment behavior,
+and GTM/GA4 tracking. Payload is a separate content service. It supplies only
+published content, using the shared canonical default-content source when Payload is
+unavailable or a field is nullish.
+
+## Required Publish Flow
+
+`Admin edits Payload -> Admin saves draft -> no frontend deploy.`
+
+`Admin publishes Payload -> Payload afterChange hook calls CLOUDFLARE_PAGES_DEPLOY_HOOK_URL -> Cloudflare Pages rebuilds the static frontend -> live website shows new published content -> GitHub remains unchanged.`
+
+The public content endpoint must request only published versions. Draft saves must
+not be exposed by normal public requests and must not call the deploy hook. The
+`afterChange` hook runs only for a published Global change. It must handle missing,
+non-successful, and network-failed hook calls by logging a redacted operational
+message and returning normally; saved Payload content is never failed, rolled back,
+or overwritten because a rebuild trigger failed.
+
+Payload edits never write GitHub source files. The Pages rebuild consumes published
+Payload content during static export, so live content changes arrive through a Pages
+deployment rather than a repository commit.
+
+## Secret Handling
+
+`CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` is an environment variable/Worker secret. It
+must not be committed or printed in logs. Configure it in the CMS Worker environment
+or secret store, not in frontend source, `.env.example` values, docs, build output,
+or Payload records. Error logs may identify the failed action and response status but
+must never include the hook URL or its query parameters.
+
+## Operational Checks
+
+Before production verification, confirm the Worker secret is present without
+displaying it. Then save a draft and confirm neither a Pages deployment nor a public
+content change occurs; publish the same change and confirm exactly one rebuild is
+requested. After Pages completes, confirm the public site reflects the published
+value and that no GitHub content commit was created.
