@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react';
 import Head from 'next/head';
 
-export type LegacyPageProps = {
+export type LegacyPageContent = {
   title: string;
   bodyClassName: string;
   bodyHtml: string;
+};
+
+export type LegacyPageProps = LegacyPageContent & {
+  pageId: string;
 };
 
 declare global {
@@ -15,7 +19,7 @@ declare global {
   }
 }
 
-export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPageProps) {
+export default function LegacyPage({ pageId, title, bodyClassName, bodyHtml }: LegacyPageProps) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -104,6 +108,12 @@ export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPag
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.__METRO_PAGE_ID__=${JSON.stringify(pageId)};`,
+        }}
+      />
+      <script src="/js/site-content.js" defer />
       <div ref={pageRef} dangerouslySetInnerHTML={{ __html: bodyHtml }} />
     </>
   );

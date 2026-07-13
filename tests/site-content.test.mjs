@@ -35,22 +35,20 @@ test('mergeSiteContent keeps fallback values when remote content is unavailable'
   const merged = mergeSiteContent(defaultSiteContent, null);
 
   assert.equal(merged.site.navbar.items[0].label, defaultSiteContent.site.navbar.items[0].label);
-  assert.equal(merged.pages.home.hero.heading, defaultSiteContent.pages.home.hero.heading);
+  assert.equal(merged.pages.home.textSlots[0].text, defaultSiteContent.pages.home.textSlots[0].text);
 });
 
 test('mergeSiteContent overlays remote values without dropping sibling fallback values', () => {
   const merged = mergeSiteContent(defaultSiteContent, {
     pages: {
       home: {
-        hero: {
-          heading: 'Fast loans for real life',
-        },
+        textSlots: [{ text: 'Fast loans for real life' }],
       },
     },
   });
 
-  assert.equal(merged.pages.home.hero.heading, 'Fast loans for real life');
-  assert.equal(merged.pages.home.hero.body, defaultSiteContent.pages.home.hero.body);
+  assert.equal(merged.pages.home.textSlots[0].text, 'Fast loans for real life');
+  assert.equal(merged.pages.home.textSlots[1].text, defaultSiteContent.pages.home.textSlots[1].text);
 });
 
 test('applySiteContent replaces text, html, links, and image slots by stable CMS keys', () => {
@@ -83,4 +81,53 @@ test('applySiteContent replaces text, html, links, and image slots by stable CMS
   assert.equal(linkNode.attributes.href, 'contact.html');
   assert.equal(imageNode.attributes.src, 'https://cdn.example.com/home.jpg');
   assert.equal(imageNode.attributes.alt, 'Customer at desk');
+});
+
+test('applySiteContent replaces ordered page text and image slots without annotations', () => {
+  const textNodes = [
+    { nodeValue: 'Old heading', parentElement: { tagName: 'H1' } },
+    { nodeValue: 'Old body', parentElement: { tagName: 'P' } },
+    { nodeValue: 'Hidden script', parentElement: { tagName: 'SCRIPT' } },
+  ];
+  const imageNode = createNode({ src: 'old.jpg', alt: 'Old image' });
+  const root = {
+    querySelectorAll(selector) {
+      if (selector === 'img') return [imageNode];
+      return [];
+    },
+    createTreeWalker() {
+      let index = -1;
+      return {
+        nextNode() {
+          index += 1;
+          return textNodes[index] || null;
+        },
+      };
+    },
+  };
+  const content = mergeSiteContent(defaultSiteContent, {
+    pages: {
+      home: {
+        textSlots: [
+          { key: 'home.text.0', label: 'Hero heading', text: 'New heading' },
+          { key: 'home.text.1', label: 'Hero body', text: 'New body' },
+        ],
+        imageSlots: [
+          {
+            key: 'home.image.0',
+            label: 'Hero image',
+            image: { src: 'new.jpg', alt: 'New image' },
+          },
+        ],
+      },
+    },
+  });
+
+  applySiteContent(root, content, 'home');
+
+  assert.equal(textNodes[0].nodeValue, 'New heading');
+  assert.equal(textNodes[1].nodeValue, 'New body');
+  assert.equal(textNodes[2].nodeValue, 'Hidden script');
+  assert.equal(imageNode.attributes.src, 'new.jpg');
+  assert.equal(imageNode.attributes.alt, 'New image');
 });
