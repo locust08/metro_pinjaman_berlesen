@@ -28,9 +28,10 @@ non-successful, and network-failed hook calls by logging a redacted operational
 message and returning normally; saved Payload content is never failed, rolled back,
 or overwritten because a rebuild trigger failed.
 
-Payload edits never write GitHub source files. The Pages rebuild consumes published
-Payload content during static export, so live content changes arrive through a Pages
-deployment rather than a repository commit.
+Payload edits never write GitHub source files or create GitHub commits. The deploy
+hook triggers a Cloudflare Pages rebuild, and that static build fetches published
+Payload content before exporting the pages. Live content changes therefore arrive
+through the Pages deployment rather than a repository commit.
 
 ## Secret Handling
 
