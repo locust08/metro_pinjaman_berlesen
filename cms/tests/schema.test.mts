@@ -49,7 +49,7 @@ describe('Payload section schema', () => {
 
   it('enables drafts and versions for every global', () => {
     globals.forEach((global) => {
-      expect(global.versions).toMatchObject({ drafts: true, maxPerDoc: 20 })
+      expect(global.versions).toMatchObject({ drafts: true, max: 20 })
     })
   })
 })

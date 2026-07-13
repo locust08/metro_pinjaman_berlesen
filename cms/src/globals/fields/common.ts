@@ -1,4 +1,4 @@
-import type { Field, GlobalConfig } from 'payload'
+import type { Field } from 'payload'
 
 type DefaultValue = string | undefined
 
@@ -59,8 +59,8 @@ export const tabs = (items: Tab[]): Field => ({ type: 'tabs', tabs: items })
 
 export const versioning = {
   drafts: true,
-  maxPerDoc: 20,
-} as unknown as NonNullable<GlobalConfig['versions']>
+  max: 20,
+}
 
 export const section = (name: string, label: string, fields: Field[]): Field => ({
   name,
