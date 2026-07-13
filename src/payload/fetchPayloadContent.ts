@@ -1,5 +1,7 @@
 import { defaultPayloadContent, type PublicPayloadContent } from './content.ts';
 
+const PAYLOAD_FETCH_TIMEOUT_MS = 10_000;
+
 function getPublishedContentUrl(): string {
   return process.env.PAYLOAD_PUBLIC_CONTENT_URL
     ?? 'https://metropinjamanberlesen-payload-cms.easondev.workers.dev/api/published-content';
@@ -27,9 +29,13 @@ function mergeNullishFallback(fallback: unknown, value: unknown): unknown {
 }
 
 export async function fetchPayloadContent(): Promise<PublicPayloadContent> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PAYLOAD_FETCH_TIMEOUT_MS);
+
   try {
     const response = await fetch(getPublishedContentUrl(), {
       headers: { accept: 'application/json' },
+      signal: controller.signal,
     });
 
     if (!response.ok) return defaultPayloadContent;
@@ -40,5 +46,7 @@ export async function fetchPayloadContent(): Promise<PublicPayloadContent> {
     return mergeNullishFallback(defaultPayloadContent, content) as PublicPayloadContent;
   } catch {
     return defaultPayloadContent;
+  } finally {
+    clearTimeout(timeout);
   }
 }

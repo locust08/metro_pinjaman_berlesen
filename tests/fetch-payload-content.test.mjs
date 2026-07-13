@@ -17,7 +17,8 @@ test('fetchPayloadContent fetches published content and merges nullish values wi
   process.env.PAYLOAD_PUBLIC_CONTENT_URL = 'https://cms.example.test/api/published-content';
   globalThis.fetch = async (url, options) => {
     assert.equal(url, process.env.PAYLOAD_PUBLIC_CONTENT_URL);
-    assert.deepEqual(options, { headers: { accept: 'application/json' } });
+    assert.deepEqual(options.headers, { accept: 'application/json' });
+    assert.ok(options.signal instanceof AbortSignal);
     return new Response(JSON.stringify({
       siteSettings: {
         header: {
@@ -42,5 +43,23 @@ test('fetchPayloadContent returns defaults when the published endpoint fails', a
 
   const content = await fetchPayloadContent();
 
+  assert.deepEqual(content, defaultPayloadContent);
+});
+
+test('fetchPayloadContent aborts a pending request and returns defaults', async (context) => {
+  context.mock.timers.enable({ apis: ['setTimeout'] });
+  let requestSignal;
+  globalThis.fetch = async (_url, options) => {
+    requestSignal = options.signal;
+    return new Promise((_resolve, reject) => {
+      options.signal.addEventListener('abort', () => reject(options.signal.reason), { once: true });
+    });
+  };
+
+  const contentPromise = fetchPayloadContent();
+  context.mock.timers.tick(10_000);
+  const content = await contentPromise;
+
+  assert.equal(requestSignal.aborted, true);
   assert.deepEqual(content, defaultPayloadContent);
 });

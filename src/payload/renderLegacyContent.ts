@@ -2329,20 +2329,27 @@ function escapeHtmlText(value: unknown): string {
     .replaceAll("'", '&#39;');
 }
 
-function isSafeUrl(value: string, kind: 'href' | 'image'): boolean {
-  const candidate = value.trim();
-  if (!candidate || /[\u0000-\u001f\u007f]/.test(candidate) || candidate.startsWith('//') || candidate.startsWith('\\\\')) {
-    return false;
+function decodeHtmlCharacterReferences(value: string): string {
+  const escapedMarkup = value.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+  return parse(`<span>${escapedMarkup}</span>`).text;
+}
+
+function getSafeUrl(value: string, kind: 'href' | 'image'): string | undefined {
+  const decoded = decodeHtmlCharacterReferences(value);
+  const candidate = decoded.replace(/^[\u0000-\u0020\u007f]+|[\u0000-\u0020\u007f]+$/g, '');
+  if (!candidate || /[\u0000-\u001f\u007f]/.test(candidate) || /^[\\/]{2}/.test(candidate)) {
+    return undefined;
   }
 
   try {
     const parsed = new URL(candidate, 'https://legacy-page.invalid/');
     const isRelativePath = parsed.origin === 'https://legacy-page.invalid';
-    if (isRelativePath) return true;
-    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return true;
-    return kind === 'href' && (parsed.protocol === 'mailto:' || parsed.protocol === 'tel:');
+    if (isRelativePath) return candidate;
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return candidate;
+    if (kind === 'href' && (parsed.protocol === 'mailto:' || parsed.protocol === 'tel:')) return candidate;
+    return undefined;
   } catch {
-    return false;
+    return undefined;
   }
 }
 
@@ -2352,15 +2359,16 @@ function renderBinding(root: ReturnType<typeof parse>, binding: LegacyContentBin
   if (!element) return;
   if (binding.kind === 'image' && typeof value === 'object' && value && 'src' in value) {
     const image = value as { src: string; alt?: string };
-    if (typeof image.src === 'string' && isSafeUrl(image.src, 'image')) {
-      element.setAttribute('src', image.src.trim());
+    const safeSrc = typeof image.src === 'string' ? getSafeUrl(image.src, 'image') : undefined;
+    if (safeSrc) {
+      element.setAttribute('src', safeSrc);
     }
     element.setAttribute('alt', image.alt || '');
     return;
   }
   if (binding.kind === 'href') {
-    const href = String(value);
-    if (isSafeUrl(href, 'href')) element.setAttribute('href', href.trim());
+    const safeHref = getSafeUrl(String(value), 'href');
+    if (safeHref) element.setAttribute('href', safeHref);
     return;
   }
   if (binding.kind === 'counter') {

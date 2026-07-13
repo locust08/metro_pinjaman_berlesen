@@ -85,6 +85,38 @@ test('renderLegacyContent blocks unsafe href and image source overrides', () => 
   assert.equal(root.querySelector('#contact-form-image').getAttribute('alt'), 'Updated alt');
 });
 
+test('renderLegacyContent blocks entity-obfuscated URL schemes without replacing safe legacy attributes', () => {
+  const html = '<a id="site-contact-waze-link" href="/safe-map">Map</a><img id="contact-form-image" src="/safe-image.png" alt="Safe">';
+  const unsafeUrls = [
+    'jav&#x61;script:alert(1)',
+    'javascript&colon;alert(1)',
+    'java&#x09;script:alert(1)',
+    'java&#10;script:alert(1)',
+    ' \tjavascript:alert(1)\r\n',
+  ];
+
+  for (const unsafeUrl of unsafeUrls) {
+    const content = structuredClone(defaultPayloadContent);
+    content.siteSettings.contactDetails.wazeUrl = unsafeUrl;
+    content.contactUsPage.contactForm.image = { src: unsafeUrl, alt: 'Updated alt' };
+
+    const root = parse(renderLegacyContent(html, 'contactUs', content));
+
+    assert.equal(root.querySelector('#site-contact-waze-link').getAttribute('href'), '/safe-map', unsafeUrl);
+    assert.equal(root.querySelector('#contact-form-image').getAttribute('src'), '/safe-image.png', unsafeUrl);
+  }
+});
+
+test('renderLegacyContent validates and applies the decoded final safe URL', () => {
+  const html = '<a id="site-contact-waze-link" href="/safe-map">Map</a>';
+  const content = structuredClone(defaultPayloadContent);
+  content.siteSettings.contactDetails.wazeUrl = '  /maps?one=1&amp;two=2  ';
+
+  const root = parse(renderLegacyContent(html, 'contactUs', content));
+
+  assert.equal(root.querySelector('#site-contact-waze-link').getAttribute('href'), '/maps?one=1&two=2');
+});
+
 test('renderLegacyContent maps all statistic values to their counter targets', () => {
   const html = [1, 2, 3, 4]
     .map((index) => `<span id="home-statistic-${index}-value" class="js-stat-counter" data-target="0" data-suffix="">0</span>`)
