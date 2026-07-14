@@ -418,6 +418,7 @@
                   return '';
               },
               async submitBooking() {
+                  if (this.loading) return;
                   this.successMessage = '';
                   this.errorMessage = this.validate();
                   if (this.errorMessage) return;
