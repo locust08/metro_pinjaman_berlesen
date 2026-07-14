@@ -10,6 +10,20 @@ export type SeedPayload = {
   updateGlobal: (args: { data: RecordValue; draft: boolean; slug: string }) => Promise<unknown>
 }
 
+export type SeedLogger = (message: string, details?: Record<string, unknown>) => void
+
+export type SeedSummary = {
+  completed: boolean
+  createdOrUpdated: string[]
+  skipped: string[]
+  failed: string[]
+}
+
+type SeedOptions = {
+  logger?: SeedLogger
+  operationTimeoutMs?: number
+}
+
 export const globalSeeds = [
   ['site-settings', defaultPayloadContent.siteSettings],
   ['home-page', defaultPayloadContent.homePage],
@@ -54,23 +68,82 @@ function missingValues(existing: unknown, defaults: unknown): unknown {
   return missing.length > 0 ? Object.fromEntries(missing) : undefined
 }
 
+function isPersistedGlobal(value: unknown): boolean {
+  return isRecord(value) && (typeof value.id === 'number' || typeof value.id === 'string' || typeof value.updatedAt === 'string')
+}
+
+function isEmptySeedPlaceholder(value: unknown): boolean {
+  if (value === null || value === undefined || value === '') return true
+  if (Array.isArray(value)) return value.length === 0
+  if (!isRecord(value)) return false
+
+  const contentEntries = Object.entries(value).filter(([key]) => !['id', 'createdAt', 'updatedAt', '_status'].includes(key))
+  return contentEntries.length === 0 || contentEntries.every(([, child]) => isEmptySeedPlaceholder(child))
+}
+
+function logSeed(logger: SeedLogger | undefined, message: string, details?: Record<string, unknown>) {
+  logger?.(message, details)
+}
+
+async function withTimeout<T>(label: string, timeoutMs: number, action: () => Promise<T>): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined
+  try {
+    return await Promise.race([
+      action(),
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs)
+      }),
+    ])
+  } finally {
+    if (timer) clearTimeout(timer)
+  }
+}
+
 export async function seedPayloadContent(
   payload: SeedPayload,
   seeds: readonly (readonly [string, unknown])[] = globalSeeds,
-) {
+  options: SeedOptions = {},
+): Promise<SeedSummary> {
+  const logger = options.logger
+  const operationTimeoutMs = options.operationTimeoutMs ?? 60_000
+  const summary: SeedSummary = { completed: false, createdOrUpdated: [], skipped: [], failed: [] }
+
   for (const [slug, canonicalContent] of seeds) {
-    const existing = await payload.findGlobal({ slug, depth: 0, draft: true })
+    logSeed(logger, `Reading ${slug}`)
+    const existingDraft = await withTimeout(`Reading ${slug}`, operationTimeoutMs, () =>
+      payload.findGlobal({ slug, depth: 0, draft: true }))
+    const existingPublished = await withTimeout(`Reading published ${slug}`, operationTimeoutMs, () =>
+      payload.findGlobal({ slug, depth: 0, draft: false }))
     const defaults = toPayloadValue(canonicalContent)
-    const data = missingValues(existing, defaults)
+    logSeed(logger, `Read ${slug}`, {
+      draftPersisted: isPersistedGlobal(existingDraft),
+      draftEmptyPlaceholder: isEmptySeedPlaceholder(existingDraft),
+      publishedPersisted: isPersistedGlobal(existingPublished),
+      publishedEmptyPlaceholder: isEmptySeedPlaceholder(existingPublished),
+      keys: isRecord(existingDraft) ? Object.keys(existingDraft).filter((key) => !['id', 'createdAt', 'updatedAt'].includes(key)) : [],
+    })
+    const publishedEmptyPlaceholder = isEmptySeedPlaceholder(existingPublished)
+    const draftEmptyPlaceholder = isEmptySeedPlaceholder(existingDraft)
+    const data = isPersistedGlobal(existingPublished) && !publishedEmptyPlaceholder
+      ? missingValues(existingDraft, defaults)
+      : defaults
 
     if (data !== undefined) {
-      await payload.updateGlobal({
+      logSeed(logger, `Updating ${slug}`)
+      await withTimeout(`Updating ${slug}`, operationTimeoutMs, () => payload.updateGlobal({
         slug,
         data: data as RecordValue,
-        draft: isRecord(existing) && existing._status === 'draft',
-      })
+        draft: isRecord(existingDraft) && existingDraft._status === 'draft' && !draftEmptyPlaceholder && !publishedEmptyPlaceholder,
+      }))
+      summary.createdOrUpdated.push(slug)
+    } else {
+      logSeed(logger, `Skipping ${slug}`)
+      summary.skipped.push(slug)
     }
   }
+
+  summary.completed = true
+  return summary
 }
 
 async function seedContent() {
@@ -78,13 +151,26 @@ async function seedContent() {
     import('payload'),
     import('../payload.config'),
   ])
+  const logger: SeedLogger = (message, details) => {
+    console.log(JSON.stringify({ level: 'info', message, ...(details ?? {}) }))
+  }
+  logger('Payload initialising')
   const payload = await getPayload({ config })
-  await seedPayloadContent(payload as unknown as SeedPayload)
+  logger('Payload initialised')
+  const summary = await seedPayloadContent(payload as unknown as SeedPayload, globalSeeds, { logger })
+  logger('Seed completed', summary)
+  if (typeof (payload as { destroy?: () => Promise<void> | void }).destroy === 'function') {
+    await (payload as { destroy: () => Promise<void> | void }).destroy()
+  }
 }
 
 const executedFile = process.argv[1]
 
-if (executedFile && path.resolve(executedFile) === fileURLToPath(import.meta.url)) seedContent().catch((error) => {
-  console.error('Unable to seed default CMS content.', error)
-  process.exitCode = 1
-})
+if (executedFile && path.resolve(executedFile) === fileURLToPath(import.meta.url)) {
+  seedContent()
+    .then(() => process.exit(0))
+    .catch((error) => {
+      console.error('Unable to seed default CMS content.', error)
+      process.exit(1)
+    })
+}

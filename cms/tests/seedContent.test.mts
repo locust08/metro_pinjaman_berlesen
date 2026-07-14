@@ -10,7 +10,7 @@ function merge(target: RecordValue, source: RecordValue): RecordValue {
     new Set([...Object.keys(target), ...Object.keys(source)]).values().map((key) => {
       const targetValue = target[key]
       const sourceValue = source[key]
-      return [key, isRecord(targetValue) && isRecord(sourceValue) ? merge(targetValue, sourceValue) : sourceValue]
+      return [key, isRecord(targetValue) && isRecord(sourceValue) ? merge(targetValue, sourceValue) : sourceValue ?? targetValue]
     }),
   )
 }
@@ -25,7 +25,8 @@ function createPayload(initial: RecordValue): SeedPayload & {
 } {
   const content = structuredClone(initial)
   const updateGlobal = vi.fn(async ({ slug, data }: { slug: string; data: RecordValue }) => {
-    content[slug] = merge((content[slug] as RecordValue) ?? {}, data)
+    const existing = isRecord(content[slug]) ? content[slug] as RecordValue : {}
+    content[slug] = merge({ id: 1, updatedAt: '2026-07-13T00:00:00.000Z', ...existing }, data)
   })
 
   return {
@@ -40,6 +41,8 @@ describe('canonical content seed', () => {
   it('fills missing and nullish defaults without including existing nested admin values', async () => {
     const payload = createPayload({
       'home-page': {
+        id: 1,
+        updatedAt: '2026-07-13T00:00:00.000Z',
         hero: {
           mainHeading: 'Admin heading',
           description: null,
@@ -66,9 +69,57 @@ describe('canonical content seed', () => {
     expect(payload.updateGlobal).not.toHaveBeenCalled()
   })
 
+  it('seeds virtual empty globals that Payload returns before a row exists', async () => {
+    const payload = createPayload({
+      'home-page': {
+        hero: {},
+        howItWorks: { steps: [] },
+        statistics: { items: [] },
+      },
+    })
+
+    await seedPayloadContent(payload, homeSeed)
+
+    expect(payload.updateGlobal).toHaveBeenCalledWith(expect.objectContaining({
+      slug: 'home-page',
+      data: expect.objectContaining({
+        hero: expect.objectContaining({
+          mainHeading: defaultPayloadContent.homePage.hero.mainHeading,
+        }),
+      }),
+    }))
+  })
+
+  it('seeds persisted empty draft placeholders as published defaults', async () => {
+    const payload = createPayload({
+      'home-page': {
+        id: 1,
+        updatedAt: '2026-07-13T00:00:00.000Z',
+        _status: 'draft',
+        hero: {},
+        howItWorks: { steps: [] },
+        statistics: { items: [] },
+      },
+    })
+
+    await seedPayloadContent(payload, homeSeed)
+
+    expect(payload.updateGlobal).toHaveBeenCalledWith(expect.objectContaining({
+      slug: 'home-page',
+      draft: false,
+      data: expect.objectContaining({
+        hero: expect.objectContaining({
+          mainHeading: defaultPayloadContent.homePage.hero.mainHeading,
+        }),
+      }),
+    }))
+  })
+
   it('reads the latest draft and keeps pending draft-only edits unpublished', async () => {
     const payload = createPayload({
       'home-page': {
+        id: 1,
+        updatedAt: '2026-07-13T00:00:00.000Z',
         _status: 'draft',
         hero: {
           mainHeading: 'Pending admin heading',
@@ -91,6 +142,8 @@ describe('canonical content seed', () => {
   it('does not overwrite existing values while seeding a published global', async () => {
     const payload = createPayload({
       'home-page': {
+        id: 1,
+        updatedAt: '2026-07-13T00:00:00.000Z',
         _status: 'published',
         hero: {
           mainHeading: 'Published admin heading',
