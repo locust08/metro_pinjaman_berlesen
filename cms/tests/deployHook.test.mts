@@ -1,6 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { DEPLOY_HOOK_TIMEOUT_MS, shouldTriggerPagesDeploy, triggerPagesDeployAfterPublish } from '../src/hooks/triggerPagesDeploy'
+import {
+  configurePagesDeployHookUrl,
+  DEPLOY_HOOK_TIMEOUT_MS,
+  shouldTriggerPagesDeploy,
+  triggerPagesDeployAfterPublish,
+} from '../src/hooks/triggerPagesDeploy'
 
 describe('Cloudflare Pages deploy hook', () => {
   const originalFetch = global.fetch
@@ -10,6 +15,7 @@ describe('Cloudflare Pages deploy hook', () => {
     vi.useRealTimers()
     global.fetch = originalFetch
     process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = originalUrl
+    configurePagesDeployHookUrl(undefined)
     vi.restoreAllMocks()
   })
 
@@ -37,6 +43,20 @@ describe('Cloudflare Pages deploy hook', () => {
 
     expect(fetchMock).toHaveBeenCalledWith(
       'https://example.com/deploy-hook',
+      expect.objectContaining({ method: 'POST', signal: expect.any(AbortSignal) }),
+    )
+  })
+
+  it('uses the configured Worker secret binding when process env is unavailable', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response('', { status: 200 }))
+    global.fetch = fetchMock
+    process.env.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL = undefined
+    configurePagesDeployHookUrl('https://example.com/worker-binding-deploy-hook')
+
+    await triggerPagesDeployAfterPublish({ doc: { _status: 'published' }, req: { payload: { logger: console } } } as any)
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://example.com/worker-binding-deploy-hook',
       expect.objectContaining({ method: 'POST', signal: expect.any(AbortSignal) }),
     )
   })

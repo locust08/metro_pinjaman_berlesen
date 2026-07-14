@@ -17,6 +17,7 @@ import { HowToApplyPage } from './globals/HowToApplyPage'
 import { LoanPage } from './globals/LoanPage'
 import { SiteSettings } from './globals/SiteSettings'
 import { DEFAULT_PAYLOAD_PUBLIC_SERVER_URL, publishedContentEndpoint } from './endpoints/publishedContent'
+import { configurePagesDeployHookUrl } from './hooks/triggerPagesDeploy'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,6 +56,10 @@ const payloadSecret =
   (cloudflare.env as CloudflareEnv & { PAYLOAD_SECRET?: string }).PAYLOAD_SECRET ||
   process.env.PAYLOAD_SECRET ||
   ''
+
+configurePagesDeployHookUrl(
+  (cloudflare.env as CloudflareEnv & { CLOUDFLARE_PAGES_DEPLOY_HOOK_URL?: string }).CLOUDFLARE_PAGES_DEPLOY_HOOK_URL,
+)
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || DEFAULT_PAYLOAD_PUBLIC_SERVER_URL,
