@@ -1,7 +1,8 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, versioning } from './fields/common'
-import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { triggerPagesDeployAfterNativeRestore, triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { withRestoreDeployEndpoint } from '../endpoints/restoreGlobalVersionWithDeploy'
 
 const contactMethodFields = (name: string, label: string, includeDescription = true) => section(
   name,
@@ -12,9 +13,9 @@ const contactMethodFields = (name: string, label: string, includeDescription = t
   ],
 )
 
-export const ContactUsPage: GlobalConfig = {
+export const ContactUsPage: GlobalConfig = withRestoreDeployEndpoint({
   slug: 'contact-us-page', label: 'Contact Us Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
-  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
+  hooks: { beforeOperation: [triggerPagesDeployAfterNativeRestore], afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Contact Us And Appointment Form', [section('contactForm', 'Contact us and appointment form', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), requiredText('submitButtonLabel', 'Submit button label'), imageUpload('image', 'Image')])]),
@@ -22,4 +23,4 @@ export const ContactUsPage: GlobalConfig = {
     tab('FAQ', [section('faq', 'FAQ', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), fixedRowArray('items', 'Questions and answers', 5, [requiredText('question', 'Question'), requiredTextarea('answer', 'Answer')])])]),
     tab('Still Have Questions', [section('stillHaveQuestions', 'Still have questions', [requiredText('heading', 'Heading')])]),
   ])],
-}
+})

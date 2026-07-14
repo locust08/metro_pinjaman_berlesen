@@ -1,11 +1,12 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, titleDescriptionFields, versioning } from './fields/common'
-import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { triggerPagesDeployAfterNativeRestore, triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { withRestoreDeployEndpoint } from '../endpoints/restoreGlobalVersionWithDeploy'
 
-export const HowToApplyPage: GlobalConfig = {
+export const HowToApplyPage: GlobalConfig = withRestoreDeployEndpoint({
   slug: 'how-to-apply-page', label: 'How To Apply Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
-  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
+  hooks: { beforeOperation: [triggerPagesDeployAfterNativeRestore], afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Hero', [section('hero', 'Hero', [requiredText('mainHeading', 'Main heading'), requiredTextarea('description', 'Description'), requiredText('primaryButtonLabel', 'Primary button label')])]),
@@ -14,4 +15,4 @@ export const HowToApplyPage: GlobalConfig = {
     tab('Eligibility Requirements', [section('eligibility', 'Eligibility requirements', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), fixedRowArray('items', 'Requirements', 4, [requiredTextarea('text', 'Requirement')])])]),
     tab('Ready To Apply', [section('readyToApply', 'Ready to apply', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), requiredText('whatsappButtonLabel', 'WhatsApp button label'), requiredText('submitButtonLabel', 'Submit button label')])]),
   ])],
-}
+})

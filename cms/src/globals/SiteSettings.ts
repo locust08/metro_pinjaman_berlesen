@@ -1,15 +1,19 @@
 import type { GlobalConfig } from 'payload'
 
 import { imageUpload, optionalText, requiredText, requiredTextarea, section, tab, tabs, versioning } from './fields/common'
-import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { triggerPagesDeployAfterNativeRestore, triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { withRestoreDeployEndpoint } from '../endpoints/restoreGlobalVersionWithDeploy'
 
-export const SiteSettings: GlobalConfig = {
+export const SiteSettings: GlobalConfig = withRestoreDeployEndpoint({
   slug: 'site-settings',
   label: 'Site Settings',
   access: { read: () => true },
   admin: { group: 'Website' },
   versions: versioning,
-  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
+  hooks: {
+    beforeOperation: [triggerPagesDeployAfterNativeRestore],
+    afterChange: [triggerPagesDeployAfterPublish],
+  },
   fields: [tabs([
     tab('Header', [
       section('header', 'Header', [
@@ -48,4 +52,4 @@ export const SiteSettings: GlobalConfig = {
       ]),
     ]),
   ])],
-}
+})

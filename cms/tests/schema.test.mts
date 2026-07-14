@@ -73,6 +73,15 @@ describe('Payload section schema', () => {
     })
   })
 
+  it('adds the restore-aware version endpoint to every global before Payload defaults', () => {
+    globals.forEach((global) => {
+      expect(global.endpoints?.[0]).toMatchObject({
+        method: 'post',
+        path: '/versions/:id',
+      })
+    })
+  })
+
   it('does not expose fields without stable production targets', () => {
     const siteSettings = stringify(SiteSettings)
     for (const field of [

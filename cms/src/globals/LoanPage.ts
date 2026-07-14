@@ -1,7 +1,8 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, titleDescriptionFields, versioning } from './fields/common'
-import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { triggerPagesDeployAfterNativeRestore, triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { withRestoreDeployEndpoint } from '../endpoints/restoreGlobalVersionWithDeploy'
 
 const loanFeatureFields = [imageUpload('image', 'Image'), ...titleDescriptionFields()]
 const requirementFields = [requiredTextarea('text', 'Requirement')]
@@ -20,9 +21,9 @@ const loanSection = (name: 'personalLoan' | 'businessLoan', label: string, requi
     ]),
   ])
 
-export const LoanPage: GlobalConfig = {
+export const LoanPage: GlobalConfig = withRestoreDeployEndpoint({
   slug: 'loan-page', label: 'Loan Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
-  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
+  hooks: { beforeOperation: [triggerPagesDeployAfterNativeRestore], afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Hero', [section('hero', 'Hero', [requiredText('mainHeading', 'Main heading'), requiredTextarea('description', 'Description'), requiredText('primaryButtonLabel', 'Primary button label'), requiredText('secondaryButtonLabel', 'Secondary button label'), imageUpload('image', 'Image')])]),
@@ -37,4 +38,4 @@ export const LoanPage: GlobalConfig = {
     ])]),
     tab('Interest Rates & Repayment', [section('interestRates', 'Interest rates and repayment', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), fixedRowArray('features', 'Features', 3, titleDescriptionFields())]), section('estimator', 'Repayment estimator', [requiredText('heading', 'Heading'), requiredTextarea('disclaimer', 'Disclaimer')])]),
   ])],
-}
+})

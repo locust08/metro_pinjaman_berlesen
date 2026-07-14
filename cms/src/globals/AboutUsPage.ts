@@ -1,11 +1,12 @@
 import type { GlobalConfig } from 'payload'
 
 import { fixedRowArray, imageUpload, requiredText, requiredTextarea, section, seoFields, tab, tabs, titleDescriptionFields, versioning } from './fields/common'
-import { triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { triggerPagesDeployAfterNativeRestore, triggerPagesDeployAfterPublish } from '../hooks/triggerPagesDeploy'
+import { withRestoreDeployEndpoint } from '../endpoints/restoreGlobalVersionWithDeploy'
 
-export const AboutUsPage: GlobalConfig = {
+export const AboutUsPage: GlobalConfig = withRestoreDeployEndpoint({
   slug: 'about-us-page', label: 'About Us Page', access: { read: () => true }, admin: { group: 'Pages' }, versions: versioning,
-  hooks: { afterChange: [triggerPagesDeployAfterPublish] },
+  hooks: { beforeOperation: [triggerPagesDeployAfterNativeRestore], afterChange: [triggerPagesDeployAfterPublish] },
   fields: [tabs([
     tab('SEO', [section('seo', 'SEO', seoFields())]),
     tab('Hero', [section('hero', 'Hero', [imageUpload('backgroundImage', 'Background image'), requiredText('mainHeading', 'Main heading'), requiredTextarea('description', 'Description')])]),
@@ -15,4 +16,4 @@ export const AboutUsPage: GlobalConfig = {
     tab('Who We Help', [section('whoWeHelp', 'Who we help', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), fixedRowArray('cards', 'Cards', 4, [imageUpload('image', 'Image'), ...titleDescriptionFields()])])]),
     tab('Ready To Get Started', [section('readyToGetStarted', 'Ready to get started', [requiredText('heading', 'Heading'), requiredTextarea('description', 'Description'), requiredText('applyButtonLabel', 'Apply button label'), requiredText('advisorButtonLabel', 'Advisor button label')])]),
   ])],
-}
+})
