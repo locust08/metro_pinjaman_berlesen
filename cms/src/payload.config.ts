@@ -64,6 +64,9 @@ configurePagesDeployHookUrl(
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || DEFAULT_PAYLOAD_PUBLIC_SERVER_URL,
   admin: {
+    components: {
+      header: [{ path: '/admin/VersionHistoryActions' }],
+    },
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),

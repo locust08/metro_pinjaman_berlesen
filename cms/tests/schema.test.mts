@@ -73,12 +73,17 @@ describe('Payload section schema', () => {
     })
   })
 
-  it('adds the restore-aware version endpoint to every global before Payload defaults', () => {
+  it('adds version UX endpoints to every global before Payload defaults', () => {
     globals.forEach((global) => {
-      expect(global.endpoints?.[0]).toMatchObject({
-        method: 'post',
-        path: '/versions/:id',
-      })
+      expect(global.endpoints?.slice(0, 4).map((endpoint) => ({
+        method: endpoint.method,
+        path: endpoint.path,
+      }))).toEqual([
+        { method: 'get', path: '/versions/:id/restore-info' },
+        { method: 'get', path: '/undo-latest-published-change' },
+        { method: 'post', path: '/undo-latest-published-change' },
+        { method: 'post', path: '/versions/:id' },
+      ])
     })
   })
 
