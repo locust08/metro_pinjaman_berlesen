@@ -134,6 +134,30 @@ test('renderLegacyContent maps all statistic values to their counter targets', (
   );
 });
 
+test('site settings logo and copyright fields update only their intended elements', () => {
+  const html = [
+    '<img id="site-header-logo" src="flow-assets/logos/flow-logo.svg" alt="">',
+    '<img id="site-footer-logo" src="flow-assets/logos/flow-logo.svg" alt="">',
+    '<p id="site-footer-copyright">© 2026 Flow. All rights reserved.</p>',
+    '<img id="home-hero-left-top-image" src="flow-assets/headers/header-4-left-top.png" alt="">',
+    '<p id="unmapped-copy">Get the funds you need.</p>',
+  ].join('');
+  const content = structuredClone(defaultPayloadContent);
+  content.siteSettings.header.websiteLogo = { src: '/api/media/file/header-logo.png', alt: 'Header logo' };
+  content.siteSettings.footer.footerLogo = { src: '/api/media/file/footer-logo.png', alt: 'Footer logo' };
+  content.siteSettings.footer.copyrightText = '© 2026 Metro Pinjaman Berlesen. All rights reserved.';
+
+  const root = parse(renderLegacyContent(html, 'home', content));
+
+  assert.equal(root.querySelector('#site-header-logo').getAttribute('src'), '/api/media/file/header-logo.png');
+  assert.equal(root.querySelector('#site-header-logo').getAttribute('alt'), 'Header logo');
+  assert.equal(root.querySelector('#site-footer-logo').getAttribute('src'), '/api/media/file/footer-logo.png');
+  assert.equal(root.querySelector('#site-footer-logo').getAttribute('alt'), 'Footer logo');
+  assert.equal(root.querySelector('#site-footer-copyright').text.trim(), '© 2026 Metro Pinjaman Berlesen. All rights reserved.');
+  assert.equal(root.querySelector('#home-hero-left-top-image').getAttribute('src'), 'flow-assets/headers/header-4-left-top.png');
+  assert.equal(root.querySelector('#unmapped-copy').text.trim(), 'Get the funds you need.');
+});
+
 test('every renderer binding resolves exactly once in its real legacy template', () => {
   for (const [pageId, filename] of Object.entries(legacyPages)) {
     const root = parse(fs.readFileSync(path.join(legacyDirectory, filename), 'utf8'));
