@@ -55,7 +55,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">%</div>
-          <h6 className="font-heading text-2xl tracking-tight mb-3">Competitive rates</h6>
+          <h6 className="font-heading text-2xl tracking-tight mb-3">Rate information</h6>
           <p className="text-gray-600">Transparent pricing with no hidden fees. You always know exactly what you'll pay.</p>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
@@ -65,7 +65,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-          <h6 className="font-heading text-2xl tracking-tight mb-3">Flexible terms</h6>
+          <h6 className="font-heading text-2xl tracking-tight mb-3">Monthly repayment plan</h6>
           <p className="text-gray-600">Choose repayment plans that fit your budget and lifestyle, not the other way around.</p>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
@@ -160,7 +160,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
     <div className="bg-lime-500 rounded-3xl px-6 py-16 sm:px-16 text-center">
       <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-gray-900">Ready to get started?</h2>
       <p className="text-lg text-gray-800 max-w-2xl mx-auto mb-10">Join thousands of satisfied customers who trust us with their financial goals. Apply today and get a decision in minutes.</p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center"><a className="inline-block px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition" href="#">Apply now</a><a className="inline-block px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition" href="#">Talk to an advisor</a></div>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center"><a className="inline-block px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition" href="contact.html">Apply Now</a><a className="inline-block px-8 py-4 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition" href="contact.html">Contact Us</a></div>
     </div>
   </div>
 </section>

@@ -55,7 +55,7 @@ const LoanSectionHeaders2: React.FC = () => {
         <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8">The Future of Green Energy</h1>
         <p className="max-w-md xl:max-w-none text-lg text-gray-700 mb-10">Our commitment to green energy is paving the way for a cleaner, healthier planet. Join us on a journey towards a future where clean, renewable energy sources transform the way we power our lives.</p>
         <div className="flex flex-col sm:flex-row">
-          <a href="contact.html" className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">Get in touch</a>
+          <a href="contact.html" className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">Contact Us</a>
         </div>
       </div>
     </div>

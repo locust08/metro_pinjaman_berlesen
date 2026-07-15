@@ -1,7 +1,7 @@
 import React from 'react';
 
 const whatsappUrl =
-  'https://wa.me/601170073191?text=Hi%20Metro%20Pinjaman%20Berlesen%2C%20I%20would%20like%20to%20enquire%20about%20a%20loan%20appointment.';
+  'https://wa.me/60102150037?text=Hi%20Metro%20Pinjaman%20Berlesen%2C%20I%20would%20like%20to%20enquire%20about%20a%20loan%20appointment.';
 
 const HowToApplySectionCustomComponents3: React.FC = () => {
     return (
@@ -52,7 +52,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
         </div>
         <div className="w-full lg:w-1/2 px-4">
           <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Required Documents</h2>
-          <p className="text-lg text-gray-600 mb-8">Have these documents ready before you apply to ensure a smooth and speedy process.</p>
+          <p className="text-lg text-gray-600 mb-8">Prepare these documents before submitting your loan enquiry.</p>
           <ul className="space-y-4">
             <li className="flex items-start p-4 bg-white rounded-xl shadow">
               <span className="flex items-center justify-center w-8 h-8 mr-4 text-sm font-bold text-black bg-lime-500 rounded-full">✓</span>

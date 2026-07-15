@@ -90,6 +90,14 @@ for (const page of pages) {
   assertNotContains(page, built, 'Review focus');
   assertNotContains(page, built, 'Personal income and repayment ability');
   assertNotContains(page, built, 'Business revenue, operations, and cash flow');
+  assertNotContains(page, built, 'Newsletter');
+  assertNotContains(page, built, 'WHATSAPP US');
+  assertNotContains(page, built, 'WhatsApp us');
+  assertNotContains(page, built, 'Talk to an advisor');
+  assertNotContains(page, built, 'Check Your Rate');
+  assertNotContains(page, built, 'Open To Malaysian only');
+  assertNotContains(page, built, 'RM3000');
+  assertNotContains(page, built, 'Prefer Call Back Time');
 
   assertNotContains(`src/legacy-pages/${page}`, legacy, 'RM313.36');
   assertNotContains(`src/legacy-pages/${page}`, legacy, '313.36');
@@ -100,7 +108,9 @@ for (const page of pages) {
 const howToApply = read(path.join(outDir, 'how_to_apply.html'));
 assertContains('how_to_apply.html', howToApply, 'contactBookingForm()');
 assertContains('how_to_apply.html', howToApply, 'Preferred Date');
-assertContains('how_to_apply.html', howToApply, 'Prefer Call Back Time');
+assertContains('how_to_apply.html', howToApply, 'Preferred callback time');
+assertContains('how_to_apply.html', howToApply, 'Prepare these documents before submitting your loan enquiry.');
+assertContains('how_to_apply.html', howToApply, 'RM3,000');
 assertContains('how_to_apply.html', howToApply, 'Select location');
 assertContains('how_to_apply.html', howToApply, 'Kuala Lumpur');
 assertContains('how_to_apply.html', howToApply, '/api/bookings');
@@ -110,7 +120,7 @@ assertContains('how_to_apply.html', howToApply, 'Business Loan');
 const index = read(path.join(outDir, 'index.html'));
 assertContains('index.html', index, 'Pay Off Your Debts');
 assertContains('index.html', index, 'No ATM Card');
-assertContains('index.html', index, 'Open To Malaysian only');
+assertContains('index.html', index, 'Open to all Malaysians');
 assertContains('index.html', index, 'No Guarantor');
 assertContains('index.html', index, 'Open every day');
 
@@ -121,6 +131,11 @@ assertContains('loan.html', loan, 'Minimum monthly salary of RM3,000');
 assertContains('loan.html', loan, 'Loan from RM500 to RM100,000');
 assertContains('loan.html', loan, 'From 8% - 12% APR');
 assertContains('loan.html', loan, 'Payment options from 6 months to 60 months');
+assertContains('loan.html', loan, 'View the required documents below.');
+assertContains('loan.html', loan, 'Personal Loan Documents');
+assertContains('loan.html', loan, 'Business Loan Documents');
+assertNotContains('loan.html', loan, 'Latest 3 months payslip and bank statement');
+assertNotContains('loan.html', loan, 'NRIC copy and name card');
 assertRepresentativeExample('src/legacy-pages/loan.html', loanSource);
 assertRepresentativeExample('out/loan.html', loan);
 if (loanHtmlRoute) {
