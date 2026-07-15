@@ -35,6 +35,7 @@ export async function onRequestPost({ request, env }) {
       email: cleanValue(payload.email),
       phone: cleanValue(payload.phone),
       loanType: cleanValue(payload.loanType),
+      location: cleanValue(payload.location),
       date: payload.date,
       time: payload.time,
       message: cleanValue(payload.message),

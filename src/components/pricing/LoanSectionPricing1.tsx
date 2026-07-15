@@ -27,8 +27,8 @@ const LoanSectionPricing1: React.FC = () => {
               <div className="py-4 px-2 shadow-md rounded-2xl">
                 <span className="block font-medium">Basic</span>
                 <div className="flex items-center justify-center">
-                  <span className="font-medium">$59</span>
-                  <span className="ml-1 font-medium text-gray-700">/month</span>
+                  <span className="font-medium">From 8%</span>
+                  <span className="ml-1 font-medium text-gray-700">APR</span>
                 </div>
               </div>
             </th>
@@ -36,8 +36,8 @@ const LoanSectionPricing1: React.FC = () => {
               <div className="py-4 px-2 shadow-md rounded-2xl">
                 <span className="block font-medium">Premium</span>
                 <div className="flex items-center justify-center">
-                  <span className="font-medium">$129</span>
-                  <span className="ml-1 font-medium text-gray-700">/month</span>
+                  <span className="font-medium">Up to 12%</span>
+                  <span className="ml-1 font-medium text-gray-700">APR</span>
                 </div>
               </div>
             </th>
@@ -60,12 +60,12 @@ const LoanSectionPricing1: React.FC = () => {
           <tr>
             <td className="border-b">
               <div className="py-8">
-                <span className="text-sm">Installation Fee</span>
+                <span className="text-sm">Application Support</span>
               </div>
             </td>
             <td className="border-b">
               <div className="py-8 text-center">
-                <span className="text-sm">$119</span>
+                <span className="text-sm">Contact us</span>
               </div>
             </td>
             <td className="border-b">
@@ -244,17 +244,17 @@ const LoanSectionPricing1: React.FC = () => {
           <tr>
             <td className="border-b">
               <div className="py-8">
-                <span className="text-sm">Energy Consumption Limit</span>
+                <span className="text-sm">Repayment Period</span>
               </div>
             </td>
             <td className="border-b">
               <div className="py-8 text-center">
-                <span className="text-sm">500 kWh</span>
+                <span className="text-sm">6 months</span>
               </div>
             </td>
             <td className="border-b">
               <div className="py-8 text-center">
-                <span className="text-sm">1,000 kWh</span>
+                <span className="text-sm">60 months</span>
               </div>
             </td>
             <td className="border-b">

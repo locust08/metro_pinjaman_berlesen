@@ -28,27 +28,12 @@ const LoanSectionCustomComponents5: React.FC = () => {
         <p className="text-gray-600">Pay off your loan early and save on interest with low or zero prepayment penalties.</p>
       </div>
     </div>
-    {/* Simple Repayment Estimator */}
-    <div className="mt-12 bg-blue-50 rounded-2xl p-8 max-w-3xl mx-auto loan-estimator">
-      <h3 className="text-xl font-semibold text-blue-900 mb-6 text-center">Estimate Your Monthly Repayment</h3>
-      <div className="grid sm:grid-cols-3 gap-5">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
-          <input type="number" defaultValue={10000} min={1000} className="est-amount w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Rate (% p.a.)</label>
-          <input type="number" defaultValue="6.5" step="0.1" min={0} className="est-rate w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Tenure (years)</label>
-          <input type="number" defaultValue={3} min={1} max={10} className="est-tenure w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        </div>
-      </div>
+    <div className="mt-12 bg-blue-50 rounded-2xl p-8 max-w-3xl mx-auto">
+      <h3 className="text-xl font-semibold text-blue-900 mb-6 text-center">Representative example</h3>
       <div className="mt-6 text-center">
-        <p className="text-gray-600">Estimated Monthly Payment</p>
-        <p className="est-result text-3xl font-bold text-blue-700 mt-1">$0</p>
-        <p className="text-xs text-gray-400 mt-2">*Estimates only. Actual rates and terms may vary upon approval.</p>
+        <p className="text-gray-600">Amount borrowed</p>
+        <p className="text-3xl font-bold text-blue-700 mt-1">RM5,000</p>
+        <p className="text-xs text-gray-400 mt-2">180-day period. Interest: RM448. Total payable: RM5,448.</p>
       </div>
     </div>
   </div>

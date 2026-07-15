@@ -1,11 +1,11 @@
 {
-  "short_name": "Shuffle App",
-  "name": "Shuffle Application",
+  "short_name": "Metro Pinjaman",
+  "name": "Metro Pinjaman Berlesen",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "metro-favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
       "src": "logo.png",

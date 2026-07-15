@@ -42,7 +42,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
       </div>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="rounded-3xl overflow-hidden shadow-lg">
-          <img className="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" alt="Personal Loan" />
+          <img className="w-full h-56 object-cover" src="flow-assets/metro/personal-loan-consultation.webp" alt="Customer discussing a personal loan application with an adviser" />
           <div className="p-8">
             <h5 className="font-heading text-3xl tracking-tight mb-4 text-teal-900">Personal Loan</h5>
             <p className="text-gray-600 mb-6">Get flexible funding for personal needs, from emergencies to dreams.</p>
@@ -50,7 +50,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
           </div>
         </div>
         <div className="rounded-3xl overflow-hidden shadow-lg">
-          <img className="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" alt="Business Loan" />
+          <img className="w-full h-56 object-cover" src="flow-assets/metro/business-financing-documents.webp" alt="Small-business owner reviewing financing documents" />
           <div className="p-8">
             <h5 className="font-heading text-3xl tracking-tight mb-4 text-teal-900">Business Loan</h5>
             <p className="text-gray-600 mb-6">Grow your business with funding tailored for entrepreneurs.</p>
@@ -66,7 +66,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
   <section className="py-16 lg:py-24 bg-teal-50">
     <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
       <div>
-        <img className="w-full rounded-3xl shadow-lg" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Why Choose Us" />
+        <img className="w-full rounded-3xl shadow-lg object-cover" src="flow-assets/metro/home-why-adviser-files.webp" alt="Adviser organising loan application files" />
       </div>
       <div>
         <h3 className="font-heading text-5xl xs:text-6xl tracking-tight mb-8 text-teal-900">Why Choose Us</h3>

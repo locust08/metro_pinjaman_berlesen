@@ -5,7 +5,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         <section className="bg-white">
   {/* Page Hero */}
   <div className="relative overflow-hidden">
-    <img className="absolute inset-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80" alt="Finance background" />
+    <img className="absolute inset-0 w-full h-full object-cover" src="flow-assets/metro/customer-support-consultation.webp" alt="Customer-service representative assisting with a loan enquiry" />
     <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/60" />
     <div className="relative max-w-7xl mx-auto px-4 py-24 xs:py-32">
       <span className="inline-block px-4 py-1 mb-6 text-sm font-medium tracking-wide bg-lime-500 text-gray-900 rounded-full">About Us</span>
@@ -17,7 +17,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
   <div className="max-w-7xl mx-auto px-4 py-20">
     <div className="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <img className="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Our team" />
+        <img className="w-full rounded-3xl shadow-xl object-cover" src="flow-assets/metro/about-company-adviser.webp" alt="Adviser reviewing loan service documents" />
       </div>
       <div>
         <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Who we are</h2>
@@ -29,8 +29,8 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
             <p className="text-sm text-gray-500">Loans funded</p>
           </div>
           <div>
-            <p className="font-heading text-4xl tracking-tight text-lime-600 mb-1">$2B+</p>
-            <p className="text-sm text-gray-500">Capital deployed</p>
+            <p className="font-heading text-4xl tracking-tight text-lime-600 mb-1">Varies</p>
+            <p className="text-sm text-gray-500">Processing and disbursement time</p>
           </div>
           <div>
             <p className="font-heading text-4xl tracking-tight text-lime-600 mb-1">98%</p>
@@ -112,7 +112,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         </ul>
       </div>
       <div className="order-1 md:order-2">
-        <img className="w-full rounded-3xl shadow-xl object-cover" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" alt="Security" />
+        <img className="w-full rounded-3xl shadow-xl object-cover" src="flow-assets/metro/about-document-review.webp" alt="Adviser checking loan documents carefully" />
       </div>
     </div>
   </div>
@@ -125,28 +125,28 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="rounded-3xl overflow-hidden bg-gray-800">
-          <img className="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home buyers" />
+          <img className="w-full h-44 object-cover" src="flow-assets/metro/who-help-personal-budget.webp" alt="Applicant reviewing a personal budget and documents" />
           <div className="p-6">
             <h6 className="font-heading text-2xl tracking-tight mb-2">Home buyers</h6>
             <p className="text-gray-400">Affordable mortgages to help you own your dream home.</p>
           </div>
         </div>
         <div className="rounded-3xl overflow-hidden bg-gray-800">
-          <img className="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Small businesses" />
+          <img className="w-full h-44 object-cover" src="flow-assets/metro/who-help-food-business.webp" alt="Food-business owner preparing financing records" />
           <div className="p-6">
             <h6 className="font-heading text-2xl tracking-tight mb-2">Small businesses</h6>
             <p className="text-gray-400">Working capital and growth funding for entrepreneurs.</p>
           </div>
         </div>
         <div className="rounded-3xl overflow-hidden bg-gray-800">
-          <img className="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80" alt="Individuals" />
+          <img className="w-full h-44 object-cover" src="flow-assets/metro/who-help-phone-support.webp" alt="Support representative answering a loan enquiry by phone" />
           <div className="p-6">
             <h6 className="font-heading text-2xl tracking-tight mb-2">Individuals</h6>
             <p className="text-gray-400">Personal loans for life's planned and unexpected moments.</p>
           </div>
         </div>
         <div className="rounded-3xl overflow-hidden bg-gray-800">
-          <img className="w-full h-44 object-cover" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="Students" />
+          <img className="w-full h-44 object-cover" src="flow-assets/metro/who-help-document-prep.webp" alt="Applicant organising loan application documents" />
           <div className="p-6">
             <h6 className="font-heading text-2xl tracking-tight mb-2">Students</h6>
             <p className="text-gray-400">Education financing to invest in your future career.</p>

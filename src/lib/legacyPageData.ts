@@ -11,8 +11,9 @@ function matchFirst(source: string, pattern: RegExp): string {
 export function loadLegacyPage(fileName: string): LegacyPageProps {
   const html = fs.readFileSync(path.join(legacyPageDir, fileName), 'utf8');
   const title = matchFirst(html, /<title[^>]*>([\s\S]*?)<\/title>/i);
+  const metaDescription = matchFirst(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["'][^>]*>/i);
   const bodyClassName = matchFirst(html, /<body[^>]*class=["']([^"']*)["'][^>]*>/i);
-  const bodyHtml = matchFirst(html, /<body[^>]*>([\s\S]*?)<\/body>/i);
+  const bodyHtml = matchFirst(html, /<body[^>]*>([\s\S]*?)<\/body>/i).replace(/\r\n/g, '\n');
 
   if (!bodyHtml) {
     throw new Error(`Could not extract body HTML from ${fileName}`);
@@ -20,6 +21,7 @@ export function loadLegacyPage(fileName: string): LegacyPageProps {
 
   return {
     title,
+    metaDescription,
     bodyClassName,
     bodyHtml,
   };

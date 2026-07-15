@@ -14,8 +14,8 @@ const ContactSectionContact4: React.FC = () => {
               <path d="M10.6666 16.147V33.3333C10.6666 34.0697 11.2636 34.6667 12 34.6667H36C36.7363 34.6667 37.3333 34.0697 37.3333 33.3333V16.147L24.8443 26.3653C24.3531 26.7671 23.6468 26.7671 23.1556 26.3653L10.6666 16.147Z" fill="#022C22" />
             </svg>
             <span className="block mt-8 mb-1 text-2xl font-medium">Email</span>
-            <p className="text-gray-700 mb-auto">We will reply within 2 working days</p>
-            <p className="mt-8 text-lg font-medium">hello@example.com</p>
+            <p className="text-gray-700 mb-auto">Email us for loan enquiries and application support.</p>
+            <p className="mt-8 text-lg font-medium">metropinjamanberlesan@gmail.com</p>
           </div>
         </div>
         <div className="w-full sm:w-1/2 md:w-1/3 px-4 mb-10 md:mb-0">
@@ -25,9 +25,9 @@ const ContactSectionContact4: React.FC = () => {
               <path d="M13.3333 12C12.597 12 12 12.597 12 13.3333C12 25.8518 22.1482 36 34.6667 36C35.403 36 36 35.403 36 34.6667V28.2667C36 27.6779 35.6138 27.1588 35.0498 26.9896L29.7165 25.3896C29.2466 25.2486 28.7374 25.377 28.3905 25.7239L26.8288 27.2856C24.2738 25.847 22.153 23.7262 20.7144 21.1712L22.2761 19.6095C22.623 19.2626 22.7514 18.7534 22.6104 18.2835L21.0104 12.9502C20.8412 12.3862 20.3221 12 19.7333 12H13.3333Z" fill="#022C22" />
             </svg>
             <span className="block mt-8 mb-1 text-2xl font-medium">Phone</span>
-            <p className="text-gray-700">We are available Monday-Friday</p>
-            <p className="text-gray-700 mb-auto">from 8 AM until 5 PM</p>
-            <p className="mt-8 text-lg font-medium">(239) 555-0108</p>
+            <p className="text-gray-700">We are open 24 hours</p>
+            <p className="text-gray-700 mb-auto">and 7 days a week</p>
+            <p className="mt-8 text-lg font-medium">+60 10-215 0037</p>
           </div>
         </div>
         <div className="w-full sm:w-1/2 md:w-1/3 px-4">
@@ -38,8 +38,8 @@ const ContactSectionContact4: React.FC = () => {
             </svg>
             <span className="block mt-8 mb-1 text-2xl font-medium">HQ Office</span>
             <p className="text-gray-700 mb-auto">Visit us in our office</p>
-            <p className="mt-8 text-lg font-medium">3891 Ranchview Dr. </p>
-            <p className="text-lg font-medium">Richardson, California 62639</p>
+            <p className="mt-8 text-lg font-medium">Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur</p>
+            <p className="text-lg font-medium">Federal Territory of Kuala Lumpur</p>
           </div>
         </div>
       </div>

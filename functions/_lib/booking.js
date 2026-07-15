@@ -118,6 +118,12 @@ export function validateBooking(payload) {
   return '';
 }
 
+function bookingMessage(payload) {
+  const location = cleanValue(payload.location);
+  const message = cleanValue(payload.message);
+  return [location ? `Location: ${location}` : '', message].filter(Boolean).join('\n\n');
+}
+
 export async function notionRequest(config, pathname, options = {}) {
   if (!config.notionToken) throw new Error('NOTION_TOKEN is not configured.');
 
@@ -251,7 +257,7 @@ export async function createBookingPage(config, payload) {
         Phone: { phone_number: cleanValue(payload.phone) },
         Email: { email: cleanValue(payload.email) },
         'Loan Type': { select: { name: cleanValue(payload.loanType) } },
-        'Message / Enquiry': { rich_text: [{ text: { content: cleanValue(payload.message) } }] },
+        'Message / Enquiry': { rich_text: [{ text: { content: bookingMessage(payload) } }] },
         'Slot Key': { rich_text: [{ text: { content: key } }] },
         'Cancel Token': { rich_text: [{ text: { content: token } }] },
         'Cancel URL': { url: cancelUrl },
@@ -267,7 +273,7 @@ export async function createBookingPage(config, payload) {
   });
 
   const confirmUrl = `${config.bookingBaseUrl}/api/bookings/confirm?id=${page.id}&token=${token}`;
-  return { ...pageToBooking(page), id: page.id, cancelToken: token, cancelUrl: realCancelUrl, confirmUrl, date: payload.date, time: payload.time };
+  return { ...pageToBooking(page), id: page.id, cancelToken: token, cancelUrl: realCancelUrl, confirmUrl, date: payload.date, time: payload.time, location: cleanValue(payload.location) };
 }
 
 export async function cancelBookingPage(config, pageId, token) {
@@ -361,10 +367,10 @@ function base64Content(value) {
 }
 
 const OFFICE_ADDRESS = 'Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur';
-const OFFICE_PHONE = '+60 11-7007 3191';
+const OFFICE_PHONE = '+60 10-215 0037';
 const OFFICE_EMAIL = 'metropinjamanberlesan@gmail.com';
 const WHATSAPP_MESSAGE = 'Hi Metro Pinjaman Berlesen, I would like to enquire about a loan appointment.';
-const WHATSAPP_URL = `https://wa.me/601170073191?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_URL = `https://wa.me/60102150037?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Jalan+Metro+1,+Metro+Prima,+52100+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/data=!4m2!3m1!1s0x31cc46401fe7d16b:0xcbf18c7859da390b';
 
 function bookingReference(booking) {
@@ -430,6 +436,7 @@ function bookingRows(booking, { includeInternal = false, includeSlot = true } = 
     ['Email', booking.email],
     ['Contact Number', booking.phone],
     ['Loan Type', booking.loanType],
+    ['Location', booking.location || '-'],
     ['Message / Enquiry', booking.message || '-'],
     ['Status', booking.status || 'Pending Confirmation'],
   ];
@@ -482,6 +489,7 @@ export async function sendBookingEmails(config, booking) {
     `Contact Number: ${booking.phone}`,
     `Loan Type: ${booking.loanType}`,
     `Preferred Slot: ${preferredSlot}`,
+    `Location: ${booking.location || '-'}`,
     `Message / Enquiry: ${booking.message || '-'}`,
     `Status: ${booking.status || 'Pending Confirmation'}`,
     `Notion: ${booking.notionUrl || '-'}`,

@@ -48,7 +48,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
     <div className="container mx-auto px-4">
       <div className="flex flex-wrap -mx-4 items-center">
         <div className="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">
-          <img className="block rounded-xl w-full" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="" />
+          <img className="block rounded-xl w-full object-cover" src="flow-assets/metro/how-apply-documents.webp" alt="Applicant preparing loan application documents" />
         </div>
         <div className="w-full lg:w-1/2 px-4">
           <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Required Documents</h2>

@@ -12,10 +12,10 @@ const ContactSectionFaq5: React.FC = () => {
       <button className="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl">
         <div>
           <div className="pr-5">
-            <h5 className="text-lg font-medium">What is green energy?</h5>
+            <h5 className="text-lg font-medium">What loan services do you offer?</h5>
           </div>
           <div className="overflow-hidden h-0 pr-5 duration-500">
-            <p className="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
+            <p className="text-gray-700 mt-4">We support personal and business loan enquiries, including application guidance, required documents, and repayment information.</p>
           </div>
         </div>
         <span className="flex-shrink-0">
@@ -35,10 +35,10 @@ const ContactSectionFaq5: React.FC = () => {
       <button className="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl">
         <div>
           <div className="pr-5">
-            <h5 className="text-lg font-medium">How does green energy benefit the environment?</h5>
+            <h5 className="text-lg font-medium">How fast can I receive the money?</h5>
           </div>
           <div className="overflow-hidden h-0 pr-5 duration-500">
-            <p className="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
+            <p className="text-gray-700 mt-4">Processing and disbursement time may vary depending on document verification and final confirmation.</p>
           </div>
         </div>
         <span className="flex-shrink-0">
@@ -58,10 +58,10 @@ const ContactSectionFaq5: React.FC = () => {
       <button className="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl">
         <div>
           <div className="pr-5">
-            <h5 className="text-lg font-medium">What green energy solutions does your company offer?</h5>
+            <h5 className="text-lg font-medium">Who can apply?</h5>
           </div>
           <div className="overflow-hidden h-0 pr-5 duration-500">
-            <p className="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
+            <p className="text-gray-700 mt-4">Our service is open to Malaysian applicants for personal and business loan enquiries.</p>
           </div>
         </div>
         <span className="flex-shrink-0">
@@ -81,10 +81,10 @@ const ContactSectionFaq5: React.FC = () => {
       <button className="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl">
         <div>
           <div className="pr-5">
-            <h5 className="text-lg font-medium">What support services do you offer after installing green energy solutions?</h5>
+            <h5 className="text-lg font-medium">Do I need an ATM card or guarantor?</h5>
           </div>
           <div className="overflow-hidden h-0 pr-5 duration-500">
-            <p className="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
+            <p className="text-gray-700 mt-4">No ATM card or guarantor is required for your loan application.</p>
           </div>
         </div>
         <span className="flex-shrink-0">
@@ -104,10 +104,10 @@ const ContactSectionFaq5: React.FC = () => {
       <button className="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl">
         <div>
           <div className="pr-5">
-            <h5 className="text-lg font-medium">How do solar panels work?</h5>
+            <h5 className="text-lg font-medium">What documents are required?</h5>
           </div>
           <div className="overflow-hidden h-0 pr-5 duration-500">
-            <p className="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
+            <p className="text-gray-700 mt-4">Typical documents include NRIC, contact details, income or bank documents, and business documents where applicable.</p>
           </div>
         </div>
         <span className="flex-shrink-0">
@@ -141,7 +141,7 @@ const ContactSectionFaq5: React.FC = () => {
             <a href="#" className="inline-block text-black font-medium underline">Contact Us</a>
             <span>page or call our customer support hotline at</span>
             <span className="text-black font-medium">(671) 555-0110</span>
-            <span>. Our dedicated team is ready to help you on your journey to a greener, more sustainable future.</span>
+            <span>. Our team is ready to help with your loan enquiry and application questions.</span>
           </p>
         </div>
       </div>

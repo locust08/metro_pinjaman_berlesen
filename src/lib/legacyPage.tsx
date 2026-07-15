@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 export type LegacyPageProps = {
   title: string;
+  metaDescription: string;
   bodyClassName: string;
   bodyHtml: string;
 };
@@ -15,7 +16,7 @@ declare global {
   }
 }
 
-export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPageProps) {
+export default function LegacyPage({ title, metaDescription, bodyClassName, bodyHtml }: LegacyPageProps) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -102,9 +103,13 @@ export default function LegacyPage({ title, bodyClassName, bodyHtml }: LegacyPag
     <>
       <Head>
         <title>{title}</title>
+        {metaDescription ? <meta name="description" content={metaDescription} /> : null}
+        {metaDescription ? <meta property="og:description" content={metaDescription} /> : null}
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="website" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
-      <div ref={pageRef} dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+      <div suppressHydrationWarning ref={pageRef} dangerouslySetInnerHTML={{ __html: bodyHtml }} />
     </>
   );
 }

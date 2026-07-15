@@ -4,32 +4,28 @@ const IndexSectionHeaders6: React.FC = () => {
     return (
         <section>
   <div className="relative pt-18">
-    <img className="hidden md:block absolute top-0 left-0 mt-28 w-32 lg:w-64 xl:h-80 rounded-r-2xl" src="flow-assets/headers/header-4-left-top.png" alt="" />
-    <img className="hidden md:block absolute top-0 right-0 mt-20 w-32 lg:w-64 xl:h-64 rounded-l-2xl" src="flow-assets/headers/header-4-right-top.png" alt="" />
+    <img className="hidden md:block absolute top-0 left-0 mt-28 w-32 lg:w-64 xl:h-80 rounded-r-2xl object-cover" src="flow-assets/metro/home-hero-adviser.webp" alt="Adviser assisting a customer with a loan enquiry" />
+    <img className="hidden md:block absolute top-0 right-0 mt-20 w-32 lg:w-64 xl:h-64 rounded-l-2xl object-cover" src="flow-assets/metro/home-personal-documents.webp" alt="Couple reviewing personal loan documents at home" />
     <div className="container mx-auto px-4 relative">
       <div className="max-w-lg xl:max-w-xl mx-auto mb-12 lg:mb-0 text-center">
-        <div className="flex mb-6 items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-            <rect width={12} height={12} rx={2} fill="#022C22" />
-            <circle cx={6} cy={6} r={4} fill="#BEF264" />
-          </svg>
-          <span className="ml-2 text-sm font-medium">Powering Tomorrow</span>
+        <div className="mb-6 text-center">
+          <span className="text-sm font-medium">Metro Pinjaman Berlesen</span>
         </div>
         <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8">Simple Loans,</h1>
         <p className="text-lg text-gray-700 mb-10">Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending.</p>
-        <div className="flex flex-col sm:flex-row justify-center">
-          <a href="#" className="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200">Check Your Rate</a>
-          <a href="#" className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">Learn More</a>
+        <div className="relative z-10 flex flex-col sm:flex-row justify-center">
+          <a href="loan.html#interest-rate" className="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200">Check Your Rate</a>
+          <a href="loan.html" className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">Learn More</a>
         </div>
       </div>
       <div className="flex -mx-4 items-end relative">
         <div className="w-1/3 xs:w-1/2 lg:w-auto px-4">
-          <img className="block h-32 lg:h-48 rounded-t-2xl" src="flow-assets/headers/header-4-bottom-lleft.png" alt="" />
+          <img className="block h-32 lg:h-48 rounded-t-2xl object-cover" src="flow-assets/metro/home-business-cafe.webp" alt="Small-business owner reviewing working capital documents" />
         </div>
         <div className="w-2/3 xs:w-1/2 lg:w-auto ml-auto px-4">
-          <img className="block w-1/2 md:w-64 ml-auto lg:w-64 xl:w-72 rounded-t-2xl" src="flow-assets/headers/header-4-bottom-right.png" alt="" />
+          <img className="block w-1/2 md:w-64 ml-auto lg:w-64 xl:w-72 rounded-t-2xl object-cover" src="flow-assets/metro/required-documents-closeup.webp" alt="Organised loan application documents on a desk" />
         </div>
-        <div className="absolute bottom-0 left-0 w-full py-32 bg-gradient-to-t from-white to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 w-full py-32 bg-gradient-to-t from-white to-transparent" />
       </div>
     </div>
   </div>

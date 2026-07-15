@@ -280,7 +280,7 @@ const ContactSectionContact2: React.FC = () => {
               </div>
               <div className="w-full lg:w-1/2 px-4">
                 <div className="lg:max-w-md lg:ml-auto h-full">
-                  <img className="block w-full h-full" src="flow-assets/contact/photo-1.png" alt="" />
+                  <img className="block w-full h-full object-cover" src="flow-assets/metro/contact-phone-support.webp" alt="Customer-service representative assisting by phone and online enquiry" />
                 </div>
               </div>
             </div>
