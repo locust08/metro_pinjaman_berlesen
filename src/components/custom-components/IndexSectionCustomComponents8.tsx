@@ -24,7 +24,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
         <div className="bg-teal-50 rounded-3xl p-8">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-500 text-teal-900 font-heading text-2xl font-bold rounded-full mx-auto mb-6">3</div>
           <h5 className="font-heading text-2xl tracking-tight mb-3 text-teal-900">Get Approved</h5>
-          <p className="text-gray-600">Receive fast approval with no guarantor.</p>
+          <p className="text-gray-600">Clear loan information with no guarantor.</p>
         </div>
         <div className="bg-teal-50 rounded-3xl p-8">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-500 text-teal-900 font-heading text-2xl font-bold rounded-full mx-auto mb-6">4</div>
@@ -45,7 +45,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
           <img className="w-full h-56 object-cover" src="flow-assets/metro/personal-loan-consultation.webp" alt="Customer discussing a personal loan application with an adviser" />
           <div className="p-8">
             <h5 className="font-heading text-3xl tracking-tight mb-4 text-teal-900">Personal Loan</h5>
-            <p className="text-gray-600 mb-6">Get flexible funding for personal needs, from emergencies to dreams.</p>
+            <p className="text-gray-600 mb-6">View personal loan information for individual needs and enquiries.</p>
             <a className="inline-block underline text-black hover:text-lime-600" href="loan.html#personal-loan">View Loan Details</a>
           </div>
         </div>
@@ -99,7 +99,7 @@ const IndexSectionCustomComponents8: React.FC = () => {
   <section className="py-20 bg-lime-500">
     <div className="max-w-4xl mx-auto px-6 text-center">
       <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-teal-900">Ready to get started?</h2>
-      <p className="text-lg text-teal-900 mb-10 opacity-80">Apply Now and get the funds you need in no time.</p>
+      <p className="text-lg text-teal-900 mb-10 opacity-80">Apply Now or contact us for personal and business loan enquiries.</p>
       <div className="flex flex-wrap gap-4 justify-center">
         <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-white bg-teal-900 hover:bg-white rounded-full transition duration-200" href="contact.html">Apply Now</a>
         <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-teal-900 hover:text-white border border-teal-900 hover:border-teal-900 bg-white hover:bg-teal-900 rounded-full transition duration-200" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>

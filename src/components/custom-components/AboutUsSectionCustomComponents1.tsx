@@ -10,7 +10,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
     <div className="relative max-w-7xl mx-auto px-4 py-24 xs:py-32">
       <span className="inline-block px-4 py-1 mb-6 text-sm font-medium tracking-wide bg-lime-500 text-gray-900 rounded-full">About Us</span>
       <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-6 text-white">Lending you trust, building your future.</h1>
-      <p className="text-lg text-gray-200 max-w-2xl">We help individuals and businesses access fair, fast and transparent loan solutions—so you can focus on what matters most.</p>
+      <p className="text-lg text-gray-200 max-w-2xl">We help individuals and businesses access clear and transparent loan information, so you can focus on what matters most.</p>
     </div>
   </div>
   {/* Company Overview */}
@@ -50,8 +50,8 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">⚡</div>
-          <h6 className="font-heading text-2xl tracking-tight mb-3">Fast approvals</h6>
-          <p className="text-gray-600">Get a decision in minutes, not days. Our streamlined process means funds reach you faster.</p>
+          <h6 className="font-heading text-2xl tracking-tight mb-3">Clear review process</h6>
+          <p className="text-gray-600">Our team reviews your enquiry and contacts you about the next step.</p>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">%</div>
@@ -60,7 +60,7 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">
           <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">♥</div>
-          <h6 className="font-heading text-2xl tracking-tight mb-3">Personalized service</h6>
+          <h6 className="font-heading text-2xl tracking-tight mb-3">Personalised service</h6>
           <p className="text-gray-600">Real people, real support. Our advisors guide you through every step of the journey.</p>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition">

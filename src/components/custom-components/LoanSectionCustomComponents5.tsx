@@ -5,7 +5,7 @@ const LoanSectionCustomComponents5: React.FC = () => {
         <section className="bg-white">
   <div className="max-w-6xl mx-auto px-6 py-16">
     <h2 className="text-3xl font-bold text-blue-900 mb-4 text-center">Interest Rates &amp; Repayment</h2>
-    <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">Transparent pricing with flexible repayment options designed to fit your budget.</p>
+    <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">Transparent pricing information with clear repayment details.</p>
     <div className="grid md:grid-cols-3 gap-8">
       <div className="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
         <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold">%</div>
@@ -19,7 +19,7 @@ const LoanSectionCustomComponents5: React.FC = () => {
       </div>
       <div className="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
         <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-blue-100 text-blue-700 rounded-full text-2xl font-bold">$</div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Flexible Repayment</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">Repayment Information</h3>
         <p className="text-gray-600">Choose monthly installments that suit your cash flow, with no hidden fees or surprises.</p>
       </div>
       <div className="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-100 text-center">

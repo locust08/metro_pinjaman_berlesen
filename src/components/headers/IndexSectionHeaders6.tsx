@@ -14,7 +14,7 @@ const IndexSectionHeaders6: React.FC = () => {
         <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8">Simple Loans,</h1>
         <p className="text-lg text-gray-700 mb-10">Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending.</p>
         <div className="relative z-10 flex flex-col sm:flex-row justify-center">
-          <a href="loan.html#interest-rate" className="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200">View Loan Details</a>
+          <a href="loan.html#interest-rate" className="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200">Apply Now</a>
           <a href="loan.html" className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">View Loan Details</a>
         </div>
       </div>

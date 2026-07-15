@@ -10,7 +10,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
     <div className="container mx-auto px-4">
       <div className="max-w-2xl mx-auto text-center mb-16">
         <h2 className="font-heading text-5xl xs:text-7xl tracking-tight mb-6">Step-by-Step Process</h2>
-        <p className="text-lg text-gray-600">A clear and simple path from application to approval.</p>
+        <p className="text-lg text-gray-600">A clear and simple path for submitting your loan enquiry.</p>
       </div>
       <div className="flex flex-wrap -mx-4">
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
@@ -31,7 +31,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
           <div className="h-full p-8 bg-gray-50 rounded-2xl hover:shadow-xl transition duration-200">
             <div className="flex items-center justify-center w-14 h-14 mb-6 text-2xl font-bold text-black bg-lime-500 rounded-full">3</div>
             <h5 className="font-heading text-2xl tracking-tight mb-3">Get Reviewed</h5>
-            <p className="text-gray-600">Our team reviews your application quickly and contacts you for any clarifications.</p>
+            <p className="text-gray-600">Our team reviews your application and contacts you for any clarifications.</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">

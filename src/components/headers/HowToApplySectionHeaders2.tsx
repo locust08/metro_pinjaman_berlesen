@@ -50,7 +50,7 @@ const HowToApplySectionHeaders2: React.FC = () => {
     <div className="container mx-auto px-4 relative">
       <div className="max-w-lg xl:max-w-xl mx-auto text-center">
         <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-8">Get Your Loan in Simple Steps</h1>
-        <p className="max-w-md xl:max-w-none text-lg text-gray-700 mb-10">Applying for a loan with us is fast and hassle-free. Follow our easy guide below to complete your application and get the funds you need.</p>
+        <p className="max-w-md xl:max-w-none text-lg text-gray-700 mb-10">Choose the loan that works for you, fill up the form for your application, and our team will review your application and contact you about the next step.</p>
         <a href="#" className="inline-flex py-4 px-6 mb-3 sm:mb-0 sm:mr-4 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200">Start Your Application</a>
       </div>
     </div>
