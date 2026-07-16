@@ -169,9 +169,21 @@ assertContains('contact.html', contact, 'Metro Pinjaman Berlesen provides inform
 assertNotContains('contact.html', contact, 'Metro Pinjaman Berlesen offers personal loans and business loans with flexible repayment options.');
 
 const about = read(path.join(outDir, 'about_us.html'));
-assertContains('about_us.html', about, 'Personalised service');
+assertContains('about_us.html', about, 'Clear loan information and application guidance for individuals and businesses across Malaysia.');
+assertContains('about_us.html', about, 'Metro Pinjaman Berlesen provides enquiry support for personal and business loans.');
+assertContains('about_us.html', about, 'Open to all Malaysians');
+assertContains('about_us.html', about, 'No ATM card required');
+assertContains('about_us.html', about, 'No guarantor required');
+assertContains('about_us.html', about, 'Available 24 hours, 7 days a week');
+assertContains('about_us.html', about, 'We support individuals, small-business owners and companies looking for personal or business loan information.');
+assertContains('about_us.html', about, 'Companies and corporate groups');
+assertContains('about_us.html', about, 'Need help with your loan enquiry?');
 assertContains('about_us.html', about, '6–60 month repayment options');
 assertNotContains('about_us.html', about, 'Personalized service');
 assertNotContains('about_us.html', about, '6 to 60 month payment options');
+assertNotContains('about_us.html', about, 'Trust &amp; security');
+assertNotContains('about_us.html', about, 'Processing and disbursement time');
+assertNotContains('about_us.html', about, 'Ready to get started?');
+assertNotContains('about_us.html', about, 'get a decision in minutes');
 
 console.log(`Verified ${pages.length} legacy pages in Next export.`);
