@@ -17,6 +17,8 @@ const staleTemplateContentPatterns = [
   /Powering Tomorrow/i,
   /The Future of Green Energy/i,
   /Get the funds you need with competitive rates/i,
+  /^Apply now and get the funds you need in no time\.?$/i,
+  /^Applying for a loan with us is fast and hassle-free\. Follow our easy guide below to complete your application and get the funds you need\.?$/i,
   /^Simple Loans,?$/i,
   /^Check Your Rate$/i,
   /^Learn More$/i,

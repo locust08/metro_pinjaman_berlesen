@@ -66,6 +66,8 @@ test('published content merge ignores stale template placeholders while preservi
   published.homePage.hero.eyebrow = 'Powering Tomorrow';
   published.homePage.hero.mainHeading = 'Simple Loans,';
   published.homePage.hero.description = 'Get the funds you need with competitive rates and a streamlined application.';
+  published.homePage.readyToGetStarted.description = 'Apply now and get the funds you need in no time.';
+  published.howToApplyPage.hero.description = 'Applying for a loan with us is fast and hassle-free. Follow our easy guide below to complete your application and get the funds you need.';
   published.homePage.howItWorks.heading = 'Editor-approved heading';
   published.siteSettings.footer.copyrightText = '© 2026 Flow. All rights reserved.';
 
@@ -75,6 +77,8 @@ test('published content merge ignores stale template placeholders while preservi
   assert.equal(merged.homePage.hero.eyebrow, fallback.homePage.hero.eyebrow);
   assert.equal(merged.homePage.hero.mainHeading, fallback.homePage.hero.mainHeading);
   assert.equal(merged.homePage.hero.description, fallback.homePage.hero.description);
+  assert.equal(merged.homePage.readyToGetStarted.description, fallback.homePage.readyToGetStarted.description);
+  assert.equal(merged.howToApplyPage.hero.description, fallback.howToApplyPage.hero.description);
   assert.equal(merged.homePage.howItWorks.heading, 'Editor-approved heading');
   assert.equal(merged.siteSettings.footer.copyrightText, fallback.siteSettings.footer.copyrightText);
 });
