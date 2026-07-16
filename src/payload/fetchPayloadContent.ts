@@ -11,32 +11,6 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-const staleTemplateContentPatterns = [
-  /LoanEase/i,
-  /green energy/i,
-  /Powering Tomorrow/i,
-  /The Future of Green Energy/i,
-  /Get the funds you need with competitive rates/i,
-  /^Apply now and get the funds you need in no time\.?$/i,
-  /^Applying for a loan with us is fast and hassle-free\. Follow our easy guide below to complete your application and get the funds you need\.?$/i,
-  /^Simple Loans,?$/i,
-  /^Check Your Rate$/i,
-  /^Learn More$/i,
-  /^Get your loan in four simple steps\.?$/i,
-  /^Select Loan$/i,
-  /^Apply Online$/i,
-  /^Get Approved$/i,
-  /^Choose the perfect loan to match your goals\.?$/i,
-  /^Lending you trust, building your future\.?$/i,
-  /^Get Your Loan in Simple Steps$/i,
-  /^© 2026 Flow\b/i,
-];
-
-function isStaleTemplateString(value: string): boolean {
-  const normalized = value.replace(/\s+/g, ' ').trim();
-  return staleTemplateContentPatterns.some((pattern) => pattern.test(normalized));
-}
-
 export function mergePublishedContentWithFallback(fallback: unknown, value: unknown): unknown {
   if (value == null) return fallback;
 
@@ -49,10 +23,6 @@ export function mergePublishedContentWithFallback(fallback: unknown, value: unkn
     return Object.fromEntries(
       [...keys].map((key) => [key, mergePublishedContentWithFallback(fallback[key], value[key])]),
     );
-  }
-
-  if (typeof value === 'string' && isStaleTemplateString(value)) {
-    return typeof fallback === 'string' ? fallback : '';
   }
 
   return value;

@@ -19,6 +19,7 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "seed:content": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/seedContent.ts",
+    "sync:approved-preview": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/syncApprovedPreviewContent.ts",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",

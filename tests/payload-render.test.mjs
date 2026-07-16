@@ -59,7 +59,7 @@ test('renderLegacyContent leaves unmatched HTML unchanged', () => {
   assert.equal(output, html);
 });
 
-test('published content merge ignores stale template placeholders while preserving real edits', () => {
+test('published content merge preserves valid published text even when it contains unusual words', () => {
   const fallback = structuredClone(defaultPayloadContent);
   const published = structuredClone(defaultPayloadContent);
   published.homePage.seo.title = 'LoanEase — Homepage';
@@ -73,14 +73,45 @@ test('published content merge ignores stale template placeholders while preservi
 
   const merged = mergePublishedContentWithFallback(fallback, published);
 
-  assert.equal(merged.homePage.seo.title, fallback.homePage.seo.title);
-  assert.equal(merged.homePage.hero.eyebrow, fallback.homePage.hero.eyebrow);
-  assert.equal(merged.homePage.hero.mainHeading, fallback.homePage.hero.mainHeading);
-  assert.equal(merged.homePage.hero.description, fallback.homePage.hero.description);
-  assert.equal(merged.homePage.readyToGetStarted.description, fallback.homePage.readyToGetStarted.description);
-  assert.equal(merged.howToApplyPage.hero.description, fallback.howToApplyPage.hero.description);
+  assert.equal(merged.homePage.seo.title, 'LoanEase — Homepage');
+  assert.equal(merged.homePage.hero.eyebrow, 'Powering Tomorrow');
+  assert.equal(merged.homePage.hero.mainHeading, 'Simple Loans,');
+  assert.equal(merged.homePage.hero.description, 'Get the funds you need with competitive rates and a streamlined application.');
+  assert.equal(merged.homePage.readyToGetStarted.description, 'Apply now and get the funds you need in no time.');
+  assert.equal(merged.howToApplyPage.hero.description, 'Applying for a loan with us is fast and hassle-free. Follow our easy guide below to complete your application and get the funds you need.');
   assert.equal(merged.homePage.howItWorks.heading, 'Editor-approved heading');
-  assert.equal(merged.siteSettings.footer.copyrightText, fallback.siteSettings.footer.copyrightText);
+  assert.equal(merged.siteSettings.footer.copyrightText, '© 2026 Flow. All rights reserved.');
+});
+
+test('published content merge uses defaults for null or missing fields only', () => {
+  const merged = mergePublishedContentWithFallback(defaultPayloadContent, {
+    homePage: {
+      hero: {
+        mainHeading: null,
+        description: 'Published editor description',
+      },
+    },
+  });
+
+  assert.equal(merged.homePage.hero.mainHeading, defaultPayloadContent.homePage.hero.mainHeading);
+  assert.equal(merged.homePage.hero.description, 'Published editor description');
+  assert.equal(merged.homePage.hero.primaryButtonLabel, defaultPayloadContent.homePage.hero.primaryButtonLabel);
+});
+
+test('published content merge preserves published images exactly', () => {
+  const merged = mergePublishedContentWithFallback(defaultPayloadContent, {
+    contactUsPage: {
+      contactForm: {
+        image: {
+          src: 'https://cms.example.test/api/media/file/contact.webp',
+          alt: 'Published contact image alt',
+        },
+      },
+    },
+  });
+
+  assert.equal(merged.contactUsPage.contactForm.image.src, 'https://cms.example.test/api/media/file/contact.webp');
+  assert.equal(merged.contactUsPage.contactForm.image.alt, 'Published contact image alt');
 });
 
 test('renderLegacyContent escapes hostile editor text without creating executable nodes', () => {
