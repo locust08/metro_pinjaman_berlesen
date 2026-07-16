@@ -14,28 +14,28 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
       </div>
       <div className="flex flex-wrap -mx-4">
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-          <div className="h-full p-8 bg-gray-50 rounded-2xl hover:shadow-xl transition duration-200">
+          <div className="h-full p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-lime-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition duration-200">
             <div className="flex items-center justify-center w-14 h-14 mb-6 text-2xl font-bold text-black bg-lime-500 rounded-full">1</div>
             <h5 className="font-heading text-2xl tracking-tight mb-3">Choose Your Loan</h5>
             <p className="text-gray-600">Select the loan option that best fits your needs and budget from our range of services.</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-          <div className="h-full p-8 bg-gray-50 rounded-2xl hover:shadow-xl transition duration-200">
+          <div className="h-full p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-lime-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition duration-200">
             <div className="flex items-center justify-center w-14 h-14 mb-6 text-2xl font-bold text-black bg-lime-500 rounded-full">2</div>
             <h5 className="font-heading text-2xl tracking-tight mb-3">Submit Documents</h5>
             <p className="text-gray-600">Prepare and upload the required documents listed below to verify your eligibility.</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-          <div className="h-full p-8 bg-gray-50 rounded-2xl hover:shadow-xl transition duration-200">
+          <div className="h-full p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-lime-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition duration-200">
             <div className="flex items-center justify-center w-14 h-14 mb-6 text-2xl font-bold text-black bg-lime-500 rounded-full">3</div>
             <h5 className="font-heading text-2xl tracking-tight mb-3">Get Reviewed</h5>
             <p className="text-gray-600">Our team reviews your application and contacts you for any clarifications.</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-          <div className="h-full p-8 bg-gray-50 rounded-2xl hover:shadow-xl transition duration-200">
+          <div className="h-full p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-lime-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition duration-200">
             <div className="flex items-center justify-center w-14 h-14 mb-6 text-2xl font-bold text-black bg-lime-500 rounded-full">4</div>
             <h5 className="font-heading text-2xl tracking-tight mb-3">Receive Funds</h5>
             <p className="text-gray-600">Once approved, your loan amount is disbursed directly to your account.</p>
@@ -121,7 +121,7 @@ const HowToApplySectionCustomComponents3: React.FC = () => {
       </div>
     </div>
   </section>
-  <section className="py-20 bg-gray-50" id="apply">
+    <section className="pt-20 pb-8 lg:pb-10 bg-gray-50" id="apply">
     <div className="container mx-auto px-4">
       <div className="flex flex-wrap -mx-4 items-center">
         <div className="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">

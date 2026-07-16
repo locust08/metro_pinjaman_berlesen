@@ -4,13 +4,23 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
     return (
         <section className="bg-white">
   {/* Page Hero */}
-  <div className="relative overflow-hidden">
-    <img className="absolute inset-0 w-full h-full object-cover" src="flow-assets/metro/customer-support-consultation.webp" alt="Customer-service representative assisting with a loan enquiry" />
-    <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/60" />
-    <div className="relative max-w-7xl mx-auto px-4 py-24 xs:py-32">
-      <span className="inline-block px-4 py-1 mb-6 text-sm font-medium tracking-wide bg-lime-500 text-gray-900 rounded-full">About Us</span>
-      <h1 className="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight mb-6 text-white">Lending you trust, building your future.</h1>
-      <p className="text-lg text-gray-200 max-w-2xl">We help individuals and businesses access clear and transparent loan information, so you can focus on what matters most.</p>
+  <div className="relative overflow-hidden bg-white">
+    <img className="absolute right-0 top-0 hidden lg:block w-[420px] opacity-20 pointer-events-none" src="flow-assets/pricing/waves-right-top.png" alt="" />
+    <div className="container mx-auto px-4 py-20 lg:py-24">
+      <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 xl:gap-16 items-center">
+        <div className="max-w-2xl">
+          <span className="inline-block px-4 py-1 mb-6 text-sm font-medium tracking-wide bg-lime-500 text-gray-900 rounded-full">About Us</span>
+          <h1 className="font-heading text-4xl xs:text-5xl lg:text-6xl tracking-tight mb-6 text-gray-900">Supporting Personal and Business Loan Enquiries</h1>
+          <p className="text-lg text-gray-600 max-w-xl mb-8">Metro Pinjaman Berlesen provides clear information and application support for individuals, small businesses and corporate groups across Malaysia.</p>
+          <a className="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200" href="contact.html">Contact Us</a>
+        </div>
+        <div className="relative">
+          <div className="absolute -right-4 -bottom-4 w-40 h-40 bg-lime-500 rounded-3xl opacity-80" />
+          <div className="relative p-3 bg-white border border-gray-100 shadow-xl rounded-3xl">
+            <img className="w-full h-80 md:h-[420px] object-cover rounded-2xl" src="flow-assets/metro/customer-support-consultation.webp" alt="Customer-service representative assisting with a loan enquiry" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   {/* Company Overview */}
