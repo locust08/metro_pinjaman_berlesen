@@ -64,35 +64,6 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
       </div>
     </div>
   </div>
-  {/* Why Choose Us */}
-  <div className="max-w-7xl mx-auto px-4 py-20 lg:py-24">
-    <div className="max-w-3xl mb-14">
-      <h2 className="font-heading text-4xl xs:text-6xl tracking-tight mb-6">Why choose us</h2>
-      <p className="text-lg text-gray-600">Practical application requirements and availability, clearly presented for loan enquiries.</p>
-    </div>
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition border border-gray-100">
-        <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-        <h6 className="font-heading text-2xl tracking-tight mb-3">Open to all Malaysians</h6>
-        <p className="text-gray-600">Loan enquiry support is available for Malaysian applicants.</p>
-      </div>
-      <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition border border-gray-100">
-        <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-        <h6 className="font-heading text-2xl tracking-tight mb-3">No ATM card required</h6>
-        <p className="text-gray-600">Applicants do not need to provide an ATM card.</p>
-      </div>
-      <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition border border-gray-100">
-        <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-        <h6 className="font-heading text-2xl tracking-tight mb-3">No guarantor required</h6>
-        <p className="text-gray-600">A guarantor is not required for the loan application.</p>
-      </div>
-      <div className="bg-white p-8 rounded-3xl shadow hover:shadow-lg transition border border-gray-100">
-        <div className="w-14 h-14 flex items-center justify-center bg-lime-100 text-lime-600 rounded-2xl mb-6 text-2xl font-bold">✓</div>
-        <h6 className="font-heading text-2xl tracking-tight mb-3">Available 24 hours, 7 days a week</h6>
-        <p className="text-gray-600">Our team is available for enquiries every day.</p>
-      </div>
-    </div>
-  </div>
   {/* Who We Help */}
   <div className="bg-gray-50">
     <div className="max-w-7xl mx-auto px-4 py-20 lg:py-24">
