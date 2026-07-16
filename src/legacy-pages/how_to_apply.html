@@ -26,7 +26,7 @@
                 <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
               </ul>
               <div class="flex items-center justify-end">
-                <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2">Apply Now</span>                    <span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
+                <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2">Apply Now</span>                    <span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                         <path d="M4.75 10H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M10 4.75L15.25 10L10 15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -54,7 +54,7 @@
           <div class="fixed inset-0 bg-violet-900 opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
           <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
             <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
-              <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="contact.html">Apply Now</a>
+              <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="contact.html">Apply Now</a>
                 <button x-on:click="mobileNavOpen = !mobileNavOpen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                     <path d="M23.2 8.79999L8.80005 23.2M8.80005 8.79999L23.2 23.2" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -181,13 +181,13 @@
               </div>
               <div class="w-full lg:w-1/2 px-4">
                 <form class="p-8 bg-white rounded-2xl shadow-xl" action="" x-data="contactBookingForm()" x-init="init()" x-on:submit.prevent="submitBooking()">
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Full Name</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Full Name</label>
                       <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.name"/>
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Email</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Email</label>
                       <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="email" x-model="form.email"/>
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Contact Number</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Contact Number</label>
                       <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.phone"/>
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Loan Type</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Loan Type</label>
                       <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                             <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -198,7 +198,7 @@
                           <option value="Business Loan">Business Loan</option>
                         </select>
                       </div>
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Location</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Location</label>
                       <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                             <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -222,11 +222,11 @@
                       </div>
                       <div class="flex flex-wrap -mx-2">
                         <div class="w-full sm:w-1/2 px-2">
-                          <label class="block pl-4 mb-1 text-sm font-medium" for="">Preferred Date</label>
+                          <label class="block pl-4 mb-1 text-base font-medium" for="">Preferred Date</label>
                           <input class="w-full px-4 py-3 mb-6 text-gray-600 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="date" x-model="form.date" x-on:change="loadBookedTimes()" :min="today"/>
                         </div>
                         <div class="w-full sm:w-1/2 px-2">
-                          <label class="block pl-4 mb-1 text-sm font-medium" for="">Preferred callback time *</label>
+                          <label class="block pl-4 mb-1 text-base font-medium" for="">Preferred callback time *</label>
                           <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                                 <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -245,7 +245,7 @@
                           </div>
                         </div>
                       </div>
-                      <label class="block pl-4 mb-1 text-sm font-medium" for="">Message / Enquiry</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="">Message / Enquiry</label>
                       <textarea class="w-full px-4 py-3 mb-8 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-2xl resize-none" rows="4" x-model="form.message"></textarea>
                       <button class="flex w-full py-4 px-6 items-center justify-center text-lg font-medium text-black hover:text-white border border-lime-500 hover:border-teal-900 bg-lime-500 hover:bg-teal-900 rounded-full transition duration-200 disabled:opacity-60" type="submit" :disabled="loading"><span class="mr-2" x-text="loading ? 'Submitting...' : 'SUBMIT APPLICATION'">SUBMIT APPLICATION</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
@@ -267,11 +267,11 @@
           <div class="grid gap-y-10 md:grid-cols-2 lg:grid-cols-[1.7fr_0.8fr_1fr_1.35fr] lg:gap-x-16 xl:gap-x-24 mb-12 md:mb-24 xl:mb-40">
             <div>
               <a class="inline-flex items-center mb-5 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html"><img class="h-8 lg:h-12 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
-              <p class="text-sm lg:text-base leading-6 lg:leading-7 text-gray-600 max-w-md mb-4 lg:mb-8">Personal and business loan enquiries with clear information and direct assistance throughout the application process.</p>
+              <p class="text-base lg:text-lg leading-7 lg:leading-8 text-gray-600 max-w-md mb-4 lg:mb-8">Personal and business loan enquiries with clear information and direct assistance throughout the application process.</p>
             </div>
             <div>
-              <h3 class="text-sm font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Quick Links</h3>
-              <ul class="space-y-1.5 lg:space-y-4 text-sm">
+              <h3 class="text-base font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Quick Links</h3>
+              <ul class="space-y-2 lg:space-y-4 text-base">
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html">Home</a></li>
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="loan.html">Loan Options</a></li>
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="how_to_apply.html">How to Apply</a></li>
@@ -280,8 +280,8 @@
               </ul>
             </div>
             <div>
-              <h3 class="text-sm font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Loan Information</h3>
-              <ul class="space-y-1.5 lg:space-y-4 text-sm">
+              <h3 class="text-base font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Loan Information</h3>
+              <ul class="space-y-2 lg:space-y-4 text-base">
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="loan.html#personal-loan">Personal Loan</a></li>
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="loan.html#business-loan">Business Loan</a></li>
                 <li><a class="inline-block text-gray-600 hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="loan.html#required-documents">Required Documents</a></li>
@@ -289,8 +289,8 @@
               </ul>
             </div>
             <div>
-              <h3 class="text-sm font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Contact</h3>
-              <ul class="space-y-1.5 lg:space-y-4 text-sm leading-6 text-gray-600">
+              <h3 class="text-base font-bold uppercase tracking-wide text-teal-900 mb-3 lg:mb-5">Contact</h3>
+              <ul class="space-y-2 lg:space-y-4 text-base leading-7 text-gray-600">
                 <li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="font-medium text-teal-900">Phone / WhatsApp:</span> <span class="inline-flex items-center gap-1.5 whitespace-nowrap"><a class="hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="tel:+60102150037">+60 10-215 0037</a><button type="button" class="inline-flex h-6 w-6 items-center justify-center rounded-full border border-gray-200 text-xs text-teal-900 hover:border-lime-500 hover:bg-lime-50 focus:outline-none focus:ring-2 focus:ring-lime-500" data-copy-value="+60 10-215 0037" aria-label="Copy phone number" title="Copy phone number">⧉</button></span></li>
                 <li class="whitespace-nowrap"><span class="font-medium text-teal-900">Email:</span> <a class="hover:text-teal-900 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="mailto:metropinjamanberlesan@gmail.com">metropinjamanberlesan@gmail.com</a></li>
                 <li><span class="font-medium text-teal-900">Office:</span> <span class="break-words">Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur</span></li>
@@ -299,7 +299,7 @@
             </div>
           </div>
           <div class="md:text-right">
-            <p class="text-sm text-gray-500">© 2026 Metro Pinjaman Berlesen. All rights reserved.</p>
+            <p class="text-base text-gray-500">© 2026 Metro Pinjaman Berlesen. All rights reserved.</p>
           </div>
         </div>
       </footer>
