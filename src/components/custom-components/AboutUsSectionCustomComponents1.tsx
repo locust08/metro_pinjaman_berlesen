@@ -16,8 +16,8 @@ const AboutUsSectionCustomComponents1: React.FC = () => {
         </div>
         <div className="relative">
           <div className="absolute -right-4 -bottom-4 w-40 h-40 bg-lime-500 rounded-3xl opacity-80" />
-          <div className="relative p-3 bg-white border border-gray-100 shadow-xl rounded-3xl">
-            <img className="w-full h-80 md:h-[420px] object-cover rounded-2xl" src="flow-assets/metro/customer-support-consultation.webp" alt="Customer-service representative assisting with a loan enquiry" />
+          <div className="relative shadow-xl rounded-3xl overflow-hidden">
+            <img className="w-full h-80 md:h-[420px] object-cover" src="flow-assets/metro/customer-support-consultation.webp" alt="Customer-service representative assisting with a loan enquiry" />
           </div>
         </div>
       </div>
