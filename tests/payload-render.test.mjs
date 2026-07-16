@@ -7,6 +7,7 @@ import { parse } from 'node-html-parser';
 
 import { legacyContentBindings, renderLegacyContent } from '../src/payload/renderLegacyContent.ts';
 import { defaultPayloadContent } from '../src/payload/content.ts';
+import { mergePublishedContentWithFallback } from '../src/payload/fetchPayloadContent.ts';
 
 const legacyPages = {
   home: 'index.html',
@@ -56,6 +57,26 @@ test('renderLegacyContent leaves unmatched HTML unchanged', () => {
   const html = '<div><span>Keep me</span></div>';
   const output = renderLegacyContent(html, 'home', defaultPayloadContent);
   assert.equal(output, html);
+});
+
+test('published content merge ignores stale template placeholders while preserving real edits', () => {
+  const fallback = structuredClone(defaultPayloadContent);
+  const published = structuredClone(defaultPayloadContent);
+  published.homePage.seo.title = 'LoanEase — Homepage';
+  published.homePage.hero.eyebrow = 'Powering Tomorrow';
+  published.homePage.hero.mainHeading = 'Simple Loans,';
+  published.homePage.hero.description = 'Get the funds you need with competitive rates and a streamlined application.';
+  published.homePage.howItWorks.heading = 'Editor-approved heading';
+  published.siteSettings.footer.copyrightText = '© 2026 Flow. All rights reserved.';
+
+  const merged = mergePublishedContentWithFallback(fallback, published);
+
+  assert.equal(merged.homePage.seo.title, fallback.homePage.seo.title);
+  assert.equal(merged.homePage.hero.eyebrow, fallback.homePage.hero.eyebrow);
+  assert.equal(merged.homePage.hero.mainHeading, fallback.homePage.hero.mainHeading);
+  assert.equal(merged.homePage.hero.description, fallback.homePage.hero.description);
+  assert.equal(merged.homePage.howItWorks.heading, 'Editor-approved heading');
+  assert.equal(merged.siteSettings.footer.copyrightText, fallback.siteSettings.footer.copyrightText);
 });
 
 test('renderLegacyContent escapes hostile editor text without creating executable nodes', () => {

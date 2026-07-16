@@ -11,18 +11,46 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function mergeNullishFallback(fallback: unknown, value: unknown): unknown {
+const staleTemplateContentPatterns = [
+  /LoanEase/i,
+  /green energy/i,
+  /Powering Tomorrow/i,
+  /The Future of Green Energy/i,
+  /Get the funds you need with competitive rates/i,
+  /^Simple Loans,?$/i,
+  /^Check Your Rate$/i,
+  /^Learn More$/i,
+  /^Get your loan in four simple steps\.?$/i,
+  /^Select Loan$/i,
+  /^Apply Online$/i,
+  /^Get Approved$/i,
+  /^Choose the perfect loan to match your goals\.?$/i,
+  /^Lending you trust, building your future\.?$/i,
+  /^Get Your Loan in Simple Steps$/i,
+  /^© 2026 Flow\b/i,
+];
+
+function isStaleTemplateString(value: string): boolean {
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  return staleTemplateContentPatterns.some((pattern) => pattern.test(normalized));
+}
+
+export function mergePublishedContentWithFallback(fallback: unknown, value: unknown): unknown {
   if (value == null) return fallback;
 
   if (Array.isArray(fallback) && Array.isArray(value)) {
-    return value.map((item, index) => mergeNullishFallback(fallback[index], item));
+    return value.map((item, index) => mergePublishedContentWithFallback(fallback[index], item));
   }
 
   if (isRecord(fallback) && isRecord(value)) {
     const keys = new Set([...Object.keys(fallback), ...Object.keys(value)]);
     return Object.fromEntries(
-      [...keys].map((key) => [key, mergeNullishFallback(fallback[key], value[key])]),
+      [...keys].map((key) => [key, mergePublishedContentWithFallback(fallback[key], value[key])]),
     );
+  }
+
+  if (typeof value === 'string' && isStaleTemplateString(value)) {
+    return typeof fallback === 'string' ? fallback : '';
   }
 
   return value;
@@ -43,7 +71,7 @@ export async function fetchPayloadContent(): Promise<PublicPayloadContent> {
     const content: unknown = await response.json();
     if (!isRecord(content)) return defaultPayloadContent;
 
-    return mergeNullishFallback(defaultPayloadContent, content) as PublicPayloadContent;
+    return mergePublishedContentWithFallback(defaultPayloadContent, content) as PublicPayloadContent;
   } catch {
     return defaultPayloadContent;
   } finally {
