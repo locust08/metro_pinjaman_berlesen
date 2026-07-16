@@ -40,7 +40,6 @@ export default function LegacyPage({ title, metaDescription, bodyClassName, body
         script.replaceWith(replacement);
       });
 
-      window.Alpine?.initTree?.(pageElement);
     }
 
     document.querySelectorAll('[data-next-hide-fouc]').forEach((element) => {

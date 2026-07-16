@@ -63,6 +63,30 @@ function assertRepresentativeExample(file, content) {
   assertNotContains(file, content, 'Estimated Monthly Payment');
 }
 
+function countMatches(content, regex) {
+  return Array.from(content.matchAll(regex)).length;
+}
+
+function assertOneH1(file, content) {
+  const h1Count = countMatches(content, /<h1\b/gi);
+  if (h1Count !== 1) {
+    throw new Error(`${file} must contain exactly one H1, found ${h1Count}`);
+  }
+}
+
+function assertNoGenericAltText(file, content) {
+  const genericAlt = /\salt=["'](?:Image|picture|graphic)["']/i.exec(content);
+  if (genericAlt) {
+    throw new Error(`${file} contains generic public alt text: ${genericAlt[0].trim()}`);
+  }
+}
+
+function assertLocations(file, content) {
+  for (const location of ['Sabah', 'Sarawak', 'Labuan']) {
+    assertContains(file, content, `<option value="${location}">${location}</option>`);
+  }
+}
+
 for (const page of pages) {
   const legacy = read(path.join(legacyDir, page));
   const built = read(path.join(outDir, page));
@@ -72,6 +96,8 @@ for (const page of pages) {
   assertContains(page, built, '/css/tailwind/tailwind.min.css');
   assertContains(page, built, '/css/main.css');
   assertContains(page, built, 'global-88881.js');
+  assertOneH1(page, built);
+  assertNoGenericAltText(page, built);
   assertNotContains(page, built, 'LoanEase');
   assertNotContains(page, built, 'Page title');
   assertNotContains(page, built, 'href="#"');
@@ -94,6 +120,9 @@ for (const page of pages) {
   assertNotContains(page, built, 'WHATSAPP US');
   assertNotContains(page, built, 'WhatsApp us');
   assertNotContains(page, built, 'Talk to an advisor');
+  assertNotContains(page, built, 'About us');
+  assertNotContains(page, built, 'Contact us');
+  assertNotContains(page, built, 'How to apply');
   assertNotContains(page, built, 'Check Your Rate');
   assertNotContains(page, built, 'Open To Malaysian only');
   assertNotContains(page, built, 'RM3000');
@@ -103,6 +132,11 @@ for (const page of pages) {
   assertNotContains(`src/legacy-pages/${page}`, legacy, '313.36');
   assertNotContains(`out/${page}`, built, 'RM313.36');
   assertNotContains(`out/${page}`, built, '313.36');
+  assertNotContains(page, built, 'Get Money');
+  assertNotContains(page, built, 'Varies');
+  assertNotContains(page, built, 'Trust & security');
+  assertNotContains(page, built, 'Trust &amp; security');
+  assertNotContains(page, built, '8% - 12%');
 }
 
 const howToApply = read(path.join(outDir, 'how_to_apply.html'));
@@ -111,10 +145,17 @@ assertContains('how_to_apply.html', howToApply, 'Preferred Date');
 assertContains('how_to_apply.html', howToApply, 'Preferred callback time');
 assertContains('how_to_apply.html', howToApply, 'Prepare these documents before submitting your loan enquiry.');
 assertContains('how_to_apply.html', howToApply, 'our team will review your application and contact you about the next step.');
+assertContains('how_to_apply.html', howToApply, 'Submit Your Loan Enquiry in Simple Steps');
+assertContains('how_to_apply.html', howToApply, 'Select Your Loan and Apply');
+assertContains('how_to_apply.html', howToApply, 'Application Review');
+assertContains('how_to_apply.html', howToApply, 'Receive Funds');
+assertContains('how_to_apply.html', howToApply, 'If the application is accepted, funds may be disbursed after document verification and final confirmation.');
 assertNotContains('how_to_apply.html', howToApply, 'our team will process your application as quickly as possible.');
+assertNotContains('how_to_apply.html', howToApply, 'fill up the form');
 assertContains('how_to_apply.html', howToApply, 'RM3,000');
 assertContains('how_to_apply.html', howToApply, 'Select location');
 assertContains('how_to_apply.html', howToApply, 'Kuala Lumpur');
+assertLocations('how_to_apply.html', howToApply);
 assertContains('how_to_apply.html', howToApply, '/api/bookings');
 assertContains('how_to_apply.html', howToApply, 'Personal Loan');
 assertContains('how_to_apply.html', howToApply, 'Business Loan');
@@ -126,6 +167,10 @@ assertContains('index.html', index, 'Open to all Malaysians');
 assertContains('index.html', index, 'No Guarantor');
 assertContains('index.html', index, 'Open every day');
 assertContains('index.html', index, '6–60 month repayment options');
+assertContains('index.html', index, 'Select Your Loan and Apply');
+assertContains('index.html', index, 'Application Review');
+assertContains('index.html', index, 'Receive Funds');
+assertContains('index.html', index, 'If the application is accepted, funds may be disbursed after document verification and final confirmation.');
 assertContains('index.html', index, 'href="loan.html#interest-rate">Apply Now</a>');
 assertContains('index.html', index, 'href="loan.html">View Loan Details</a>');
 assertNotContains('index.html', index, 'href="loan.html#interest-rate">View Loan Details</a>');
@@ -134,9 +179,10 @@ const loan = read(path.join(outDir, 'loan.html'));
 const loanHtmlRoute = readIfExists(path.join(outDir, 'loan.html.html'));
 const loanSource = read(path.join(legacyDir, 'loan.html'));
 assertContains('loan.html', loan, 'Minimum monthly salary of RM3,000');
-assertContains('loan.html', loan, 'Loan from RM500 to RM100,000');
-assertContains('loan.html', loan, 'From 8% - 12% APR');
-assertContains('loan.html', loan, 'Payment options from 6 months to 60 months');
+assertContains('loan.html', loan, 'Loan from RM500–RM100,000');
+assertContains('loan.html', loan, '8%–12% APR');
+assertContains('loan.html', loan, '6–60 month repayment period');
+assertContains('loan.html', loan, 'Published rate and repayment information is shown generally. Final loan terms are subject to document verification and confirmation.');
 assertContains('loan.html', loan, 'Explore business loan support for working capital, stock purchases, overheads and other business activities.');
 assertContains('loan.html', loan, 'Business funding information');
 assertContains('loan.html', loan, 'View required documents');
@@ -165,22 +211,33 @@ assertContains('contact.html', contact, '+60 10-215 0037');
 assertContains('contact.html', contact, 'https://wa.me/60102150037');
 assertContains('contact.html', contact, 'metropinjamanberlesan@gmail.com');
 assertContains('contact.html', contact, 'Select location');
+assertLocations('contact.html', contact);
 assertContains('contact.html', contact, 'Metro Pinjaman Berlesen provides information and enquiry support for personal and business loans.');
+assertContains('contact.html', contact, 'Contact Metro Pinjaman Berlesen for personal and business loan information, application guidance and customer support. Our enquiry channels are available 24 hours, 7 days a week.');
+assertContains('contact.html', contact, 'Open 24 hours, 7 days a week');
+assertContains('contact.html', contact, 'Chat with us on WhatsApp');
+assertContains('contact.html', contact, 'href="how_to_apply.html">How to Apply</a>');
+assertContains('contact.html', contact, 'href="loan.html#required-documents">Required Documents</a>');
+assertContains('contact.html', contact, 'Document requirements differ between personal and business loan enquiries.');
 assertNotContains('contact.html', contact, 'Metro Pinjaman Berlesen offers personal loans and business loans with flexible repayment options.');
+assertNotContains('contact.html', contact, 'pay slip');
 
 const about = read(path.join(outDir, 'about_us.html'));
+assertContains('about_us.html', about, 'About Us');
 assertContains('about_us.html', about, 'Clear loan information and application guidance for individuals and businesses across Malaysia.');
 assertContains('about_us.html', about, 'Metro Pinjaman Berlesen provides enquiry support for personal and business loans.');
+assertContains('about_us.html', about, 'Why choose us');
+assertContains('about_us.html', about, 'Open to all Malaysians');
+assertContains('about_us.html', about, 'No ATM card required');
+assertContains('about_us.html', about, 'No guarantor required');
+assertContains('about_us.html', about, 'Available 24 hours, 7 days a week');
+assertContains('about_us.html', about, 'Month repayment options');
 assertContains('about_us.html', about, 'We support individuals, small-business owners and companies looking for personal or business loan information.');
 assertContains('about_us.html', about, 'Companies and corporate groups');
 assertContains('about_us.html', about, 'Need help with your loan enquiry?');
-assertContains('about_us.html', about, '6–60 month repayment options');
 assertNotContains('about_us.html', about, 'Personalized service');
 assertNotContains('about_us.html', about, '6 to 60 month payment options');
 assertNotContains('about_us.html', about, 'Trust &amp; security');
-assertNotContains('about_us.html', about, 'Why choose us');
-assertNotContains('about_us.html', about, 'No ATM card required');
-assertNotContains('about_us.html', about, 'No guarantor required');
 assertNotContains('about_us.html', about, 'Processing and disbursement time');
 assertNotContains('about_us.html', about, 'Ready to get started?');
 assertNotContains('about_us.html', about, 'get a decision in minutes');

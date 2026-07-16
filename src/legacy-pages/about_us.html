@@ -18,12 +18,12 @@
       <section class="bg-white" x-data="{ mobileNavOpen: false }">
         <nav class="mx-4 py-6">
           <div class="container mx-auto px-4">
-            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <ul class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex">
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About Us</a></li>
                 <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to Apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact Us</a></li>
               </ul>
               <div class="flex items-center justify-end">
                 <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2">Apply Now</span><span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
@@ -45,7 +45,7 @@
         <div class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50" :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}">
           <div class="fixed inset-0 bg-violet-900 opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
           <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
-            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html">Apply Now</a>
                 <button x-on:click="mobileNavOpen = !mobileNavOpen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
@@ -56,10 +56,10 @@
             </div>
             <div class="pt-20 pb-12 mb-auto">
               <ul class="flex-col">
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About Us</a></li>
                 <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to Apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact Us</a></li>
               </ul>
             </div>
           </nav>
@@ -69,6 +69,7 @@
           <div class="container mx-auto px-4 py-20 lg:py-24">
             <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 xl:gap-16 items-center">
               <div class="max-w-2xl">
+                <span class="inline-block px-4 py-1 mb-6 text-sm font-semibold text-teal-900 bg-lime-500 rounded-full">About Us</span>
                 <h1 class="font-heading text-5xl lg:text-6xl tracking-tight mb-6 text-gray-900">Supporting Personal and Business Loan Enquiries</h1>
                 <p class="text-lg text-gray-600 max-w-xl mb-8">Clear loan information and application guidance for individuals and businesses across Malaysia.</p>
                 <a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200" href="contact.html">Contact Us</a>
@@ -115,7 +116,37 @@
               </div>
               <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <p class="font-heading text-5xl tracking-tight text-lime-600 mb-2">6–60</p>
-                <p class="text-gray-600">6–60 month repayment options</p>
+                <p class="text-gray-600">Month repayment options</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white">
+          <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+            <div class="max-w-3xl mb-14">
+              <h2 class="font-heading text-4xl xs:text-6xl tracking-tight mb-6">Why choose us</h2>
+              <p class="text-lg text-gray-600">Practical application requirements and availability, clearly presented for loan enquiries.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+                <div class="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 text-3xl text-lime-600">✓</div>
+                <h3 class="font-heading text-2xl tracking-tight mb-4">Open to all Malaysians</h3>
+                <p class="text-gray-600">Loan enquiry support is available for Malaysian applicants.</p>
+              </div>
+              <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+                <div class="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 text-3xl text-lime-600">✓</div>
+                <h3 class="font-heading text-2xl tracking-tight mb-4">No ATM card required</h3>
+                <p class="text-gray-600">Applicants do not need to provide an ATM card.</p>
+              </div>
+              <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+                <div class="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 text-3xl text-lime-600">✓</div>
+                <h3 class="font-heading text-2xl tracking-tight mb-4">No guarantor required</h3>
+                <p class="text-gray-600">A guarantor is not required for the loan application.</p>
+              </div>
+              <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+                <div class="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 text-3xl text-lime-600">✓</div>
+                <h3 class="font-heading text-2xl tracking-tight mb-4">Available 24 hours, 7 days a week</h3>
+                <p class="text-gray-600">Our team is available for enquiries every day.</p>
               </div>
             </div>
           </div>
@@ -129,19 +160,19 @@
             <div class="grid md:grid-cols-3 gap-6">
               <div class="rounded-3xl overflow-hidden bg-white shadow border border-gray-100"><img class="w-full h-44 object-cover" src="flow-assets/metro/who-help-phone-support.webp" alt="Support representative answering a loan enquiry by phone"/>
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Individuals</h6>
+                  <h3 class="font-heading text-2xl tracking-tight mb-2">Individuals</h3>
                   <p class="text-gray-600">Support for personal loan information, enquiry steps and application preparation.</p>
                 </div>
               </div>
               <div class="rounded-3xl overflow-hidden bg-white shadow border border-gray-100"><img class="w-full h-44 object-cover" src="flow-assets/metro/who-help-food-business.webp" alt="Food-business owner preparing financing records"/>
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Small-business owners</h6>
+                  <h3 class="font-heading text-2xl tracking-tight mb-2">Small-business owners</h3>
                   <p class="text-gray-600">Guidance for business loan enquiries related to working capital, stock or overheads.</p>
                 </div>
               </div>
               <div class="rounded-3xl overflow-hidden bg-white shadow border border-gray-100"><img class="w-full h-44 object-cover" src="flow-assets/metro/who-help-document-prep.webp" alt="Applicant organising loan application documents"/>
                 <div class="p-6">
-                  <h6 class="font-heading text-2xl tracking-tight mb-2">Companies and corporate groups</h6>
+                  <h3 class="font-heading text-2xl tracking-tight mb-2">Companies and corporate groups</h3>
                   <p class="text-gray-600">Information support for company loan enquiries and application requirements.</p>
                 </div>
               </div>
@@ -161,7 +192,7 @@
         <div class="container px-4 mx-auto relative">
           <div class="grid gap-y-10 md:grid-cols-2 lg:grid-cols-[1.7fr_0.8fr_1fr_1.35fr] lg:gap-x-16 xl:gap-x-24 mb-12 md:mb-24 xl:mb-40">
             <div>
-              <a class="inline-flex items-center mb-5 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html"><img class="h-8 lg:h-12 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+              <a class="inline-flex items-center mb-5 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html"><img class="h-8 lg:h-12 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <p class="text-base lg:text-lg leading-7 lg:leading-8 text-gray-600 max-w-md mb-4 lg:mb-8">Personal and business loan enquiries with clear information and direct assistance throughout the application process.</p>
             </div>
             <div>

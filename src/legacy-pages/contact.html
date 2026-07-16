@@ -18,12 +18,12 @@
       <section class="overflow-hidden" x-data="{ mobileNavOpen: false }">
         <nav class="mx-4 py-6">
           <div class="container mx-auto px-4">
-            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+            <div class="relative flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <ul class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex">
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About Us</a></li>
                 <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to Apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact Us</a></li>
               </ul>
               <div class="flex items-center justify-end">
                 <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="loan.html"><span class="mr-2">Apply Now</span>                    <span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
@@ -45,7 +45,7 @@
         <div class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50" :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}">
           <div class="fixed inset-0 bg-violet-900 opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
           <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
-            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+            <div class="flex items-center justify-between"><a class="inline-block" href="index.html"><img class="h-8 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <div class="flex items-center"><a class="inline-flex py-2.5 px-4 items-center justify-center text-base font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="contact.html">Apply Now</a>
                 <button class="ml-6" x-on:click="mobileNavOpen = !mobileNavOpen">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
@@ -56,10 +56,10 @@
             </div>
             <div class="pt-20 pb-12 mb-auto">
               <ul class="flex-col">
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about_us.html">About Us</a></li>
                 <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="loan.html">Loan</a></li>
-                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to apply</a></li>
-                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
+                <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="how_to_apply.html">How to Apply</a></li>
+                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact Us</a></li>
               </ul>
             </div>
           </nav>
@@ -72,60 +72,63 @@
               <div class="flex flex-wrap -mx-4">
                 <div class="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">
                   <div class="max-w-lg py-7">
-                    <h1 class="font-heading text-4xl sm:text-6xl tracking-sm mb-6">Contact us</h1>
-                    <p class="text-lg text-gray-700 mb-16">Contact Metro Pinjaman Berlesen for personal and business loan enquiries. We are open 24 hours and 7 days a week for personal and business loan enquiries.</p>
-                    <form action="" x-data="contactBookingForm()" x-init="init()" x-on:submit.prevent="submitBooking()">
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Full Name</label>
-                      <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.name"/>
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Email</label>
-                      <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="email" x-model="form.email"/>
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Contact Number</label>
-                      <input class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.phone"/>
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Loan Type *</label>
+                    <h1 class="font-heading text-4xl sm:text-6xl tracking-sm mb-6">Contact Us</h1>
+                    <p class="text-lg text-gray-700 mb-16">Contact Metro Pinjaman Berlesen for personal and business loan information, application guidance and customer support. Our enquiry channels are available 24 hours, 7 days a week.</p>
+                    <form action="" x-data="contactBookingForm()" x-on:submit.prevent="submitBooking()">
+                      <label class="block pl-4 mb-1 text-base font-medium" for="full-name">Full Name *</label>
+                      <input id="full-name" class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.name"/>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="email">Email *</label>
+                      <input id="email" class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="email" x-model="form.email"/>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="contact-number">Contact Number *</label>
+                      <input id="contact-number" class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="text" x-model="form.phone"/>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="loan-type">Loan Type *</label>
                       <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                             <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></span>
-                        <select class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.loanType">
+                        <select id="loan-type" class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.loanType">
                           <option value="">Select loan type</option>
                           <option value="Personal Loan">Personal Loan</option>
                           <option value="Business Loan">Business Loan</option>
                         </select>
                       </div>
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Location</label>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="location">Location <span class="text-gray-500 font-normal">(optional)</span></label>
                       <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                             <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           </svg></span>
-                        <select class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.location">
+                        <select id="location" class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.location">
                           <option value="">Select location</option>
-                          <option value="Selangor">Selangor</option>
-                          <option value="Kuala Lumpur">Kuala Lumpur</option>
                           <option value="Johor">Johor</option>
                           <option value="Kedah">Kedah</option>
                           <option value="Kelantan">Kelantan</option>
                           <option value="Melaka">Melaka</option>
                           <option value="Negeri Sembilan">Negeri Sembilan</option>
                           <option value="Pahang">Pahang</option>
-                          <option value="Penang">Penang</option>
                           <option value="Perak">Perak</option>
                           <option value="Perlis">Perlis</option>
+                          <option value="Pulau Pinang">Pulau Pinang</option>
+                          <option value="Sabah">Sabah</option>
+                          <option value="Sarawak">Sarawak</option>
+                          <option value="Selangor">Selangor</option>
                           <option value="Terengganu">Terengganu</option>
+                          <option value="Kuala Lumpur">Kuala Lumpur</option>
+                          <option value="Labuan">Labuan</option>
                           <option value="Putrajaya">Putrajaya</option>
                         </select>
                       </div>
                       <div class="flex flex-wrap -mx-2">
                         <div class="w-full sm:w-1/2 px-2">
-                          <label class="block pl-4 mb-1 text-base font-medium" for="">Preferred Date</label>
-                          <input class="w-full px-4 py-3 mb-6 text-gray-600 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="date" x-model="form.date" x-on:change="loadBookedTimes()" :min="today"/>
+                          <label class="block pl-4 mb-1 text-base font-medium" for="preferred-date">Preferred Date *</label>
+                          <input id="preferred-date" class="w-full px-4 py-3 mb-6 text-gray-600 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="date" x-model="form.date" x-on:change="loadBookedTimes()" :min="today"/>
                         </div>
                         <div class="w-full sm:w-1/2 px-2">
-                          <label class="block pl-4 mb-1 text-base font-medium" for="">Preferred callback time *</label>
+                          <label class="block pl-4 mb-1 text-base font-medium" for="preferred-time">Preferred callback time *</label>
                           <div class="relative w-full mb-8 bg-white rounded-full"><span class="absolute top-1/2 right-0 mr-4 transform -translate-y-1/2">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
                                 <path d="M6.3999 8.2L9.9999 11.8L13.5999 8.2" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></span>
-                            <select class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.time" x-on:focus="loadBookedTimes()" x-on:click="loadBookedTimes()">
+                            <select id="preferred-time" class="w-full px-4 py-3 text-gray-600 border rounded-full appearance-none cursor-pointer outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 bg-transparent relative" x-model="form.time" x-on:focus="loadBookedTimes()" x-on:click="loadBookedTimes()">
                               <option value="">Select preferred time</option>
                               <option value="09:00" x-bind:disabled="isBooked('09:00')" x-text="timeLabel('09:00', '9:00 AM')">9:00 AM</option>
                               <option value="10:00" x-bind:disabled="isBooked('10:00')" x-text="timeLabel('10:00', '10:00 AM')">10:00 AM</option>
@@ -139,9 +142,9 @@
                           </div>
                         </div>
                       </div>
-                      <label class="block pl-4 mb-1 text-base font-medium" for="">Message / Enquiry</label>
-                      <textarea class="w-full px-4 py-3 mb-8 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-2xl resize-none" rows="4" x-model="form.message"></textarea>
-                      <button class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200 disabled:opacity-60" type="submit" :disabled="loading"><span class="mr-2" x-text="loading ? 'Submitting...' : 'Submit'">Submit</span>
+                      <label class="block pl-4 mb-1 text-base font-medium" for="message">Message / Enquiry</label>
+                      <textarea id="message" class="w-full px-4 py-3 mb-8 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-2xl resize-none" rows="4" x-model="form.message"></textarea>
+                      <button class="flex w-full py-3 px-5 items-center justify-center font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200 disabled:opacity-60" type="submit" :disabled="loading"><span class="mr-2" x-text="loading ? 'Submitting...' : 'Apply Now'">Apply Now</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewbox="0 0 21 20" fill="none">
                           <path d="M5.25 10H15.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           <path d="M10.5 4.75L15.75 10L10.5 15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -178,8 +181,7 @@
                     <path d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z" fill="#BEF264"></path>
                     <path d="M13.3333 12C12.597 12 12 12.597 12 13.3333C12 25.8518 22.1482 36 34.6667 36C35.403 36 36 35.403 36 34.6667V28.2667C36 27.6779 35.6138 27.1588 35.0498 26.9896L29.7165 25.3896C29.2466 25.2486 28.7374 25.377 28.3905 25.7239L26.8288 27.2856C24.2738 25.847 22.153 23.7262 20.7144 21.1712L22.2761 19.6095C22.623 19.2626 22.7514 18.7534 22.6104 18.2835L21.0104 12.9502C20.8412 12.3862 20.3221 12 19.7333 12H13.3333Z" fill="#022C22"></path>
                   </svg><span class="block mt-8 mb-1 text-2xl font-medium">Phone</span>
-                  <p class="text-gray-700">We are open 24 hours</p>
-                  <p class="text-gray-700 mb-auto">and 7 days a week</p>
+                  <p class="text-gray-700 mb-auto">Open 24 hours, 7 days a week</p>
                   <div class="mt-8 flex items-center">
                     <p class="text-lg font-medium">+60 10-215 0037</p>
                     <button class="ml-3 inline-flex items-center justify-center text-teal-900 hover:text-teal-700 transition duration-200" type="button" aria-label="Copy phone number" x-on:click.stop="navigator.clipboard.writeText('+60 10-215 0037'); copied = true; setTimeout(() =&gt; copied = false, 2000)">
@@ -213,14 +215,14 @@
       <section class="py-12 lg:py-24">
         <div class="container mx-auto px-4">
           <div class="text-center mb-20">
-            <h1 class="font-heading text-6xl mb-6">FAQ</h1>
+            <h2 class="font-heading text-6xl mb-6">FAQ</h2>
             <p class="text-gray-700">Here you will find the answers to the frequently asked questions.</p>
           </div>
           <div class="max-w-4xl mx-auto">
             <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
               <div>
                 <div class="pr-5">
-                  <h5 class="text-lg font-medium">What loan services do you offer?</h5>
+                  <h3 class="text-lg font-medium">What loan services do you offer?</h3>
                 </div>
                 <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
                   <p class="text-gray-700 mt-4">Metro Pinjaman Berlesen provides information and enquiry support for personal and business loans.</p>
@@ -241,7 +243,7 @@
             <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
               <div>
                 <div class="pr-5">
-                  <h5 class="text-lg font-medium">How fast can I receive the money?</h5>
+                  <h3 class="text-lg font-medium">How fast can I receive the money?</h3>
                 </div>
                 <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
                   <p class="text-gray-700 mt-4">Processing and disbursement time may vary depending on document verification and final confirmation.</p>
@@ -262,7 +264,7 @@
             <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
               <div>
                 <div class="pr-5">
-                  <h5 class="text-lg font-medium">Who can apply?</h5>
+                  <h3 class="text-lg font-medium">Who can apply?</h3>
                 </div>
                 <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
                   <p class="text-gray-700 mt-4">The service is open to Malaysians. Personal loan applicants should have a source of income and a minimum monthly salary of RM3,000.</p>
@@ -283,7 +285,7 @@
             <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
               <div>
                 <div class="pr-5">
-                  <h5 class="text-lg font-medium">Do I need an ATM card or guarantor?</h5>
+                  <h3 class="text-lg font-medium">Do I need an ATM card or guarantor?</h3>
                 </div>
                 <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
                   <p class="text-gray-700 mt-4">No. Metro Pinjaman Berlesen does not require your ATM card or a guarantor for your loan application.</p>
@@ -304,10 +306,10 @@
             <button class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
               <div>
                 <div class="pr-5">
-                  <h5 class="text-lg font-medium">What documents are required?</h5>
+                  <h3 class="text-lg font-medium">What documents are required?</h3>
                 </div>
                 <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                  <p class="text-gray-700 mt-4">Required documents may include NRIC, contact number, latest 3 months pay slip, latest 3 months bank statement, latest utility bills, EPF statement, S&P, or tenancy agreement.</p>
+                  <p class="text-gray-700 mt-4">Document requirements differ between personal and business loan enquiries. Review the complete <a class="text-black font-medium underline" href="loan.html#required-documents">Required Documents</a> section on the Loan Options page.</p>
                 </div>
               </div><span class="flex-shrink-0">
                 <div :class="{'hidden': accordion}">
@@ -333,8 +335,8 @@
                 </svg>
               </div>
               <div>
-                <h5 class="text-xl font-medium mb-4">Still have questions?</h5>
-                <p class="text-gray-700"><span>For assistance, please visit our</span>                  <a class="inline-block text-black font-medium underline" href="contact.html">Contact Us</a>                  <span>page or contact us on WhatsApp at</span>                  <span class="text-black font-medium">+60 10-215 0037</span>                  <span>. Our team is ready to help with your loan enquiry and application.</span></p>
+                <h3 class="text-xl font-medium mb-4">Still have questions?</h3>
+                <p class="text-gray-700"><a class="inline-block text-black font-medium underline" href="https://wa.me/60102150037?text=Hi%20Metro%20Pinjaman%20Berlesen%2C%20I%20would%20like%20to%20enquire%20about%20a%20loan%20appointment." target="_blank" rel="noopener">Chat with us on WhatsApp</a> <span>or review the</span> <a class="inline-block text-black font-medium underline" href="how_to_apply.html">How to Apply</a> <span>page for application information and required documents.</span></p>
               </div>
             </div>
           </div>
@@ -345,7 +347,7 @@
         <div class="container px-4 mx-auto relative">
           <div class="grid gap-y-10 md:grid-cols-2 lg:grid-cols-[1.7fr_0.8fr_1fr_1.35fr] lg:gap-x-16 xl:gap-x-24 mb-12 md:mb-24 xl:mb-40">
             <div>
-              <a class="inline-flex items-center mb-5 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html"><img class="h-8 lg:h-12 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen logo"/></a>
+              <a class="inline-flex items-center mb-5 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded" href="index.html"><img class="h-8 lg:h-12 w-auto brightness-0" src="logo.png" alt="Metro Pinjaman Berlesen"/></a>
               <p class="text-base lg:text-lg leading-7 lg:leading-8 text-gray-600 max-w-md mb-4 lg:mb-8">Personal and business loan enquiries with clear information and direct assistance throughout the application process.</p>
             </div>
             <div>
@@ -402,9 +404,7 @@
                   time: '',
                   message: ''
               },
-              init() {
-                  this.loadBookedTimes();
-              },
+              init() {},
               isBooked(time) {
                   return this.bookedTimes.includes(time);
               },
@@ -428,14 +428,15 @@
               validate() {
                   if (!this.form.name.trim()) return 'Please enter your full name.';
                   if (!this.form.email.trim()) return 'Please enter your email address.';
+                  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email.trim())) return 'Please enter a valid email address.';
                   if (!this.form.phone.trim()) return 'Please enter your contact number.';
                   if (!this.form.loanType) return 'Please select a loan type.';
-                  if (!this.form.location) return 'Please select your location.';
                   if (!this.form.date || !this.form.time) return 'Please select your preferred date and time.';
                   if (this.isBooked(this.form.time)) return 'This time slot has already been booked. Please choose another time.';
                   return '';
               },
               async submitBooking() {
+                  if (this.loading) return;
                   this.successMessage = '';
                   this.errorMessage = this.validate();
                   if (this.errorMessage) {
