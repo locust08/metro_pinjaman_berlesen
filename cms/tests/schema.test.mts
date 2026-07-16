@@ -59,12 +59,16 @@ describe('Payload section schema', () => {
     expect(alt).toMatchObject({ required: true })
   })
 
-  it('uses fixed rows for home steps and statistics', () => {
+  it('uses fixed rows for approved Metro section layouts', () => {
     const schema = stringify(HomePage)
-    expect(schema).toContain('"minRows":4')
-    expect(schema).toContain('"maxRows":4')
     expect(schema).toContain('"minRows":3')
     expect(schema).toContain('"maxRows":3')
+
+    const loanSchema = stringify(LoanPage)
+    expect(loanSchema).toContain('"minRows":8')
+    expect(loanSchema).toContain('"maxRows":8')
+    expect(loanSchema).toContain('"minRows":11')
+    expect(loanSchema).toContain('"maxRows":11')
   })
 
   it('enables drafts and versions for every global', () => {
@@ -93,15 +97,12 @@ describe('Payload section schema', () => {
       'telephoneLinkNumber',
       'whatsappNumber',
       'defaultWhatsappMessage',
-      'businessHours',
       'formMessages',
     ]) {
       expect(siteSettings).not.toContain(`"name":"${field}"`)
     }
-
-    const phone = findNamedField(ContactUsPage, 'phone')
-    const stillHaveQuestions = findNamedField(ContactUsPage, 'stillHaveQuestions')
-    expect(stringify(phone)).not.toContain('"name":"description"')
-    expect(stringify(stillHaveQuestions)).not.toContain('"name":"description"')
+    expect(siteSettings).not.toContain('"name":"loginButtonLabel"')
+    expect(siteSettings).not.toContain('"name":"newsletterLabel"')
+    expect(siteSettings).toContain('"name":"businessHours"')
   })
 })

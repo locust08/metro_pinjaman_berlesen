@@ -192,6 +192,8 @@
   };
 
   function sendVisitorEvent(payload) {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) >= 0) return;
+
     var body = JSON.stringify(payload);
     if (navigator.sendBeacon) {
       var blob = new Blob([body], { type: "application/json" });
@@ -302,6 +304,57 @@
     });
   }
 
+  function copyText(value) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(value);
+    }
+
+    return new Promise(function(resolve, reject) {
+      var textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-1000px";
+      textarea.style.left = "-1000px";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand("copy");
+        resolve();
+      } catch (error) {
+        reject(error);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    });
+  }
+
+  function initCopyButtons() {
+    document.addEventListener("click", function(event) {
+      var button = event.target.closest("[data-copy-value]");
+      if (!button) return;
+
+      var value = button.getAttribute("data-copy-value") || "";
+      if (!value) return;
+
+      var originalText = button.getAttribute("data-copy-original") || button.textContent || "⧉";
+      window.clearTimeout(button.__metroCopyTimer);
+      button.setAttribute("data-copy-original", originalText);
+      button.textContent = "✓";
+      button.setAttribute("aria-label", "Copied");
+      button.setAttribute("title", "Copied");
+
+      copyText(value).catch(function() {});
+
+      button.__metroCopyTimer = window.setTimeout(function() {
+        button.textContent = originalText;
+        button.setAttribute("aria-label", "Copy phone number");
+        button.setAttribute("title", "Copy phone number");
+      }, 1800);
+    });
+  }
+
   loadGtm();
   loadGa4Fallback();
 
@@ -310,10 +363,12 @@
       initPageViewTracking();
       initConditionalClickTracking();
       initFormTracking();
+      initCopyButtons();
     });
   } else {
     initPageViewTracking();
     initConditionalClickTracking();
     initFormTracking();
+    initCopyButtons();
   }
 })();

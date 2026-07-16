@@ -341,18 +341,27 @@ export interface SiteSetting {
     howToApplyMenuLabel: string;
     contactUsMenuLabel: string;
     applyNowButtonLabel: string;
-    loginButtonLabel: string;
-    newsletterLabel: string;
   };
   footer: {
     footerLogo?: (number | null) | Media;
-    pagesColumnHeading: string;
+    brandDescription: string;
+    quickLinksColumnHeading: string;
     homeLinkLabel: string;
-    aboutUsLinkLabel: string;
-    loanLinkLabel: string;
-    helpColumnHeading: string;
+    loanOptionsLinkLabel: string;
     howToApplyLinkLabel: string;
+    aboutUsLinkLabel: string;
     contactUsLinkLabel: string;
+    loanInformationColumnHeading: string;
+    personalLoanLinkLabel: string;
+    businessLoanLinkLabel: string;
+    requiredDocumentsLinkLabel: string;
+    interestRepaymentLinkLabel: string;
+    contactColumnHeading: string;
+    phoneLabel: string;
+    emailLabel: string;
+    officeLabel: string;
+    hoursLabel: string;
+    businessHours: string;
     copyrightText: string;
   };
   contactDetails: {
@@ -395,15 +404,6 @@ export interface HomePage {
       | {
           title: string;
           description: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  statistics?: {
-    items?:
-      | {
-          value: string;
-          label: string;
           id?: string | null;
         }[]
       | null;
@@ -456,11 +456,18 @@ export interface AboutUsPage {
     backgroundImage?: (number | null) | Media;
     mainHeading: string;
     description: string;
+    primaryButtonLabel: string;
   };
   whoWeAre: {
     image?: (number | null) | Media;
     heading: string;
     paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    highlights?:
       | {
           text: string;
           id?: string | null;
@@ -485,18 +492,6 @@ export interface AboutUsPage {
         }[]
       | null;
   };
-  trustAndSecurity: {
-    heading: string;
-    description: string;
-    items?:
-      | {
-          title: string;
-          description: string;
-          id?: string | null;
-        }[]
-      | null;
-    image?: (number | null) | Media;
-  };
   whoWeHelp: {
     heading: string;
     description: string;
@@ -513,7 +508,7 @@ export interface AboutUsPage {
     heading: string;
     description: string;
     applyButtonLabel: string;
-    advisorButtonLabel: string;
+    whatsappButtonLabel: string;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -530,15 +525,16 @@ export interface LoanPage {
     description?: string | null;
   };
   hero: {
+    eyebrow: string;
     mainHeading: string;
     description: string;
     primaryButtonLabel: string;
-    secondaryButtonLabel: string;
     image?: (number | null) | Media;
   };
   personalLoan: {
     heading: string;
     description: string;
+    documentsLinkLabel: string;
     applyButtonLabel: string;
     whatsappButtonLabel: string;
     features?:
@@ -549,9 +545,7 @@ export interface LoanPage {
           id?: string | null;
         }[]
       | null;
-    requirements: {
-      image?: (number | null) | Media;
-      heading: string;
+    requirements?: {
       items?:
         | {
             text: string;
@@ -563,6 +557,7 @@ export interface LoanPage {
   businessLoan: {
     heading: string;
     description: string;
+    documentsLinkLabel: string;
     applyButtonLabel: string;
     whatsappButtonLabel: string;
     features?:
@@ -573,9 +568,7 @@ export interface LoanPage {
           id?: string | null;
         }[]
       | null;
-    requirements: {
-      image?: (number | null) | Media;
-      heading: string;
+    requirements?: {
       items?:
         | {
             text: string;
@@ -605,7 +598,14 @@ export interface LoanPage {
         }[]
       | null;
     loanDetailsHeading: string;
-    applicationNeedsHeading: string;
+  };
+  requiredDocuments: {
+    heading: string;
+    description: string;
+    personalHeading: string;
+    businessHeading: string;
+    ctaHeading: string;
+    ctaDescription: string;
   };
   interestRates: {
     heading: string;
@@ -617,10 +617,10 @@ export interface LoanPage {
           id?: string | null;
         }[]
       | null;
-  };
-  estimator: {
-    heading: string;
-    disclaimer: string;
+    exampleHeading: string;
+    amountLabel: string;
+    amountValue: string;
+    exampleDescription: string;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -707,6 +707,7 @@ export interface ContactUsPage {
     };
     phone: {
       heading: string;
+      description: string;
     };
     office: {
       heading: string;
@@ -726,6 +727,7 @@ export interface ContactUsPage {
   };
   stillHaveQuestions: {
     heading: string;
+    description: string;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -746,20 +748,29 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         howToApplyMenuLabel?: T;
         contactUsMenuLabel?: T;
         applyNowButtonLabel?: T;
-        loginButtonLabel?: T;
-        newsletterLabel?: T;
       };
   footer?:
     | T
     | {
         footerLogo?: T;
-        pagesColumnHeading?: T;
+        brandDescription?: T;
+        quickLinksColumnHeading?: T;
         homeLinkLabel?: T;
-        aboutUsLinkLabel?: T;
-        loanLinkLabel?: T;
-        helpColumnHeading?: T;
+        loanOptionsLinkLabel?: T;
         howToApplyLinkLabel?: T;
+        aboutUsLinkLabel?: T;
         contactUsLinkLabel?: T;
+        loanInformationColumnHeading?: T;
+        personalLoanLinkLabel?: T;
+        businessLoanLinkLabel?: T;
+        requiredDocumentsLinkLabel?: T;
+        interestRepaymentLinkLabel?: T;
+        contactColumnHeading?: T;
+        phoneLabel?: T;
+        emailLabel?: T;
+        officeLabel?: T;
+        hoursLabel?: T;
+        businessHours?: T;
         copyrightText?: T;
       };
   contactDetails?:
@@ -811,17 +822,6 @@ export interface HomePageSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
-              id?: T;
-            };
-      };
-  statistics?:
-    | T
-    | {
-        items?:
-          | T
-          | {
-              value?: T;
-              label?: T;
               id?: T;
             };
       };
@@ -883,6 +883,7 @@ export interface AboutUsPageSelect<T extends boolean = true> {
         backgroundImage?: T;
         mainHeading?: T;
         description?: T;
+        primaryButtonLabel?: T;
       };
   whoWeAre?:
     | T
@@ -890,6 +891,12 @@ export interface AboutUsPageSelect<T extends boolean = true> {
         image?: T;
         heading?: T;
         paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        highlights?:
           | T
           | {
               text?: T;
@@ -916,20 +923,6 @@ export interface AboutUsPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  trustAndSecurity?:
-    | T
-    | {
-        heading?: T;
-        description?: T;
-        items?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              id?: T;
-            };
-        image?: T;
-      };
   whoWeHelp?:
     | T
     | {
@@ -950,7 +943,7 @@ export interface AboutUsPageSelect<T extends boolean = true> {
         heading?: T;
         description?: T;
         applyButtonLabel?: T;
-        advisorButtonLabel?: T;
+        whatsappButtonLabel?: T;
       };
   _status?: T;
   updatedAt?: T;
@@ -971,10 +964,10 @@ export interface LoanPageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
+        eyebrow?: T;
         mainHeading?: T;
         description?: T;
         primaryButtonLabel?: T;
-        secondaryButtonLabel?: T;
         image?: T;
       };
   personalLoan?:
@@ -982,6 +975,7 @@ export interface LoanPageSelect<T extends boolean = true> {
     | {
         heading?: T;
         description?: T;
+        documentsLinkLabel?: T;
         applyButtonLabel?: T;
         whatsappButtonLabel?: T;
         features?:
@@ -995,8 +989,6 @@ export interface LoanPageSelect<T extends boolean = true> {
         requirements?:
           | T
           | {
-              image?: T;
-              heading?: T;
               items?:
                 | T
                 | {
@@ -1010,6 +1002,7 @@ export interface LoanPageSelect<T extends boolean = true> {
     | {
         heading?: T;
         description?: T;
+        documentsLinkLabel?: T;
         applyButtonLabel?: T;
         whatsappButtonLabel?: T;
         features?:
@@ -1023,8 +1016,6 @@ export interface LoanPageSelect<T extends boolean = true> {
         requirements?:
           | T
           | {
-              image?: T;
-              heading?: T;
               items?:
                 | T
                 | {
@@ -1060,7 +1051,16 @@ export interface LoanPageSelect<T extends boolean = true> {
               id?: T;
             };
         loanDetailsHeading?: T;
-        applicationNeedsHeading?: T;
+      };
+  requiredDocuments?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        personalHeading?: T;
+        businessHeading?: T;
+        ctaHeading?: T;
+        ctaDescription?: T;
       };
   interestRates?:
     | T
@@ -1074,12 +1074,10 @@ export interface LoanPageSelect<T extends boolean = true> {
               description?: T;
               id?: T;
             };
-      };
-  estimator?:
-    | T
-    | {
-        heading?: T;
-        disclaimer?: T;
+        exampleHeading?: T;
+        amountLabel?: T;
+        amountValue?: T;
+        exampleDescription?: T;
       };
   _status?: T;
   updatedAt?: T;
@@ -1188,6 +1186,7 @@ export interface ContactUsPageSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              description?: T;
             };
         office?:
           | T
@@ -1213,6 +1212,7 @@ export interface ContactUsPageSelect<T extends boolean = true> {
     | T
     | {
         heading?: T;
+        description?: T;
       };
   _status?: T;
   updatedAt?: T;

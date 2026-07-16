@@ -117,29 +117,12 @@ test('renderLegacyContent validates and applies the decoded final safe URL', () 
   assert.equal(root.querySelector('#site-contact-waze-link').getAttribute('href'), '/maps?one=1&two=2');
 });
 
-test('renderLegacyContent maps all statistic values to their counter targets', () => {
-  const html = [1, 2, 3, 4]
-    .map((index) => `<span id="home-statistic-${index}-value" class="js-stat-counter" data-target="0" data-suffix="">0</span>`)
-    .join('');
-  const content = structuredClone(defaultPayloadContent);
-
-  const root = parse(renderLegacyContent(html, 'home', content));
-
-  assert.deepEqual(
-    [1, 2, 3, 4].map((index) => {
-      const counter = root.querySelector(`#home-statistic-${index}-value`);
-      return [counter.getAttribute('data-target'), counter.getAttribute('data-suffix')];
-    }),
-    [['4', ''], ['2', ''], ['24', 'h'], ['100', '%']],
-  );
-});
-
 test('site settings logo and copyright fields update only their intended elements', () => {
   const html = [
-    '<img id="site-header-logo" src="flow-assets/logos/flow-logo.svg" alt="">',
-    '<img id="site-footer-logo" src="flow-assets/logos/flow-logo.svg" alt="">',
-    '<p id="site-footer-copyright">© 2026 Flow. All rights reserved.</p>',
-    '<img id="home-hero-left-top-image" src="flow-assets/headers/header-4-left-top.png" alt="">',
+    '<img id="site-header-logo" src="logo.png" alt="">',
+    '<img id="site-footer-logo" src="logo.png" alt="">',
+    '<p id="site-footer-copyright">© 2026 Metro Pinjaman Berlesen. All rights reserved.</p>',
+    '<img id="home-hero-left-top-image" src="flow-assets/metro/home-hero-adviser.webp" alt="">',
     '<p id="unmapped-copy">Get the funds you need.</p>',
   ].join('');
   const content = structuredClone(defaultPayloadContent);
@@ -154,7 +137,7 @@ test('site settings logo and copyright fields update only their intended element
   assert.equal(root.querySelector('#site-footer-logo').getAttribute('src'), '/api/media/file/footer-logo.png');
   assert.equal(root.querySelector('#site-footer-logo').getAttribute('alt'), 'Footer logo');
   assert.equal(root.querySelector('#site-footer-copyright').text.trim(), '© 2026 Metro Pinjaman Berlesen. All rights reserved.');
-  assert.equal(root.querySelector('#home-hero-left-top-image').getAttribute('src'), 'flow-assets/headers/header-4-left-top.png');
+  assert.equal(root.querySelector('#home-hero-left-top-image').getAttribute('src'), 'flow-assets/metro/home-hero-adviser.webp');
   assert.equal(root.querySelector('#unmapped-copy').text.trim(), 'Get the funds you need.');
 });
 

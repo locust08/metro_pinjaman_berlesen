@@ -19,6 +19,7 @@ const globalSlugs = [
 
 const singleTextArrayPaths = new Set([
   'aboutUsPage.whoWeAre.paragraphs',
+  'aboutUsPage.whoWeAre.highlights',
   'loanPage.personalLoan.requirements.items',
   'loanPage.businessLoan.requirements.items',
   'howToApplyPage.eligibility.items',

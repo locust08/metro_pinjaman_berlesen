@@ -5,8 +5,12 @@ export type LabeledText = { title: string; description: string };
 
 export type PublicPayloadContent = {
   siteSettings: {
-    header: { websiteLogo: ImageValue; mobileDrawerLogo: ImageValue; aboutUsMenuLabel: string; loanMenuLabel: string; howToApplyMenuLabel: string; contactUsMenuLabel: string; applyNowButtonLabel: string; loginButtonLabel: string; newsletterLabel: string; };
-    footer: { footerLogo: ImageValue; pagesColumnHeading: string; homeLinkLabel: string; aboutUsLinkLabel: string; loanLinkLabel: string; helpColumnHeading: string; howToApplyLinkLabel: string; contactUsLinkLabel: string; copyrightText: string; };
+    header: { websiteLogo: ImageValue; mobileDrawerLogo: ImageValue; aboutUsMenuLabel: string; loanMenuLabel: string; howToApplyMenuLabel: string; contactUsMenuLabel: string; applyNowButtonLabel: string; };
+    footer: {
+      footerLogo: ImageValue; brandDescription: string; quickLinksColumnHeading: string; homeLinkLabel: string; loanOptionsLinkLabel: string; howToApplyLinkLabel: string; aboutUsLinkLabel: string; contactUsLinkLabel: string;
+      loanInformationColumnHeading: string; personalLoanLinkLabel: string; businessLoanLinkLabel: string; requiredDocumentsLinkLabel: string; interestRepaymentLinkLabel: string;
+      contactColumnHeading: string; phoneLabel: string; emailLabel: string; officeLabel: string; hoursLabel: string; businessHours: string; copyrightText: string;
+    };
     contactDetails: { supportEmail: string; displayPhoneNumber: string; officeName: string; officeAddress: string; wazeUrl: string; googleMapsUrl: string; };
   };
   homePage: Record<string, unknown>; aboutUsPage: Record<string, unknown>; loanPage: Record<string, unknown>; howToApplyPage: Record<string, unknown>; contactUsPage: Record<string, unknown>;
@@ -16,38 +20,47 @@ export const defaultPayloadContent: PublicPayloadContent = {
   "siteSettings": {
     "header": {
       "websiteLogo": {
-        "src": "flow-assets/logos/flow-logo.svg",
-        "alt": ""
+        "src": "logo.png",
+        "alt": "Metro Pinjaman Berlesen"
       },
       "mobileDrawerLogo": {
-        "src": "flow-assets/logos/sign-logo-flow.svg",
-        "alt": ""
+        "src": "logo.png",
+        "alt": "Metro Pinjaman Berlesen"
       },
-      "aboutUsMenuLabel": "About us",
+      "aboutUsMenuLabel": "About Us",
       "loanMenuLabel": "Loan",
-      "howToApplyMenuLabel": "How to apply",
-      "contactUsMenuLabel": "Contact us",
-      "applyNowButtonLabel": "Apply now",
-      "loginButtonLabel": "Login",
-      "newsletterLabel": "Newsletter"
+      "howToApplyMenuLabel": "How to Apply",
+      "contactUsMenuLabel": "Contact Us",
+      "applyNowButtonLabel": "Apply Now"
     },
     "footer": {
       "footerLogo": {
-        "src": "flow-assets/logos/flow-logo.svg",
-        "alt": ""
+        "src": "logo.png",
+        "alt": "Metro Pinjaman Berlesen"
       },
-      "pagesColumnHeading": "Pages",
+      "brandDescription": "Personal and business loan enquiries with clear information and direct assistance throughout the application process.",
+      "quickLinksColumnHeading": "Quick Links",
       "homeLinkLabel": "Home",
-      "aboutUsLinkLabel": "About us",
-      "loanLinkLabel": "Loan",
-      "helpColumnHeading": "Help",
-      "howToApplyLinkLabel": "How to apply",
-      "contactUsLinkLabel": "Contact us",
-      "copyrightText": "© 2026 Flow. All rights reserved."
+      "loanOptionsLinkLabel": "Loan Options",
+      "howToApplyLinkLabel": "How to Apply",
+      "aboutUsLinkLabel": "About Us",
+      "contactUsLinkLabel": "Contact Us",
+      "loanInformationColumnHeading": "Loan Information",
+      "personalLoanLinkLabel": "Personal Loan",
+      "businessLoanLinkLabel": "Business Loan",
+      "requiredDocumentsLinkLabel": "Required Documents",
+      "interestRepaymentLinkLabel": "Interest & Repayment",
+      "contactColumnHeading": "Contact",
+      "phoneLabel": "Phone / WhatsApp:",
+      "emailLabel": "Email:",
+      "officeLabel": "Office:",
+      "hoursLabel": "Hours:",
+      "businessHours": "Open 24 hours, 7 days a week",
+      "copyrightText": "© 2026 Metro Pinjaman Berlesen. All rights reserved."
     },
     "contactDetails": {
       "supportEmail": "metropinjamanberlesan@gmail.com",
-      "displayPhoneNumber": "+60 11-7007 3191",
+      "displayPhoneNumber": "+60 10-215 0037",
       "officeName": "Metro Pinjaman Berlesen",
       "officeAddress": "Jalan Metro 1, Metro Prima, 52100 Kuala Lumpur, Federal Territory of Kuala Lumpur",
       "wazeUrl": "https://www.waze.com/live-map/directions/my/wilayah-persekutuan-kuala-lumpur/kuala-lumpur/jalan-metro-1?to=place.ElpKYWxhbiBNZXRybyAxLCBNZXRybyBQcmltYSwgNTIxMDAgS3VhbGEgTHVtcHVyLCBXaWxheWFoIFBlcnNla3V0dWFuIEt1YWxhIEx1bXB1ciwgTWFsYXlzaWEiLiosChQKEglr0ecfQEbMMRELOdpZeIzxyxIUChIJ35pfkUBGzDERuup-yz1DT3Y",
@@ -56,124 +69,100 @@ export const defaultPayloadContent: PublicPayloadContent = {
   },
   "homePage": {
     "seo": {
-      "title": "LoanEase — Homepage",
+      "title": "Metro Pinjaman Berlesen | Personal & Business Loans in Malaysia",
       "description": ""
     },
     "hero": {
-      "eyebrow": "Powering Tomorrow",
-      "mainHeading": "Simple Loans,",
-      "description": "Get the funds you need with competitive rates and a streamlined application. No hidden fees, no surprises — just straightforward lending.",
-      "primaryButtonLabel": "Check Your Rate",
-      "secondaryButtonLabel": "Learn More",
+      "eyebrow": "Metro Pinjaman Berlesen",
+      "mainHeading": "Pay Off Your Debts",
+      "description": "Are you paying more than 10% interest on your credit cards? Metro Pinjaman Berlesen provides loan information for credit card repayment, high interest debt, and major purchase enquiries. A repayment option designed to provide clear and manageable loan information.",
+      "primaryButtonLabel": "Apply Now",
+      "secondaryButtonLabel": "View Loan Details",
       "leftTopImage": {
-        "src": "flow-assets/headers/header-4-left-top.png",
-        "alt": ""
+        "src": "flow-assets/metro/home-hero-adviser.webp",
+        "alt": "Adviser assisting a customer with a loan enquiry"
       },
       "rightTopImage": {
-        "src": "flow-assets/headers/header-4-right-top.png",
-        "alt": ""
+        "src": "flow-assets/metro/home-personal-documents.webp",
+        "alt": "Couple reviewing personal loan documents at home"
       },
       "bottomLeftImage": {
-        "src": "flow-assets/headers/header-4-bottom-lleft.png",
-        "alt": ""
+        "src": "flow-assets/metro/home-business-cafe.webp",
+        "alt": "Small-business owner reviewing working capital documents"
       },
       "bottomRightImage": {
-        "src": "flow-assets/headers/header-4-bottom-right.png",
-        "alt": ""
+        "src": "flow-assets/metro/required-documents-closeup.webp",
+        "alt": "Organised loan application documents on a desk"
       }
     },
     "howItWorks": {
       "heading": "How It Works",
-      "description": "Get your loan in four simple steps.",
+      "description": "Choose your loan, submit your application, and wait for the application review outcome.",
       "steps": [
         {
-          "title": "Select Loan",
-          "description": "Choose the loan type that fits your needs."
+          "title": "Select Your Loan and Apply",
+          "description": "Choose the loan that works for you and complete the application form."
         },
         {
-          "title": "Apply Online",
-          "description": "Fill in our simple form in just minutes."
+          "title": "Application Review",
+          "description": "We will review your application details and contact you about the next step."
         },
         {
-          "title": "Get Approved",
-          "description": "Receive fast approval with no guarantor."
-        },
-        {
-          "title": "Receive Money",
-          "description": "Money is sent directly to your account."
-        }
-      ]
-    },
-    "statistics": {
-      "items": [
-        {
-          "value": "4",
-          "label": "Simple Application Steps"
-        },
-        {
-          "value": "2",
-          "label": "Loan Options Available"
-        },
-        {
-          "value": "24h",
-          "label": "Response Time Target"
-        },
-        {
-          "value": "100%",
-          "label": "Transparent Terms"
+          "title": "Receive Funds After Approval",
+          "description": "If the application is accepted, funds may be disbursed after document verification and final confirmation."
         }
       ]
     },
     "loanOptions": {
       "heading": "Loan Options",
-      "description": "Choose the perfect loan to match your goals.",
+      "description": "Review the personal and business loan options available from Metro Pinjaman Berlesen.",
       "cards": [
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/personal-loan-consultation.webp",
+            "alt": "Customer discussing a personal loan application with an adviser"
           },
           "title": "Personal Loan",
-          "description": "Get flexible funding for personal needs, from emergencies to dreams.",
-          "linkLabel": "Learn more"
+          "description": "A personal loan may help fund a big expense, consolidate debt, or meet short-term cash needs.",
+          "linkLabel": "View Loan Details"
         },
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/business-financing-documents.webp",
+            "alt": "Small-business owner reviewing financing documents"
           },
           "title": "Business Loan",
-          "description": "Grow your business with funding tailored for entrepreneurs.",
-          "linkLabel": "Learn more"
+          "description": "Business loan support for working capital, stock purchases, overheads, and business activities.",
+          "linkLabel": "View Loan Details"
         }
       ]
     },
     "whyChooseUs": {
       "image": {
-        "src": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
-        "alt": ""
+        "src": "flow-assets/metro/home-why-adviser-files.webp",
+        "alt": "Adviser organising loan application files"
       },
       "heading": "Why Choose Us",
       "features": [
         {
-          "title": "Simple Process",
-          "description": "Apply easily online with minimal paperwork."
+          "title": "No ATM Card",
+          "description": "We do not require any ATM card."
         },
         {
-          "title": "Trusted by Thousands",
-          "description": "Thousands of happy customers rely on us."
+          "title": "Open to all Malaysians",
+          "description": "Our service is open to all Malaysians."
         },
         {
-          "title": "Transparent Terms",
-          "description": "No hidden fees, clear and honest pricing."
+          "title": "No Guarantor",
+          "description": "We do not require a guarantor from you for your loan application."
         }
       ]
     },
     "readyToGetStarted": {
       "heading": "Ready to get started?",
-      "description": "Apply now and get the funds you need in no time.",
-      "applyButtonLabel": "APPLY NOW",
-      "whatsappButtonLabel": "WHATSAPP US"
+      "description": "Apply Now or contact us on WhatsApp at +60 10-215 0037 for personal and business loan enquiries.",
+      "applyButtonLabel": "Apply Now",
+      "whatsappButtonLabel": "Chat on WhatsApp"
     }
   },
   "aboutUsPage": {
@@ -183,220 +172,190 @@ export const defaultPayloadContent: PublicPayloadContent = {
     },
     "hero": {
       "backgroundImage": {
-        "src": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80",
-        "alt": ""
+        "src": "flow-assets/metro/customer-support-consultation.webp",
+        "alt": "Customer-service representative assisting with a loan enquiry"
       },
-      "mainHeading": "Lending you trust, building your future.",
-      "description": "We help individuals and businesses access fair, fast and transparent loan solutions-so you can focus on what matters most."
+      "mainHeading": "Supporting Personal and Business Loan Enquiries",
+      "description": "Clear loan information and application guidance for individuals and businesses across Malaysia.",
+      "primaryButtonLabel": "Contact Us"
     },
     "whoWeAre": {
       "image": {
-        "src": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80",
-        "alt": ""
+        "src": "flow-assets/metro/about-company-adviser.webp",
+        "alt": "Adviser reviewing loan service documents"
       },
       "heading": "Who we are",
       "paragraphs": [
-        "Founded with a simple mission-to make borrowing simpler, smarter and more human-we've helped thousands of customers secure the funding they need with confidence.",
-        "Our team of financial experts combines years of industry experience with modern technology to deliver loan services that are transparent, secure and tailored to your goals."
+        "Metro Pinjaman Berlesen provides enquiry support for personal and business loans. We help customers understand available loan information, prepare the required documents and follow the application process."
+      ],
+      "highlights": [
+        "Clear loan information",
+        "Application guidance",
+        "Personal and business loan support"
       ],
       "statistics": [
         {
-          "value": "15K+",
-          "label": "Loans funded"
+          "value": "2",
+          "label": "Loan types"
         },
         {
-          "value": "$2B+",
-          "label": "Capital deployed"
+          "value": "24/7",
+          "label": "Service availability"
         },
         {
-          "value": "98%",
-          "label": "Satisfaction rate"
+          "value": "6–60",
+          "label": "Month repayment options"
         }
       ]
     },
     "whyChooseUs": {
       "heading": "Why choose us",
-      "description": "We go beyond just approving loans. Here's what sets our service apart from the rest.",
+      "description": "Practical application requirements and availability, clearly presented for loan enquiries.",
       "features": [
         {
-          "title": "Fast approvals",
-          "description": "Get a decision in minutes, not days. Our streamlined process means funds reach you faster."
+          "title": "Open to all Malaysians",
+          "description": "Loan enquiry support is available for Malaysian applicants."
         },
         {
-          "title": "Competitive rates",
-          "description": "Transparent pricing with no hidden fees. You always know exactly what you'll pay."
+          "title": "No ATM card required",
+          "description": "Applicants do not need to provide an ATM card."
         },
         {
-          "title": "Personalized service",
-          "description": "Real people, real support. Our advisors guide you through every step of the journey."
+          "title": "No guarantor required",
+          "description": "A guarantor is not required for the loan application."
         },
         {
-          "title": "Flexible terms",
-          "description": "Choose repayment plans that fit your budget and lifestyle, not the other way around."
-        },
-        {
-          "title": "100% online",
-          "description": "Apply, track and manage your loan entirely from your phone or computer-anytime."
-        },
-        {
-          "title": "Trusted reputation",
-          "description": "Thousands of happy customers and top industry ratings back our commitment to you."
+          "title": "Available 24 hours, 7 days a week",
+          "description": "Our team is available for enquiries every day."
         }
       ]
     },
-    "trustAndSecurity": {
-      "heading": "Trust & security",
-      "description": "Your data and money are protected by industry-leading standards. We treat your security as seriously as you do.",
-      "items": [
-        {
-          "title": "Bank-level encryption",
-          "description": "256-bit SSL encryption keeps every transaction safe."
-        },
-        {
-          "title": "Fully licensed & regulated",
-          "description": "We operate in full compliance with financial authorities."
-        },
-        {
-          "title": "Privacy first",
-          "description": "Your personal information is never sold or shared without consent."
-        }
-      ],
-      "image": {
-        "src": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80",
-        "alt": ""
-      }
-    },
     "whoWeHelp": {
       "heading": "Who we help",
-      "description": "Whatever your goal, we have a loan solution designed for you.",
+      "description": "We support individuals, business owners and applicants seeking personal or business financing information.",
       "cards": [
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
-          },
-          "title": "Home buyers",
-          "description": "Affordable mortgages to help you own your dream home."
-        },
-        {
-          "image": {
-            "src": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
-          },
-          "title": "Small businesses",
-          "description": "Working capital and growth funding for entrepreneurs."
-        },
-        {
-          "image": {
-            "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/who-help-phone-support.webp",
+            "alt": "Support representative answering a loan enquiry by phone"
           },
           "title": "Individuals",
-          "description": "Personal loans for life's planned and unexpected moments."
+          "description": "Support for personal loan information, enquiry steps and application preparation."
         },
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/who-help-food-business.webp",
+            "alt": "Food-business owner preparing financing records"
           },
-          "title": "Students",
-          "description": "Education financing to invest in your future career."
+          "title": "Small-business owners",
+          "description": "Guidance for business loan enquiries related to working capital, stock or overheads."
+        },
+        {
+          "image": {
+            "src": "flow-assets/metro/who-help-document-prep.webp",
+            "alt": "Applicant preparing company loan documents"
+          },
+          "title": "Companies and corporate groups",
+          "description": "Information support for company loan enquiries and application requirements."
         }
       ]
     },
     "readyToGetStarted": {
-      "heading": "Ready to get started?",
-      "description": "Join thousands of satisfied customers who trust us with their financial goals. Apply today and get a decision in minutes.",
-      "applyButtonLabel": "Apply now",
-      "advisorButtonLabel": "Talk to an advisor"
+      "heading": "Need help with your loan enquiry?",
+      "description": "Contact our team for information about personal loans, business loans and the application process.",
+      "applyButtonLabel": "Apply Now",
+      "whatsappButtonLabel": "Chat on WhatsApp"
     }
   },
   "loanPage": {
     "seo": {
-      "title": "Loan | Metro Pinjaman Berlesen",
+      "title": "Loan Options | Metro Pinjaman Berlesen",
       "description": ""
     },
     "hero": {
-      "mainHeading": "The Future of Green Energy",
-      "description": "Our commitment to green energy is paving the way for a cleaner, healthier planet. Join us on a journey towards a future where clean, renewable energy sources transform the way we power our lives.",
-      "primaryButtonLabel": "See our solutions",
-      "secondaryButtonLabel": "Get in touch",
+      "eyebrow": "Metro Pinjaman Berlesen",
+      "mainHeading": "Personal & Business Loan Options",
+      "description": "Choose between personal loan and business loan options, review the required documents, and contact Metro Pinjaman Berlesen for application support.",
+      "primaryButtonLabel": "Contact Us",
       "image": {
-        "src": "flow-assets/headers/image-hero-1.png",
-        "alt": ""
+        "src": "flow-assets/metro/loan-hero-adviser.webp",
+        "alt": "Loan adviser discussing personal and business loan options"
       }
     },
     "personalLoan": {
       "heading": "Personal Loan",
-      "description": "Flexible financing for big expenses, debt consolidation, short-term cash needs, or personal projects with a clear monthly repayment plan.",
-      "applyButtonLabel": "Apply now",
-      "whatsappButtonLabel": "WhatsApp us",
+      "description": "A personal loan might be right for you if you want to fund a big expense or consolidate debt. This loan scheme provides loans to individuals with a source of income and comes with a monthly repayment plan to meet personal needs.",
+      "documentsLinkLabel": "View required documents",
+      "applyButtonLabel": "Apply Now",
+      "whatsappButtonLabel": "Chat on WhatsApp",
       "features": [
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/loan-personal-applicant.webp",
+            "alt": "Personal loan applicant reviewing documents"
           },
-          "title": "Loan from RM500 to RM100,000",
-          "description": "Available for applicants with a minimum monthly salary of RM3,000 and a steady source of income."
+          "title": "Loan from RM500–RM100,000",
+          "description": "Minimum monthly salary of RM3,000 and a steady source of income."
         },
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/loan-repayment-advice.webp",
+            "alt": "Adviser explaining a repayment plan"
           },
           "title": "Monthly repayment plan",
-          "description": "Suitable for personal expenses, big purchases, debt consolidation, or short-term cash needs."
+          "description": "A personal loan can also be defined as a short term loan and may be the answer to short-term cash needs because the repayment period is normally shorter than other types of loan such as housing loan or a mortgage."
         }
       ],
       "requirements": {
-        "image": {
-          "src": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
-          "alt": ""
-        },
-        "heading": "Required documents",
         "items": [
           "NRIC and contact number",
-          "Latest 3 months payslip and bank statement",
-          "Utility bill, S&P, tenancy agreement, and EPF statement"
+          "Latest 3 months' payslips",
+          "Latest 3 months' bank statements",
+          "Latest electricity bill",
+          "Latest water bill",
+          "Sale and Purchase Agreement, where applicable",
+          "Tenancy agreement, where applicable",
+          "Latest EPF statement"
         ]
       }
     },
     "businessLoan": {
       "heading": "Business Loan",
-      "description": "Take your business further with flexible loan tenures, high financing margins, and funding for working capital, stock, overheads, or business activities.",
-      "applyButtonLabel": "Apply now",
-      "whatsappButtonLabel": "WhatsApp us",
+      "description": "Explore business loan support for working capital, stock purchases, overheads and other business activities.",
+      "documentsLinkLabel": "View required documents",
+      "applyButtonLabel": "Apply Now",
+      "whatsappButtonLabel": "Chat on WhatsApp",
       "features": [
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/loan-business-retail.webp",
+            "alt": "Retail business owner reviewing working capital documents"
           },
           "title": "Working capital support",
-          "description": "Support cash flow, daily operations, stock purchases, overheads, and other working capital needs."
+          "description": "Funds may be used for purchasing stock, managing overheads and other business activities, to fulfil working capital needs."
         },
         {
           "image": {
-            "src": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80",
-            "alt": ""
+            "src": "flow-assets/metro/loan-business-workshop.webp",
+            "alt": "Service business owner discussing funding documents"
           },
-          "title": "Flexible business funding",
-          "description": "Suitable for small businesses and corporate groups that need practical financing solutions."
+          "title": "Business funding information",
+          "description": "Metro Pinjaman Berlesen offers services and solutions for small businesses and corporate groups with financing needs."
         }
       ],
       "requirements": {
-        "image": {
-          "src": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80",
-          "alt": ""
-        },
-        "heading": "Required documents",
         "items": [
-          "NRIC copy and name card",
-          "Borang B and Borang D",
-          "Latest 3 months bank statement",
-          "S&P and latest electric & water bill",
-          "Form 24/49, 42, 11A and latest EPF statement"
+          "NRIC copy",
+          "Name card",
+          "Borang B",
+          "Borang D",
+          "Latest 3 months' bank statements",
+          "Sale and Purchase Agreement, where applicable",
+          "Utility bill",
+          "Form 24/49",
+          "Form 42",
+          "Form 11A",
+          "Latest EPF statement"
         ]
       }
     },
@@ -415,139 +374,127 @@ export const defaultPayloadContent: PublicPayloadContent = {
       "rows": [
         {
           "label": "Best for",
-          "personalValue": "Personal expenses, emergencies, education, or home needs",
-          "businessValue": "Working capital, equipment, inventory, or business expansion"
+          "personalValue": "Big expenses, debt consolidation, major purchases, or short-term cash needs",
+          "businessValue": "Working capital, purchasing stock, managing overheads, or business activities"
         },
         {
           "label": "Indicative rate",
-          "personalValue": "From 6.5% p.a.",
-          "businessValue": "From 8.0% p.a."
+          "personalValue": "8%–12% APR",
+          "businessValue": "8%–12% APR"
         },
         {
           "label": "Loan amount",
-          "personalValue": "Smaller to medium financing needs",
-          "businessValue": "Higher limits based on business profile"
+          "personalValue": "RM500–RM100,000 for personal loan",
+          "businessValue": "Contact Us for business loan details"
         },
         {
           "label": "Repayment tenure",
-          "personalValue": "Flexible monthly installments",
-          "businessValue": "Structured around business cash flow"
-        },
-        {
-          "label": "Documents",
-          "personalValue": "Identity, income, and bank details",
-          "businessValue": "Business registration, bank statements, and company financials"
-        },
-        {
-          "label": "Approval focus",
-          "personalValue": "Personal income and repayment ability",
-          "businessValue": "Business revenue, operations, and cash flow"
-        },
-        {
-          "label": "Support",
-          "personalValue": "Guided application assistance",
-          "businessValue": "Guided application assistance for business documents"
+          "personalValue": "6–60 month repayment period",
+          "businessValue": "6–60 month repayment period"
         }
       ],
-      "loanDetailsHeading": "Loan details",
-      "applicationNeedsHeading": "Application needs"
+      "loanDetailsHeading": "Loan details"
+    },
+    "requiredDocuments": {
+      "heading": "Required Documents",
+      "description": "Prepare the relevant documents before submitting your loan enquiry.",
+      "personalHeading": "Personal Loan Documents",
+      "businessHeading": "Business Loan Documents",
+      "ctaHeading": "Need help preparing your documents?",
+      "ctaDescription": "Contact our team if you need help understanding the application requirements."
     },
     "interestRates": {
-      "heading": "Interest Rates & Repayment",
-      "description": "Transparent pricing with flexible repayment options designed to fit your budget.",
+      "heading": "Interest Rate",
+      "description": "Indicative rate range information for Metro Pinjaman Berlesen loan enquiries.",
       "features": [
         {
-          "title": "Competitive Rates",
-          "description": "Personal loans from 6.5% p.a. and business loans from 8.0% p.a."
+          "title": "Indicative rate range",
+          "description": "8%–12% APR"
         },
         {
-          "title": "Flexible Repayment",
-          "description": "Choose monthly installments that suit your cash flow, with no hidden fees or surprises."
+          "title": "Repayment period",
+          "description": "6–60 month repayment period"
         },
         {
-          "title": "Early Settlement",
-          "description": "Pay off your loan early and save on interest with low or zero prepayment penalties."
+          "title": "Personal-loan amount",
+          "description": "RM500–RM100,000 personal-loan amount"
         }
-      ]
-    },
-    "estimator": {
-      "heading": "Estimate Your Monthly Repayment",
-      "disclaimer": "*Estimates only. Actual rates and terms may vary upon approval."
+      ],
+      "exampleHeading": "Representative example",
+      "amountLabel": "Amount borrowed",
+      "amountValue": "RM5,000",
+      "exampleDescription": "180-day period. Interest: RM448. Total payable: RM5,448."
     }
   },
   "howToApplyPage": {
     "seo": {
-      "title": "How To Apply | Metro Pinjaman Berlesen",
+      "title": "How to Apply | Metro Pinjaman Berlesen",
       "description": ""
     },
     "hero": {
-      "mainHeading": "Get Your Loan in Simple Steps",
-      "description": "Applying for a loan with us is fast and hassle-free. Follow our easy guide below to complete your application and get the funds you need.",
-      "primaryButtonLabel": "Start Your Application"
+      "mainHeading": "Submit Your Loan Enquiry in Simple Steps",
+      "description": "Choose the loan that works for you, fill in the form for your application, and our team will review your application and contact you about the next step.",
+      "primaryButtonLabel": "Apply Now"
     },
     "steps": {
       "heading": "Step-by-Step Process",
-      "description": "A clear and simple path from application to approval.",
+      "description": "The application process is simple: select your loan, apply, wait for review, and receive the next-step update from Metro Pinjaman Berlesen.",
       "items": [
         {
-          "title": "Choose Your Loan",
-          "description": "Select the loan option that best fits your needs and budget from our range of services."
+          "title": "Select Your Loan and Apply",
+          "description": "Choose the loan that works for you and complete the application form."
         },
         {
-          "title": "Submit Documents",
-          "description": "Prepare and upload the required documents listed below to verify your eligibility."
+          "title": "Application Review",
+          "description": "We will review your application details and contact you about the next step."
         },
         {
-          "title": "Get Reviewed",
-          "description": "Our team reviews your application quickly and contacts you for any clarifications."
-        },
-        {
-          "title": "Receive Funds",
-          "description": "Once approved, your loan amount is disbursed directly to your account."
+          "title": "Receive Funds After Approval",
+          "description": "If the application is accepted, funds may be disbursed after document verification and final confirmation."
         }
       ]
     },
     "requiredDocuments": {
       "image": {
-        "src": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
-        "alt": ""
+        "src": "flow-assets/metro/how-apply-documents.webp",
+        "alt": "Applicant preparing loan application documents"
       },
       "heading": "Required Documents",
-      "description": "Have these documents ready before you apply to ensure a smooth and speedy process.",
+      "description": "Prepare these documents before submitting your loan enquiry.",
       "items": [
         {
-          "title": "Valid Government ID",
-          "description": "Passport, driver's license, or national ID card."
+          "title": "NRIC / NRIC copy",
+          "description": "Required for personal loan and business loan applications."
         },
         {
-          "title": "Proof of Income",
-          "description": "Recent payslips, bank statements, or tax returns."
+          "title": "Income and bank documents",
+          "description": "Latest 3 months payslip and latest 3 months bank statement for personal loan applications."
         },
         {
-          "title": "Proof of Address",
-          "description": "Utility bill or lease agreement dated within 3 months."
+          "title": "Utility and property documents",
+          "description": "Latest electric & water bill, S&P, tenancy agreement, and latest EPF statement where applicable."
         },
         {
-          "title": "Bank Account Details",
-          "description": "Active bank account for loan disbursement."
+          "title": "Business documents",
+          "description": "Name card, Borang B & D, Form 24/49, 42, 11A, and latest bank statement where applicable."
         }
       ]
     },
     "eligibility": {
-      "heading": "Eligibility Requirements",
-      "description": "Make sure you meet these basic requirements before you apply.",
+      "heading": "Application Notes",
+      "description": "Review these notes before you submit an enquiry.",
       "items": [
-        "You must be at least 18 years old.",
-        "Have a stable and verifiable source of income.",
-        "Be a resident or citizen with valid documents.",
-        "Maintain an active bank account."
+        "Our service is open to Malaysians.",
+        "Personal loan applicants should have a source of income and a minimum monthly salary of RM3,000.",
+        "Prepare the required documents for the loan type you are applying for.",
+        "No ATM card or guarantor is required for your loan application."
       ]
     },
     "readyToApply": {
       "heading": "Ready to Apply?",
-      "description": "Fill out the quick form below or chat with us instantly on WhatsApp to get started right away.",
+      "description": "Submit your enquiry using the form below or chat with us on WhatsApp. You can also choose a preferred appointment slot for our team to follow up.",
       "whatsappButtonLabel": "Chat on WhatsApp",
-      "submitButtonLabel": "SUBMIT APPLICATION"
+      "submitButtonLabel": "Apply Now"
     }
   },
   "contactUsPage": {
@@ -556,12 +503,12 @@ export const defaultPayloadContent: PublicPayloadContent = {
       "description": ""
     },
     "contactForm": {
-      "heading": "Contact us",
-      "description": "Contact Metro Pinjaman Berlesen for personal and business loan enquiries. Our team is ready to assist you 24/7.",
-      "submitButtonLabel": "Submit",
+      "heading": "Contact Us",
+      "description": "Contact Metro Pinjaman Berlesen for personal and business loan information, application guidance and customer support. Our enquiry channels are available 24 hours, 7 days a week.",
+      "submitButtonLabel": "Apply Now",
       "image": {
-        "src": "flow-assets/contact/photo-1.png",
-        "alt": ""
+        "src": "flow-assets/metro/contact-phone-support.webp",
+        "alt": "Customer-service representative assisting by phone and online enquiry"
       }
     },
     "contactMethods": {
@@ -570,7 +517,8 @@ export const defaultPayloadContent: PublicPayloadContent = {
         "description": "Email us for loan enquiries and application support."
       },
       "phone": {
-        "heading": "Phone"
+        "heading": "Phone",
+        "description": "Open 24 hours, 7 days a week"
       },
       "office": {
         "heading": "HQ Office",
@@ -583,28 +531,29 @@ export const defaultPayloadContent: PublicPayloadContent = {
       "items": [
         {
           "question": "What loan services do you offer?",
-          "answer": "Metro Pinjaman Berlesen offers personal loans and business loans with flexible repayment options."
+          "answer": "Metro Pinjaman Berlesen provides information and enquiry support for personal and business loans."
         },
         {
           "question": "How fast can I receive the money?",
-          "answer": "Once your application is approved, you can receive your cash by bank transfer within 10 minutes."
+          "answer": "Processing and disbursement time may vary depending on document verification and final confirmation."
         },
         {
           "question": "Who can apply?",
-          "answer": "The service is open to Malaysians. Personal loan applicants should have a source of income and a minimum monthly salary of RM3000."
+          "answer": "The service is open to Malaysians. Personal loan applicants should have a source of income and a minimum monthly salary of RM3,000."
         },
         {
-          "question": "Do I need to provide my ATM card or a guarantor?",
+          "question": "Do I need an ATM card or guarantor?",
           "answer": "No. Metro Pinjaman Berlesen does not require your ATM card or a guarantor for your loan application."
         },
         {
-          "question": "What documents do I need?",
-          "answer": "Required documents may include NRIC, contact number, latest 3 months pay slip, latest 3 months bank statement, latest utility bills, EPF statement, S&P, or tenancy agreement."
+          "question": "What documents are required?",
+          "answer": "Document requirements differ between personal and business loan enquiries. Review the complete Required Documents section on the Loan Options page."
         }
       ]
     },
     "stillHaveQuestions": {
-      "heading": "Still have questions?"
+      "heading": "Still have questions?",
+      "description": "Contact us using the form above or chat with us on WhatsApp."
     }
   }
 };

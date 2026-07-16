@@ -256,7 +256,7 @@ export const defaultPayloadContent: PublicPayloadContent = {
       helpColumnHeading: 'Help',
       howToApplyLinkLabel: 'How to apply',
       contactUsLinkLabel: 'Contact us',
-      copyrightText: '© 2026 Flow. All rights reserved.',
+      copyrightText: '© 2026 Metro Pinjaman Berlesen. All rights reserved.',
     },
     contactDetails: {
       supportEmail: 'metropinjamanberlesan@gmail.com',

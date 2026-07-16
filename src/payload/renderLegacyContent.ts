@@ -188,15 +188,8 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "id": "site-header-mobile-drawer-primary-apply-now-label",
     "path": "siteSettings.header.applyNowButtonLabel",
     "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "site-header-mobile-drawer-primary-login-label",
-    "path": "siteSettings.header.loginButtonLabel",
-    "pages": [
       "index.html",
+      "about_us.html",
       "loan.html",
       "how_to_apply.html",
       "contact.html"
@@ -204,27 +197,8 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "site-header-mobile-drawer-secondary-login-label",
-    "path": "siteSettings.header.loginButtonLabel",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "site-header-mobile-drawer-primary-newsletter-label",
-    "path": "siteSettings.header.newsletterLabel",
-    "pages": [
-      "index.html",
-      "loan.html",
-      "how_to_apply.html",
-      "contact.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "site-header-mobile-drawer-secondary-newsletter-label",
-    "path": "siteSettings.header.newsletterLabel",
+    "id": "site-header-mobile-drawer-secondary-apply-now-label",
+    "path": "siteSettings.header.applyNowButtonLabel",
     "pages": [
       "index.html"
     ],
@@ -243,8 +217,20 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "image"
   },
   {
-    "id": "site-footer-pages-heading",
-    "path": "siteSettings.footer.pagesColumnHeading",
+    "id": "site-footer-brand-description",
+    "path": "siteSettings.footer.brandDescription",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-quick-links-heading",
+    "path": "siteSettings.footer.quickLinksColumnHeading",
     "pages": [
       "index.html",
       "about_us.html",
@@ -267,32 +253,8 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "site-footer-link-about-us",
-    "path": "siteSettings.footer.aboutUsLinkLabel",
-    "pages": [
-      "index.html",
-      "about_us.html",
-      "loan.html",
-      "how_to_apply.html",
-      "contact.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "site-footer-link-loan",
-    "path": "siteSettings.footer.loanLinkLabel",
-    "pages": [
-      "index.html",
-      "about_us.html",
-      "loan.html",
-      "how_to_apply.html",
-      "contact.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "site-footer-help-heading",
-    "path": "siteSettings.footer.helpColumnHeading",
+    "id": "site-footer-link-loan-options",
+    "path": "siteSettings.footer.loanOptionsLinkLabel",
     "pages": [
       "index.html",
       "about_us.html",
@@ -315,8 +277,188 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "site-footer-link-about-us",
+    "path": "siteSettings.footer.aboutUsLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "site-footer-link-contact-us",
     "path": "siteSettings.footer.contactUsLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-loan-information-heading",
+    "path": "siteSettings.footer.loanInformationColumnHeading",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-link-personal-loan",
+    "path": "siteSettings.footer.personalLoanLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-link-business-loan",
+    "path": "siteSettings.footer.businessLoanLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-link-required-documents",
+    "path": "siteSettings.footer.requiredDocumentsLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-link-interest-repayment",
+    "path": "siteSettings.footer.interestRepaymentLinkLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-contact-heading",
+    "path": "siteSettings.footer.contactColumnHeading",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-phone-label",
+    "path": "siteSettings.footer.phoneLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-phone-number",
+    "path": "siteSettings.contactDetails.displayPhoneNumber",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-email-label",
+    "path": "siteSettings.footer.emailLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-email-address",
+    "path": "siteSettings.contactDetails.supportEmail",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-office-label",
+    "path": "siteSettings.footer.officeLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-office-address",
+    "path": "siteSettings.contactDetails.officeAddress",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-hours-label",
+    "path": "siteSettings.footer.hoursLabel",
+    "pages": [
+      "index.html",
+      "about_us.html",
+      "loan.html",
+      "how_to_apply.html",
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "site-footer-business-hours",
+    "path": "siteSettings.footer.businessHours",
     "pages": [
       "index.html",
       "about_us.html",
@@ -483,6 +625,70 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "home-loan-options-heading",
+    "path": "homePage.loanOptions.heading",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-loan-options-description",
+    "path": "homePage.loanOptions.description",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-why-choose-us-image",
+    "path": "homePage.whyChooseUs.image",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "image"
+  },
+  {
+    "id": "home-why-choose-us-heading",
+    "path": "homePage.whyChooseUs.heading",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-ready-to-get-started-heading",
+    "path": "homePage.readyToGetStarted.heading",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-ready-to-get-started-description",
+    "path": "homePage.readyToGetStarted.description",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-ready-to-get-started-apply-label",
+    "path": "homePage.readyToGetStarted.applyButtonLabel",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-ready-to-get-started-whatsapp-label",
+    "path": "homePage.readyToGetStarted.whatsappButtonLabel",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "home-how-it-works-step-1-title",
     "path": "homePage.howItWorks.steps[0].title",
     "pages": [
@@ -493,6 +699,22 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "home-how-it-works-step-1-description",
     "path": "homePage.howItWorks.steps[0].description",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-why-choose-us-feature-1-title",
+    "path": "homePage.whyChooseUs.features[0].title",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-why-choose-us-feature-1-description",
+    "path": "homePage.whyChooseUs.features[0].description",
     "pages": [
       "index.html"
     ],
@@ -515,6 +737,22 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "home-why-choose-us-feature-2-title",
+    "path": "homePage.whyChooseUs.features[1].title",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "home-why-choose-us-feature-2-description",
+    "path": "homePage.whyChooseUs.features[1].description",
+    "pages": [
+      "index.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "home-how-it-works-step-3-title",
     "path": "homePage.howItWorks.steps[2].title",
     "pages": [
@@ -531,96 +769,16 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "home-how-it-works-step-4-title",
-    "path": "homePage.howItWorks.steps[3].title",
+    "id": "home-why-choose-us-feature-3-title",
+    "path": "homePage.whyChooseUs.features[2].title",
     "pages": [
       "index.html"
     ],
     "kind": "text"
   },
   {
-    "id": "home-how-it-works-step-4-description",
-    "path": "homePage.howItWorks.steps[3].description",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-statistic-1-value",
-    "path": "homePage.statistics.items[0].value",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "counter"
-  },
-  {
-    "id": "home-statistic-1-label",
-    "path": "homePage.statistics.items[0].label",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-statistic-2-value",
-    "path": "homePage.statistics.items[1].value",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "counter"
-  },
-  {
-    "id": "home-statistic-3-value",
-    "path": "homePage.statistics.items[2].value",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "counter"
-  },
-  {
-    "id": "home-statistic-4-value",
-    "path": "homePage.statistics.items[3].value",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "counter"
-  },
-  {
-    "id": "home-statistic-2-label",
-    "path": "homePage.statistics.items[1].label",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-statistic-3-label",
-    "path": "homePage.statistics.items[2].label",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-statistic-4-label",
-    "path": "homePage.statistics.items[3].label",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-loan-options-heading",
-    "path": "homePage.loanOptions.heading",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-loan-options-description",
-    "path": "homePage.loanOptions.description",
+    "id": "home-why-choose-us-feature-3-description",
+    "path": "homePage.whyChooseUs.features[2].description",
     "pages": [
       "index.html"
     ],
@@ -691,102 +849,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "home-why-choose-us-image",
-    "path": "homePage.whyChooseUs.image",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "home-why-choose-us-heading",
-    "path": "homePage.whyChooseUs.heading",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-1-title",
-    "path": "homePage.whyChooseUs.features[0].title",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-1-description",
-    "path": "homePage.whyChooseUs.features[0].description",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-2-title",
-    "path": "homePage.whyChooseUs.features[1].title",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-2-description",
-    "path": "homePage.whyChooseUs.features[1].description",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-3-title",
-    "path": "homePage.whyChooseUs.features[2].title",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-why-choose-us-feature-3-description",
-    "path": "homePage.whyChooseUs.features[2].description",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-ready-to-get-started-heading",
-    "path": "homePage.readyToGetStarted.heading",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-ready-to-get-started-description",
-    "path": "homePage.readyToGetStarted.description",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-ready-to-get-started-apply-label",
-    "path": "homePage.readyToGetStarted.applyButtonLabel",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "home-ready-to-get-started-whatsapp-label",
-    "path": "homePage.readyToGetStarted.whatsappButtonLabel",
-    "pages": [
-      "index.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "about-us-seo-title",
     "path": "aboutUsPage.seo.title",
     "pages": [
@@ -819,6 +881,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "about-us-hero-primary-button-label",
+    "path": "aboutUsPage.hero.primaryButtonLabel",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "about-us-who-we-are-image",
     "path": "aboutUsPage.whoWeAre.image",
     "pages": [
@@ -843,8 +913,72 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "about-us-who-we-are-paragraph-2",
-    "path": "aboutUsPage.whoWeAre.paragraphs[1]",
+    "id": "about-us-why-choose-us-heading",
+    "path": "aboutUsPage.whyChooseUs.heading",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-why-choose-us-description",
+    "path": "aboutUsPage.whyChooseUs.description",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-help-heading",
+    "path": "aboutUsPage.whoWeHelp.heading",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-help-description",
+    "path": "aboutUsPage.whoWeHelp.description",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-ready-heading",
+    "path": "aboutUsPage.readyToGetStarted.heading",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-ready-description",
+    "path": "aboutUsPage.readyToGetStarted.description",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-ready-apply-label",
+    "path": "aboutUsPage.readyToGetStarted.applyButtonLabel",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-ready-whatsapp-label",
+    "path": "aboutUsPage.readyToGetStarted.whatsappButtonLabel",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-are-highlight-1",
+    "path": "aboutUsPage.whoWeAre.highlights[0]",
     "pages": [
       "about_us.html"
     ],
@@ -867,6 +1001,38 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "about-us-who-we-help-card-1-image",
+    "path": "aboutUsPage.whoWeHelp.cards[0].image",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "image"
+  },
+  {
+    "id": "about-us-who-we-help-card-1-title",
+    "path": "aboutUsPage.whoWeHelp.cards[0].title",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-help-card-1-description",
+    "path": "aboutUsPage.whoWeHelp.cards[0].description",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-are-highlight-2",
+    "path": "aboutUsPage.whoWeAre.highlights[1]",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "about-us-statistic-2-value",
     "path": "aboutUsPage.whoWeAre.statistics[1].value",
     "pages": [
@@ -877,6 +1043,38 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "about-us-statistic-2-label",
     "path": "aboutUsPage.whoWeAre.statistics[1].label",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-help-card-2-image",
+    "path": "aboutUsPage.whoWeHelp.cards[1].image",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "image"
+  },
+  {
+    "id": "about-us-who-we-help-card-2-title",
+    "path": "aboutUsPage.whoWeHelp.cards[1].title",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-help-card-2-description",
+    "path": "aboutUsPage.whoWeHelp.cards[1].description",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "about-us-who-we-are-highlight-3",
+    "path": "aboutUsPage.whoWeAre.highlights[2]",
     "pages": [
       "about_us.html"
     ],
@@ -899,16 +1097,24 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "about-us-why-choose-us-heading",
-    "path": "aboutUsPage.whyChooseUs.heading",
+    "id": "about-us-who-we-help-card-3-image",
+    "path": "aboutUsPage.whoWeHelp.cards[2].image",
+    "pages": [
+      "about_us.html"
+    ],
+    "kind": "image"
+  },
+  {
+    "id": "about-us-who-we-help-card-3-title",
+    "path": "aboutUsPage.whoWeHelp.cards[2].title",
     "pages": [
       "about_us.html"
     ],
     "kind": "text"
   },
   {
-    "id": "about-us-why-choose-us-description",
-    "path": "aboutUsPage.whyChooseUs.description",
+    "id": "about-us-who-we-help-card-3-description",
+    "path": "aboutUsPage.whoWeHelp.cards[2].description",
     "pages": [
       "about_us.html"
     ],
@@ -979,256 +1185,16 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "about-us-why-choose-us-feature-5-title",
-    "path": "aboutUsPage.whyChooseUs.features[4].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-why-choose-us-feature-5-description",
-    "path": "aboutUsPage.whyChooseUs.features[4].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-why-choose-us-feature-6-title",
-    "path": "aboutUsPage.whyChooseUs.features[5].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-why-choose-us-feature-6-description",
-    "path": "aboutUsPage.whyChooseUs.features[5].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-heading",
-    "path": "aboutUsPage.trustAndSecurity.heading",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-description",
-    "path": "aboutUsPage.trustAndSecurity.description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-1-title",
-    "path": "aboutUsPage.trustAndSecurity.items[0].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-1-description",
-    "path": "aboutUsPage.trustAndSecurity.items[0].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-2-title",
-    "path": "aboutUsPage.trustAndSecurity.items[1].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-2-description",
-    "path": "aboutUsPage.trustAndSecurity.items[1].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-3-title",
-    "path": "aboutUsPage.trustAndSecurity.items[2].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-item-3-description",
-    "path": "aboutUsPage.trustAndSecurity.items[2].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-trust-and-security-image",
-    "path": "aboutUsPage.trustAndSecurity.image",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "about-us-who-we-help-heading",
-    "path": "aboutUsPage.whoWeHelp.heading",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-description",
-    "path": "aboutUsPage.whoWeHelp.description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-1-image",
-    "path": "aboutUsPage.whoWeHelp.cards[0].image",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "about-us-who-we-help-card-1-title",
-    "path": "aboutUsPage.whoWeHelp.cards[0].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-1-description",
-    "path": "aboutUsPage.whoWeHelp.cards[0].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-2-image",
-    "path": "aboutUsPage.whoWeHelp.cards[1].image",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "about-us-who-we-help-card-2-title",
-    "path": "aboutUsPage.whoWeHelp.cards[1].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-2-description",
-    "path": "aboutUsPage.whoWeHelp.cards[1].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-3-image",
-    "path": "aboutUsPage.whoWeHelp.cards[2].image",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "about-us-who-we-help-card-3-title",
-    "path": "aboutUsPage.whoWeHelp.cards[2].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-3-description",
-    "path": "aboutUsPage.whoWeHelp.cards[2].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-4-image",
-    "path": "aboutUsPage.whoWeHelp.cards[3].image",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "about-us-who-we-help-card-4-title",
-    "path": "aboutUsPage.whoWeHelp.cards[3].title",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-who-we-help-card-4-description",
-    "path": "aboutUsPage.whoWeHelp.cards[3].description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-ready-to-get-started-heading",
-    "path": "aboutUsPage.readyToGetStarted.heading",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-ready-to-get-started-description",
-    "path": "aboutUsPage.readyToGetStarted.description",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-ready-to-get-started-apply-label",
-    "path": "aboutUsPage.readyToGetStarted.applyButtonLabel",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "about-us-ready-to-get-started-advisor-label",
-    "path": "aboutUsPage.readyToGetStarted.advisorButtonLabel",
-    "pages": [
-      "about_us.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "loan-seo-title",
     "path": "loanPage.seo.title",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-hero-eyebrow",
+    "path": "loanPage.hero.eyebrow",
     "pages": [
       "loan.html"
     ],
@@ -1259,20 +1225,172 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "loan-hero-secondary-button-label",
-    "path": "loanPage.hero.secondaryButtonLabel",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "loan-hero-image",
     "path": "loanPage.hero.image",
     "pages": [
       "loan.html"
     ],
     "kind": "image"
+  },
+  {
+    "id": "loan-required-documents-heading",
+    "path": "loanPage.requiredDocuments.heading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-required-documents-description",
+    "path": "loanPage.requiredDocuments.description",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-required-documents-personal-heading",
+    "path": "loanPage.requiredDocuments.personalHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-required-documents-business-heading",
+    "path": "loanPage.requiredDocuments.businessHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-required-documents-cta-heading",
+    "path": "loanPage.requiredDocuments.ctaHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-required-documents-cta-description",
+    "path": "loanPage.requiredDocuments.ctaDescription",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-heading",
+    "path": "loanPage.comparison.heading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-description",
+    "path": "loanPage.comparison.description",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-table-heading",
+    "path": "loanPage.comparison.tableHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-personal-title",
+    "path": "loanPage.comparison.personalColumn.title",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-business-title",
+    "path": "loanPage.comparison.businessColumn.title",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-personal-subtitle",
+    "path": "loanPage.comparison.personalColumn.subtitle",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-business-subtitle",
+    "path": "loanPage.comparison.businessColumn.subtitle",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-comparison-loan-details-heading",
+    "path": "loanPage.comparison.loanDetailsHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-heading",
+    "path": "loanPage.interestRates.heading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-description",
+    "path": "loanPage.interestRates.description",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-example-heading",
+    "path": "loanPage.interestRates.exampleHeading",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-amount-label",
+    "path": "loanPage.interestRates.amountLabel",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-amount-value",
+    "path": "loanPage.interestRates.amountValue",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-interest-rates-example-description",
+    "path": "loanPage.interestRates.exampleDescription",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
   },
   {
     "id": "loan-personal-heading",
@@ -1285,6 +1403,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "loan-personal-description",
     "path": "loanPage.personalLoan.description",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-personal-documents-link-label",
+    "path": "loanPage.personalLoan.documentsLinkLabel",
     "pages": [
       "loan.html"
     ],
@@ -1355,22 +1481,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "loan-personal-requirements-image",
-    "path": "loanPage.personalLoan.requirements.image",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "loan-personal-requirements-heading",
-    "path": "loanPage.personalLoan.requirements.heading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "loan-personal-requirement-1",
     "path": "loanPage.personalLoan.requirements.items[0]",
     "pages": [
@@ -1395,6 +1505,46 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "loan-personal-requirement-4",
+    "path": "loanPage.personalLoan.requirements.items[3]",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-personal-requirement-5",
+    "path": "loanPage.personalLoan.requirements.items[4]",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-personal-requirement-6",
+    "path": "loanPage.personalLoan.requirements.items[5]",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-personal-requirement-7",
+    "path": "loanPage.personalLoan.requirements.items[6]",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-personal-requirement-8",
+    "path": "loanPage.personalLoan.requirements.items[7]",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "loan-business-heading",
     "path": "loanPage.businessLoan.heading",
     "pages": [
@@ -1405,6 +1555,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "loan-business-description",
     "path": "loanPage.businessLoan.description",
+    "pages": [
+      "loan.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "loan-business-documents-link-label",
+    "path": "loanPage.businessLoan.documentsLinkLabel",
     "pages": [
       "loan.html"
     ],
@@ -1475,22 +1633,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "loan-business-requirements-image",
-    "path": "loanPage.businessLoan.requirements.image",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "loan-business-requirements-heading",
-    "path": "loanPage.businessLoan.requirements.heading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "loan-business-requirement-1",
     "path": "loanPage.businessLoan.requirements.items[0]",
     "pages": [
@@ -1531,56 +1673,48 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "loan-comparison-heading",
-    "path": "loanPage.comparison.heading",
+    "id": "loan-business-requirement-6",
+    "path": "loanPage.businessLoan.requirements.items[5]",
     "pages": [
       "loan.html"
     ],
     "kind": "text"
   },
   {
-    "id": "loan-comparison-description",
-    "path": "loanPage.comparison.description",
+    "id": "loan-business-requirement-7",
+    "path": "loanPage.businessLoan.requirements.items[6]",
     "pages": [
       "loan.html"
     ],
     "kind": "text"
   },
   {
-    "id": "loan-comparison-table-heading",
-    "path": "loanPage.comparison.tableHeading",
+    "id": "loan-business-requirement-8",
+    "path": "loanPage.businessLoan.requirements.items[7]",
     "pages": [
       "loan.html"
     ],
     "kind": "text"
   },
   {
-    "id": "loan-comparison-personal-title",
-    "path": "loanPage.comparison.personalColumn.title",
+    "id": "loan-business-requirement-9",
+    "path": "loanPage.businessLoan.requirements.items[8]",
     "pages": [
       "loan.html"
     ],
     "kind": "text"
   },
   {
-    "id": "loan-comparison-personal-subtitle",
-    "path": "loanPage.comparison.personalColumn.subtitle",
+    "id": "loan-business-requirement-10",
+    "path": "loanPage.businessLoan.requirements.items[9]",
     "pages": [
       "loan.html"
     ],
     "kind": "text"
   },
   {
-    "id": "loan-comparison-business-title",
-    "path": "loanPage.comparison.businessColumn.title",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-business-subtitle",
-    "path": "loanPage.comparison.businessColumn.subtitle",
+    "id": "loan-business-requirement-11",
+    "path": "loanPage.businessLoan.requirements.items[10]",
     "pages": [
       "loan.html"
     ],
@@ -1683,110 +1817,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "loan-comparison-row-5-label",
-    "path": "loanPage.comparison.rows[4].label",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-5-personal",
-    "path": "loanPage.comparison.rows[4].personalValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-5-business",
-    "path": "loanPage.comparison.rows[4].businessValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-6-label",
-    "path": "loanPage.comparison.rows[5].label",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-6-personal",
-    "path": "loanPage.comparison.rows[5].personalValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-6-business",
-    "path": "loanPage.comparison.rows[5].businessValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-7-label",
-    "path": "loanPage.comparison.rows[6].label",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-7-personal",
-    "path": "loanPage.comparison.rows[6].personalValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-row-7-business",
-    "path": "loanPage.comparison.rows[6].businessValue",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-loan-details-heading",
-    "path": "loanPage.comparison.loanDetailsHeading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-comparison-application-needs-heading",
-    "path": "loanPage.comparison.applicationNeedsHeading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-interest-rates-heading",
-    "path": "loanPage.interestRates.heading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-interest-rates-description",
-    "path": "loanPage.interestRates.description",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "loan-interest-rates-feature-1-title",
     "path": "loanPage.interestRates.features[0].title",
     "pages": [
@@ -1829,22 +1859,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "loan-interest-rates-feature-3-description",
     "path": "loanPage.interestRates.features[2].description",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-estimator-heading",
-    "path": "loanPage.estimator.heading",
-    "pages": [
-      "loan.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "loan-estimator-disclaimer",
-    "path": "loanPage.estimator.disclaimer",
     "pages": [
       "loan.html"
     ],
@@ -1899,6 +1913,78 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "how-to-apply-required-documents-image",
+    "path": "howToApplyPage.requiredDocuments.image",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "image"
+  },
+  {
+    "id": "how-to-apply-required-documents-heading",
+    "path": "howToApplyPage.requiredDocuments.heading",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-required-documents-description",
+    "path": "howToApplyPage.requiredDocuments.description",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-eligibility-heading",
+    "path": "howToApplyPage.eligibility.heading",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-eligibility-description",
+    "path": "howToApplyPage.eligibility.description",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-ready-heading",
+    "path": "howToApplyPage.readyToApply.heading",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-ready-description",
+    "path": "howToApplyPage.readyToApply.description",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-ready-whatsapp-label",
+    "path": "howToApplyPage.readyToApply.whatsappButtonLabel",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-ready-submit-label",
+    "path": "howToApplyPage.readyToApply.submitButtonLabel",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "how-to-apply-step-1-title",
     "path": "howToApplyPage.steps.items[0].title",
     "pages": [
@@ -1947,46 +2033,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "how-to-apply-step-4-title",
-    "path": "howToApplyPage.steps.items[3].title",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-step-4-description",
-    "path": "howToApplyPage.steps.items[3].description",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-required-documents-image",
-    "path": "howToApplyPage.requiredDocuments.image",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "image"
-  },
-  {
-    "id": "how-to-apply-required-documents-heading",
-    "path": "howToApplyPage.requiredDocuments.heading",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-required-documents-description",
-    "path": "howToApplyPage.requiredDocuments.description",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "how-to-apply-document-1-title",
     "path": "howToApplyPage.requiredDocuments.items[0].title",
     "pages": [
@@ -1997,6 +2043,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "how-to-apply-document-1-description",
     "path": "howToApplyPage.requiredDocuments.items[0].description",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-eligibility-1",
+    "path": "howToApplyPage.eligibility.items[0]",
     "pages": [
       "how_to_apply.html"
     ],
@@ -2019,6 +2073,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "how-to-apply-eligibility-2",
+    "path": "howToApplyPage.eligibility.items[1]",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "how-to-apply-document-3-title",
     "path": "howToApplyPage.requiredDocuments.items[2].title",
     "pages": [
@@ -2029,6 +2091,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "how-to-apply-document-3-description",
     "path": "howToApplyPage.requiredDocuments.items[2].description",
+    "pages": [
+      "how_to_apply.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "how-to-apply-eligibility-3",
+    "path": "howToApplyPage.eligibility.items[2]",
     "pages": [
       "how_to_apply.html"
     ],
@@ -2051,80 +2121,8 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
-    "id": "how-to-apply-eligibility-heading",
-    "path": "howToApplyPage.eligibility.heading",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-eligibility-description",
-    "path": "howToApplyPage.eligibility.description",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-eligibility-1",
-    "path": "howToApplyPage.eligibility.items[0]",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-eligibility-2",
-    "path": "howToApplyPage.eligibility.items[1]",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-eligibility-3",
-    "path": "howToApplyPage.eligibility.items[2]",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
     "id": "how-to-apply-eligibility-4",
     "path": "howToApplyPage.eligibility.items[3]",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-ready-heading",
-    "path": "howToApplyPage.readyToApply.heading",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-ready-description",
-    "path": "howToApplyPage.readyToApply.description",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-ready-whatsapp-label",
-    "path": "howToApplyPage.readyToApply.whatsappButtonLabel",
-    "pages": [
-      "how_to_apply.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "how-to-apply-ready-submit-label",
-    "path": "howToApplyPage.readyToApply.submitButtonLabel",
     "pages": [
       "how_to_apply.html"
     ],
@@ -2195,6 +2193,14 @@ export const legacyContentBindings: LegacyContentBinding[] = [
     "kind": "text"
   },
   {
+    "id": "contact-method-phone-description",
+    "path": "contactUsPage.contactMethods.phone.description",
+    "pages": [
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
     "id": "contact-method-office-heading",
     "path": "contactUsPage.contactMethods.office.heading",
     "pages": [
@@ -2221,6 +2227,22 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "contact-faq-description",
     "path": "contactUsPage.faq.description",
+    "pages": [
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "contact-still-have-questions-heading",
+    "path": "contactUsPage.stillHaveQuestions.heading",
+    "pages": [
+      "contact.html"
+    ],
+    "kind": "text"
+  },
+  {
+    "id": "contact-still-have-questions-description",
+    "path": "contactUsPage.stillHaveQuestions.description",
     "pages": [
       "contact.html"
     ],
@@ -2301,14 +2323,6 @@ export const legacyContentBindings: LegacyContentBinding[] = [
   {
     "id": "contact-faq-5-answer",
     "path": "contactUsPage.faq.items[4].answer",
-    "pages": [
-      "contact.html"
-    ],
-    "kind": "text"
-  },
-  {
-    "id": "contact-still-have-questions-heading",
-    "path": "contactUsPage.stillHaveQuestions.heading",
     "pages": [
       "contact.html"
     ],

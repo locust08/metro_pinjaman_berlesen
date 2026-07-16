@@ -48,12 +48,14 @@ describe('published content media normalization', () => {
     }
     const expectedRows = {
       paragraphs: ['Payload about paragraph one', 'Payload about paragraph two'],
-      personalRequirements: ['Payload personal requirement one', 'Payload personal requirement two', 'Payload personal requirement three'],
-      businessRequirements: ['Payload business requirement one', 'Payload business requirement two', 'Payload business requirement three', 'Payload business requirement four', 'Payload business requirement five'],
+      highlights: ['Payload highlight one', 'Payload highlight two', 'Payload highlight three'],
+      personalRequirements: Array.from({ length: 8 }, (_, index) => `Payload personal requirement ${index + 1}`),
+      businessRequirements: Array.from({ length: 11 }, (_, index) => `Payload business requirement ${index + 1}`),
       eligibility: ['Payload eligibility one', 'Payload eligibility two', 'Payload eligibility three', 'Payload eligibility four'],
     }
 
     payloadResponse.aboutUsPage.whoWeAre.paragraphs = expectedRows.paragraphs.map((text) => ({ text }))
+    ;(payloadResponse.aboutUsPage.whoWeAre as unknown as { highlights: Array<{ text: string }> }).highlights = expectedRows.highlights.map((text) => ({ text }))
     payloadResponse.loanPage.personalLoan.requirements.items = expectedRows.personalRequirements.map((text) => ({ text }))
     payloadResponse.loanPage.businessLoan.requirements.items = expectedRows.businessRequirements.map((text) => ({ text }))
     payloadResponse.howToApplyPage.eligibility.items = expectedRows.eligibility.map((text) => ({ text }))
@@ -75,7 +77,7 @@ describe('published content media normalization', () => {
 
     expect([renderedAbout, renderedLoan, renderedHowToApply].join('')).not.toContain('[object Object]')
     expect(parse(renderedAbout).querySelector('#about-us-who-we-are-paragraph-1')?.text.trim()).toBe(expectedRows.paragraphs[0])
-    expect(parse(renderedAbout).querySelector('#about-us-who-we-are-paragraph-2')?.text.trim()).toBe(expectedRows.paragraphs[1])
+    expect(expectedRows.highlights.map((_, index) => parse(renderedAbout).querySelector(`#about-us-who-we-are-highlight-${index + 1}`)?.text.trim())).toEqual(expectedRows.highlights)
     expect(expectedRows.personalRequirements.map((_, index) => parse(renderedLoan).querySelector(`#loan-personal-requirement-${index + 1}`)?.text.trim())).toEqual(expectedRows.personalRequirements)
     expect(expectedRows.businessRequirements.map((_, index) => parse(renderedLoan).querySelector(`#loan-business-requirement-${index + 1}`)?.text.trim())).toEqual(expectedRows.businessRequirements)
     expect(expectedRows.eligibility.map((_, index) => parse(renderedHowToApply).querySelector(`#how-to-apply-eligibility-${index + 1}`)?.text.trim())).toEqual(expectedRows.eligibility)
