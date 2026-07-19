@@ -1,8 +1,8 @@
 import LegacyPage, { type LegacyPageProps } from '../lib/legacyPage';
 import { loadLegacyPage } from '../lib/legacyPageData';
 
-export function getStaticProps() {
-  return { props: loadLegacyPage('index.html') };
+export async function getStaticProps() {
+  return { props: await loadLegacyPage('index.html', 'home') };
 }
 
 export default function Index(props: LegacyPageProps) {

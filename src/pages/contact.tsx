@@ -1,8 +1,8 @@
 import LegacyPage, { type LegacyPageProps } from '../lib/legacyPage';
 import { loadLegacyPage } from '../lib/legacyPageData';
 
-export function getStaticProps() {
-  return { props: loadLegacyPage('contact.html') };
+export async function getStaticProps() {
+  return { props: await loadLegacyPage('contact.html', 'contactUs') };
 }
 
 export default function Contact(props: LegacyPageProps) {

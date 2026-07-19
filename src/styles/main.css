@@ -5,3 +5,158 @@
   background-color: #000
 }
 
+.bg-teal-50.rounded-3xl,
+.bg-white.rounded-3xl,
+.h-full.p-8.bg-gray-50.rounded-2xl,
+.bg-gray-50.rounded-2xl.p-8.shadow-sm,
+.p-5.bg-gray-50.rounded-2xl,
+a.group.rounded-3xl {
+  backface-visibility: hidden;
+  transform: translateY(0) scale(1);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  will-change: transform;
+}
+
+.bg-teal-50.rounded-3xl:hover,
+.bg-white.rounded-3xl:hover,
+.h-full.p-8.bg-gray-50.rounded-2xl:hover,
+.bg-gray-50.rounded-2xl.p-8.shadow-sm:hover,
+.p-5.bg-gray-50.rounded-2xl:hover,
+a.group.rounded-3xl:hover,
+.bg-teal-50.rounded-3xl:focus-within,
+.bg-white.rounded-3xl:focus-within,
+.h-full.p-8.bg-gray-50.rounded-2xl:focus-within,
+.bg-gray-50.rounded-2xl.p-8.shadow-sm:focus-within,
+.p-5.bg-gray-50.rounded-2xl:focus-within,
+a.group.rounded-3xl:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(7, 61, 50, 0.12);
+  border-color: rgba(7, 61, 50, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-teal-50.rounded-3xl,
+  .bg-white.rounded-3xl,
+  .h-full.p-8.bg-gray-50.rounded-2xl,
+  .bg-gray-50.rounded-2xl.p-8.shadow-sm,
+  .p-5.bg-gray-50.rounded-2xl,
+  a.group.rounded-3xl {
+    transition: none;
+  }
+
+  .bg-teal-50.rounded-3xl:hover,
+  .bg-white.rounded-3xl:hover,
+  .h-full.p-8.bg-gray-50.rounded-2xl:hover,
+  .bg-gray-50.rounded-2xl.p-8.shadow-sm:hover,
+  .p-5.bg-gray-50.rounded-2xl:hover,
+  a.group.rounded-3xl:hover,
+  .bg-teal-50.rounded-3xl:focus-within,
+  .bg-white.rounded-3xl:focus-within,
+  .h-full.p-8.bg-gray-50.rounded-2xl:focus-within,
+  .bg-gray-50.rounded-2xl.p-8.shadow-sm:focus-within,
+  .p-5.bg-gray-50.rounded-2xl:focus-within,
+  a.group.rounded-3xl:focus-visible {
+    transform: none;
+  }
+}
+
+.metro-floating-whatsapp {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: inline-flex;
+  width: 172px;
+  height: 56px;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: none;
+  white-space: nowrap;
+  transition: transform 180ms ease;
+}
+
+.metro-floating-whatsapp:hover {
+  transform: none;
+}
+
+.metro-floating-whatsapp:focus-visible {
+  outline: 3px solid #b7f34b;
+  outline-offset: 4px;
+}
+
+.metro-floating-whatsapp-label {
+  position: absolute;
+  right: 68px;
+  top: 9px;
+  display: inline-flex;
+  width: 104px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 10px 24px rgba(7, 61, 50, 0.12);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 180ms ease, transform 200ms ease;
+}
+
+.metro-floating-whatsapp:hover .metro-floating-whatsapp-label,
+.metro-floating-whatsapp:focus-visible .metro-floating-whatsapp-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.metro-floating-whatsapp-icon {
+  position: relative;
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(7, 61, 50, 0.22);
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.metro-floating-whatsapp:hover .metro-floating-whatsapp-icon,
+.metro-floating-whatsapp:focus-visible .metro-floating-whatsapp-icon {
+  background: #25d366;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px rgba(7, 61, 50, 0.28);
+}
+
+.metro-floating-whatsapp-icon svg {
+  width: 31px;
+  height: 31px;
+  fill: currentColor;
+}
+
+@media (max-width: 640px) {
+  .metro-floating-whatsapp {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: 54px;
+    height: 54px;
+  }
+
+  .metro-floating-whatsapp-label {
+    display: none;
+  }
+
+  .metro-floating-whatsapp-icon {
+    width: 54px;
+    height: 54px;
+  }
+}
+

@@ -24,6 +24,19 @@ export function cleanValue(value) {
   return String(value || '').trim();
 }
 
+export function normalizeNotionDatabaseId(value, fallback = '') {
+  const raw = cleanValue(value);
+  if (!raw) return fallback;
+
+  const uuid = raw.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+  if (uuid) return uuid[0].replace(/-/g, '');
+
+  const compactId = raw.match(/[0-9a-f]{32}/i);
+  if (compactId) return compactId[0];
+
+  return raw;
+}
+
 export function escapeHtml(value) {
   return cleanValue(value)
     .replace(/&/g, '&amp;')
@@ -94,8 +107,8 @@ export function addMinutesToWallClock(date, time, minutesToAdd) {
 export function getConfig(env) {
   return {
     notionToken: env.NOTION_TOKEN || '',
-    notionDatabaseId: env.APPOINTMENT_NOTION_DATABASE_ID || env.NOTION_DATABASE_ID || DEFAULT_DATABASE_ID,
-    visitorEventsDatabaseId: env.VISITOR_EVENTS_NOTION_DATABASE_ID || DEFAULT_VISITOR_EVENTS_DATABASE_ID,
+    notionDatabaseId: normalizeNotionDatabaseId(env.APPOINTMENT_NOTION_DATABASE_ID || env.NOTION_DATABASE_ID, DEFAULT_DATABASE_ID),
+    visitorEventsDatabaseId: normalizeNotionDatabaseId(env.VISITOR_EVENTS_NOTION_DATABASE_ID, DEFAULT_VISITOR_EVENTS_DATABASE_ID),
     resendApiKey: env.RESEND_API_KEY || '',
     resendFromEmail: env.RESEND_FROM_EMAIL_DEV || env.RESEND_FROM_EMAIL || env.RESEND_FROM_EMAIL_PROD || 'Metro Pinjaman Berlesen <no-reply@locus-t.com.my>',
     resendAdminEmails: env.RESEND_CONFIRMATION_TO_EMAIL_DEV || env.RESEND_TO_EMAIL_DEV || env.RESEND_TO_EMAILS || env.RESEND_TO_EMAIL || env.RESEND_TO_EMAIL_PROD || '',
