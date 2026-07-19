@@ -11,6 +11,7 @@ export type LegacyPageProps = {
 export type LegacyPageContent = {
   title: string;
   description: string;
+  metaDescription: string;
   bodyClassName: string;
   bodyHtml: string;
 };

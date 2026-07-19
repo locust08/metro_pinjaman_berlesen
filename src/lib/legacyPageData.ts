@@ -46,6 +46,7 @@ function getImageSrc(content: PublicPayloadContent, keys: Array<number | string>
 }
 
 function replaceLeftoverLegacyAssetPaths(bodyHtml: string, content: PublicPayloadContent): string {
+  const transparentPixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
   const imageReplacements: Record<string, string> = {
     'flow-assets/metro/home-hero-adviser.webp': getImageSrc(content, ['homePage', 'hero', 'images', 'leftTop']),
     'flow-assets/metro/home-personal-documents.webp': getImageSrc(content, ['homePage', 'hero', 'images', 'rightTop']),
@@ -74,8 +75,8 @@ function replaceLeftoverLegacyAssetPaths(bodyHtml: string, content: PublicPayloa
   }
 
   return rendered
-    .replaceAll('flow-assets/footer/waves-lines-left-bottom.png', '')
-    .replaceAll('flow-assets/pricing/waves-right-top.png', '');
+    .replaceAll('flow-assets/footer/waves-lines-left-bottom.png', transparentPixel)
+    .replaceAll('flow-assets/pricing/waves-right-top.png', transparentPixel);
 }
 
 export async function loadLegacyPage(fileName: string, pageId: SitePageId): Promise<LegacyPageContent> {
@@ -95,6 +96,7 @@ export async function loadLegacyPage(fileName: string, pageId: SitePageId): Prom
   return {
     title: seo.title || fallbackTitle,
     description: seo.description || fallbackDescription,
+    metaDescription: seo.description || fallbackDescription,
     bodyClassName,
     bodyHtml: replaceLeftoverLegacyAssetPaths(renderLegacyContent(bodyHtml, pageId, content), content),
   };
