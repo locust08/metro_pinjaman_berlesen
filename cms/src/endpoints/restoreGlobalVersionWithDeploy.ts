@@ -104,12 +104,23 @@ function jsonWithCors(req: Parameters<Endpoint['handler']>[0], body: unknown, st
   })
 }
 
+function rejectUnauthenticated(req: Parameters<Endpoint['handler']>[0]) {
+  if (req.user) return undefined
+
+  return jsonWithCors(req, {
+    errors: [{ message: 'You must be logged in to restore a version.' }],
+  }, 401)
+}
+
 export function restoreGlobalVersionWithDeployEndpoint(
   globalConfig: GlobalConfig,
   options: RestoreGlobalVersionEndpointOptions = {},
 ): Endpoint {
   return {
     handler: async (req) => {
+      const authError = rejectUnauthenticated(req)
+      if (authError) return authError
+
       const depth = parseOptionalNumber(req.searchParams.get('depth'))
       const draft = req.searchParams.get('draft') === 'true' ? true : undefined
       const { id } = req.routeParams
@@ -148,6 +159,9 @@ export function restoreGlobalVersionWithDeployEndpoint(
 export function selectedGlobalVersionInfoEndpoint(globalConfig: GlobalConfig): Endpoint {
   return {
     handler: async (req) => {
+      const authError = rejectUnauthenticated(req)
+      if (authError) return authError
+
       const { id } = req.routeParams
       if (typeof id !== 'string' && typeof id !== 'number') {
         return jsonWithCors(req, { errors: [{ message: 'Missing ID of selected version.' }] }, 400)
@@ -180,6 +194,9 @@ export function undoLatestPublishedGlobalVersionEndpoint(
 ): Endpoint {
   return {
     handler: async (req) => {
+      const authError = rejectUnauthenticated(req)
+      if (authError) return authError
+
       const publishedVersions = await findPublishedVersions(req, globalConfig)
       const [currentVersion, previousPublishedVersion] = publishedVersions
 
@@ -213,6 +230,9 @@ export function undoLatestPublishedGlobalVersionEndpoint(
 export function undoLatestPublishedGlobalVersionInfoEndpoint(globalConfig: GlobalConfig): Endpoint {
   return {
     handler: async (req) => {
+      const authError = rejectUnauthenticated(req)
+      if (authError) return authError
+
       const publishedVersions = await findPublishedVersions(req, globalConfig)
       const [currentVersion, previousPublishedVersion] = publishedVersions
 

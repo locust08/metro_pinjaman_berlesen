@@ -31,6 +31,7 @@ function makeReq(overrides: Record<string, unknown> = {}) {
     },
     searchParams: new URLSearchParams('depth=2'),
     t: vi.fn((key: string) => `translated:${key}`),
+    user: { id: 1 },
     ...overrides,
   }
 }
@@ -80,6 +81,21 @@ describe('restore Global version endpoint', () => {
 
     expect(response.status).toBe(400)
     expect(body).toEqual({ errors: [{ message: 'Missing ID of version to restore.' }] })
+    expect(restoreVersionOperation).not.toHaveBeenCalled()
+  })
+
+  it('rejects unauthenticated restore requests', async () => {
+    const restoreVersionOperation = vi.fn()
+    const endpoint = restoreGlobalVersionWithDeployEndpoint(
+      { slug: 'site-settings' } as never,
+      { restoreVersionOperation: restoreVersionOperation as never },
+    )
+
+    const response = await endpoint.handler(makeReq({ user: undefined }) as never)
+    const body = await response.json()
+
+    expect(response.status).toBe(401)
+    expect(body).toEqual({ errors: [{ message: 'You must be logged in to restore a version.' }] })
     expect(restoreVersionOperation).not.toHaveBeenCalled()
   })
 
