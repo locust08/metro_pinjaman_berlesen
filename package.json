@@ -7,7 +7,7 @@
     },
     "scripts": {
         "dev": "next dev",
-        "build": "node scripts/clean-public-output.js && next build && wrangler pages functions build functions --outfile out/_worker.js --output-routes-path out/_routes.json --build-output-directory out",
+        "build": "node scripts/clean-public-output.js && next build && wrangler pages functions build functions --outdir .pages-functions --output-routes-path out/_routes.json --build-output-directory out && node scripts/install-pages-worker.js",
         "start": "next start",
         "test": "node --test tests/*.test.mjs",
         "lint": "next lint",

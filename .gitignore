@@ -1,4 +1,5 @@
 node_modules/
+.pages-functions/
 .playwright-mcp/
 
 *.log
