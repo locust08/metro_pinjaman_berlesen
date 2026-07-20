@@ -7,7 +7,7 @@
     },
     "scripts": {
         "dev": "next dev",
-        "build": "node scripts/clean-public-output.js && next build",
+        "build": "node scripts/clean-public-output.js && next build && wrangler pages functions build functions --outfile out/_worker.js --output-routes-path out/_routes.json --build-output-directory out",
         "start": "next start",
         "test": "node --test tests/*.test.mjs",
         "lint": "next lint",
@@ -31,6 +31,7 @@
         "eslint-config-next": "15.4.4",
         "postcss": "^8.5.6",
         "tailwindcss": "^3.0.7",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "wrangler": "^4.112.0"
     }
 }
