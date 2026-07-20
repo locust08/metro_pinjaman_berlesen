@@ -277,6 +277,8 @@ export async function createBookingPage(config, payload) {
   await notionRequest(config, `/pages/${page.id}`, {
     method: 'PATCH',
     body: JSON.stringify({ properties: { 'Cancel URL': { url: realCancelUrl } } }),
+  }).catch((error) => {
+    console.error('[booking] Failed to update Notion cancel URL:', error.message);
   });
 
   const confirmUrl = `${config.bookingBaseUrl}/api/bookings/confirm?id=${page.id}&token=${token}`;
