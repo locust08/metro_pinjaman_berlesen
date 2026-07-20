@@ -5,6 +5,14 @@
   background-color: #000
 }
 
+.metro-balanced-cta-heading {
+  max-width: 11.5ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  text-wrap: balance;
+}
+
 .bg-teal-50.rounded-3xl,
 .bg-white.rounded-3xl,
 .h-full.p-8.bg-gray-50.rounded-2xl,
