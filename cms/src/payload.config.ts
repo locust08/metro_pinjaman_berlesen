@@ -18,6 +18,7 @@ import { LoanPage } from './globals/LoanPage'
 import { SiteSettings } from './globals/SiteSettings'
 import { DEFAULT_PAYLOAD_PUBLIC_SERVER_URL, publishedContentEndpoint } from './endpoints/publishedContent'
 import { configurePagesDeployHookUrl } from './hooks/triggerPagesDeploy'
+import { buildLivePreviewUrl } from './preview/livePreview'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -68,6 +69,15 @@ export default buildConfig({
     components: {
       header: [{ path: '/admin/VersionHistoryActions' }],
     },
+    livePreview: {
+      breakpoints: [
+        { height: 844, label: 'Mobile', name: 'mobile', width: 390 },
+        { height: 1024, label: 'Tablet', name: 'tablet', width: 768 },
+        { height: 900, label: 'Desktop', name: 'desktop', width: 1440 },
+      ],
+      globals: ['site-settings', 'home-page', 'about-us-page', 'loan-page', 'how-to-apply-page', 'contact-us-page'],
+      url: ({ globalConfig, req }) => buildLivePreviewUrl(globalConfig?.slug, req.payload.config.serverURL),
+    },
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
@@ -77,8 +87,14 @@ export default buildConfig({
   globals: [SiteSettings, HomePage, AboutUsPage, LoanPage, HowToApplyPage, ContactUsPage],
   endpoints: [publishedContentEndpoint],
   cors: [
+    DEFAULT_PAYLOAD_PUBLIC_SERVER_URL,
     'https://metropinjamanberlesen.pages.dev',
     'https://12add699.metropinjamanberlesen.pages.dev',
+    'http://localhost:3000',
+  ],
+  csrf: [
+    DEFAULT_PAYLOAD_PUBLIC_SERVER_URL,
+    'https://metropinjamanberlesen.pages.dev',
     'http://localhost:3000',
   ],
   editor: lexicalEditor(),
