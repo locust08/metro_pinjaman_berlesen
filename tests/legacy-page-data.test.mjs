@@ -25,3 +25,18 @@ test('loadLegacyPage exposes Payload SEO title and description to Next Head prop
   assert.equal(page.description, 'Payload SEO description');
   assert.match(page.bodyHtml, /id="home-hero-main-heading"/);
 });
+
+test('loadLegacyPage renders published Payload home heading into generated HTML', async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    homePage: {
+      hero: {
+        mainHeading: 'Pay Off Your Debts',
+      },
+    },
+  }));
+
+  const page = await loadLegacyPage('index.html', 'home');
+
+  assert.match(page.bodyHtml, /Pay Off Your Debts/);
+  assert.doesNotMatch(page.bodyHtml, /Powering Tomorrow|Simple Loans,/);
+});
