@@ -1,9 +1,8 @@
 import React from 'react'
-import './styles.css'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Metro Pinjaman Berlesen Payload preview',
+  title: 'Metro Pinjaman Berlesen Preview',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -11,8 +10,21 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
+      <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900|Plus+Jakarta+Sans:400,500,600,700,800,900&subset=latin"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+        />
+        <link rel="stylesheet" href="https://metropinjamanberlesen.pages.dev/css/tailwind/tailwind.min.css" />
+        <link rel="stylesheet" href="https://metropinjamanberlesen.pages.dev/css/main.css" />
+      </head>
+      <body className="antialiased bg-body text-body font-body">
+        {children}
       </body>
     </html>
   )

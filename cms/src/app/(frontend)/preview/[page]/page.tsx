@@ -82,19 +82,15 @@ export default async function MetroLivePreviewPage({ params }: Props) {
   const initialGlobal = content[mapping.globalKey]
 
   return (
-    <>
-      <link rel="stylesheet" href={`${publishedFrontendOrigin}/css/tailwind/tailwind.min.css`} />
-      <link rel="stylesheet" href={`${publishedFrontendOrigin}/css/main.css`} />
-      <MetroLivePreviewClient
-        bindings={legacyContentBindings}
-        bodyClassName={bodyClassName}
-        globalKey={mapping.globalKey}
-        initialContent={content}
-        initialGlobal={initialGlobal}
-        initialHtml={bodyHtml}
-        pageFile={mapping.fileName}
-        serverURL={serverURL}
-      />
-    </>
+    <MetroLivePreviewClient
+      bindings={legacyContentBindings}
+      bodyClassName={bodyClassName}
+      globalKey={mapping.globalKey}
+      initialContent={content}
+      initialGlobal={initialGlobal}
+      initialHtml={bodyHtml}
+      pageFile={mapping.fileName}
+      serverURL={serverURL}
+    />
   )
 }
