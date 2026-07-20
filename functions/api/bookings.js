@@ -46,7 +46,15 @@ export async function onRequestPost({ request, env }) {
     const whatsappResult = await sendBookingWhatsApp(config, booking);
     if (!whatsappResult.ok) console.error('[booking] WhatsApp message failed:', whatsappResult.error);
 
-    return jsonResponse({ message: 'Booking submitted.', booking }, 201);
+    const warnings = [];
+    if (!emailResults.admin.ok || !emailResults.client.ok) {
+      warnings.push('Your booking was saved, but an email notification could not be sent.');
+    }
+    if (!whatsappResult.ok) {
+      warnings.push('Your booking was saved, but a WhatsApp notification could not be sent.');
+    }
+
+    return jsonResponse({ message: 'Booking submitted.', booking, warnings }, 201);
   } catch (error) {
     console.error('[booking] Booking submission failed:', error);
     return jsonResponse({

@@ -11,7 +11,11 @@ export async function onRequestGet({ request, env }) {
   if (!date) return jsonResponse({ message: 'Date is required.' }, 400);
 
   const config = getConfig(env);
-  const bookings = await findActiveBookingsForDate(config, date);
-
-  return jsonResponse({ bookedTimes: bookedTimesFromPages(date, bookings) });
+  try {
+    const bookings = await findActiveBookingsForDate(config, date);
+    return jsonResponse({ bookedTimes: bookedTimesFromPages(date, bookings) });
+  } catch (error) {
+    console.error('[booking] Booked-slot lookup failed:', error);
+    return jsonResponse({ message: 'Booked times are temporarily unavailable. Please try again.' }, 500);
+  }
 }

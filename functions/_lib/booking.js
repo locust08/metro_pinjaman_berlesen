@@ -470,14 +470,19 @@ export async function sendResendEmail(config, { to, replyTo, subject, text, html
   if (replyTo) payload.reply_to = replyTo;
   if (attachments?.length) payload.attachments = attachments;
 
-  const response = await fetch(RESEND_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${config.resendApiKey}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
+  let response;
+  try {
+    response = await fetch(RESEND_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${config.resendApiKey}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    return { ok: false, error: 'Resend request failed.' };
+  }
 
   if (!response.ok) return { ok: false, error: `Resend returned ${response.status}: ${(await response.text()).slice(0, 500)}` };
   return { ok: true };
@@ -573,23 +578,28 @@ export async function sendWhatsAppText(config, { to, body }) {
     return { ok: false, error: 'Missing WhatsApp configuration or recipient.' };
   }
 
-  const response = await fetch(`${WHATSAPP_GRAPH_HOST}/${config.whatsappApiVersion}/${config.whatsappPhoneNumberId}/messages`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${config.whatsappAccessToken}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: recipient,
-      type: 'text',
-      text: {
-        preview_url: true,
-        body,
+  let response;
+  try {
+    response = await fetch(`${WHATSAPP_GRAPH_HOST}/${config.whatsappApiVersion}/${config.whatsappPhoneNumberId}/messages`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${config.whatsappAccessToken}`,
+        'content-type': 'application/json',
       },
-    }),
-  });
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to: recipient,
+        type: 'text',
+        text: {
+          preview_url: true,
+          body,
+        },
+      }),
+    });
+  } catch {
+    return { ok: false, error: 'WhatsApp request failed.' };
+  }
 
   if (!response.ok) {
     return { ok: false, error: `WhatsApp returned ${response.status}: ${(await response.text()).slice(0, 500)}` };
