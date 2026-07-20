@@ -95,7 +95,7 @@ describe('Payload Live Preview configuration helpers', () => {
     const previewClient = fs.readFileSync(path.join(process.cwd(), 'src/app/(frontend)/preview/[page]/MetroLivePreviewClient.tsx'), 'utf8')
 
     expect(homeTemplate).toContain('id="home-ready-to-get-started-heading"')
-    expect(homeTemplate).toContain('class="font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-teal-900"')
+    expect(homeTemplate).toContain('class="metro-balanced-cta-heading font-heading text-5xl xs:text-7xl tracking-tight mb-6 text-teal-900"')
     expect(homeTemplate).toContain('id="home-ready-to-get-started-apply-label"')
     expect(previewPage).toContain('legacyContentBindings')
     expect(previewClient).not.toContain('Ready to get started?')
